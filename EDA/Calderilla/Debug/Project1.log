@@ -1,0 +1,5 @@
+﻿  QuitarseCalderilla.cpp
+c:\users\usuario\desktop\calderilla\quitarsecalderilla.cpp(32): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\calderilla\quitarsecalderilla.cpp(47): warning C4018: '<': signed/unsigned mismatch
+  Project1.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Project1.exe
+  Project1.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Project1.pdb (Full PDB)
