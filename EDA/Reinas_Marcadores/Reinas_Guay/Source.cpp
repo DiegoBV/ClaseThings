@@ -14,6 +14,9 @@ int diagonal_Ascendente(int x, int y);
 int diagonal_Descendente(int x, int y, int tam);
 void procesa_Solucion(int &cont);
 
+
+//Coste O(n!), donde n es el número de Reinas y el tamaño del tablero
+//Como queremos encontrar todas las soluciones, el algoritmo debe recorrer el árbol entero y sus posibilidades
 void Cuatro_Reinas(vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vector<bool> &hilera, int fila, int n, int &cont) {
 
 	if (fila < n) {
