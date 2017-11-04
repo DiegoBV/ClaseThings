@@ -5,50 +5,55 @@ using namespace std;
 
 
 const vector <int> valor = { 1, 2, 5, 10, 20, 50, 100, 200 };
-vector <bool> marcador; //esto de aqui deberia pasar por referencia o nos corta la cabeza pero me daba pereza -_-
+int cant_Max = 0;
 
-int sumaValores(vector <int> &v, int k, int &suma) {
-	int aux;
-	aux = suma + (v[k] * valor[k]);
-	return aux;
+int sumaValores(const vector <int> &sol, const int k) {
+	int sumaTotal = 0;
+	for (int i = 0; i < sol.size(); i++) {
+		sumaTotal += sol[i] * valor[i];
+	}
+
+	return sumaTotal;
 }
 
-bool es_solucion(int precio, int suma, int pos) {
-	return (suma == precio) && !marcador[pos];
+bool es_solucion(const int precio, const vector <int> &sol) {
+	return (sumaValores(sol, sol.size()) == precio);
 }
 
-bool es_completable(int precio, int suma, int pos) {
-	return (suma < precio) && !marcador[pos];
+bool es_completable(const int precio, const vector <int> &sol, const int k) {
+	return (k < sol.size() && sumaValores(sol, k) < precio);
 }
 
-void procesaSolucion(int cantidad, bool &finish) {
-	cout << cantidad << endl;
-	finish = true;
-	for (int i = 0; i < marcador.size(); i++) {
-		if (marcador[i]) {
-			cout << "Moneda de " << valor[i] << " centimos" << endl; //para debuguear
-		}
+void procesaSolucion(const vector <int> &sol) {
+	int cantidad = 0;
+	for (int i = 0; i < sol.size(); i++) {
+		cantidad += sol[i];
+	}
+	if (cantidad > cant_Max) {
+		cant_Max = cantidad;
 	}
 }
 
 
-void quita_calderilla(vector <int> &v, int k, int precio, int suma, int cantidad, bool &finish) {
-	if (suma < precio) {
-		int i = k + 1;
-
-		while (i < v.size() && !finish)
+void quita_calderilla(const vector <int> &v, vector <int> &sol, int k, const int precio) {
+	int i = 0;
+	if (k < v.size() && v[k] == 0) {
+		quita_calderilla(v, sol, k + 1, precio);
+		if (k + 1 < v.size())
+			sol[k + 1] = 0; //reinicia el elemento posterior
+	}
+	else {
+		while (k < v.size() && sol[k] < v[k])
 		{
-			int sumaTemporal = sumaValores(v, i, suma);
-			if (es_solucion(precio, sumaTemporal, i)) {
-				marcador[i] = true;
-				procesaSolucion(cantidad + v[i], finish);
+			sol[k]++;
+			if (es_solucion(precio, sol)) {
+				procesaSolucion(sol);
 			}
-			else if (es_completable(precio, sumaTemporal, i)) {
-				marcador[i] = true;
-				quita_calderilla(v, k + 1, precio, sumaTemporal, cantidad + v[i], finish);
-				marcador[i] = false;
+			else if (es_completable(precio, sol, k)) {
+				quita_calderilla(v, sol, k + 1, precio);
+				if (k + 1 < v.size())
+					sol[k + 1] = 0;  //reinicia el elemento posterior
 			}
-			i++;
 		}
 	}
 }
@@ -65,32 +70,30 @@ int main() {
 	int n;
 	int i = 0;
 	vector <int> calderilla;
+	calderilla.resize(8);
 
 	//Function
 	cin >> n;
-	calderilla.resize(8);
-	marcador.resize(valor.size());
 
 	while (i < n) {
-		int suma = 0;
-		int cantidad = 0;
-		bool finish = false;
+		vector <int> sol;
+		sol.resize(8);
+		for (int i = 0; i < sol.size(); i++) {
+			sol[i] = 0;
+		}
 		int precio;
-
 		cin >> precio;
-		if (precio == 0) {
-			cout << 0 << endl;
+		rellena_Vector(calderilla);
+		quita_calderilla(calderilla, sol, 0, precio);
+
+		if (cant_Max == 0) {
+			cout << "IMPOSIBLE" << endl;
 		}
 		else {
-			rellena_Vector(calderilla);
-			quita_calderilla(calderilla, -1, precio, suma, cantidad, finish);
-			if (!finish) {
-				cout << "IMPOSIBLE" << endl;
-			}
+			cout << cant_Max << endl;
 		}
-		for (int i = 0; i < marcador.size(); i++) {
-			marcador[i] = false;
-		}
+
+		cant_Max = 0;
 		i++;
 	}
 	return 0;
