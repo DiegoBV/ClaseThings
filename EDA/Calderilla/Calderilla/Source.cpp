@@ -36,7 +36,7 @@ void procesaSolucion(const vector <int> &sol, int &monedasCant) {
 
 
 void quita_calderilla(const vector <int> &v, vector <int> &sol, int k, const int precio, int &monedasCant) {
-	/*int i = 0;
+	int i = 0;
 	if (k < v.size() && v[k] == 0) {
 		quita_calderilla(v, sol, k + 1, precio, monedasCant);
 		if (k + 1 < v.size())
@@ -55,7 +55,7 @@ void quita_calderilla(const vector <int> &v, vector <int> &sol, int k, const int
 					sol[k + 1] = 0;  //reinicia el elemento posterior
 			}
 		}
-	}*/
+	}
 
 
 }
