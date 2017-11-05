@@ -1,7 +1,1 @@
-﻿  Source.cpp
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(39): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(57): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(91): warning C4018: '<': signed/unsigned mismatch
-  Calderilla.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Calderilla.exe
-  Calderilla.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Calderilla.pdb (Partial PDB)
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(57,5): error MSB8020: No se pueden encontrar las herramientas de compilación para v140 (Conjunto de herramientas de la plataforma = 'v140'). Para compilar con las herramientas de compilación v140, instale las herramientas de compilación v140. También puede actualizar a las herramientas actuales de Visual Studio. Para ello, seleccione el menú Proyecto o haga clic con el botón secundario en la solución y, a continuación, seleccione "Actualizar solución".
