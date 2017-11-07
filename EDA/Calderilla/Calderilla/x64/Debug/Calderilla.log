@@ -1,16 +1,16 @@
-﻿Build started 06/11/2017 0:15:52.
-     1>Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\Calderilla\Calderilla.vcxproj" on node 2 (Build target(s)).
+﻿Compilación iniciada a las 06/11/2017 0:25:09.
+     1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\Calderilla\Calderilla.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /Od /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc120.pdb" /Gd /TP /errorReport:prompt Source.cpp
          Source.cpp
-     1>Source.cpp(100): warning C4258: 'i' : definition from the for loop is ignored; the definition from the enclosing scope is used
-                 Source.cpp(84) : definition of 'i' ignored
-                 Source.cpp(73) : definition of 'i' used
+     1>Source.cpp(100): warning C4258: 'i' : se ha omitido la definición del bucle For; se ha utilizado la definición del ámbito de inclusión
+                 Source.cpp(84) : definición de 'i' omitida
+                 Source.cpp(73) : definición de 'i' utilizada
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.lib" /MACHINE:X64 x64\Debug\Source.obj
-         Calderilla.vcxproj -> C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.exe
-     1>Done Building Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\EDA\Calderilla\Calderilla\Calderilla.vcxproj" (Build target(s)).
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.lib" /MACHINE:X64 x64\Debug\Source.obj
+         Calderilla.vcxproj -> C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\x64\Debug\Calderilla.exe
+     1>Compilación del proyecto terminada "C:\Users\mrcorner\Desktop\GIT\ClaseThings\EDA\Calderilla\Calderilla\Calderilla.vcxproj" (Build destinos).
 
-Build succeeded.
+Compilación correcta.
 
-Time Elapsed 00:00:02.68
+Tiempo transcurrido 00:00:07.48
