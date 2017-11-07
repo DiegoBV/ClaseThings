@@ -1,14 +1,60 @@
 #include "GameMap.h"
 #include "Game.h"
 
+/* Esto es una cosa opcional, luego vemos si lo metemos o no xD
+class GameMap(){
+	friend class Game; La clase Game puede acceder a los atributos privados de GameMap
+}
+*/
 
-GameMap::GameMap()
+GameMap::GameMap(int fils, int cols) //Crea un tablero con un array dinámico
 {
+	this->fils = fils;
+	this->cols = cols;
+
+	//Creación de la matriz
+	tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
+	for (int r = 0; r < fils; r++) {
+		tablero2[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
+	}
+}
+/*
+//////////
+Alternativa
+//////////
+
+En vez de hacer un array de punteros a arrays dinámicos, se hace todo en un mismo array dinámico
+MapCell* celdas; //Esto en el .h
+
+Contructora:
+GameMap(int fils, int cols){
+	celdas = new MapCell[fils*cols];
 }
 
+Destructora:
+~GameMap(){
+	delete[] celdas;
+}
 
-GameMap::~GameMap()
+Acceso:
+MapCell getCell(int fila, int columna){
+	return celdas [fils*cols + columna]; //Esto no lo entiendo muy bien xD Habría que revisarlo
+}
+
+*/
+
+GameMap::~GameMap()  //Destructora del tablero de juego con un array dinámico
 {
+	if (tablero2 != nullptr) {
+		for (int r = 0; r < fils; r++) {
+			delete[] tablero2[r];
+		}
+		delete[] tablero2;
+	}
+}
+
+MapCell GameMap::getCell(int fils, int cols) {
+	return tablero[fils][cols];
 }
 
 void GameMap::crea_Mapa(Texture* vit, Texture* m, Texture* com, MapCell tab[200][200]) {
