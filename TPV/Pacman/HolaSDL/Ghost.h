@@ -2,6 +2,7 @@
 #include "Texture.h"
 #include "Game.h"
 #include "SDL.h"
+#include <string>
 
 class Ghost
 {
@@ -26,7 +27,7 @@ private:
 	
 	
 public:
-	Ghost();
+	Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY);
 	~Ghost();
 
 

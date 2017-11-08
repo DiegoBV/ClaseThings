@@ -10,18 +10,19 @@ Texture::~Texture()
 {
 }
 
-void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols){
+void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename/*, int fils, int cols*/){
 	//SDL_Texture* texture; //Texture
 	//string filename = "..\\images\\background1.png";
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	textura = SDL_CreateTextureFromSurface(renderer, surface);
 	textH = surface->h;
 	textW = surface->w;
-	CreaRectangulo(textH/fils, textW/cols, 0, 0);
+	CreaRectangulo(textH, textW, 0, 0);
 	SDL_FreeSurface(surface);	
+	/*
 	filas = fils;
 	columnas = cols;
-
+	*/
 }
 
 /*void Texture::CreaTexturaBMP(SDL_Renderer* &renderer, string filename){
