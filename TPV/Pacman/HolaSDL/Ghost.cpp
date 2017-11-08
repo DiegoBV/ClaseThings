@@ -2,7 +2,7 @@
 
 
 
-Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY)
+/*Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY)
 {
 	textura->CreaTexturaIMG(renderer, dirTextura);
 
@@ -13,7 +13,7 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY)
 	dirY = 0;
 
 	rectDes = textura->CreaRectangulo(
-}
+}*/
 
 
 Ghost::~Ghost()

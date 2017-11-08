@@ -10,7 +10,7 @@ Texture::~Texture()
 {
 }
 
-void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename/*, int fils, int cols*/){
+void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols){
 	//SDL_Texture* texture; //Texture
 	//string filename = "..\\images\\background1.png";
 	SDL_Surface* surface = IMG_Load(filename.c_str());

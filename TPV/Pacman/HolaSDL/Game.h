@@ -2,11 +2,14 @@
 #include "SDL.h"
 #include "Texture.h"
 #include "GameMap.h"
+#include <fstream>
 class Game
 {
+friend class GameMap;
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	ifstream archivo;
 	int winWidth;
 	int winHeight;
 	int winX, winY;
@@ -15,9 +18,11 @@ private:
 	Texture vitam;
 	MapCell tab[200][200];
 	GameMap map;
+	
 public:
 	Game();
 	~Game();
+	void carga_Archivo(string name);
 	void pinta_Mapa();
 };
 

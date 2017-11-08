@@ -7,10 +7,10 @@ class GameMap(){
 }
 */
 
-GameMap::GameMap(int fils, int cols) //Crea un tablero con un array dinámico
+GameMap::GameMap() //Crea un tablero con un array dinámico
 {
-	this->fils = fils;
-	this->cols = cols;
+	this->fils = 29;
+	this->cols = 28;
 
 	//Creación de la matriz
 	tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
@@ -91,18 +91,18 @@ string GameMap::consulta_Posicion(int x, int y) {
 }
 
 void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
-	tablero[x][y] = nuevoObjeto;
+	tablero2[x][y] = nuevoObjeto;
 }
 
 void GameMap::render_Mapa(SDL_Renderer* &rnd) {
-	for (int i = 0; i < 200; i++) {
-		for (int j = 0; j < 200; j++) {
+	for (int i = 0; i < fils; i++) {
+		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
-			des.x = i;
-			des.y = j;
-			des.w = 30; //pruebas, deberia coger la anchura del game
-			des.h = 30;
-			switch (tablero[i][j]) {
+			des.x =  i * 870 / 29;
+			des.y = j * 644 / 28;
+			des.w = 25; //pruebas, deberia coger la anchura del game
+			des.h = 25;
+			switch (tablero2[i][j]) {
 			case Empty:
 				//algo
 				break;

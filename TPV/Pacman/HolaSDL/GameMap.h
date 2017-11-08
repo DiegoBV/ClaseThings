@@ -3,7 +3,7 @@
 #include "SDL.h"
 using namespace std;
 enum MapCell { Empty, Wall, Food, Vitamins };
-
+class Game;
 class GameMap
 {
 private:
@@ -16,7 +16,7 @@ private:
 	Texture* comida;
 	Game* game;
 public:
-	GameMap(int fils, int cols);
+	GameMap();
 	~GameMap();
 
 	MapCell getCell(int fils, int cols); //devuelve una celda
