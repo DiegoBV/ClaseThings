@@ -1,8 +1,31 @@
 ﻿  Texture.cpp
-  main.cpp
-  GameObject.cpp
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(13): error C2511: 'void Texture::CreaTexturaIMG(SDL_Renderer *&,std::string,int,int)': overloaded member function not found in 'Texture'
+  c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.h(9): note: see declaration of 'Texture'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(17): error C2597: illegal reference to non-static member 'Texture::textura'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(18): error C2597: illegal reference to non-static member 'Texture::textH'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(19): error C2597: illegal reference to non-static member 'Texture::textW'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(20): error C2597: illegal reference to non-static member 'Texture::textH'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(20): error C2597: illegal reference to non-static member 'Texture::textW'
+  Ghost.cpp
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp : fatal error C1041: cannot open program database 'C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\Debug\vc140.idb'; if multiple CL.EXE write to the same .PDB file, please use /FS
   GameMap.cpp
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2238: unexpected token(s) preceding ';'
   Game.cpp
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2238: unexpected token(s) preceding ';'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(21): error C2660: 'Texture::CreaTexturaIMG': function does not take 4 arguments
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(22): error C2660: 'Texture::CreaTexturaIMG': function does not take 4 arguments
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(23): error C2660: 'Texture::CreaTexturaIMG': function does not take 4 arguments
   Generating Code...
-  HolaSDL.vcxproj -> C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+  Compiling...
+  GameObject.cpp
+  Generating Code...
+  Compiling...
+  main.cpp
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2143: syntax error: missing ';' before '*'
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C4430: missing type specifier - int assumed. Note: C++ does not support default-int
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(17): error C2238: unexpected token(s) preceding ';'
+  Generating Code...

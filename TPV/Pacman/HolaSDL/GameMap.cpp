@@ -9,6 +9,7 @@ class GameMap(){
 
 GameMap::GameMap(int fils, int cols) //Crea un tablero con un array dinámico
 {
+	
 	this->fils = fils;
 	this->cols = cols;
 
@@ -67,7 +68,7 @@ void GameMap::crea_Mapa(Texture* vit, Texture* m, Texture* com, MapCell tab[200]
 		}
 	}
 }
-string GameMap::consulta_Posicion(int x, int y) {
+MapCell GameMap::consulta_Posicion(int x, int y) {
 	string pos;
 	switch (tablero[x][y]) {
 	case Empty:

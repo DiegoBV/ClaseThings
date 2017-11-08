@@ -14,7 +14,12 @@ private:
 	int posActX, posActY;
 
 	//Dirección actual
-	int dirX, dirY;
+	struct Dirs {
+		int dirX;
+		int dirY;
+	};
+	Dirs* posiblesDirs;
+	Dirs actualDir;
 
 	//Punteros
 	//Textura
@@ -24,6 +29,7 @@ private:
 
 	//Rectángulo para dibujarlo
 	SDL_Rect rectDes;
+	bool posibles_Dirs(int &direction);
 	
 	
 public:
@@ -36,6 +42,6 @@ public:
 				  //actualiza la direccion aleatoriamente
 	void render(SDL_Renderer* &renderer); //Pinta el estado actual en pantalla
 	void muerte(); //Muere y vuelve a la posición inicial
-
+	void cambiaDir();
 };
 
