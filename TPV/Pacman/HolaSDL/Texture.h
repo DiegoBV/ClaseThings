@@ -17,7 +17,7 @@ private:
 public:
 	Texture();
 	~Texture();
-	void CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols);
+	void CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols, int fila_Inicio, int col_Inicio);
 	void CreaTexturaBMP(SDL_Renderer* &renderer, string filename);
 	void CreaRectangulo(int alturaIMG, int anchuraIMG, int posX, int posY);
 	void Render(SDL_Renderer* rnd);

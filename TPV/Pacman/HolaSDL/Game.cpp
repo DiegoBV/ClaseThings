@@ -17,10 +17,9 @@ Game::Game()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//Texturas
-	muro.CreaTexturaIMG(renderer, "..\\images\\wall.png", 1, 1);
-	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1);
-	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1);
-
+	muro.CreaTexturaIMG(renderer, "..\\images\\wall.png", 1, 1, 0 , 0);
+	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
+	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
 	for (int i = 0; i < 200; i++) {
 		for (int j = 0; j < 200; j++) { //mapa cargado de archivo teoricamente
 			tab[i][j] = Empty;
