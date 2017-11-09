@@ -98,10 +98,10 @@ void GameMap::render_Mapa(SDL_Renderer* &rnd) {
 	for (int i = 0; i < fils; i++) {
 		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
-			des.x =  i * 870 / 29;
-			des.y = j * 644 / 28;
-			des.w = 25; //pruebas, deberia coger la anchura del game
-			des.h = 25;
+			des.x = j * 870 / fils;
+			des.y = i * 644 / cols;
+			des.w = 870 / fils; //pruebas, deberia coger la anchura del game
+			des.h = 644 / cols;
 			switch (tablero2[i][j]) {
 			case Empty:
 				//algo

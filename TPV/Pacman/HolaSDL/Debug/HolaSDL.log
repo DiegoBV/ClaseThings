@@ -1,4 +1,5 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
 ﻿  Texture.cpp
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.cpp(13): error C2511: 'void Texture::CreaTexturaIMG(SDL_Renderer *&,std::string,int,int)': overloaded member function not found in 'Texture'
   c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\texture.h(9): note: see declaration of 'Texture'
@@ -50,3 +51,8 @@ Build succeeded.
 
 Time Elapsed 00:00:00.52
 >>>>>>> 27059f75133b521059a97c52d977223d0b928caf
+=======
+﻿  GameMap.cpp
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+>>>>>>> c26f0ef6aa819a59879b089b06e8eb5ce4edb57c
