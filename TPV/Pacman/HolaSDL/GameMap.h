@@ -1,6 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include "SDL.h"
+
 using namespace std;
 enum MapCell { Empty, Wall, Food, Vitamins };
 class Game;

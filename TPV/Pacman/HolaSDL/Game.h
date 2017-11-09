@@ -2,6 +2,7 @@
 #include "SDL.h"
 #include "Texture.h"
 #include "GameMap.h"
+#include "Ghost.h"
 #include <fstream>
 class Game
 {
@@ -18,6 +19,7 @@ private:
 	Texture vitam;
 	MapCell tab[200][200];
 	GameMap map = GameMap(0, 0);
+	Ghost fantasma; 
 public:
 	Game();
 	~Game();

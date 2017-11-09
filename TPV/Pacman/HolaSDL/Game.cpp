@@ -62,6 +62,18 @@ void Game::carga_Archivo(string name){
 				case 3:
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
+				case 5:
+					fantasma (renderer, i, j, pos);
+					break;
+				case 6:
+					fantasmas[1] = new Ghost(renderer, i, j, pos);
+					break;
+				case 7:
+					fantasmas[2] = new Ghost(renderer, i, j, pos);
+					break;
+				case 8:
+					fantasmas[3] = new Ghost(renderer, i, j, pos);
+					break;
 					//faltan pcman y fantasmas
 				default:
 					break;

@@ -1,13 +1,11 @@
 #pragma once
 #include "Texture.h"
-#include "Game.h"
 #include "SDL.h"
 #include <string>
 #include <cstdlib>
-#include <cstdio>
 #include <ctime>
 #include <random>
-using namespace std;
+//using namespace std;
 
 class Ghost
 {

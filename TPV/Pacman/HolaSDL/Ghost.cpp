@@ -1,4 +1,5 @@
 #include "Ghost.h"
+#include "Game.h"
 
 
 
@@ -119,9 +120,13 @@ int Ghost::posibles_Dirs() {
 
 void Ghost::cambiaDir() {
 	int direction = 0;
-	bool puedeCambiar = posibles_Dirs();
+	direction = posibles_Dirs();
 
-	if (puedeCambiar) {
-
+	if (direction != 0) { //Si puede cambiar de direccion ponemos la nueva direccion
+		actualDir.dirX = posiblesDirs[direction].dirX;
+		actualDir.dirY = posiblesDirs[direction].dirY;
+	}
+	else {
+		throw invalid_argument("No hay donde mover, ¿es el mapa correcto?");
 	}
 }
