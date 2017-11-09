@@ -1,3 +1,1 @@
-﻿  GameMap.cpp
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.Cpp.Platform.targets(57,5): error MSB8020: No se pueden encontrar las herramientas de compilación para v140 (Conjunto de herramientas de la plataforma = 'v140'). Para compilar con las herramientas de compilación v140, instale las herramientas de compilación v140. También puede actualizar a las herramientas actuales de Visual Studio. Para ello, seleccione el menú Proyecto o haga clic con el botón secundario en la solución y, a continuación, seleccione "Actualizar solución".
