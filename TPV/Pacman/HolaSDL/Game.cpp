@@ -7,8 +7,8 @@ Game::Game()
 	map = GameMap(10, 10);
 	window = nullptr;
 	renderer = nullptr;
-	const int winWidth = 800;
-	const int winHeight = 600;
+	const int winWidth = 870;
+	const int winHeight = 644;
 	int winX, winY;
 	winX = winY = SDL_WINDOWPOS_CENTERED;
 
@@ -36,6 +36,41 @@ Game::Game()
 
 Game::~Game()
 {
+}
+
+void Game::carga_Archivo(string name){
+	int fils, cols;
+
+	archivo.open(name);
+
+	if (archivo.is_open()){
+		archivo >> fils >> cols;
+		//map = GameMap(fils, cols);
+		for (int i = 0; i < fils; i++){
+			for (int j = 0; j < cols; j++){
+				int pos;
+				archivo >> pos;
+				switch (pos) {
+				case 0:
+					map.modifica_Posicion(i, j, Empty);
+					break;
+				case 1:
+					map.modifica_Posicion(i, j, Wall);
+					break;
+				case 2:
+					map.modifica_Posicion(i, j, Food);
+					break;
+				case 3:
+					map.modifica_Posicion(i, j, Vitamins);
+					break;
+					//faltan pcman y fantasmas
+				default:
+					break;
+				}
+			}
+		}
+		archivo.close();
+	}
 }
 
 void Game::pinta_Mapa() {
