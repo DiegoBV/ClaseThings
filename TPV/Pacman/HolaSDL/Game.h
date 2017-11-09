@@ -17,13 +17,13 @@ private:
 	Texture com;
 	Texture vitam;
 	MapCell tab[200][200];
-	GameMap map;
-	
+	GameMap map = GameMap(0, 0);
 public:
 	Game();
 	~Game();
 	void carga_Archivo(string name);
 	void pinta_Mapa();
+	bool comprueba_Celda(int X, int Y);
 };
 
  

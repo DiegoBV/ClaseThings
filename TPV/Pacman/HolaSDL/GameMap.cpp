@@ -8,9 +8,9 @@ class GameMap(){
 */
 
 GameMap::GameMap() //Crea un tablero con un array dinámico
-{
-	this->fils = 29;
-	this->cols = 28;
+{	
+	this->fils = fils;
+	this->cols = cols;
 
 	//Creación de la matriz
 	tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
@@ -67,7 +67,7 @@ void GameMap::crea_Mapa(Texture* vit, Texture* m, Texture* com, MapCell tab[200]
 		}
 	}
 }
-string GameMap::consulta_Posicion(int x, int y) {
+MapCell GameMap::consulta_Posicion(int x, int y) {
 	string pos;
 	switch (tablero[x][y]) {
 	case Empty:

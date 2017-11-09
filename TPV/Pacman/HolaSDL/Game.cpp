@@ -4,6 +4,7 @@
 
 Game::Game()
 {
+	map = GameMap(10, 10);
 	window = nullptr;
 	renderer = nullptr;
 	const int winWidth = 870;
@@ -74,4 +75,13 @@ void Game::carga_Archivo(string name){
 void Game::pinta_Mapa() {
 	map.render_Mapa(renderer);
 	SDL_RenderPresent(renderer);
+}
+
+bool Game::comprueba_Celda(int X, int Y) {
+	MapCell casilla = map.consulta_Posicion(X, Y);
+	if (casilla == Wall) {
+		return false;
+	}
+	else
+		return true;
 }
