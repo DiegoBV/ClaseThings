@@ -67,23 +67,24 @@ void GameMap::crea_Mapa(Texture* vit, Texture* m, Texture* com, MapCell tab[200]
 		}
 	}
 }
+
 MapCell GameMap::consulta_Posicion(int x, int y) {
-	string pos;
+	MapCell pos;
 	switch (tablero[x][y]) {
 	case Empty:
-		pos = "Empty";
+		pos = Empty;
 		break;
 	case Wall:
-		pos = "Wall";
+		pos = Wall;
 		break;
 	case Food:
-		pos = "Food";
+		pos = Food;
 		break;
 	case Vitamins:
-		pos = "Vitamins";
+		pos = Vitamins;
 		break;
 	default:
-		pos = "Error";
+		throw invalid_argument("Casilla sin asignar"); //Aquí habría que lanzar una excepción 
 		break;	
 	}
 

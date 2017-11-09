@@ -23,7 +23,7 @@ public:
 	~Game();
 	void carga_Archivo(string name);
 	void pinta_Mapa();
-	bool comprueba_Celda(int X, int Y);
+	bool comprueba_Muro(int X, int Y);
 };
 
  

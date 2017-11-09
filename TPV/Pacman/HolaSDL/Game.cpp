@@ -77,11 +77,11 @@ void Game::pinta_Mapa() {
 	SDL_RenderPresent(renderer);
 }
 
-bool Game::comprueba_Celda(int X, int Y) {
+bool Game::comprueba_Muro(int X, int Y) {
 	MapCell casilla = map.consulta_Posicion(X, Y);
 	if (casilla == Wall) {
-		return false;
+		return true;
 	}
 	else
-		return true;
+		return false;
 }

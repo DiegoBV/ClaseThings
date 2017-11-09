@@ -3,6 +3,11 @@
 #include "Game.h"
 #include "SDL.h"
 #include <string>
+#include <cstdlib>
+#include <cstdio>
+#include <ctime>
+#include <random>
+using namespace std;
 
 class Ghost
 {
@@ -29,11 +34,11 @@ private:
 
 	//Rectángulo para dibujarlo
 	SDL_Rect rectDes;
-	bool posibles_Dirs(int &direction);
+	int posibles_Dirs();
 	
 	
 public:
-	Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY);
+	Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant);
 	~Ghost();
 
 

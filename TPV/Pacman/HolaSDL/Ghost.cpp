@@ -2,16 +2,36 @@
 
 
 
-/Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY)
+Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant)
 {
-	textura->CreaTexturaIMG(renderer, dirTextura);
+	switch (numFant){
+	case 5:
+		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 0, 0);
+		break;
+	
+	case 6:
+		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 2, 2);
+		break;
+
+	case 7:
+		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 4, 4);
+		break;
+
+	case 8:
+		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 6, 6);
+		break;
+
+	default:
+		throw invalid_argument("Este fantasma no existe");
+		break;
+	}
 
 	posActX = orX;
 	posActY = orY;
 
+	//Array con las posibles direcciones que puede tomar el fantasma
 	posiblesDirs = new Dirs[4];
-
-
+	//Rellenado con esas direcciones
 	posiblesDirs[0].dirX = 0; //Arriba
 	posiblesDirs[0].dirY = -1;
 	posiblesDirs[1].dirX = 0; //Abajo
@@ -23,7 +43,8 @@
 
 	actualDir.dirX = 0;
 	actualDir.dirY = 0;
-	rectDes = textura->CreaRectangulo(
+
+	srand(time(nullptr));
 }
 
 
@@ -51,26 +72,54 @@ void Ghost::muerte() {
 	update();
 }
 
-bool Ghost::posibles_Dirs(int &direction) {
+int Ghost::posibles_Dirs() {
 	int tempX;
 	int tempY;
+	int direccion = 0;
+	int backward = 0;
+	int prueba = 0;
 	bool cambia;
+	bool borrar = false;
 	int* posibles = new int [];
+	int j = 0; //COntrol del array de posibles
 
+	//Exploramos las posibilidades 
 	for (int i = 0; i < 4; i++) {
 		tempX = posActX;
 		tempY = posActY;
 
-		if (juego->comprueba_Celda(tempX, tempY)) {
-			posibles
+		tempX += posiblesDirs[i].dirX;
+		tempY += posiblesDirs[i].dirY;
+
+		if (posiblesDirs[i].dirX != (actualDir.dirX*-1) && posiblesDirs[i].dirY != (actualDir.dirY*-1)) { //Primero comprobamos que no es la dir contraria
+			if (!juego->comprueba_Muro(tempX, tempY)) { //Comprobamos que no hay muro
+				posibles[j] = i;
+				j++;
+			}
+		}
+		else { //Si es la dir contraria, hacemos anoder cing
+			backward = i;
 		}
 	}
 
+	//Elección de direccion
+	if (j > 1) { //Hay más de una posición posible: escogemos una random
+		prueba = (rand() % j);
+		direccion = posibles[rand() % j];
+	}
+	else if (j = 1) { //Sólo hay una posibilidad, estamos en un pasillo
+		direccion = posibles[0];
+	}
+	else { //No hay posibilidades, callejón sin salida, mueve atrás
+		direccion = backward;
+	}
+
+	return direccion;
 }
 
 void Ghost::cambiaDir() {
 	int direction = 0;
-	bool puedeCambiar = posibles_Dirs(direction);
+	bool puedeCambiar = posibles_Dirs();
 
 	if (puedeCambiar) {
 
