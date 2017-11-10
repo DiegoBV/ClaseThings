@@ -21,9 +21,9 @@ Game::Game()
 	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
 	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14, 0, 0); //carga las texturas de todos los personajes
-	for (int i = 0; i < 4; i++) {
-		textGhost[i] = &textGeneral; //asignacion de punteros
-	}
+	
+		textGhost = &textGeneral; //asignacion de punteros
+	
 }
 
 
@@ -59,16 +59,16 @@ void Game::carga_Archivo(string name){
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
 				case 5:
-					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[0], this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
+					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
 					break;
 				case 6:
-					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[1], this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
+					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
 					break;
 				case 7:
-					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[2], this); //el this se refiere a "Game"
+					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //el this se refiere a "Game"
 					break;
 				case 8:
-					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[3], this);
+					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
 					break;
 					//faltan pcman y fantasmas
 				default:
@@ -96,7 +96,6 @@ bool Game::comprueba_Muro(int X, int Y) {
 
 void Game::run() {
 	for (int i = 0; i < 4; i++) {
-		fantasmas[i].update();
 		fantasmas[i].render(renderer);
 	}
 	SDL_RenderPresent(renderer);

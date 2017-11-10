@@ -29,7 +29,7 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int n
 	}*/
 	this->numFantasma = numFant;
 	juego = gam; //Actualiza el puntero a game
-	textura = text;
+	textura = text;//asigna el puntero de texturas
 	rectDes.x = orY * juego->dame_Anchura() / juego->dame_FilasTablero(); //pone al fantasma en su posicion
 	rectDes.y = orX * juego->dame_Altura() / juego->dame_ColumnasTablero();
 	rectDes.w = juego->dame_Anchura() / juego->dame_FilasTablero();//establece anchura y altura del fantasma
