@@ -6,7 +6,7 @@
 #include <ctime>
 #include <random>
 //using namespace std;
-
+class Game;
 class Ghost
 {
 private:

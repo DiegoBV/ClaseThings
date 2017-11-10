@@ -7,6 +7,7 @@ enum MapCell { Empty, Wall, Food, Vitamins };
 class Game;
 class GameMap
 {
+	friend class Game;
 private:
 	int fils;
 	int cols;
@@ -16,6 +17,7 @@ private:
 	Texture* muro;
 	Texture* comida;
 	Game* game;
+
 public:
 	GameMap();
 	~GameMap();

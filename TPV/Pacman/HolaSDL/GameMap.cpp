@@ -9,13 +9,18 @@ class GameMap(){
 
 GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
-	this->fils = fils;
-	this->cols = cols;
+	if (fils != 0 && cols != 0){
+		this->fils = fils;
+		this->cols = cols;
 
-	//Creación de la matriz
-	tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
-	for (int r = 0; r < fils; r++) {
-		tablero2[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
+		//Creación de la matriz
+		tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
+		for (int r = 0; r < fils; r++) {
+			tablero2[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
+		}
+	}
+	else {
+		tablero2 = nullptr;
 	}
 }
 /*

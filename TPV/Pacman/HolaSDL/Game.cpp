@@ -4,7 +4,9 @@
 
 Game::Game()
 {
-	map = GameMap(10, 10);
+	if (map.fils != 0 && map.cols != 0){
+		map = GameMap();
+	}
 	window = nullptr;
 	renderer = nullptr;
 	const int winWidth = 870;
@@ -21,7 +23,7 @@ Game::Game()
 	muro.CreaTexturaIMG(renderer, "..\\images\\wall.png", 1, 1, 0 , 0);
 	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
-	for (int i = 0; i < 200; i++) {
+	/*for (int i = 0; i < 200; i++) {
 		for (int j = 0; j < 200; j++) { //mapa cargado de archivo teoricamente
 			tab[i][j] = Empty;
 		}
@@ -29,7 +31,7 @@ Game::Game()
 	tab[9][9] = Wall;
 	tab[199][199] = Food;
 	tab[60][60] = Vitamins;
-	map.crea_Mapa(&vitam, &muro, &com, tab);
+	map.crea_Mapa(&vitam, &muro, &com, tab);*/
 }
 
 
@@ -44,7 +46,9 @@ void Game::carga_Archivo(string name){
 
 	if (archivo.is_open()){
 		archivo >> fils >> cols;
-		//map = GameMap(fils, cols);
+		map.fils = fils;
+		map.cols = cols;
+		map = GameMap();
 		for (int i = 0; i < fils; i++){
 			for (int j = 0; j < cols; j++){
 				int pos;
@@ -63,16 +67,16 @@ void Game::carga_Archivo(string name){
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
 				case 5:
-					fantasma (renderer, i, j, pos);
+					fantasmas[0] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
 					break;
 				case 6:
-					fantasmas[1] = new Ghost(renderer, i, j, pos);
+					fantasmas[1] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
 					break;
 				case 7:
-					fantasmas[2] = new Ghost(renderer, i, j, pos);
+					fantasmas[2] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
 					break;
 				case 8:
-					fantasmas[3] = new Ghost(renderer, i, j, pos);
+					fantasmas[3] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
 					break;
 					//faltan pcman y fantasmas
 				default:
@@ -86,6 +90,9 @@ void Game::carga_Archivo(string name){
 
 void Game::pinta_Mapa() {
 	map.render_Mapa(renderer);
+	for (int i = 0; i < 4; i++){
+		fantasmas[i]->render(renderer);
+	}
 	SDL_RenderPresent(renderer);
 }
 

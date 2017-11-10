@@ -18,8 +18,8 @@ private:
 	Texture com;
 	Texture vitam;
 	MapCell tab[200][200];
-	GameMap map = GameMap(0, 0);
-	Ghost fantasma; 
+	GameMap map;
+	Ghost* fantasmas [4]; 
 public:
 	Game();
 	~Game();
