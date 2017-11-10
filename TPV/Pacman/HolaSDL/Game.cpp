@@ -4,13 +4,10 @@
 
 Game::Game()
 {
-	if (map.fils != 0 && map.cols != 0){
-		map = GameMap();
-	}
 	window = nullptr;
 	renderer = nullptr;
-	const int winWidth = 870;
-	const int winHeight = 644;
+	winWidth = 870;
+	winHeight = 644;
 	int winX, winY;
 	winX = winY = SDL_WINDOWPOS_CENTERED;
 
@@ -23,15 +20,10 @@ Game::Game()
 	muro.CreaTexturaIMG(renderer, "..\\images\\wall.png", 1, 1, 0 , 0);
 	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
-	/*for (int i = 0; i < 200; i++) {
-		for (int j = 0; j < 200; j++) { //mapa cargado de archivo teoricamente
-			tab[i][j] = Empty;
-		}
+	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14, 0, 0); //carga las texturas de todos los personajes
+	for (int i = 0; i < 4; i++) {
+		textGhost[i] = &textGeneral; //asignacion de punteros
 	}
-	tab[9][9] = Wall;
-	tab[199][199] = Food;
-	tab[60][60] = Vitamins;
-	map.crea_Mapa(&vitam, &muro, &com, tab);*/
 }
 
 
@@ -46,9 +38,9 @@ void Game::carga_Archivo(string name){
 
 	if (archivo.is_open()){
 		archivo >> fils >> cols;
-		map.fils = fils;
-		map.cols = cols;
-		map = GameMap();
+		this->filasTablero = fils;
+		this->colsTablero = cols;
+		map = GameMap(fils, cols, &vitam, &muro, &com, this);
 		for (int i = 0; i < fils; i++){
 			for (int j = 0; j < cols; j++){
 				int pos;
@@ -67,16 +59,16 @@ void Game::carga_Archivo(string name){
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
 				case 5:
-					fantasmas[0] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
+					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[0], this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
 					break;
 				case 6:
-					fantasmas[1] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
+					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[1], this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
 					break;
 				case 7:
-					fantasmas[2] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
+					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[2], this); //el this se refiere a "Game"
 					break;
 				case 8:
-					fantasmas[3] = new Ghost(renderer, "..\\images\\characters1.png", i, j, pos);
+					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost[3], this);
 					break;
 					//faltan pcman y fantasmas
 				default:
@@ -90,9 +82,6 @@ void Game::carga_Archivo(string name){
 
 void Game::pinta_Mapa() {
 	map.render_Mapa(renderer);
-	for (int i = 0; i < 4; i++){
-		fantasmas[i]->render(renderer);
-	}
 	SDL_RenderPresent(renderer);
 }
 
@@ -103,4 +92,38 @@ bool Game::comprueba_Muro(int X, int Y) {
 	}
 	else
 		return false;
+}
+
+void Game::run() {
+	for (int i = 0; i < 4; i++) {
+		fantasmas[i].update();
+		fantasmas[i].render(renderer);
+	}
+	SDL_RenderPresent(renderer);
+	//prueba.update();
+}
+
+//los gets de altura, anchura, renderer...
+int Game::dame_Altura() {
+	return this->winHeight;
+}
+
+int Game::dame_Anchura() {
+	return this->winWidth;
+}
+
+int Game::dame_FilasTablero() {
+	return this->filasTablero;
+}
+
+int Game::dame_ColumnasTablero() {
+	return this->colsTablero;
+}
+
+SDL_Renderer* Game::dame_Renderer() {
+	return this->renderer;
+}
+
+void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay uno
+	map.destruir_Mapa();
 }

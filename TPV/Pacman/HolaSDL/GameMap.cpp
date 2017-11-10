@@ -9,7 +9,13 @@ class GameMap(){
 
 GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
-	if (fils != 0 && cols != 0){
+}
+GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam) { //Constructora con parámetros
+	vitamina = vit;
+	muro = m;
+	comida = com;
+	game = gam;
+	if (fils != 0 && cols != 0) {
 		this->fils = fils;
 		this->cols = cols;
 
@@ -48,34 +54,26 @@ MapCell getCell(int fila, int columna){
 
 */
 
-GameMap::~GameMap()  //Destructora del tablero de juego con un array dinámico
+GameMap::~GameMap() 
 {
+}
+
+void GameMap::destruir_Mapa() { //Destructora del tablero de juego con un array dinámico, la destructora por defecto se llama al hacer un nuevo map
 	if (tablero2 != nullptr) {
-		for (int r = 0; r < fils; r++) {
-			delete[] tablero2[r];
-		}
-		delete[] tablero2;
+	for (int r = 0; r < fils; r++) {
+	delete[] tablero2[r];
+	}
+	delete[] tablero2;
 	}
 }
 
 MapCell GameMap::getCell(int fils, int cols) {
-	return tablero[fils][cols];
+	return tablero2[fils][cols];
 }
 
-void GameMap::crea_Mapa(Texture* vit, Texture* m, Texture* com, MapCell tab[200][200]) {
-	vitamina = vit;
-	muro = m;
-	comida = com;
-	for (int i = 0; i < 200; i++) {
-		for (int j = 0; j < 200; j++) {
-			tablero[i][j] = tab[i][j];
-		}
-	}
-}
-
-MapCell GameMap::consulta_Posicion(int x, int y) {
+MapCell GameMap::consulta_Posicion(int x, int y) { //esto es lo mismo que lo de arriba, deberia borrarse (?) al ppo devolvia un string pero si no es necesario...
 	MapCell pos;
-	switch (tablero[x][y]) {
+	switch (tablero2[x][y]) {
 	case Empty:
 		pos = Empty;
 		break;
@@ -104,11 +102,11 @@ void GameMap::render_Mapa(SDL_Renderer* &rnd) {
 	for (int i = 0; i < fils; i++) {
 		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
-			des.x = j * 870 / fils;
-			des.y = i * 644 / cols;
-			des.w = 870 / fils; //pruebas, deberia coger la anchura del game
-			des.h = 644 / cols;
-			switch (tablero2[i][j]) {
+			des.x = j * game->dame_Anchura() / fils;
+			des.y = i * game->dame_Altura() / cols;
+			des.w = game->dame_Anchura() / fils;
+			des.h = game->dame_Altura() / cols;
+			switch (tablero2[i][j]) {  //comprueba lo que hay en la posicion i,j y manda a la textura correspondiente pintarse
 			case Empty:
 				//algo
 				break;

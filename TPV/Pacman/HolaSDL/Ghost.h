@@ -21,6 +21,10 @@ private:
 		int dirX;
 		int dirY;
 	};
+
+	//Número Fantasma
+	int numFantasma;
+
 	Dirs* posiblesDirs;
 	Dirs actualDir;
 
@@ -36,7 +40,8 @@ private:
 	
 	
 public:
-	Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant);
+	Ghost();
+	Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant, Texture* text, Game* gam);
 	~Ghost();
 
 

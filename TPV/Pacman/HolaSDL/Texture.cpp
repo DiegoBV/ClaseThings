@@ -13,16 +13,16 @@ Texture::~Texture()
 void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols, int fila_Inicio, int col_Inicio){
 	//SDL_Texture* texture; //Texture
 	//string filename = "..\\images\\background1.png";
+	this->filas = fils;
+	this->columnas = cols;
 	SDL_Surface* surface = IMG_Load(filename.c_str());
 	textura = SDL_CreateTextureFromSurface(renderer, surface);
 	textH = surface->h;
 	textW = surface->w;
-	CreaRectangulo(textH, textW, fila_Inicio, col_Inicio);
+	ModificaRectangulo((textW/columnas) * col_Inicio, (textH/filas) * fila_Inicio);//para las imágenes con varias texturas
+	rect.w = textW / columnas;
+	rect.h = textH / filas;
 	SDL_FreeSurface(surface);	
-	
-	this ->filas = fils;
-	this ->columnas = cols;
-	
 }
 
 /*void Texture::CreaTexturaBMP(SDL_Renderer* &renderer, string filename){
@@ -33,11 +33,9 @@ void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fil
 	SDL_FreeSurface(surface);
 }*/
 
-void Texture::CreaRectangulo(int alturaIMG, int anchuraIMG, int posX, int posY){
-	rect.x = posX;
-	rect.y = posY;
-	rect.w = anchuraIMG;
-	rect.h = alturaIMG;
+void Texture::ModificaRectangulo(int fil, int col){  //modifica el rect origen, sirve para una textura con multiples sprites
+	rect.x = (textW / columnas) * col;
+	rect.y = (textH / filas) * fil;
 }
 
 void Texture::Render(SDL_Renderer* rnd){

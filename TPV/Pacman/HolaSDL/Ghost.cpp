@@ -2,31 +2,38 @@
 #include "Game.h"
 
 
-
-Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant)
+Ghost::Ghost() {
+}
+Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant, Texture* text, Game* gam)
 {
-	switch (numFant){
+	/*switch (numFant){
 	case 5:
-		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 0, 0);
+		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 0, 0);
 		break;
 	
 	case 6:
-		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 2, 2);
+		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 2, 2);
 		break;
 
 	case 7:
-		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 4, 4);
+		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 4, 4);
 		break;
 
 	case 8:
-		textura->CreaTexturaIMG(renderer, dirTextura, 0, 0, 6, 6);
+		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 6, 6);
 		break;
 
 	default:
 		throw invalid_argument("Este fantasma no existe");
 		break;
-	}
-
+	}*/
+	this->numFantasma = numFant;
+	juego = gam; //Actualiza el puntero a game
+	textura = text;
+	rectDes.x = orY * juego->dame_Anchura() / juego->dame_FilasTablero(); //pone al fantasma en su posicion
+	rectDes.y = orX * juego->dame_Altura() / juego->dame_ColumnasTablero();
+	rectDes.w = juego->dame_Anchura() / juego->dame_FilasTablero();//establece anchura y altura del fantasma
+	rectDes.h = juego->dame_Altura() / juego->dame_ColumnasTablero();
 	posActX = orX;
 	posActY = orY;
 
@@ -61,6 +68,7 @@ void Ghost::update() {
 }
 
 void Ghost::render(SDL_Renderer* &render) {
+	textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
 	textura->RenderFrame(render, rectDes);
 }
 
@@ -81,7 +89,7 @@ int Ghost::posibles_Dirs() {
 	int prueba = 0;
 	bool cambia;
 	bool borrar = false;
-	int* posibles = new int [];
+	int* posibles = new int [4];
 	int j = 0; //COntrol del array de posibles
 
 	//Exploramos las posibilidades 
