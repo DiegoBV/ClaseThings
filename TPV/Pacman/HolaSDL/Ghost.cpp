@@ -6,27 +6,6 @@ Ghost::Ghost() {
 }
 Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant, Texture* text, Game* gam)
 {
-	/*switch (numFant){
-	case 5:
-		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 0, 0);
-		break;
-	
-	case 6:
-		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 2, 2);
-		break;
-
-	case 7:
-		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 4, 4);
-		break;
-
-	case 8:
-		textura.CreaTexturaIMG(renderer, dirTextura, 0, 0, 6, 6);
-		break;
-
-	default:
-		throw invalid_argument("Este fantasma no existe");
-		break;
-	}*/
 	this->numFantasma = numFant;
 	juego = gam; //Actualiza el puntero a game
 	textura = text;//asigna el puntero de texturas
