@@ -1,22 +1,23 @@
-<<<<<<< HEAD
-﻿Build started 10/11/2017 17:57:17.
+﻿Build started 11/11/2017 17:34:05.
      1>Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
-     1>Link:
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp
+         Game.cpp
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         GameMap.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Game.obj
+         Debug\GameMap.obj
+         Debug\GameObject.obj
+         Debug\Ghost.obj
+         Debug\main.obj
+         Debug\Pacman.obj
+         Debug\Texture.obj
+         LINK : C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe not found or not built by the last incremental link; performing full link
          HolaSDL.vcxproj -> C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
      1>Done Building Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.25
-=======
-﻿  main.cpp
-  Generating Code...
-  Compiling...
-  Game.cpp
-  Generating Code...
-  Skipping... (no relevant changes detected)
-  Ghost.cpp
-  GameMap.cpp
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
->>>>>>> bff6a96f7d97e131812995860ce3f52d7270aa84
+Time Elapsed 00:00:03.82
