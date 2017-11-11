@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "GameMap.h"
 #include "Ghost.h"
+#include "Pacman.h"
 #include <fstream>
 class Game
 {
@@ -21,6 +22,7 @@ private:
 	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
 	Texture* textGhost; //puntero a la textura general para acceder a ella, se llama ghost porq por ahora solo hay fantasmicos
 	Texture textGeneral; //carga la textura con todas las cositas
+	Pacman pacman;
 public:
 	Game();
 	~Game();

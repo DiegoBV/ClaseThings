@@ -22,7 +22,7 @@ Game::Game()
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
 	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14, 0, 0); //carga las texturas de todos los personajes
 	
-		textGhost = &textGeneral; //asignacion de punteros
+		textGhost = &textGeneral; //Dirección de la textGeneral cargada
 	
 }
 
@@ -58,6 +58,9 @@ void Game::carga_Archivo(string name){
 				case 3:
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
+				case 4: //Pacman
+
+					break;
 				case 5:
 					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
 					break;
@@ -70,7 +73,7 @@ void Game::carga_Archivo(string name){
 				case 8:
 					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
 					break;
-					//faltan pcman y fantasmas
+					//faltan pcman
 				default:
 					break;
 				}
