@@ -18,8 +18,8 @@ private:
 	Texture com;
 	Texture vitam;
 	GameMap map;
-	Ghost fantasmas [4]; //array de fantasmas/personajes
-	Texture* textGhost[4]; //punteros a la textura general para acceder a ella
+	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
+	Texture* textGhost; //puntero a la textura general para acceder a ella, se llama ghost porq por ahora solo hay fantasmicos
 	Texture textGeneral; //carga la textura con todas las cositas
 public:
 	Game();
