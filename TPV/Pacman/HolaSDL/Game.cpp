@@ -21,14 +21,16 @@ Game::Game()
 	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
 	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14, 0, 0); //carga las texturas de todos los personajes
-	
-		textGhost = &textGeneral; //Dirección de la textGeneral cargada
+	textGhost = &textGeneral; //Dirección de la textGeneral cargada
 	
 }
 
 
-Game::~Game()
-{
+Game::~Game() //destruye el renderer y la ventana
+{	
+	//Finalization
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 }
 
 void Game::carga_Archivo(string name){
@@ -54,12 +56,14 @@ void Game::carga_Archivo(string name){
 					break;
 				case 2:
 					map.modifica_Posicion(i, j, Food);
+					setComida(1);
 					break;
 				case 3:
 					map.modifica_Posicion(i, j, Vitamins);
+					setComida(1);
 					break;
-				case 4: //Pacman
-
+				case 4:
+					//pacman = Pacman(i, j, textGhost, this);
 					break;
 				case 5:
 					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
@@ -73,7 +77,11 @@ void Game::carga_Archivo(string name){
 				case 8:
 					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
 					break;
-					//faltan pcman
+				case 9: {
+					map.modifica_Posicion(i, j, Empty);
+					pacman = Pacman(i, j, textGhost, this);
+					break;
+				}
 				default:
 					break;
 				}
@@ -84,25 +92,67 @@ void Game::carga_Archivo(string name){
 }
 
 void Game::pinta_Mapa() {
-	map.render_Mapa(renderer);
-	SDL_RenderPresent(renderer);
+	map.render_Mapa();
 }
 
 bool Game::comprueba_Muro(int X, int Y) {
-	MapCell casilla = map.consulta_Posicion(X, Y);
+	MapCell casilla = map.getCell(X, Y);
 	if (casilla == Wall) {
 		return true;
 	}
 	else
 		return false;
 }
+void Game::setComida(int a) {
+	numComida += a;
+}
+void Game::come(int x, int y) {
+	map.modifica_Posicion(x, y, Empty);
+	setComida(-1);
+}
+
+MapCell Game::consulta(int x, int y) {
+	return map.getCell(x, y);
+}
+
+bool Game::win() { //comprueba si se ha comido todo e.e
+	return (numComida == 0);
+}
+
+void Game::handle_Events() {
+	SDL_PollEvent(&event);
+	if (event.type == SDL_QUIT) {
+		exit = true;
+	}
+	else {
+		if (event.type == SDL_KEYDOWN) {
+			if (event.key.keysym.sym == SDLK_RIGHT) {
+				pacman.siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
+			}
+			else if (event.key.keysym.sym == SDLK_UP) {
+				pacman.siguiente_Dir(0, -1);
+			}
+			else if (event.key.keysym.sym == SDLK_DOWN) {
+				pacman.siguiente_Dir(0, 1);
+			}
+			else if (event.key.keysym.sym == SDLK_LEFT) {
+				pacman.siguiente_Dir(-1, 0);
+			}
+		}
+	}
+}
 
 void Game::run() {
+	SDL_Delay(100);
+	SDL_RenderClear(renderer);
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].render(renderer);
+		//fantasmas[i].update();
 	}
+	handle_Events();
+	pacman.update();
+	pinta_Mapa();
 	SDL_RenderPresent(renderer);
-	//prueba.update();
 }
 
 //los gets de altura, anchura, renderer...
@@ -122,6 +172,9 @@ int Game::dame_ColumnasTablero() {
 	return this->colsTablero;
 }
 
+bool Game::dame_exit() {
+	return this->exit;
+}
 SDL_Renderer* Game::dame_Renderer() {
 	return this->renderer;
 }

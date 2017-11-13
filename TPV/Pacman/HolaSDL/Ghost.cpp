@@ -17,7 +17,6 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int n
 	posActY = orY;
 
 	//Array con las posibles direcciones que puede tomar el fantasma
-	posiblesDirs = new Dirs[4];
 	//Rellenado con esas direcciones
 	posiblesDirs[0].dirX = 0; //Arriba
 	posiblesDirs[0].dirY = -1;

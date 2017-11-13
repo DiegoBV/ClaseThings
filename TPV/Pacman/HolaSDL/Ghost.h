@@ -25,7 +25,7 @@ private:
 	//Número Fantasma
 	int numFantasma;
 
-	Dirs* posiblesDirs;
+	Dirs posiblesDirs[4];
 	Dirs actualDir;
 
 	//Punteros

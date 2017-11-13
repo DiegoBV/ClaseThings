@@ -71,34 +71,11 @@ MapCell GameMap::getCell(int fils, int cols) {
 	return tablero2[fils][cols];
 }
 
-MapCell GameMap::consulta_Posicion(int x, int y) { //esto es lo mismo que lo de arriba, deberia borrarse (?) al ppo devolvia un string pero si no es necesario...
-	MapCell pos;
-	switch (tablero2[x][y]) {
-	case Empty:
-		pos = Empty;
-		break;
-	case Wall:
-		pos = Wall;
-		break;
-	case Food:
-		pos = Food;
-		break;
-	case Vitamins:
-		pos = Vitamins;
-		break;
-	default:
-		throw invalid_argument("Casilla sin asignar"); //Aquí habría que lanzar una excepción 
-		break;	
-	}
-
-	return pos;
-}
-
 void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
 	tablero2[x][y] = nuevoObjeto;
 }
 
-void GameMap::render_Mapa(SDL_Renderer* &rnd) {
+void GameMap::render_Mapa() {
 	for (int i = 0; i < fils; i++) {
 		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
@@ -111,13 +88,13 @@ void GameMap::render_Mapa(SDL_Renderer* &rnd) {
 				//algo
 				break;
 			case Wall:
-				muro->RenderFrame(rnd, des);
+				muro->RenderFrame(game->dame_Renderer(), des);
 				break;
 			case Food:
-				comida->RenderFrame(rnd, des);
+				comida->RenderFrame(game->dame_Renderer(), des);
 				break;
 			case Vitamins:
-				vitamina->RenderFrame(rnd, des);
+				vitamina->RenderFrame(game->dame_Renderer(), des);
 				break;
 			}
 		}
