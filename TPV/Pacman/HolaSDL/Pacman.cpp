@@ -45,15 +45,15 @@ void Pacman::modifica_Rectangulo() { //modifica el rectangulo destino, asignando
 
 void Pacman::donut() { //hace las comprobaciones para el movimiento toroidal
 	if (posY < 0) {
-		posY = game->dame_ColumnasTablero() - 1;
+		posY = game->dame_FilasTablero() - 1;
 	}
-	if (posY >= game->dame_ColumnasTablero()) {
+	if (posY >= game->dame_FilasTablero()) {
 		posY = 0;
 	}
 	if (posX < 0) {
-		posX = game->dame_FilasTablero() - 1;
+		posX = game->dame_ColumnasTablero() - 1;
 	}
-	if (posX >= game->dame_FilasTablero()) {
+	if (posX >= game->dame_ColumnasTablero()) {
 		posX = 0;
 	}
 }

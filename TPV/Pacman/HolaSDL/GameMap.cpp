@@ -68,7 +68,9 @@ void GameMap::destruir_Mapa() { //Destructora del tablero de juego con un array 
 }
 
 MapCell GameMap::getCell(int fils, int cols) {
-	return tablero2[fils][cols];
+	if (fils < game->dame_FilasTablero() && fils >= 0 && cols < game->dame_ColumnasTablero() && cols >= 0) {
+		return tablero2[fils][cols];
+	}
 }
 
 void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
