@@ -22,6 +22,9 @@ Game::Game()
 	vitam.CreaTexturaIMG(renderer, "..\\images\\vitaminas.png", 1, 4);
 	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14); //carga las texturas de todos los personajes
 	textGhost = &textGeneral; //Dirección de la textGeneral cargada
+
+	//FrameRate
+	this->frameRate = 100; //a + alto, + lento
 	
 }
 
@@ -143,20 +146,21 @@ void Game::handle_Events() {
 }
 
 void Game::run() {
-	/*startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime;
-	if(frameTime < SDL_FrameRate)*/
-	SDL_Delay(100);
-	SDL_RenderClear(renderer);
+	SDL_RenderClear(renderer); //limpia el render
+	startTime = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - startTime; //hace lo del Delay más eficiente
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].render(renderer);
 		//fantasmas[i].update();
 	}
-	this->vitam.Anima(500, 0, 0, 1, 4);
-	handle_Events();
-	pacman.update();
-	pinta_Mapa();
-	SDL_RenderPresent(renderer);
+	this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
+	handle_Events(); //controla los eventos de teclado
+	pacman.update(); //update del pacman
+	pinta_Mapa();   //pinta el tablero
+	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
+	if (frameTime < frameRate) {
+		SDL_Delay(frameRate - frameTime); //delay
+	}
 }
 
 //los gets de altura, anchura, renderer...

@@ -27,7 +27,8 @@ private:
 	Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos
 	int startTime;
-	int frameTime;
+	int frameTime; // mediciones del tiempo para un Delay "eficiente"
+	int frameRate;
 public:
 	Game();
 	~Game();
