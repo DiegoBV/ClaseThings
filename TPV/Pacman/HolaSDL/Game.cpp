@@ -17,10 +17,10 @@ Game::Game()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//Texturas
-	muro.CreaTexturaIMG(renderer, "..\\images\\wall.png", 1, 1, 0 , 0);
-	com.CreaTexturaIMG(renderer, "..\\images\\comida.png", 1, 1, 0 , 0);
-	vitam.CreaTexturaIMG(renderer, "..\\images\\vitamina.png", 1, 1, 0 , 0);
-	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14, 0, 0); //carga las texturas de todos los personajes
+	muro.CreaTexturaIMG(renderer, "..\\images\\wall2.png", 1, 1);
+	com.CreaTexturaIMG(renderer, "..\\images\\comida4.png", 1, 1);
+	vitam.CreaTexturaIMG(renderer, "..\\images\\vitaminas.png", 1, 4);
+	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14); //carga las texturas de todos los personajes
 	textGhost = &textGeneral; //Dirección de la textGeneral cargada
 	
 }
@@ -143,12 +143,16 @@ void Game::handle_Events() {
 }
 
 void Game::run() {
+	/*startTime = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - startTime;
+	if(frameTime < SDL_FrameRate)*/
 	SDL_Delay(100);
 	SDL_RenderClear(renderer);
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].render(renderer);
 		//fantasmas[i].update();
 	}
+	this->vitam.Anima(500, 0, 0, 1, 4);
 	handle_Events();
 	pacman.update();
 	pinta_Mapa();

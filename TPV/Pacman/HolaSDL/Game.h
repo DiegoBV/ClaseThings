@@ -26,6 +26,8 @@ private:
 	Texture textGeneral; //carga la textura con todas las cositas
 	Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos
+	int startTime;
+	int frameTime;
 public:
 	Game();
 	~Game();

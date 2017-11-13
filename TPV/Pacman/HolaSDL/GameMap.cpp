@@ -81,9 +81,9 @@ void GameMap::render_Mapa() {
 	for (int i = 0; i < fils; i++) {
 		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
-			des.x = j * game->dame_Anchura() / fils;
-			des.y = i * game->dame_Altura() / cols;
-			des.w = game->dame_Anchura() / fils;
+			des.x = j * game->dame_Anchura() / cols;
+			des.y = i * game->dame_Altura() / fils;
+			des.w = game->dame_Anchura() / cols;
 			des.h = game->dame_Altura() / cols;
 			switch (tablero2[i][j]) {  //comprueba lo que hay en la posicion i,j y manda a la textura correspondiente pintarse
 			case Empty:

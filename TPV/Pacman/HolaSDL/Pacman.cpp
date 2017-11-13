@@ -15,11 +15,12 @@ Pacman::Pacman(int posY, int posX, Texture* text, Game* gam) { //contructora con
 	this->textura = text;
 	this->posX = posX;
 	this->posY = posY;  //establece coordenadas y crea el rectangulo destino inicial
-	rectDest.x = posX * game->dame_Anchura()/ game->dame_FilasTablero();
-	rectDest.y = posY * game->dame_Altura()/ game->dame_ColumnasTablero();
+	rectDest.x = posX * game->dame_Anchura()/ game->dame_ColumnasTablero();
+	rectDest.y = posY * game->dame_Altura()/ game->dame_FilasTablero();
 	rectDest.w = game->dame_Anchura() / game->dame_FilasTablero(); //establece anchura y altura del fantasma
 	rectDest.h = game->dame_Altura() / game->dame_ColumnasTablero();
 	dirX = dirY = nX = nY = 0;
+	this->textura->ModificaRectangulo(0, 10);
 }
 bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la nueva direccion, si no, se mantiene la antigua
 	nX = dX;
@@ -27,7 +28,6 @@ bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la
 	return (!game->comprueba_Muro(posY + nY, posX + nX));
 }
 void Pacman::render() {//pinta la textura correcta
-	this->textura->ModificaRectangulo(0, 10);
 	this->textura->RenderFrame(game->dame_Renderer(), rectDest);
 }
 
@@ -39,8 +39,8 @@ void Pacman::comer() { //comrpueba si la casilla en la que estas es comida o vit
 }
 
 void Pacman::modifica_Rectangulo() { //modifica el rectangulo destino, asignandole la x y la y multiplicandolo por las medidas del tablero
-	this->rectDest.y = this->posY * game->dame_Altura() / game->dame_ColumnasTablero();
-	this->rectDest.x = this->posX * game->dame_Anchura() / game->dame_FilasTablero();
+	this->rectDest.y = this->posY * game->dame_Altura() / game->dame_FilasTablero();
+	this->rectDest.x = this->posX * game->dame_Anchura() / game->dame_ColumnasTablero();
 }
 
 void Pacman::donut() { //hace las comprobaciones para el movimiento toroidal
@@ -72,6 +72,24 @@ void Pacman::mueve_Pacman() {
 	}
 	donut();
 	modifica_Rectangulo();
+	animar();
+}
+
+void Pacman::animar() {
+	int filaSheet; //indica la fila donde animar (0, 1, 2, 3)
+	if (this->dirX == 1) {
+		filaSheet = 0;
+	}
+	else if (this->dirX == -1) {
+		filaSheet = 2;
+	}
+	else if (this->dirY == 1) {
+		filaSheet = 1;
+	}
+	else {
+		filaSheet = 3;
+	}
+	this->textura->Anima(100, filaSheet, 10, 1, 2);
 }
 
 void Pacman::update() {

@@ -19,6 +19,7 @@ public:
 	void donut();
 	void mueve_Pacman();
 	void modifica_Rectangulo();
+	void animar();
 	void update();
 
 };
