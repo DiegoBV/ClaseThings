@@ -42,25 +42,40 @@ void Pacman::modifica_Rectangulo() { //modifica el rectangulo destino, asignando
 	this->rectDest.y = this->posY * game->dame_Altura() / game->dame_ColumnasTablero();
 	this->rectDest.x = this->posX * game->dame_Anchura() / game->dame_FilasTablero();
 }
-void Pacman::elige_Direccion() {
+
+void Pacman::donut() { //hace las comprobaciones para el movimiento toroidal
+	if (posY < 0) {
+		posY = game->dame_ColumnasTablero() - 1;
+	}
+	if (posY >= game->dame_ColumnasTablero()) {
+		posY = 0;
+	}
+	if (posX < 0) {
+		posX = game->dame_FilasTablero() - 1;
+	}
+	if (posX >= game->dame_FilasTablero()) {
+		posX = 0;
+	}
+}
+void Pacman::mueve_Pacman() {
 	if (siguiente_Dir(nX, nY)) { //si con la nueva direccion que pulsaste puede moverse... (aqui se hace lo de la memoria del movimiento)
 		dirX = nX;
 		dirY = nY;  //asigna la nueva direccion a la actual y se mueve en esa direccion
 		posX += dirX;
 		posY += dirY;
-		modifica_Rectangulo();
 	}
 	else {  //si no, comprueba que no haya muro y se sigue moviendo en la direccion antigua
 		if (!game->comprueba_Muro(this->posY + dirY, this->posX + dirX)) {
 			posX += dirX;
 			posY += dirY;
-			modifica_Rectangulo();
 		}
 	}
+	donut();
+	modifica_Rectangulo();
 }
 
 void Pacman::update() {
-	elige_Direccion();
+	mueve_Pacman();
 	comer();
 	this->render();
 }

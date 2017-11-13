@@ -16,7 +16,8 @@ public:
 	bool siguiente_Dir(int dX, int dY);
 	void render();
 	void comer();
-	void elige_Direccion();
+	void donut();
+	void mueve_Pacman();
 	void modifica_Rectangulo();
 	void update();
 
