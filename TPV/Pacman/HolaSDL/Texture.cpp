@@ -38,8 +38,8 @@ void Texture::ModificaRectangulo(int fil, int col){  //modifica el rect origen, 
 	rect.y = (textH / filas) * fil;
 }
 
-void Texture::Render(SDL_Renderer* rnd){
-	SDL_RenderCopy(rnd, textura, &rect, nullptr);
+void Texture::Render(SDL_Renderer* rnd, SDL_Rect dest){
+	SDL_RenderCopy(rnd, textura, &rect, &dest);
 }
 
 void Texture::RenderFrame(SDL_Renderer* rnd, const SDL_Rect dest) {

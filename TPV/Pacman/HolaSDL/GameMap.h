@@ -26,5 +26,6 @@ public:
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
 	void render_Mapa(SDL_Renderer* &rnd);
 	void destruir_Mapa();
+	
 };
 

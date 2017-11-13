@@ -5,11 +5,13 @@
 #include "Ghost.h"
 #include "Pacman.h"
 #include <fstream>
+using namespace std;
 class Game
 {
 private:
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	SDL_Event termina;
 	ifstream archivo;
 	int winWidth;
 	int winHeight;
@@ -23,6 +25,8 @@ private:
 	Texture* textGhost; //puntero a la textura general para acceder a ella, se llama ghost porq por ahora solo hay fantasmicos
 	Texture textGeneral; //carga la textura con todas las cositas
 	Pacman pacman;
+	bool end; //Cierra el juego / termina 
+
 public:
 	Game();
 	~Game();
@@ -36,6 +40,8 @@ public:
 	int dame_ColumnasTablero();
 	SDL_Renderer* dame_Renderer();
 	void destruir();
+	int obtenerPixelX(int casilla);
+	int obtenerPixelY(int casilla);
 };
 
  

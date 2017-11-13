@@ -98,10 +98,21 @@ bool Game::comprueba_Muro(int X, int Y) {
 }
 
 void Game::run() {
-	for (int i = 0; i < 4; i++) {
-		fantasmas[i].render(renderer);
+
+	while (SDL_PollEvent(&termina) && !end){
+		if (termina.type == SDL_QUIT)
+			end = true;
+
+		SDL_RenderClear(renderer);
+		map.render_Mapa(renderer);
+
+		for (int i = 0; i < 4; i++) {
+			fantasmas[i].update();
+			fantasmas[i].render(renderer);
+		}
+		SDL_RenderPresent(renderer);
+		system("pause");
 	}
-	SDL_RenderPresent(renderer);
 	//prueba.update();
 }
 
@@ -128,4 +139,12 @@ SDL_Renderer* Game::dame_Renderer() {
 
 void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay uno
 	map.destruir_Mapa();
+}
+
+int Game::obtenerPixelX(int posicion){
+	return (winWidth / filasTablero) * posicion;
+}
+
+int Game::obtenerPixelY(int posicion){
+	return (winHeight / colsTablero) * posicion;
 }

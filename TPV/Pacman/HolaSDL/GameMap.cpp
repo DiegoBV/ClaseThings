@@ -72,8 +72,10 @@ MapCell GameMap::getCell(int fils, int cols) {
 }
 
 MapCell GameMap::consulta_Posicion(int x, int y) { //esto es lo mismo que lo de arriba, deberia borrarse (?) al ppo devolvia un string pero si no es necesario...
-	MapCell pos;
-	switch (tablero2[x][y]) {
+	MapCell pos = Empty; //Devolvemos vacía predeterminadamente para depuración, después calculos de fantasmas.
+	//pos = getCell(x, y);
+
+	switch (pos) {
 	case Empty:
 		pos = Empty;
 		break;

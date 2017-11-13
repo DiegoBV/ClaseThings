@@ -17,7 +17,7 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int n
 	posActY = orY;
 
 	//Array con las posibles direcciones que puede tomar el fantasma
-	posiblesDirs = new Dirs[4];
+	//posiblesDirs = new Dirs[4];
 	//Rellenado con esas direcciones
 	posiblesDirs[0].dirX = 0; //Arriba
 	posiblesDirs[0].dirY = -1;
@@ -28,8 +28,8 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int n
 	posiblesDirs[3].dirX = 1; //Dcha
 	posiblesDirs[3].dirY = 0;
 
-	actualDir.dirX = 0;
-	actualDir.dirY = 0;
+	actualDir.dirX = 0;  //Inicializamos de base hacia arriba, para probar cosas
+	actualDir.dirY = -1;
 
 	srand(time(nullptr));
 }
@@ -40,15 +40,18 @@ Ghost::~Ghost()
 }
 
 void Ghost::update() {
-	posActX += actualDir.dirX;
-	posActY += actualDir.dirY;
+	rectDes.x = juego->obtenerPixelX(posActY);
+	rectDes.y = juego->obtenerPixelY(posActX);
+
+	posActX += actualDir.dirY;
+	posActY += actualDir.dirX;
 
 	cambiaDir();
 }
 
 void Ghost::render(SDL_Renderer* &render) {
 	textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
-	textura->RenderFrame(render, rectDes);
+	textura->Render(render, rectDes);
 }
 
 void Ghost::muerte() {
@@ -66,27 +69,25 @@ int Ghost::posibles_Dirs() {
 	int direccion = 0;
 	int backward = 0;
 	int prueba = 0;
-	bool cambia;
+	bool cambia = false;
 	bool borrar = false;
-	int* posibles = new int [4];
+	int posibles [4];
 	int j = 0; //COntrol del array de posibles
 
 	//Exploramos las posibilidades 
 	for (int i = 0; i < 4; i++) {
-		tempX = posActX;
-		tempY = posActY;
+		tempX = posActY;
+		tempY = posActX;
 
 		tempX += posiblesDirs[i].dirX;
 		tempY += posiblesDirs[i].dirY;
 
-		if (posiblesDirs[i].dirX != (actualDir.dirX*-1) && posiblesDirs[i].dirY != (actualDir.dirY*-1)) { //Primero comprobamos que no es la dir contraria
-			if (!juego->comprueba_Muro(tempX, tempY)) { //Comprobamos que no hay muro
-				posibles[j] = i;
-				j++;
-			}
-		}
-		else { //Si es la dir contraria, hacemos anoder cing
+		if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
 			backward = i;
+		}
+		else if (!juego->comprueba_Muro(tempY, tempX)) { //Comprobamos que no hay muro
+			posibles[j] = i;
+			j++;
 		}
 	}
 
@@ -95,7 +96,7 @@ int Ghost::posibles_Dirs() {
 		prueba = (rand() % j);
 		direccion = posibles[rand() % j];
 	}
-	else if (j = 1) { //Sólo hay una posibilidad, estamos en un pasillo
+	else if (j == 1) { //Sólo hay una posibilidad, estamos en un pasillo
 		direccion = posibles[0];
 	}
 	else { //No hay posibilidades, callejón sin salida, mueve atrás
@@ -106,14 +107,14 @@ int Ghost::posibles_Dirs() {
 }
 
 void Ghost::cambiaDir() {
-	int direction = 0;
+	int direction = -1;
 	direction = posibles_Dirs();
 
-	if (direction != 0) { //Si puede cambiar de direccion ponemos la nueva direccion
+	if (direction >= 0) { //Si puede cambiar de direccion ponemos la nueva direccion
 		actualDir.dirX = posiblesDirs[direction].dirX;
 		actualDir.dirY = posiblesDirs[direction].dirY;
 	}
-	else {
+	/*else {
 		throw invalid_argument("No hay donde mover, ¿es el mapa correcto?");
-	}
+	}*/
 }
