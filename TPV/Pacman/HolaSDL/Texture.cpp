@@ -36,7 +36,9 @@ void Texture::RenderFrame(SDL_Renderer* rnd, const SDL_Rect dest) {
 }
 
 void Texture::Anima(int veloc, int posInicialX, int posInicialY, int fil, int col){
-	//rect.x = (textW / columnas)* int(((SDL_GetTicks() / veloc) % numFrames));
-	//RenderFrame(rnd, dest);
 	this->ModificaRectangulo(posInicialX + int(((SDL_GetTicks() / veloc) % fil)), posInicialY + int(((SDL_GetTicks() / veloc) % col)));
+	//utiliza el método ModificaRecángulo, le pasa los parámetros pos inicialX y posInicialY (la pos desde la cual empieza en la textura,
+	//usa el método que vimos para animar (lo de los ticks/velocidad y le hace el % con el numero de filas y columnas que tienen los frames de tu textura
+	//por ejemplo, en la imagen que tenemos del pacman empieza siempre en la posInicial = 10 y varía la posInicialX, mientras que, como solo hay dos frames
+	//tiene 1 fila de frames y dos columnas (no sé si se entiende o_O)
 }
