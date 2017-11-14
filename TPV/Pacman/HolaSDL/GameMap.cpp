@@ -86,9 +86,6 @@ void GameMap::render_Mapa() {
 			des.w = game->dame_Anchura() / cols;
 			des.h = game->dame_Altura() / cols;
 			switch (tablero2[i][j]) {  //comprueba lo que hay en la posicion i,j y manda a la textura correspondiente pintarse
-			case Empty:
-				//algo
-				break;
 			case Wall:
 				muro->RenderFrame(game->dame_Renderer(), des);
 				break;

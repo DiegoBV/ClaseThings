@@ -109,7 +109,7 @@ bool Game::comprueba_Muro(int X, int Y) {
 void Game::setComida(int a) {
 	numComida += a;
 }
-void Game::come(int x, int y) {
+void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
 	map.modifica_Posicion(x, y, Empty);
 	setComida(-1);
 }
@@ -123,43 +123,45 @@ bool Game::win() { //comprueba si se ha comido todo e.e
 }
 
 void Game::handle_Events() {
-	SDL_PollEvent(&event);
-	if (event.type == SDL_QUIT) {
-		exit = true;
-	}
-	else {
-		if (event.type == SDL_KEYDOWN) {
-			if (event.key.keysym.sym == SDLK_RIGHT) {
-				pacman.siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
-			}
-			else if (event.key.keysym.sym == SDLK_UP) {
-				pacman.siguiente_Dir(0, -1);
-			}
-			else if (event.key.keysym.sym == SDLK_DOWN) {
-				pacman.siguiente_Dir(0, 1);
-			}
-			else if (event.key.keysym.sym == SDLK_LEFT) {
-				pacman.siguiente_Dir(-1, 0);
+	while (SDL_PollEvent(&event)) {
+		if (event.type == SDL_QUIT) {
+			exit = true;
+		}
+		else {
+			if (event.type == SDL_KEYDOWN) {
+				if (event.key.keysym.sym == SDLK_RIGHT) {
+					pacman.siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
+				}
+				else if (event.key.keysym.sym == SDLK_UP) {
+					pacman.siguiente_Dir(0, -1);
+				}
+				else if (event.key.keysym.sym == SDLK_DOWN) {
+					pacman.siguiente_Dir(0, 1);
+				}
+				else if (event.key.keysym.sym == SDLK_LEFT) {
+					pacman.siguiente_Dir(-1, 0);
+				}
+				else if (event.key.keysym.sym == SDLK_ESCAPE) {
+					exit = true; //añadido de si le das a escape sales tambien
+				}
 			}
 		}
 	}
 }
 
 void Game::run() {
-	SDL_RenderClear(renderer); //limpia el render
-	startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime; //hace lo del Delay más eficiente
-	for (int i = 0; i < 4; i++) {
-		fantasmas[i].render(renderer);
-		//fantasmas[i].update();
-	}
-	this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
-	handle_Events(); //controla los eventos de teclado
-	pacman.update(); //update del pacman
-	pinta_Mapa();   //pinta el tablero
-	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
-	if (frameTime < frameRate) {
-		SDL_Delay(frameRate - frameTime); //delay
+	while (!this->win() && !this->dame_exit()) {
+		SDL_RenderClear(renderer); //limpia el render
+		for (int i = 0; i < 4; i++) {
+			fantasmas[i].render(renderer);
+			//fantasmas[i].update();
+		}
+		this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
+		handle_Events(); //controla los eventos de teclado
+		pacman.update(); //update del pacman
+		pinta_Mapa();   //pinta el tablero
+		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
+		delay();
 	}
 }
 
@@ -187,6 +189,16 @@ SDL_Renderer* Game::dame_Renderer() {
 	return this->renderer;
 }
 
+void Game::delay() {
+	startTime = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - startTime; //hace lo del Delay más eficiente
+	if (frameTime < frameRate) {
+		SDL_Delay(frameRate - frameTime); //delay
+	}
+}
+
 void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay uno
 	map.destruir_Mapa();
+	SDL_DestroyRenderer(renderer);
+	SDL_DestroyWindow(window);
 }

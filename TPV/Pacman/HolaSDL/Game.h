@@ -46,6 +46,7 @@ public:
 	int dame_FilasTablero();
 	int dame_ColumnasTablero();
 	bool dame_exit();
+	void delay();
 	SDL_Renderer* dame_Renderer();
 	void destruir();
 };
