@@ -121,7 +121,4 @@ void Ghost::cambiaDir() {
 		actualDir.dirX = posiblesDirs[direction].dirX;
 		actualDir.dirY = posiblesDirs[direction].dirY;
 	}
-	/*else {
-		throw invalid_argument("No hay donde mover, ¿es el mapa correcto?");
-	}*/
 }
