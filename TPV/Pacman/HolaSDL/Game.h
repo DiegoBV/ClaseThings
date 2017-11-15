@@ -5,12 +5,14 @@
 #include "Ghost.h"
 #include "Pacman.h"
 #include <fstream>
+using namespace std;
 class Game
 {
 private:
 	bool exit = false; //booleano que indica si se ha salido del juego o no
 	SDL_Window* window;
 	SDL_Renderer* renderer;
+	SDL_Event termina;
 	ifstream archivo;
 	int winWidth;
 	int winHeight;
@@ -29,6 +31,7 @@ private:
 	int startTime;
 	int frameTime; // mediciones del tiempo para un Delay "eficiente"
 	int frameRate;
+	bool muerteFantasma = false;
 public:
 	Game();
 	~Game();
@@ -49,6 +52,9 @@ public:
 	void delay();
 	SDL_Renderer* dame_Renderer();
 	void destruir();
+	int obtenerPixelX(int casilla);
+	int obtenerPixelY(int casilla);
+	bool comprueba_personajes(int x, int y);
 };
 
  

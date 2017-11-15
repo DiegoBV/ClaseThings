@@ -24,5 +24,6 @@ public:
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
 	void render_Mapa();
 	void destruir_Mapa();
+	
 };
 

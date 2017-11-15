@@ -68,9 +68,8 @@ void GameMap::destruir_Mapa() { //Destructora del tablero de juego con un array 
 }
 
 MapCell GameMap::getCell(int fils, int cols) {
-	if (fils < game->dame_FilasTablero() && fils >= 0 && cols < game->dame_ColumnasTablero() && cols >= 0) {
+	if (fils < game->dame_FilasTablero() && fils >= 0 && cols < game->dame_ColumnasTablero() && cols >= 0) 
 		return tablero2[fils][cols];
-	}
 }
 
 void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
@@ -84,7 +83,7 @@ void GameMap::render_Mapa() {
 			des.x = j * game->dame_Anchura() / cols;
 			des.y = i * game->dame_Altura() / fils;
 			des.w = game->dame_Anchura() / cols;
-			des.h = game->dame_Altura() / cols;
+			des.h = game->dame_Altura() / fils;
 			switch (tablero2[i][j]) {  //comprueba lo que hay en la posicion i,j y manda a la textura correspondiente pintarse
 			case Wall:
 				muro->RenderFrame(game->dame_Renderer(), des);

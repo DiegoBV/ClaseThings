@@ -9,6 +9,7 @@
 class Game;
 class Ghost
 {
+friend class Game;
 private:
 	//Posicion inicial
 	int posInX, posInY;
@@ -24,8 +25,7 @@ private:
 
 	//Número Fantasma
 	int numFantasma;
-
-	Dirs posiblesDirs[4];
+	Dirs posiblesDirs [4];
 	Dirs actualDir;
 
 	//Punteros
@@ -46,10 +46,11 @@ public:
 
 
 	//Métodos del juego
-	void update(); //Actualiza la posición del fantasma en la dirección actual y 
+	void update(bool muerte); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
 	void render(SDL_Renderer* &renderer); //Pinta el estado actual en pantalla
 	void muerte(); //Muere y vuelve a la posición inicial
 	void cambiaDir();
+	void donut()
 };
 

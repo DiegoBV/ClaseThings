@@ -67,16 +67,20 @@ void Game::carga_Archivo(string name){
 					setComida(1);
 					break;
 				case 5:
-					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
+					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica	
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 6:
 					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 7:
 					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //el this se refiere a "Game"
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 8:
 					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 9: {
 					map.modifica_Posicion(i, j, Empty);
@@ -108,6 +112,9 @@ void Game::setComida(int a) {
 	numComida += a;
 }
 void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
+	if (map.getCell(x, y) == Vitamins){
+		muerteFantasma = true;
+	}
 	map.modifica_Posicion(x, y, Empty);
 	setComida(-1);
 }
@@ -149,10 +156,11 @@ void Game::handle_Events() {
 
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
+		muerteFantasma = false;
 		SDL_RenderClear(renderer); //limpia el render
 		for (int i = 0; i < 4; i++) {
 			fantasmas[i].render(renderer);
-			//fantasmas[i].update();
+			fantasmas[i].update(muerteFantasma);
 		}
 		this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 		handle_Events(); //controla los eventos de teclado
@@ -160,6 +168,13 @@ void Game::run() {
 		pinta_Mapa();   //pinta el tablero
 		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 		delay();
+	}
+}
+
+bool Game::comprueba_personajes(int x, int y){
+	for (int i = 0; i < 4; i++){
+		if (fantasmas[i].posActX == x && fantasmas[i].posActY == y)
+			return true;
 	}
 }
 
@@ -199,4 +214,12 @@ void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay 
 	map.destruir_Mapa();
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+}
+
+int Game::obtenerPixelX(int posicion){
+	return (winWidth / filasTablero) * posicion;
+}
+
+int Game::obtenerPixelY(int posicion){
+	return (winHeight / colsTablero) * posicion;
 }

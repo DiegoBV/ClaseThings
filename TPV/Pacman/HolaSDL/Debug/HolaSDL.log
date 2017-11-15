@@ -1,4 +1,21 @@
-﻿  Game.cpp
-cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Compilación iniciada a las 15/11/2017 17:48:36.
+     1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp Ghost.cpp Pacman.cpp main.cpp
+         main.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(55): error C2143: error de sintaxis : falta ';' delante de '}'
+         Pacman.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(55): error C2143: error de sintaxis : falta ';' delante de '}'
+         Ghost.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(55): error C2143: error de sintaxis : falta ';' delante de '}'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp(33): warning C4244: 'argumento' : conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+         GameMap.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(55): error C2143: error de sintaxis : falta ';' delante de '}'
+         Game.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(55): error C2143: error de sintaxis : falta ';' delante de '}'
+         Generando código...
+     1>Compilación del proyecto terminada "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build destinos) -- ERROR.
+
+ERROR al compilar.
+
+Tiempo transcurrido 00:00:03.13
