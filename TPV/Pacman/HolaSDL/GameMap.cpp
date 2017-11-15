@@ -20,13 +20,13 @@ GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Gam
 		this->cols = cols;
 
 		//Creación de la matriz
-		tablero2 = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
+		tablero = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
 		for (int r = 0; r < fils; r++) {
-			tablero2[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
+			tablero[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
 		}
 	}
 	else {
-		tablero2 = nullptr;
+		tablero = nullptr;
 	}
 }
 /*
@@ -54,22 +54,22 @@ MapCell getCell(int fila, int columna){
 
 */
 
-GameMap::~GameMap()  //Destructora por defecto del tablero de juego, destrulle el array dinámico
+GameMap::~GameMap()  //Destructora por defecto del tablero de juego, destruye el array dinámico
 {
-	if (tablero2 != nullptr) {
+	if (tablero != nullptr) {
 		for (int r = 0; r < fils; r++) {
-			delete[] tablero2[r];
+			delete[] tablero[r];
 		}
-		delete[] tablero2;
+		delete[] tablero;
 	}
 }
 MapCell GameMap::getCell(int fils, int cols) {
 	if (fils < game->dame_FilasTablero() && fils >= 0 && cols < game->dame_ColumnasTablero() && cols >= 0) 
-		return tablero2[fils][cols];
+		return tablero[fils][cols];
 }
 
 void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
-	tablero2[x][y] = nuevoObjeto;
+	tablero[x][y] = nuevoObjeto;
 }
 
 void GameMap::render_Mapa() {
@@ -80,8 +80,8 @@ void GameMap::render_Mapa() {
 			des.y = i * game->dame_Altura() / fils;
 			des.w = game->dame_Anchura() / cols;
 			des.h = game->dame_Altura() / fils;
-			if ((int)tablero2[i][j] > 0) {
-				textsMapa[(int)tablero2[i][j] - 1]->RenderFrame(game->dame_Renderer(), des); //para ahorrarse el switch, cambiamos a entero la pos del 
+			if ((int)tablero[i][j] > 0) {
+				textsMapa[(int)tablero[i][j] - 1]->RenderFrame(game->dame_Renderer(), des); //para ahorrarse el switch, cambiamos a entero la pos del 
 				//tablero y le mandamos que haga render
 			}
 		}

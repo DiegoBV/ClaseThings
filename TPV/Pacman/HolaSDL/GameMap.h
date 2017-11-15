@@ -10,7 +10,7 @@ class GameMap
 private:
 	int fils;
 	int cols;
-	MapCell** tablero2; //Matriz dinámica para el tablero
+	MapCell** tablero; //Matriz dinámica para el tablero
 	Texture* textsMapa[3]; //array con las 3 texturas del mapa -> vitaminas, muros, comida
 	Game* game;
 
