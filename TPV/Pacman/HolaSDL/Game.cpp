@@ -52,6 +52,7 @@ void Game::carga_Archivo(string name){
 				archivo >> pos;
 				switch (pos) {
 				case 0:
+				case 4:
 					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 1:
@@ -64,9 +65,6 @@ void Game::carga_Archivo(string name){
 				case 3:
 					map.modifica_Posicion(i, j, Vitamins);
 					setComida(1);
-					break;
-				case 4:
-					//pacman = Pacman(i, j, textGhost, this);
 					break;
 				case 5:
 					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
