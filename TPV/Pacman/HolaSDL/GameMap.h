@@ -11,9 +11,7 @@ private:
 	int fils;
 	int cols;
 	MapCell** tablero2; //Matriz dinámica para el tablero
-	Texture* vitamina;
-	Texture* muro;
-	Texture* comida;
+	Texture* textsMapa[3]; //array con las 3 texturas del mapa -> vitaminas, muros, comida
 	Game* game;
 
 public:
@@ -23,7 +21,5 @@ public:
 	MapCell getCell(int fils, int cols); //devuelve una celda
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
 	void render_Mapa();
-	void destruir_Mapa();
-	
 };
 

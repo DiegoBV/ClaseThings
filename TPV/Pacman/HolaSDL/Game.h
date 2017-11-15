@@ -19,18 +19,15 @@ private:
 	int filasTablero, colsTablero;
 	int winX, winY;
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
-	Texture muro; //deberia ser un array, esto es pa probar
-	Texture com;
-	Texture vitam;
-	GameMap map;
+	Texture* texts[4];
+	GameMap* map;
 	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
-	Texture* textGhost; //puntero a la textura general para acceder a ella, se llama ghost porq por ahora solo hay fantasmicos
-	Texture textGeneral; //carga la textura con todas las cositas
 	Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos
 	int startTime;
 	int frameTime; // mediciones del tiempo para un Delay "eficiente"
 	int frameRate;
+	string path; //path de las texturas
 	bool muerteFantasma = false;
 public:
 	Game();
@@ -51,7 +48,7 @@ public:
 	bool dame_exit();
 	void delay();
 	SDL_Renderer* dame_Renderer();
-	void destruir();
+	void animaciones_Extra();
 	int obtenerPixelX(int casilla);
 	int obtenerPixelY(int casilla);
 	bool comprueba_personajes(int x, int y);

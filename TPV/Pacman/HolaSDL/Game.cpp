@@ -10,21 +10,28 @@ Game::Game()
 	winHeight = 644;
 	int winX, winY;
 	winX = winY = SDL_WINDOWPOS_CENTERED;
-
+	this->path = "..\\images\\textura";
 	//Inicialización del sistema y renderer
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//Texturas
-	muro.CreaTexturaIMG(renderer, "..\\images\\wall2.png", 1, 1);
-	com.CreaTexturaIMG(renderer, "..\\images\\comida4.png", 1, 1);
-	vitam.CreaTexturaIMG(renderer, "..\\images\\vitaminas.png", 1, 4);
-	textGeneral.CreaTexturaIMG(renderer, "..\\images\\characters1.png", 4, 14); //carga las texturas de todos los personajes
-	textGhost = &textGeneral; //Dirección de la textGeneral cargada
+	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet
+	for (int i = 0; i < 4; i++) {
+		if (i == 0) {
+			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 4); //vitamina animada
+		}
+		else if (i == 3) {
+			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 4, 14); //carga las texturas de todos los personajes
+		}
+		else {
+			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 1);
+		}
+	}
 
 	//FrameRate
-	this->frameRate = 100; //a + alto, + lento
+	this->frameRate = 120; //a + alto, + lento
 	
 }
 
@@ -34,6 +41,11 @@ Game::~Game() //destruye el renderer y la ventana
 	//Finalization
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
+
+	delete map; //borra el mapa
+	for (int i = 0; i < 4; i++) {
+		delete texts[i]; //bora cada una de las texturas creadas
+	}
 }
 
 void Game::carga_Archivo(string name){
@@ -45,50 +57,24 @@ void Game::carga_Archivo(string name){
 		archivo >> fils >> cols;
 		this->filasTablero = fils;
 		this->colsTablero = cols;
-		map = GameMap(fils, cols, &vitam, &muro, &com, this);
+		map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
 		for (int i = 0; i < fils; i++){
 			for (int j = 0; j < cols; j++){
 				int pos;
 				archivo >> pos;
-				switch (pos) {
-				case 0:
-				case 4:
-					map.modifica_Posicion(i, j, Empty);
-					break;
-				case 1:
-					map.modifica_Posicion(i, j, Wall);
-					break;
-				case 2:
-					map.modifica_Posicion(i, j, Food);
-					setComida(1);
-					break;
-				case 3:
-					map.modifica_Posicion(i, j, Vitamins);
-					setComida(1);
-					break;
-				case 5:
-					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica	
-					map.modifica_Posicion(i, j, Empty);
-					break;
-				case 6:
-					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
-					map.modifica_Posicion(i, j, Empty);
-					break;
-				case 7:
-					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //el this se refiere a "Game"
-					map.modifica_Posicion(i, j, Empty);
-					break;
-				case 8:
-					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
-					map.modifica_Posicion(i, j, Empty);
-					break;
-				case 9: {
-					map.modifica_Posicion(i, j, Empty);
-					pacman = Pacman(i, j, textGhost, this);
-					break;
+				if (pos < 4) {
+					map->modifica_Posicion(i, j, (MapCell)pos);
+					if (pos == 2 || pos == 3) {
+						setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
+					}
 				}
-				default:
-					break;
+				else if (pos == 9) {
+					map->modifica_Posicion(i, j, Empty);
+					pacman = Pacman(i, j, texts[3], this);
+				}
+				else if (pos != 4) {
+					fantasmas[pos - 5] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, texts[3], this);
+					map->modifica_Posicion(i, j, Empty);
 				}
 			}
 		}
@@ -97,11 +83,11 @@ void Game::carga_Archivo(string name){
 }
 
 void Game::pinta_Mapa() {
-	map.render_Mapa();
+	map->render_Mapa();
 }
 
 bool Game::comprueba_Muro(int X, int Y) {
-	MapCell casilla = map.getCell(X, Y);
+	MapCell casilla = map->getCell(X, Y);
 	if (casilla == Wall) {
 		return true;
 	}
@@ -112,15 +98,15 @@ void Game::setComida(int a) {
 	numComida += a;
 }
 void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
-	if (map.getCell(x, y) == Vitamins){
+	if (map->getCell(x, y) == Vitamins){
 		muerteFantasma = true;
 	}
-	map.modifica_Posicion(x, y, Empty);
+	map->modifica_Posicion(x, y, Empty);
 	setComida(-1);
 }
 
 MapCell Game::consulta(int x, int y) {
-	return map.getCell(x, y);
+	return map->getCell(x, y);
 }
 
 bool Game::win() { //comprueba si se ha comido todo e.e
@@ -156,18 +142,18 @@ void Game::handle_Events() {
 
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
+		delay();
 		SDL_RenderClear(renderer); //limpia el render
 		for (int i = 0; i < 4; i++) {
 			fantasmas[i].update(muerteFantasma);
 			fantasmas[i].render(renderer);
 		}
 		muerteFantasma = false;
-		this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
+		animaciones_Extra();
 		handle_Events(); //controla los eventos de teclado
 		pacman.update(); //update del pacman
 		pinta_Mapa();   //pinta el tablero
 		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
-		delay();
 	}
 }
 
@@ -202,22 +188,20 @@ SDL_Renderer* Game::dame_Renderer() {
 	return this->renderer;
 }
 
-void Game::delay() {
+void Game::delay() { //hace lo del Delay más eficiente
 	startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime; //hace lo del Delay más eficiente
+	frameTime = SDL_GetTicks() - startTime; 
 	if (frameTime < frameRate) {
-		SDL_Delay(frameRate - frameTime); //delay
+		SDL_Delay(frameRate - frameTime);
 	}
-}
-
-void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay uno
-	map.destruir_Mapa();
-	SDL_DestroyRenderer(renderer);
-	SDL_DestroyWindow(window);
 }
 
 int Game::obtenerPixelX(int posicion){
 	return (winWidth / colsTablero) * posicion;
+}
+
+void Game::animaciones_Extra() {
+	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 }
 
 int Game::obtenerPixelY(int posicion){

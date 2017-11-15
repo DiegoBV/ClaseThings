@@ -15,9 +15,9 @@ private:
 	int filas;
 	int columnas;
 public:
-	Texture();
+	Texture(); //contructora por defecto
+	Texture(SDL_Renderer* &renderer, string filename, int fils, int cols);//crea la textura a partir del archivo
 	~Texture();
-	void CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols);//crea la textura a partir del archivo
 	void ModificaRectangulo(int fil, int col); //modifica el rectangulo origen
 	void Render(SDL_Renderer* rnd, SDL_Rect dest); //render fondo
 	void RenderFrame(SDL_Renderer* rnd, SDL_Rect dest); //render un frame espécifico

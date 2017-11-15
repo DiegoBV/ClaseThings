@@ -4,13 +4,8 @@
 Texture::Texture()
 {
 }
-
-
-Texture::~Texture()
+Texture::Texture(SDL_Renderer* &renderer, string filename, int fils, int cols)
 {
-}
-
-void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fils, int cols){
 	this->filas = fils;
 	this->columnas = cols;
 	SDL_Surface* surface = IMG_Load(filename.c_str());
@@ -19,7 +14,12 @@ void Texture :: CreaTexturaIMG(SDL_Renderer* &renderer, string filename, int fil
 	textW = surface->w;
 	rect.w = textW / columnas;
 	rect.h = textH / filas;
-	SDL_FreeSurface(surface);	
+	SDL_FreeSurface(surface);
+}
+
+
+Texture::~Texture()
+{
 }
 
 void Texture::ModificaRectangulo(int fil, int col){  //modifica el rect origen, sirve para una textura con multiples sprites y para animar

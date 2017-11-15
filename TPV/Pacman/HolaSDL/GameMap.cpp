@@ -11,9 +11,9 @@ GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
 }
 GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam) { //Constructora con parámetros
-	vitamina = vit;
-	muro = m;
-	comida = com;
+	textsMapa[0] = m;
+	textsMapa[1] = com; //asignacion de punteros
+	textsMapa[2] = vit;
 	game = gam;
 	if (fils != 0 && cols != 0) {
 		this->fils = fils;
@@ -54,19 +54,15 @@ MapCell getCell(int fila, int columna){
 
 */
 
-GameMap::~GameMap() 
+GameMap::~GameMap()  //Destructora por defecto del tablero de juego, destrulle el array dinámico
 {
-}
-
-void GameMap::destruir_Mapa() { //Destructora del tablero de juego con un array dinámico, la destructora por defecto se llama al hacer un nuevo map
 	if (tablero2 != nullptr) {
-	for (int r = 0; r < fils; r++) {
-	delete[] tablero2[r];
-	}
-	delete[] tablero2;
+		for (int r = 0; r < fils; r++) {
+			delete[] tablero2[r];
+		}
+		delete[] tablero2;
 	}
 }
-
 MapCell GameMap::getCell(int fils, int cols) {
 	if (fils < game->dame_FilasTablero() && fils >= 0 && cols < game->dame_ColumnasTablero() && cols >= 0) 
 		return tablero2[fils][cols];
@@ -84,16 +80,9 @@ void GameMap::render_Mapa() {
 			des.y = i * game->dame_Altura() / fils;
 			des.w = game->dame_Anchura() / cols;
 			des.h = game->dame_Altura() / fils;
-			switch (tablero2[i][j]) {  //comprueba lo que hay en la posicion i,j y manda a la textura correspondiente pintarse
-			case Wall:
-				muro->RenderFrame(game->dame_Renderer(), des);
-				break;
-			case Food:
-				comida->RenderFrame(game->dame_Renderer(), des);
-				break;
-			case Vitamins:
-				vitamina->RenderFrame(game->dame_Renderer(), des);
-				break;
+			if ((int)tablero2[i][j] > 0) {
+				textsMapa[(int)tablero2[i][j] - 1]->RenderFrame(game->dame_Renderer(), des); //para ahorrarse el switch, cambiamos a entero la pos del 
+				//tablero y le mandamos que haga render
 			}
 		}
 	}
