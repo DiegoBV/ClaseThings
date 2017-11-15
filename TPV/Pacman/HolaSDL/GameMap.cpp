@@ -73,7 +73,8 @@ MapCell GameMap::getCell(int fils, int cols) {
 
 MapCell GameMap::consulta_Posicion(int x, int y) { //esto es lo mismo que lo de arriba, deberia borrarse (?) al ppo devolvia un string pero si no es necesario...
 	MapCell pos = Empty; //Devolvemos vacía predeterminadamente para depuración, después calculos de fantasmas.
-	//pos = getCell(x, y);
+	pos = getCell(y, x);
+	bool pers = false;
 
 	switch (pos) {
 	case Empty:
@@ -89,7 +90,12 @@ MapCell GameMap::consulta_Posicion(int x, int y) { //esto es lo mismo que lo de 
 		pos = Vitamins;
 		break;
 	default:
-		throw invalid_argument("Casilla sin asignar"); //Aquí habría que lanzar una excepción 
+		pers = game->comprueba_personajes(x, y);
+		if (pers){
+			pos = Wall;
+		}
+		else 
+			pos = Empty;
 		break;	
 	}
 

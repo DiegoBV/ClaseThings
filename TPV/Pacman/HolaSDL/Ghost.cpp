@@ -29,7 +29,7 @@ Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int n
 	posiblesDirs[3].dirY = 0;
 
 	actualDir.dirX = 0;  //Inicializamos de base hacia arriba, para probar cosas
-	actualDir.dirY = -1;
+	actualDir.dirY = 0;
 
 	srand(time(nullptr));
 }
@@ -47,6 +47,7 @@ void Ghost::update() {
 	posActY += actualDir.dirX;
 
 	cambiaDir();
+
 }
 
 void Ghost::render(SDL_Renderer* &render) {
@@ -69,7 +70,7 @@ int Ghost::posibles_Dirs() {
 	int direccion = 0;
 	int backward = 0;
 	int prueba = 0;
-	bool cambia = false;
+	bool muro = false;
 	bool borrar = false;
 	int posibles [4];
 	int j = 0; //COntrol del array de posibles
@@ -82,10 +83,16 @@ int Ghost::posibles_Dirs() {
 		tempX += posiblesDirs[i].dirX;
 		tempY += posiblesDirs[i].dirY;
 
-		if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
+		muro = juego->comprueba_Muro(tempY, tempX);
+
+		if (actualDir.dirX == 0 && actualDir.dirY == 0){ //Para que se pueda inicia
+			posibles[j] = i;
+			j++;
+		}
+		else if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
 			backward = i;
 		}
-		else if (!juego->comprueba_Muro(tempY, tempX)) { //Comprobamos que no hay muro
+		else if (!muro) { //Comprobamos que no hay muro
 			posibles[j] = i;
 			j++;
 		}

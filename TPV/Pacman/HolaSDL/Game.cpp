@@ -58,23 +58,28 @@ void Game::carga_Archivo(string name){
 				case 3:
 					map.modifica_Posicion(i, j, Vitamins);
 					break;
-				case 4: //Pacman
-
+				case 4:
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 5:
-					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica																									
+					fantasmas[0] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //todo lo del new no es necesario, trabajariamos con mem dinamica	
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 6:
 					fantasmas[1] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //basta con tener un array estatico de fantasmas o , como mucho, un array dinamico
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 7:
 					fantasmas[2] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this); //el this se refiere a "Game"
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				case 8:
 					fantasmas[3] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, textGhost, this);
+					map.modifica_Posicion(i, j, Empty);
 					break;
-					//faltan pcman
-				default:
+				case 9:
+					//Pacman
+					map.modifica_Posicion(i, j, Empty);
 					break;
 				}
 			}
@@ -89,7 +94,9 @@ void Game::pinta_Mapa() {
 }
 
 bool Game::comprueba_Muro(int X, int Y) {
-	MapCell casilla = map.consulta_Posicion(X, Y);
+
+	MapCell casilla = map.consulta_Posicion(Y, X);
+
 	if (casilla == Wall) {
 		return true;
 	}
@@ -98,8 +105,7 @@ bool Game::comprueba_Muro(int X, int Y) {
 }
 
 void Game::run() {
-
-	while (SDL_PollEvent(&termina) && !end){
+	while (true){
 		if (termina.type == SDL_QUIT)
 			end = true;
 
@@ -114,6 +120,13 @@ void Game::run() {
 		system("pause");
 	}
 	//prueba.update();
+}
+
+bool Game::comprueba_personajes(int x, int y){
+	for (int i = 0; i < 4; i++){
+		if (fantasmas[i].posActX == x && fantasmas[i].posActY == y)
+			return true;
+	}
 }
 
 //los gets de altura, anchura, renderer...

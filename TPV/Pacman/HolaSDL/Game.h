@@ -42,6 +42,7 @@ public:
 	void destruir();
 	int obtenerPixelX(int casilla);
 	int obtenerPixelY(int casilla);
+	bool comprueba_personajes(int x, int y);
 };
 
  

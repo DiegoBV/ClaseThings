@@ -9,6 +9,7 @@
 class Game;
 class Ghost
 {
+friend class Game;
 private:
 	//Posicion inicial
 	int posInX, posInY;
