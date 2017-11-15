@@ -156,12 +156,12 @@ void Game::handle_Events() {
 
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
-		muerteFantasma = false;
 		SDL_RenderClear(renderer); //limpia el render
 		for (int i = 0; i < 4; i++) {
-			fantasmas[i].render(renderer);
 			fantasmas[i].update(muerteFantasma);
+			fantasmas[i].render(renderer);
 		}
+		muerteFantasma = false;
 		this->vitam.Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 		handle_Events(); //controla los eventos de teclado
 		pacman.update(); //update del pacman
@@ -217,9 +217,9 @@ void Game::destruir() { //llamaría a todos los destructores, por ahora solo hay 
 }
 
 int Game::obtenerPixelX(int posicion){
-	return (winWidth / filasTablero) * posicion;
+	return (winWidth / colsTablero) * posicion;
 }
 
 int Game::obtenerPixelY(int posicion){
-	return (winHeight / colsTablero) * posicion;
+	return (winHeight / filasTablero) * posicion;
 }

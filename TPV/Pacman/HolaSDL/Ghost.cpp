@@ -7,10 +7,12 @@ Ghost::Ghost() {
 Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant, Texture* text, Game* gam)
 {
 	this->numFantasma = numFant;
+	posInY = orY;
+	posInX = orX;
 	juego = gam; //Actualiza el puntero a game
 	textura = text;//asigna el puntero de texturas
-	rectDes.x = orY * juego->dame_Anchura() / juego->dame_ColumnasTablero(); //pone al fantasma en su posicion
-	rectDes.y = orX * juego->dame_Altura() / juego->dame_FilasTablero();
+	rectDes.x = orX * juego->dame_Anchura() / juego->dame_ColumnasTablero(); //pone al fantasma en su posicion
+	rectDes.y = orY * juego->dame_Altura() / juego->dame_FilasTablero();
 	rectDes.w = juego->dame_Anchura() / juego->dame_FilasTablero();//establece anchura y altura del fantasma
 	rectDes.h = juego->dame_Altura() / juego->dame_ColumnasTablero();
 	posActX = orX;
@@ -44,12 +46,12 @@ void Ghost::update(bool muerte) {
 	}
 	else {
 		posActX += actualDir.dirY;
-		posActY += actualDir.dirX;
-
-		cambiaDir();
+		posActY += actualDir.dirX;	
 	}
 
 	donut();
+
+	cambiaDir();
 
 	rectDes.x = juego->obtenerPixelX(posActY);
 	rectDes.y = juego->obtenerPixelY(posActX);
@@ -128,15 +130,16 @@ void Ghost::cambiaDir() {
 
 void Ghost::donut() { //hace las comprobaciones para el movimiento toroidal
 	if (posActY < 0) {
-		posActY = juego->dame_FilasTablero() - 1;
+		posActY = juego->dame_FilasTablero() - 2;
 	}
-	if (posActY >= juego->dame_FilasTablero()) {
+	if (posActY >= juego->dame_FilasTablero() - 1) {
 		posActY = 0;
 	}
 	if (posActX < 0) {
 		posActX = juego->dame_ColumnasTablero() - 1;
 	}
-	if (posActX >= juego->dame_ColumnasTablero()) {
+	if (posActX > juego->dame_ColumnasTablero()) {
 		posActX = 0;
 	}
+	donutS = true;
 }

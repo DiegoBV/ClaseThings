@@ -22,6 +22,7 @@ private:
 		int dirX;
 		int dirY;
 	};
+	bool donutS = false;
 
 	//Número Fantasma
 	int numFantasma;
@@ -51,6 +52,6 @@ public:
 	void render(SDL_Renderer* &renderer); //Pinta el estado actual en pantalla
 	void muerte(); //Muere y vuelve a la posición inicial
 	void cambiaDir();
-	void donut()
+	void donut();
 };
 
