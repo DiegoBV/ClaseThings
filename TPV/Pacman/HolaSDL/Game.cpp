@@ -31,7 +31,7 @@ Game::Game()
 	}
 
 	//FrameRate
-	this->frameRate = 120; //a + alto, + lento
+	this->frameRate = 110; //a + alto, + lento
 	
 }
 
