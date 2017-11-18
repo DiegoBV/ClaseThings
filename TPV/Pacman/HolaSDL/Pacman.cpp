@@ -26,7 +26,9 @@ Pacman::Pacman(int posY, int posX, Texture* text, Game* gam) { //contructora con
 bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la nueva direccion, si no, se mantiene la antigua
 	nX = dX;
 	nY = dY;
-	return (!game->siguiente_casilla(posY, posX, nX, nY));
+	int tempX = posX;
+	int tempY = posY;
+	return (game->siguiente_casilla(tempX, tempY, nX, nY));
 }
 
 void Pacman::render() {//pinta la textura correcta
@@ -63,14 +65,10 @@ void Pacman::donut() { //hace las comprobaciones para el movimiento toroidal
 void Pacman::mueve_Pacman() {
 	if (siguiente_Dir(nX, nY)) { //si con la nueva direccion que pulsaste puede moverse... (aqui se hace lo de la memoria del movimiento)
 		dirX = nX;
-		dirY = nY;  //asigna la nueva direccion a la actual y se mueve en esa direccion
-		/*posX += dirX;
-		posY += dirY;
-		}
-		else {  //si no, comprueba que no haya muro y se sigue moviendo en la direccion antigua
-		game->siguiente_casilla(posX, posY, dirX, dirY);
-		}*/
+		dirY = nY; 
 	}
+
+	game->siguiente_casilla(posX, posY, dirX, dirY);
 
 	donut();
 	modifica_Rectangulo();
