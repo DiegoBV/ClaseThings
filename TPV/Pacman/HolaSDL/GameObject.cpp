@@ -21,8 +21,8 @@ void GameObject::crea_GameObject(Texture* text, const SDL_Rect rect) {
 }
 
 void GameObject::render(SDL_Renderer* &renderer) { //todos los renderer sobrarian, se cogerian del puntero a Game...
-	if(textura != nullptr)
-	textura -> Anima(100, renderer, rec_Destino);
+	
+	//(textura -> Anima(100, renderer, rec_Destino);
 }
 
 void GameObject::update(SDL_Renderer* &renderer) {

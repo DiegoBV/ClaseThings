@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 ﻿Build started 11/11/2017 18:56:01.
      1>Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
@@ -18,3 +19,9 @@
 Build succeeded.
 
 Time Elapsed 00:00:03.39
+=======
+﻿  Game.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(165): warning C4715: 'Game::comprueba_personajes': not all control paths return a value
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+>>>>>>> 8b3fd482babf55567b81759c0388d80b31efa541
