@@ -41,13 +41,8 @@ Ghost::~Ghost()
 }
 
 void Ghost::update(bool muerte) {
-	if (muerte){
-		this->muerte();
-	}
-	else {
-		posActX += actualDir.dirY;
-		posActY += actualDir.dirX;	
-	}
+	posActX += actualDir.dirY;
+	posActY += actualDir.dirX;	
 
 	donut();
 
