@@ -31,7 +31,7 @@ Game::Game()
 	}
 
 	//FrameRate
-	this->frameRate = 110; //a + alto, + lento
+	this->frameRate = 150; //a + alto, + lento
 	
 }
 
@@ -177,7 +177,6 @@ void Game::run() {
 bool Game::comprueba_colisiones(int x, int y){
 	for (int i = 0; i < 4; i++){
 		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
-			cout << "Colisión" << endl;
 			if (vitaminas){
 				fantasmas[i].muerte();
 			}

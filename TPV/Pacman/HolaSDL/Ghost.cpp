@@ -40,9 +40,8 @@ Ghost::~Ghost()
 {
 }
 
-void Ghost::update() {
-	posActX += actualDir.dirY;
-	posActY += actualDir.dirX;	
+void Ghost::update() {	
+	juego->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
 	donut();
 
