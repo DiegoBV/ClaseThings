@@ -92,7 +92,7 @@ bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
 	int tempY = Y + dirY;
 
 	//Comprueba el tipo de casilla que es
-	MapCell casilla = map->getCell(tempX, tempY);
+	MapCell casilla = map->getCell(tempY, tempX);
 
 	//Miramos si puede mover
 	if (casilla != Wall) {
