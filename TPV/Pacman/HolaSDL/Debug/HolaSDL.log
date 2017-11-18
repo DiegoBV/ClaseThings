@@ -1,8 +1,12 @@
-﻿Build started 18/11/2017 14:30:28.
+﻿Build started 18/11/2017 14:54:28.
      1>Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt main.cpp
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp Pacman.cpp
+         Pacman.cpp
+         Game.cpp
+         Generating Code...
+     1>c:\users\mrcorner\desktop\cosas git\clasethings\tpv\pacman\holasdl\game.cpp(174): warning C4715: 'Game::comprueba_personajes' : not all control paths return a value
+     1>cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Game.obj
          Debug\GameMap.obj
@@ -11,16 +15,13 @@
          Debug\main.obj
          Debug\Pacman.obj
          Debug\Texture.obj
-         LINK : C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe not found or not built by the last incremental link; performing full link
      1>Game.obj : error LNK2019: unresolved external symbol "public: __thiscall Texture::Texture(struct SDL_Renderer * &,class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >,int,int)" (??0Texture@@QAE@AAPAUSDL_Renderer@@V?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@HH@Z) referenced in function "public: __thiscall Game::Game(void)" (??0Game@@QAE@XZ)
      1>Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Texture::Anima(int,int,int,int,int)" (?Anima@Texture@@QAEXHHHHH@Z) referenced in function "public: void __thiscall Game::animaciones_Extra(void)" (?animaciones_Extra@Game@@QAEXXZ)
-     1>Game.obj : error LNK2019: unresolved external symbol "public: __thiscall Pacman::Pacman(int,int,class Texture *,class Game *)" (??0Pacman@@QAE@HHPAVTexture@@PAVGame@@@Z) referenced in function "public: void __thiscall Game::carga_Archivo(class std::basic_string<char,struct std::char_traits<char>,class std::allocator<char> >)" (?carga_Archivo@Game@@QAEXV?$basic_string@DU?$char_traits@D@std@@V?$allocator@D@2@@std@@@Z)
-     1>Game.obj : error LNK2019: unresolved external symbol "public: bool __thiscall Pacman::siguiente_Dir(int,int)" (?siguiente_Dir@Pacman@@QAE_NHH@Z) referenced in function "public: void __thiscall Game::handle_Events(void)" (?handle_Events@Game@@QAEXXZ)
-     1>Game.obj : error LNK2019: unresolved external symbol "public: void __thiscall Pacman::update(void)" (?update@Pacman@@QAEXXZ) referenced in function "public: void __thiscall Game::run(void)" (?run@Game@@QAEXXZ)
+     1>Pacman.obj : error LNK2001: unresolved external symbol "public: void __thiscall Texture::Anima(int,int,int,int,int)" (?Anima@Texture@@QAEXHHHHH@Z)
      1>Ghost.obj : error LNK2019: unresolved external symbol "public: void __thiscall Texture::Render(struct SDL_Renderer *,struct SDL_Rect)" (?Render@Texture@@QAEXPAUSDL_Renderer@@USDL_Rect@@@Z) referenced in function "public: void __thiscall Ghost::render(struct SDL_Renderer * &)" (?render@Ghost@@QAEXAAPAUSDL_Renderer@@@Z)
-     1>C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe : fatal error LNK1120: 6 unresolved externals
+     1>C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe : fatal error LNK1120: 3 unresolved externals
      1>Done Building Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build target(s)) -- FAILED.
 
 Build FAILED.
 
-Time Elapsed 00:00:01.33
+Time Elapsed 00:00:02.49

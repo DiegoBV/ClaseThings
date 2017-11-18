@@ -88,14 +88,16 @@ void Game::pinta_Mapa() {
 
 bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
 	//Primero calculamos la casilla siguiente
-	X += dirX;
-	Y += dirY;
+	int tempX = X + dirX;
+	int tempY = Y + dirY;
 
 	//Comprueba el tipo de casilla que es
-	MapCell casilla = map->getCell(X, Y);
+	MapCell casilla = map->getCell(tempX, tempY);
 
 	//Miramos si puede mover
 	if (casilla != Wall) {
+		X += dirX;
+		Y += dirY;
 		return true;
 	}
 	else
