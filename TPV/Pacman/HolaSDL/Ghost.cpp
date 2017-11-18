@@ -72,11 +72,7 @@ void Ghost::muerte() {
 int Ghost::posibles_Dirs() {
 	int tempX;
 	int tempY;
-	int direccion = 0;
 	int backward = 0;
-	int prueba = 0;
-	bool muro = false;
-	bool borrar = false;
 	int posibles [4];
 	int j = 0; //COntrol del array de posibles
 
@@ -85,11 +81,6 @@ int Ghost::posibles_Dirs() {
 		tempX = posActY;
 		tempY = posActX;
 
-		tempX += posiblesDirs[i].dirX;
-		tempY += posiblesDirs[i].dirY;
-
-		muro = juego->comprueba_Muro(tempY, tempX);
-
 		if (actualDir.dirX == 0 && actualDir.dirY == 0){ //Para que se pueda iniciar
 			posibles[j] = i;
 			j++;
@@ -97,7 +88,7 @@ int Ghost::posibles_Dirs() {
 		else if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
 			backward = i;
 		}
-		else if (!muro) { //Comprobamos que no hay muro
+		else if (juego->siguiente_casilla(tempX, tempY, posiblesDirs[i].dirX, posiblesDirs[i].dirY)) { //Comprobamos que no hay muro
 			posibles[j] = i;
 			j++;
 		}
@@ -105,17 +96,14 @@ int Ghost::posibles_Dirs() {
 
 	//Elección de direccion
 	if (j > 1) { //Hay más de una posición posible: escogemos una random
-		prueba = (rand() % j);
-		direccion = posibles[rand() % j];
+		return posibles[rand() % j];
 	}
 	else if (j == 1) { //Sólo hay una posibilidad, estamos en un pasillo
-		direccion = posibles[0];
+		return posibles[0];
 	}
 	else { //No hay posibilidades, callejón sin salida, mueve atrás
-		direccion = backward;
+		return backward;
 	}
-
-	return direccion;
 }
 
 void Ghost::cambiaDir() {
@@ -141,5 +129,4 @@ void Ghost::donut() { //hace las comprobaciones para el movimiento toroidal
 	if (posActX > juego->dame_ColumnasTablero()) {
 		posActX = 0;
 	}
-	donutS = true;
 }

@@ -86,9 +86,16 @@ void Game::pinta_Mapa() {
 	map->render_Mapa();
 }
 
-bool Game::comprueba_Muro(int X, int Y) {
+bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
+	//Primero calculamos la casilla siguiente
+	X += dirX;
+	Y += dirY;
+
+	//Comprueba el tipo de casilla que es
 	MapCell casilla = map->getCell(X, Y);
-	if (casilla == Wall) {
+
+	//Miramos si puede mover
+	if (casilla != Wall) {
 		return true;
 	}
 	else

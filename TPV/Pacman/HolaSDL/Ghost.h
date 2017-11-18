@@ -22,7 +22,6 @@ private:
 		int dirX;
 		int dirY;
 	};
-	bool donutS = false;
 
 	//Número Fantasma
 	int numFantasma;
