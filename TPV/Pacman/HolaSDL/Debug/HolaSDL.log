@@ -1,51 +1,20 @@
-<<<<<<< HEAD
-﻿Build started 11/11/2017 17:34:05.
+﻿Build started 11/11/2017 18:56:01.
      1>Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
          Game.cpp
-         Generating Code...
-         Skipping... (no relevant changes detected)
-         GameMap.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Game.obj
-=======
-﻿Compilación iniciada a las 11/11/2017 14:33:33.
-     1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
-     1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp GameObject.cpp Ghost.cpp main.cpp Pacman.cpp Texture.cpp
-         Texture.cpp
-         Pacman.cpp
-         main.cpp
-         Ghost.cpp
-     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp(55): warning C4244: 'argumento' : conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
-     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp(90): warning C4101: 'cambia' : variable local sin referencia
-         GameObject.cpp
-         GameMap.cpp
-         Game.cpp
-         Generando código...
-       Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Game.obj
->>>>>>> c0189a8fba1741b4fa8e45fe4b833ab5712226ca
          Debug\GameMap.obj
          Debug\GameObject.obj
          Debug\Ghost.obj
          Debug\main.obj
          Debug\Pacman.obj
          Debug\Texture.obj
-<<<<<<< HEAD
          LINK : C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe not found or not built by the last incremental link; performing full link
          HolaSDL.vcxproj -> C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
      1>Done Building Project "C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:03.82
-=======
-         HolaSDL.vcxproj -> C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-     1>Compilación del proyecto terminada "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build destinos).
-
-Compilación correcta.
-
-Tiempo transcurrido 00:00:17.65
->>>>>>> c0189a8fba1741b4fa8e45fe4b833ab5712226ca
+Time Elapsed 00:00:03.39
