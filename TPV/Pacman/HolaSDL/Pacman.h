@@ -3,9 +3,12 @@
 class Game;
 class Pacman
 {
+private:
 	Game* game;
 	Texture* textura;
+public:
 	int posX, posY;
+private:
 	SDL_Rect rectDest;
 	int dirX, dirY, nX, nY;
 	

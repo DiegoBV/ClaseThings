@@ -93,9 +93,11 @@ void Pacman::animar() {
 }
 
 void Pacman::update() {
-	mueve_Pacman();
-	comer();
-	this->render();
+	if (!game->comprueba_colisiones(posX, posY)){
+		mueve_Pacman();
+		comer();
+		this->render();
+	}
 }
 
 

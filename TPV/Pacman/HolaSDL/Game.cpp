@@ -103,12 +103,15 @@ bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
 	else
 		return false;
 }
+
 void Game::setComida(int a) {
 	numComida += a;
 }
+
 void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
 	if (map->getCell(x, y) == Vitamins){
-		muerteFantasma = true;
+		vitaminas = true;
+		vitaminasTiempo = 20;
 	}
 	map->modifica_Posicion(x, y, Empty);
 	setComida(-1);
@@ -152,12 +155,17 @@ void Game::handle_Events() {
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
 		delay();
+		if (vitaminasTiempo > 0)
+			vitaminasTiempo--;
+		else
+			vitaminas = false;
+
 		SDL_RenderClear(renderer); //limpia el render
+		comprueba_colisiones(pacman.posX, pacman.posY);
 		for (int i = 0; i < 4; i++) {
-			fantasmas[i].update(muerteFantasma);
-			fantasmas[i].render(renderer);
+			fantasmas[i].update();
+			fantasmas[i].render(renderer, vitaminas);
 		}
-		muerteFantasma = false;
 		animaciones_Extra();
 		handle_Events(); //controla los eventos de teclado
 		pacman.update(); //update del pacman
@@ -166,11 +174,20 @@ void Game::run() {
 	}
 }
 
-bool Game::comprueba_personajes(int x, int y){
+bool Game::comprueba_colisiones(int x, int y){
 	for (int i = 0; i < 4; i++){
-		if (fantasmas[i].posActX == x && fantasmas[i].posActY == y)
-			return true;
+		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
+			cout << "Colisión" << endl;
+			if (vitaminas){
+				fantasmas[i].muerte();
+			}
+			else{
+				exit = true;
+			}
+		}
 	}
+
+	return exit;
 }
 
 //los gets de altura, anchura, renderer...

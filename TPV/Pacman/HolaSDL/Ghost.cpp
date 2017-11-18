@@ -40,7 +40,7 @@ Ghost::~Ghost()
 {
 }
 
-void Ghost::update(bool muerte) {
+void Ghost::update() {
 	posActX += actualDir.dirY;
 	posActY += actualDir.dirX;	
 
@@ -50,11 +50,18 @@ void Ghost::update(bool muerte) {
 
 	rectDes.x = juego->obtenerPixelX(posActY);
 	rectDes.y = juego->obtenerPixelY(posActX);
-
 }
 
-void Ghost::render(SDL_Renderer* &render) {
-	textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
+void Ghost::render(SDL_Renderer* &render, bool vitamina) {
+	if (vitamina){
+		textura->ModificaRectangulo(0, 13);
+	}
+	else {
+		textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
+	}
+
+	animar(vitamina);
+
 	textura->Render(render, rectDes);
 }
 
@@ -123,5 +130,30 @@ void Ghost::donut() { //hace las comprobaciones para el movimiento toroidal
 	}
 	if (posActX > juego->dame_ColumnasTablero()) {
 		posActX = 0;
+	}
+}
+
+void Ghost::animar(bool vitamina){
+	int filaSheet; //indica la fila donde animar (0, 1, 2, 3)
+
+	if (!vitamina){
+		if (this->actualDir.dirX == 1) {
+			filaSheet = 0;
+		}
+		else if (this->actualDir.dirX == -1) {
+			filaSheet = 2;
+		}
+		else if (this->actualDir.dirY == 1) {
+			filaSheet = 1;
+		}
+		else {
+			filaSheet = 3;
+		}
+		this->textura->Anima(100, filaSheet, (this->numFantasma - 4) * 2, 1, 2);
+	}
+	else
+	{
+		filaSheet = 0;
+		this->textura->Anima(100, filaSheet, 12, 1, 2);
 	}
 }

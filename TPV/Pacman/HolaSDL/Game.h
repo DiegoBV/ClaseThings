@@ -28,7 +28,9 @@ private:
 	int frameTime; // mediciones del tiempo para un Delay "eficiente"
 	int frameRate;
 	string path; //path de las texturas
-	bool muerteFantasma = false;
+	bool vitaminas = false;
+	int vitaminasTiempo = 0;
+
 public:
 	Game();
 	~Game();
@@ -51,7 +53,7 @@ public:
 	void animaciones_Extra();
 	int obtenerPixelX(int casilla);
 	int obtenerPixelY(int casilla);
-	bool comprueba_personajes(int x, int y);
+	bool comprueba_colisiones(int x, int y);
 };
 
  
