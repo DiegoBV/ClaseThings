@@ -6,13 +6,12 @@ class Pacman
 private:
 	Game* game;
 	Texture* textura;
-public:
-	int posX, posY;
-private:
 	SDL_Rect rectDest;
 	int dirX, dirY, nX, nY;
+	int iniX, iniY;
 	
 public:
+	int posX, posY;
 	Pacman();
 	~Pacman();
 	Pacman(int posX, int posY, Texture* text, Game* gam);
@@ -24,6 +23,7 @@ public:
 	void modifica_Rectangulo();
 	void animar();
 	void update();
-
+	int dame_IniX();
+	int dame_IniY();
 };
 

@@ -46,9 +46,9 @@ public:
 
 
 	//Métodos del juego
-	void update(); //Actualiza la posición del fantasma en la dirección actual y 
+	void update(bool vitamina); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
-	void render(SDL_Renderer* &renderer, bool vitamina); //Pinta el estado actual en pantalla
+	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void muerte(); //Muere y vuelve a la posición inicial
 	void cambiaDir();
 	void donut();

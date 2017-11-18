@@ -14,6 +14,7 @@ private:
 	SDL_Renderer* renderer;
 	SDL_Event termina;
 	ifstream archivo;
+	ofstream partidaGuardada;
 	int winWidth;
 	int winHeight;
 	int filasTablero, colsTablero;
@@ -54,6 +55,10 @@ public:
 	int obtenerPixelX(int casilla);
 	int obtenerPixelY(int casilla);
 	bool comprueba_colisiones(int x, int y);
+	void tiempo_Vitamina();
+	void update_Fantasmas();
+	void menu();
+	void guarda_Partida();
 };
 
  

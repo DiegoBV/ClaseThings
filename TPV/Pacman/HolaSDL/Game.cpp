@@ -31,7 +31,7 @@ Game::Game()
 	}
 
 	//FrameRate
-	this->frameRate = 150; //a + alto, + lento
+	this->frameRate = 120; //a + alto, + lento
 	
 }
 
@@ -111,7 +111,7 @@ void Game::setComida(int a) {
 void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
 	if (map->getCell(x, y) == Vitamins){
 		vitaminas = true;
-		vitaminasTiempo = 20;
+		vitaminasTiempo = 30;
 	}
 	map->modifica_Posicion(x, y, Empty);
 	setComida(-1);
@@ -147,6 +147,9 @@ void Game::handle_Events() {
 				else if (event.key.keysym.sym == SDLK_ESCAPE) {
 					exit = true; //añadido de si le das a escape sales tambien
 				}
+				else if (event.key.keysym.sym == SDLK_g) { //guardar partida
+					this->guarda_Partida();
+				}
 			}
 		}
 	}
@@ -155,20 +158,13 @@ void Game::handle_Events() {
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
 		delay();
-		if (vitaminasTiempo > 0)
-			vitaminasTiempo--;
-		else
-			vitaminas = false;
-
+		tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 		SDL_RenderClear(renderer); //limpia el render
-		comprueba_colisiones(pacman.posX, pacman.posY);
-		for (int i = 0; i < 4; i++) {
-			fantasmas[i].update();
-			fantasmas[i].render(renderer, vitaminas);
-		}
-		animaciones_Extra();
-		handle_Events(); //controla los eventos de teclado
+		comprueba_colisiones(pacman.posX, pacman.posY); //comprueba que los fantasmas y pacman se han o no chocado
+		update_Fantasmas(); //update de los 4 fantasmas
 		pacman.update(); //update del pacman
+		animaciones_Extra(); //anima las vitaminas
+		handle_Events(); //controla los eventos de teclado
 		pinta_Mapa();   //pinta el tablero
 		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 	}
@@ -231,4 +227,67 @@ void Game::animaciones_Extra() {
 
 int Game::obtenerPixelY(int posicion){
 	return (winHeight / filasTablero) * posicion;
+}
+
+void Game::tiempo_Vitamina() { //temporizador vitaminas
+	if (vitaminasTiempo > 0)
+		vitaminasTiempo--;
+	else
+		vitaminas = false;
+}
+
+void Game::update_Fantasmas() { //update de todos los fantsasmas
+	for (int i = 0; i < 4; i++) {
+		fantasmas[i].update(vitaminas);
+	}
+}
+
+void Game::menu() { //menu simple desde consola
+	string eleccion;
+	do {
+		cout << "PACMAN!!!" << endl << "Cargar partida[c] o Nueva Partida[n]";
+		cin >> eleccion;
+
+		if (eleccion == "c") {
+			this->carga_Archivo("..\\partidaGuardada.txt"); //no se controla que no exista el archivo
+		}
+		
+	} while (eleccion != "c" && eleccion != "n");
+
+	if (eleccion == "n") {
+		cout << "Elige nivel [1 - 5]" << endl;
+		cin >> eleccion;
+		this->carga_Archivo("..\\level0" + eleccion + ".dat");
+	}
+
+}
+
+void Game::guarda_Partida() {
+	bool noEscribir = false; //para no sobreescribir
+	partidaGuardada.open("..\\partidaGuardada.txt");
+	if (partidaGuardada.is_open()) {
+		partidaGuardada << this->dame_FilasTablero() << " " << this->dame_ColumnasTablero();
+		partidaGuardada << endl;
+
+		for (int i = 0; i < this->dame_FilasTablero(); i++) {
+			for (int j = 0; j < this->dame_ColumnasTablero(); j++) {
+				for (int r = 0; r < 4; r++) { //esto se podria hacer mejor. Recorre todos los fantasmas buscando la posIniX y la posIniY y los coloca en el archivo
+					if (fantasmas[r].posInX == i && fantasmas[r].posInY == j) {
+						partidaGuardada << r + 5 << " ";
+						noEscribir = true; //si se pone a true, no puede sobreescribir
+					}
+				}
+				if (pacman.dame_IniY() == i && pacman.dame_IniX() == j) { //coloca a Pacman en su posicion original
+					partidaGuardada << 9 << " ";
+				}
+				else {
+					if (!noEscribir)//si ningun fantasma se ha escrito, escribe la posicion adecuada
+						partidaGuardada << (int)this->consulta(i, j) << " ";
+				}
+				noEscribir = false;
+			}
+			partidaGuardada << endl;
+		}
+	}
+	partidaGuardada.close();
 }

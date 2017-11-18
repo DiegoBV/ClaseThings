@@ -15,6 +15,8 @@ Pacman::Pacman(int posY, int posX, Texture* text, Game* gam) { //contructora con
 	this->textura = text;
 	this->posX = posX;
 	this->posY = posY;  //establece coordenadas y crea el rectangulo destino inicial
+	iniX = posX;
+	iniY = posY; //posiciones iniciales del pacman para el guardado
 	rectDest.x = posX * game->dame_Anchura()/ game->dame_ColumnasTablero();
 	rectDest.y = posY * game->dame_Altura()/ game->dame_FilasTablero();
 	rectDest.w = game->dame_Anchura() / game->dame_FilasTablero(); //establece anchura y altura del fantasma
@@ -98,6 +100,14 @@ void Pacman::update() {
 		comer();
 		this->render();
 	}
+}
+
+int Pacman::dame_IniX() {
+	return this->iniX;
+}
+
+int Pacman::dame_IniY() {
+	return this->iniY;
 }
 
 

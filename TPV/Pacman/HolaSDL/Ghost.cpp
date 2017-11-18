@@ -40,7 +40,7 @@ Ghost::~Ghost()
 {
 }
 
-void Ghost::update() {	
+void Ghost::update(bool vitamina) {
 	juego->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
 	donut();
@@ -49,9 +49,11 @@ void Ghost::update() {
 
 	rectDes.x = juego->obtenerPixelX(posActY);
 	rectDes.y = juego->obtenerPixelY(posActX);
+	
+	this->render(vitamina);
 }
 
-void Ghost::render(SDL_Renderer* &render, bool vitamina) {
+void Ghost::render(bool vitamina) {
 	if (vitamina){
 		textura->ModificaRectangulo(0, 13);
 	}
@@ -61,7 +63,7 @@ void Ghost::render(SDL_Renderer* &render, bool vitamina) {
 
 	animar(vitamina);
 
-	textura->Render(render, rectDes);
+	textura->Render(juego->dame_Renderer(), rectDes);
 }
 
 void Ghost::muerte() {
@@ -75,7 +77,7 @@ int Ghost::posibles_Dirs() {
 	int tempY;
 	int backward = 0;
 	int posibles [4];
-	int j = 0; //COntrol del array de posibles
+	int j = 0; //Control del array de posibles
 
 	//Exploramos las posibilidades 
 	for (int i = 0; i < 4; i++) {
