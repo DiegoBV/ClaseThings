@@ -63,7 +63,7 @@ void Ghost::render(bool vitamina) {
 
 	animar(vitamina);
 
-	textura->Render(juego->dame_Renderer(), rectDes);
+	textura->RenderFrame(juego->dame_Renderer(), rectDes);
 }
 
 void Ghost::muerte() {

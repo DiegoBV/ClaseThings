@@ -17,8 +17,8 @@ Game::Game()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//Texturas
-	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet
-	for (int i = 0; i < 4; i++) {
+	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[6] = gameOver
+	for (int i = 0; i < 6; i++) {
 		if (i == 0) {
 			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 4); //vitamina animada
 		}
@@ -33,6 +33,10 @@ Game::Game()
 	//FrameRate
 	this->frameRate = 120; //a + alto, + lento
 	
+	this->levels[0] = "..\\partidaGuardada.txt";  //guarda los niveles en un array
+	for (int i = 1; i < 6; i++) {
+		this->levels[i] = "..\\level0" + to_string(i) + ".dat";
+	}
 }
 
 
@@ -50,6 +54,7 @@ Game::~Game() //destruye el renderer y la ventana
 
 void Game::carga_Archivo(string name){
 	int fils, cols;
+
 
 	archivo.open(name);
 
@@ -168,6 +173,7 @@ void Game::run() {
 		pinta_Mapa();   //pinta el tablero
 		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 	}
+	siguiente_Nivel();
 }
 
 bool Game::comprueba_colisiones(int x, int y){
@@ -177,9 +183,14 @@ bool Game::comprueba_colisiones(int x, int y){
 				fantasmas[i].muerte();
 			}
 			else{
-				exit = true;
+				pacman.reduceVidas();
+				pacman.vuelta_Origen();
 			}
 		}
+	}
+
+	if (pacman.he_Muerto()) {
+		exit = true;
 	}
 
 	return exit;
@@ -242,29 +253,29 @@ void Game::update_Fantasmas() { //update de todos los fantsasmas
 	}
 }
 
-void Game::menu() { //menu simple desde consola
-	string eleccion;
-	do {
-		cout << "PACMAN!!!" << endl << "Cargar partida[c] o Nueva Partida[n]";
-		cin >> eleccion;
-
-		if (eleccion == "c") {
-			this->carga_Archivo("..\\partidaGuardada.txt"); //no se controla que no exista el archivo
+void Game::menu() {
+	texts[4]->Render(renderer);
+	SDL_RenderPresent(renderer);
+	bool finish = false;
+	while (!finish) {
+		while (SDL_PollEvent(&event)) {
+			if (event.type == SDL_KEYDOWN) {
+				if (event.key.keysym.sym == SDLK_n) {
+					this->carga_Archivo(levels[levels_Index]);
+					finish = true;
+				}
+				else if (event.key.keysym.sym == SDLK_c) {
+					this->carga_Archivo(levels[0]); //carga la partida guardada
+					finish = true;
+				}
+			}
 		}
-		
-	} while (eleccion != "c" && eleccion != "n");
-
-	if (eleccion == "n") {
-		cout << "Elige nivel [1 - 5]" << endl;
-		cin >> eleccion;
-		this->carga_Archivo("..\\level0" + eleccion + ".dat");
 	}
-
+	this->run();
 }
-
 void Game::guarda_Partida() {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open("..\\partidaGuardada.txt");
+	partidaGuardada.open(levels[0]);
 	if (partidaGuardada.is_open()) {
 		partidaGuardada << this->dame_FilasTablero() << " " << this->dame_ColumnasTablero();
 		partidaGuardada << endl;
@@ -290,4 +301,23 @@ void Game::guarda_Partida() {
 		}
 	}
 	partidaGuardada.close();
+}
+
+void Game::siguiente_Estado() {
+	if (this->win() && levels_Index < 5) { //comrpueba que haya comido todo y ademas sigan existiendo niveles
+			levels_Index++;
+			delete map; //deletea el map anterior para construir el siguiente
+			this->carga_Archivo(levels[levels_Index]); //carga el siguiente archivo
+			this->run(); //run!
+	}
+	else if (pacman.he_Muerto()) {
+		game_Over(); 
+	}
+}
+
+void Game::game_Over() {
+	SDL_RenderClear(renderer);
+	texts[5]->Render(renderer);
+	SDL_RenderPresent(renderer);
+	SDL_Delay(1000);
 }

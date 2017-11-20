@@ -20,7 +20,7 @@ private:
 	int filasTablero, colsTablero;
 	int winX, winY;
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
-	Texture* texts[4];
+	Texture* texts[6];
 	GameMap* map;
 	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
 	Pacman pacman; //GameObject Pacman
@@ -31,6 +31,9 @@ private:
 	string path; //path de las texturas
 	bool vitaminas = false;
 	int vitaminasTiempo = 0;
+	string levels[6];
+	int levels_Index = 1;  //cambiar de nivel al ganar
+	void siguiente_Estado();
 
 public:
 	Game();
@@ -59,6 +62,7 @@ public:
 	void update_Fantasmas();
 	void menu();
 	void guarda_Partida();
+	void game_Over();
 };
 
  

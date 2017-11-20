@@ -9,7 +9,7 @@ private:
 	SDL_Rect rectDest;
 	int dirX, dirY, nX, nY;
 	int iniX, iniY;
-	
+	int vidas;
 public:
 	int posX, posY;
 	Pacman();
@@ -25,5 +25,8 @@ public:
 	void update();
 	int dame_IniX();
 	int dame_IniY();
+	void reduceVidas();
+	bool he_Muerto();
+	void vuelta_Origen();
 };
 
