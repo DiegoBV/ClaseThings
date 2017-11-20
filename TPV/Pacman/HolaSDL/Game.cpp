@@ -173,7 +173,7 @@ void Game::run() {
 		pinta_Mapa();   //pinta el tablero
 		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 	}
-	siguiente_Nivel();
+	siguiente_Estado();
 }
 
 bool Game::comprueba_colisiones(int x, int y){
