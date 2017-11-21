@@ -23,7 +23,7 @@ Pacman::Pacman(int posY, int posX, Texture* text, Game* gam) { //contructora con
 	rectDest.h = game->dame_Altura() / game->dame_ColumnasTablero();
 	dirX = dirY = nX = nY = 0;
 	this->textura->ModificaRectangulo(0, 10);
-	this -> vidas = 1;
+	this -> vidas = 3;
 }
 
 bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la nueva direccion, si no, se mantiene la antigua
