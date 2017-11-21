@@ -17,7 +17,7 @@ Game::Game()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 
 	//Texturas
-	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[6] = gameOver
+	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver
 	for (int i = 0; i < 6; i++) {
 		if (i == 0) {
 			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 4); //vitamina animada
@@ -47,7 +47,7 @@ Game::~Game() //destruye el renderer y la ventana
 	SDL_DestroyWindow(window);
 
 	delete map; //borra el mapa
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
 }
@@ -83,6 +83,7 @@ void Game::carga_Archivo(string name){
 				}
 			}
 		}
+		archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
 		archivo.close();
 	}
 }
@@ -300,6 +301,7 @@ void Game::guarda_Partida() {
 			partidaGuardada << endl;
 		}
 	}
+	partidaGuardada << levels_Index; //guarda el nivel en el que estamos
 	partidaGuardada.close();
 }
 
