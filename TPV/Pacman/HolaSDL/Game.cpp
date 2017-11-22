@@ -78,7 +78,7 @@ void Game::carga_Archivo(string name){
 					pacman = Pacman(i, j, texts[3], this);
 				}
 				else if (pos != 4) {
-					fantasmas[pos - 5] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, texts[3], this);
+					//fantasmas[pos - 5] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, texts[3], this);
 					map->modifica_Posicion(i, j, Empty);
 				}
 			}
@@ -166,7 +166,7 @@ void Game::run() {
 		delay();
 		tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 		SDL_RenderClear(renderer); //limpia el render
-		comprueba_colisiones(pacman.posX, pacman.posY); //comprueba que los fantasmas y pacman se han o no chocado
+		comprueba_colisiones(pacman.GO::get_PosActX(), pacman.GO::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
 		update_Fantasmas(); //update de los 4 fantasmas
 		pacman.update(); //update del pacman
 		animaciones_Extra(); //anima las vitaminas
@@ -185,7 +185,7 @@ bool Game::comprueba_colisiones(int x, int y){
 			}
 			else{
 				pacman.reduceVidas();
-				pacman.vuelta_Origen();
+				pacman.GO::muerte(); //esto funciona increíblemente
 			}
 		}
 	}

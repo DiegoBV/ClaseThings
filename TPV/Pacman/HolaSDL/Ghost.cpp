@@ -7,7 +7,7 @@ Ghost::Ghost() {
 Ghost::Ghost(SDL_Renderer* &renderer, string dirTextura, int orX, int orY, int numFant, Texture* text, Game* gam)
 {
 	this->numFantasma = numFant;
-	posInY = orY;
+	IniY = orY;
 	posInX = orX;
 	juego = gam; //Actualiza el puntero a game
 	textura = text;//asigna el puntero de texturas

@@ -1,5 +1,4 @@
 #pragma once
-#include "Texture.h"
 #include "SDL.h"
 #include <string>
 #include <cstdlib>
@@ -7,15 +6,11 @@
 #include <random>
 //using namespace std;
 class Game;
-class Ghost
+class Ghost : public GO
 {
 friend class Game;
 private:
-	//Posicion inicial
-	int posInX, posInY;
 
-	//Posicion actual
-	int posActX, posActY;
 
 	//Dirección actual
 	struct Dirs {
@@ -27,15 +22,6 @@ private:
 	int numFantasma;
 	Dirs posiblesDirs [4];
 	Dirs actualDir;
-
-	//Punteros
-	//Textura
-	Texture* textura;
-	//Game (Para conocer el entorno)
-	Game* juego;
-
-	//Rectángulo para dibujarlo
-	SDL_Rect rectDes;
 	int posibles_Dirs();
 	
 	
@@ -49,9 +35,7 @@ public:
 	void update(bool vitamina); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
 	void render(bool vitamina); //Pinta el estado actual en pantalla
-	void muerte(); //Muere y vuelve a la posición inicial
 	void cambiaDir();
-	void donut();
 	void animar(bool vitamina);
 };
 
