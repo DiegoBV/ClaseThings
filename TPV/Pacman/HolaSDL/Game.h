@@ -22,7 +22,7 @@ private:
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
 	Texture* texts[6];
 	GameMap* map;
-	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
+	//Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos, por ahora no los usamos pero para llamar a sus métodos se necesitan.
 	Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos
 	int startTime;

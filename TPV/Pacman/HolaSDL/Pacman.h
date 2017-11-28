@@ -1,8 +1,8 @@
 #pragma once
 #include "Texture.h"
-#include "GO.h"
+#include "GameCharacter.h"
 class Game;
-class Pacman: public GO
+class Pacman: public GameCharacter
 {
 private:
 	int dirX, dirY, nX, nY;

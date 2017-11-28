@@ -1,4 +1,4 @@
-#include "Ghost.h"
+/*#include "Ghost.h"
 #include "Game.h"
 
 
@@ -157,4 +157,4 @@ void Ghost::animar(bool vitamina){
 		filaSheet = 0;
 		this->textura->Anima(100, filaSheet, 12, 1, 2);
 	}
-}
+}*/

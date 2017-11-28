@@ -1,4 +1,4 @@
-#pragma once
+/*#pragma once
 #include "SDL.h"
 #include <string>
 #include <cstdlib>
@@ -6,7 +6,7 @@
 #include <random>
 //using namespace std;
 class Game;
-class Ghost : public GO
+class Ghost : public GameCharacter
 {
 friend class Game;
 private:
@@ -37,5 +37,5 @@ public:
 	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	void animar(bool vitamina);
-};
+};*/
 

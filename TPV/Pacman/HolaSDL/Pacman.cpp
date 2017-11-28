@@ -1,21 +1,21 @@
 #include "Pacman.h"
 #include "Game.h"
 
-Pacman::Pacman(): GO(), dirX(0), dirY(0), nX(0), nY(0) {}
+Pacman::Pacman(): GameCharacter(), dirX(0), dirY(0), nX(0), nY(0) {}
 
 
 Pacman::~Pacman()
 {
 }
 
-Pacman::Pacman(int posY, int posX, Texture* text, Game* gam): GO(posX, posY, text, gam), dirX(0), dirY(0), nX(0), nY(0) {} //contructora con parámetros
+Pacman::Pacman(int posY, int posX, Texture* text, Game* gam): GameCharacter(posX, posY, text, gam), dirX(0), dirY(0), nX(0), nY(0) {} //contructora con parámetros
 
 
 bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la nueva direccion, si no, se mantiene la antigua
 	nX = dX;
 	nY = dY;
-	int tempX = GO::posActX;
-	int tempY = GO::posActY;
+	int tempX = GameCharacter::posActX;
+	int tempY = GameCharacter::posActY;
 	return (game->siguiente_casilla(tempX, tempY, nX, nY));
 }
 
@@ -24,14 +24,14 @@ void Pacman::render() {//pinta la textura correcta
 }
 
 void Pacman::comer() { //comrpueba si la casilla en la que estas es comida o vitamina, si lo es, la cambia por casilla vacia
-	if (GO::game->consulta(GO::posActY, GO::posActX) == Food || GO::game->consulta(GO::posActY, GO::posActX) == Vitamins) {
-		GO::game->come(GO::posActY, GO::posActX);
+	if (GameCharacter::game->consulta(GameCharacter::posActY, GameCharacter::posActX) == Food || GameCharacter::game->consulta(GameCharacter::posActY, GameCharacter::posActX) == Vitamins) {
+		GameCharacter::game->come(GameCharacter::posActY, GameCharacter::posActX);
 	}
 }
 
 void Pacman::modifica_Rectangulo() { //modifica el rectangulo destino, asignandole la x y la y multiplicandolo por las medidas del tablero
-	GO::rectDest.y = GO::posActY * GO::game->dame_Altura() / GO::game->dame_FilasTablero();
-	GO::rectDest.x = GO::posActX * GO::game->dame_Anchura() / GO::game->dame_ColumnasTablero();
+	GameCharacter::rectDest.y = GameCharacter::posActY * GameCharacter::game->dame_Altura() / GameCharacter::game->dame_FilasTablero();
+	GameCharacter::rectDest.x = GameCharacter::posActX * GameCharacter::game->dame_Anchura() / GameCharacter::game->dame_ColumnasTablero();
 }
 
 void Pacman::mueve_Pacman() {
@@ -40,9 +40,9 @@ void Pacman::mueve_Pacman() {
 		dirY = nY; 
 	}
 
-	GO::game->siguiente_casilla(GO::posActX, GO::posActY, dirX, dirY);
+	GameCharacter::game->siguiente_casilla(GameCharacter::posActX, GameCharacter::posActY, dirX, dirY);
 
-	GO::donut();
+	GameCharacter::donut();
 	modifica_Rectangulo();
 	animar();
 }
@@ -66,7 +66,7 @@ void Pacman::animar() {
 }
 
 void Pacman::update() {
-	//if (!GO::game->comprueba_colisiones(GO::posActX, GO::posActY)){
+	//if (!GameCharacter::game->comprueba_colisiones(GameCharacter::posActX, GameCharacter::posActY)){
 		mueve_Pacman();
 		comer();
 		this->render();

@@ -166,7 +166,7 @@ void Game::run() {
 		delay();
 		tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 		SDL_RenderClear(renderer); //limpia el render
-		comprueba_colisiones(pacman.GO::get_PosActX(), pacman.GO::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
+		//comprueba_colisiones(pacman.GameCharacter::get_PosActX(), pacman.GameCharacter::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
 		update_Fantasmas(); //update de los 4 fantasmas
 		pacman.update(); //update del pacman
 		animaciones_Extra(); //anima las vitaminas
@@ -177,7 +177,7 @@ void Game::run() {
 	siguiente_Estado();
 }
 
-bool Game::comprueba_colisiones(int x, int y){
+/*bool Game::comprueba_colisiones(int x, int y){
 	for (int i = 0; i < 4; i++){
 		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
 			if (vitaminas){
@@ -185,7 +185,7 @@ bool Game::comprueba_colisiones(int x, int y){
 			}
 			else{
 				pacman.reduceVidas();
-				pacman.GO::muerte(); //esto funciona increíblemente
+				pacman.GameCharacter::muerte(); //esto funciona increíblemente
 			}
 		}
 	}
@@ -195,7 +195,7 @@ bool Game::comprueba_colisiones(int x, int y){
 	}
 
 	return exit;
-}
+}*/
 
 //los gets de altura, anchura, renderer...
 int Game::dame_Altura() {
@@ -250,7 +250,7 @@ void Game::tiempo_Vitamina() { //temporizador vitaminas
 
 void Game::update_Fantasmas() { //update de todos los fantsasmas
 	for (int i = 0; i < 4; i++) {
-		fantasmas[i].update(vitaminas);
+		//fantasmas[i].update(vitaminas);
 	}
 }
 
@@ -284,10 +284,10 @@ void Game::guarda_Partida() {
 		for (int i = 0; i < this->dame_FilasTablero(); i++) {
 			for (int j = 0; j < this->dame_ColumnasTablero(); j++) {
 				for (int r = 0; r < 4; r++) { //esto se podria hacer mejor. Recorre todos los fantasmas buscando la posIniX y la posIniY y los coloca en el archivo
-					if (fantasmas[r].posInX == i && fantasmas[r].posInY == j) {
+					/*if (fantasmas[r].posInX == i && fantasmas[r].posInY == j) {
 						partidaGuardada << r + 5 << " ";
 						noEscribir = true; //si se pone a true, no puede sobreescribir
-					}
+					}*/
 				}
 				if (pacman.dame_IniY() == i && pacman.dame_IniX() == j) { //coloca a Pacman en su posicion original
 					partidaGuardada << 9 << " ";
