@@ -35,11 +35,12 @@ bool es_Prometedora(const int &precio, const int &suma, const int &cantidad, con
 	}*/
 	return ((precio - suma + cantidad) > cant_Max);
 }
+
 //Coste = x1 * x2 * x3... * x8, siendo xn el numero de monedas en dicha posicion
 void quita_calderilla(const vector <int> &v, int k, const int &precio, int suma, int cantidad, const vector <int> &valor, int &cant_Max) {
 	int i = 0;
 	bool cont = true;
-	while (k < v.size() && i <= v[k] && cont)
+	while (k < v.size() && i <= v[k] && cont && valor[k] < precio)
 	{
 		int sumaAux = suma + i * valor[k];
 		int cantAux = cantidad++;
