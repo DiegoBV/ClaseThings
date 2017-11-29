@@ -8,7 +8,7 @@ Pacman::~Pacman()
 {
 }
 
-Pacman::Pacman(int posY, int posX, Texture* text, Game* gam): GameCharacter(posX, posY, text, gam), dirX(0), dirY(0), nX(0), nY(0) {} //contructora con parámetros
+Pacman::Pacman(int posY, int posX, Texture* text, Game* gam): GameCharacter(posX, posY, text, gam), dirX(0), dirY(0), nX(0), nY(0), filaSheet(0) {} //contructora con parámetros
 
 
 bool Pacman::siguiente_Dir(int dX, int dY) { //si pulsas una tecla, se guarda la nueva direccion, si no, se mantiene la antigua
@@ -49,7 +49,6 @@ void Pacman::mueve_Pacman() {
 
 //esto se parece mucho al ghost...hmmmm
 void Pacman::animar() {
-	int filaSheet; //indica la fila donde animar (0, 1, 2, 3)
 	if (this->dirX == 1) {
 		filaSheet = 0;
 	}
@@ -69,7 +68,6 @@ void Pacman::update() {
 	//if (!GameCharacter::game->comprueba_colisiones(GameCharacter::posActX, GameCharacter::posActY)){
 		mueve_Pacman();
 		comer();
-		this->render();
 	//}
 }
 

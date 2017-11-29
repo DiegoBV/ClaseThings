@@ -8,16 +8,17 @@ private:
 	int dirX, dirY, nX, nY;
 	int vidas;
 	void modifica_Rectangulo();
-public:
-	Pacman();
-	~Pacman();
-	Pacman(int posX, int posY, Texture* text, Game* gam);
-	bool siguiente_Dir(int dX, int dY);
-	void render();
+	int filaSheet; //animar el frame correcto...
 	void comer();
 	void mueve_Pacman();
 	void animar();
-	void update();
+public:
+	Pacman();
+	~Pacman();
+	Pacman(int posX, int posY, Texture* text, Game* gam);	
+	virtual void render();	
+	virtual void update();
+	bool siguiente_Dir(int dX, int dY);
 	void reduceVidas();
 	bool he_Muerto();
 };

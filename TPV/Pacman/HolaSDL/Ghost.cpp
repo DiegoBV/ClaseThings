@@ -40,7 +40,7 @@ Ghost::~Ghost()
 {
 }
 
-void Ghost::update(bool vitamina) {
+void Ghost::update() {
 	juego->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
 	donut();
@@ -49,8 +49,7 @@ void Ghost::update(bool vitamina) {
 
 	rectDes.x = juego->obtenerPixelX(posActY);
 	rectDes.y = juego->obtenerPixelY(posActX);
-	
-	this->render(vitamina);
+
 }
 
 void Ghost::render(bool vitamina) {
@@ -135,8 +134,6 @@ void Ghost::donut() { //hace las comprobaciones para el movimiento toroidal
 }
 
 void Ghost::animar(bool vitamina){
-	int filaSheet; //indica la fila donde animar (0, 1, 2, 3)
-
 	if (!vitamina){
 		if (this->actualDir.dirX == 1) {
 			filaSheet = 0;

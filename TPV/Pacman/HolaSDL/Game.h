@@ -34,6 +34,8 @@ private:
 	string levels[6];
 	int levels_Index = 1;  //cambiar de nivel al ganar
 	void siguiente_Estado();
+	void update();
+	void render();
 
 public:
 	Game();
@@ -59,7 +61,6 @@ public:
 	int obtenerPixelY(int casilla);
 	bool comprueba_colisiones(int x, int y);
 	void tiempo_Vitamina();
-	void update_Fantasmas();
 	void menu();
 	void guarda_Partida();
 	void game_Over();

@@ -11,7 +11,7 @@ class Ghost : public GameCharacter
 friend class Game;
 private:
 
-
+	int filaSheet;
 	//Dirección actual
 	struct Dirs {
 		int dirX;
@@ -32,9 +32,9 @@ public:
 
 
 	//Métodos del juego
-	void update(bool vitamina); //Actualiza la posición del fantasma en la dirección actual y 
+	virtual void update(); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
-	void render(bool vitamina); //Pinta el estado actual en pantalla
+	virtual void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	void animar(bool vitamina);
 };*/

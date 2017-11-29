@@ -161,18 +161,32 @@ void Game::handle_Events() {
 	}
 }
 
+void Game::update() {
+	delay();
+	//comprueba_colisiones(pacman.GameCharacter::get_PosActX(), pacman.GameCharacter::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
+	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
+	for (int i = 0; i < 4; i++) {
+		//fantasmas[i].update();
+	}
+	pacman.update(); //update del pacman
+}
+
+void Game::render() {
+	SDL_RenderClear(renderer); //limpia el render
+	for (int i = 0; i < 4; i++) {
+		//fantasmas[i].render(vitaminas);
+	}
+	animaciones_Extra(); //anima las vitaminas
+	pacman.render();
+	pinta_Mapa();   //pinta el tablero
+	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
+}
+
 void Game::run() {
 	while (!this->win() && !this->dame_exit()) {
-		delay();
-		tiempo_Vitamina(); //tiempo que los fantasmas están asustados
-		SDL_RenderClear(renderer); //limpia el render
-		//comprueba_colisiones(pacman.GameCharacter::get_PosActX(), pacman.GameCharacter::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
-		update_Fantasmas(); //update de los 4 fantasmas
-		pacman.update(); //update del pacman
-		animaciones_Extra(); //anima las vitaminas
 		handle_Events(); //controla los eventos de teclado
-		pinta_Mapa();   //pinta el tablero
-		SDL_RenderPresent(renderer); //plasma el renderer en pantalla
+		update(); //update de tooodo
+		render();  //render de tooodo
 	}
 	siguiente_Estado();
 }
@@ -248,11 +262,6 @@ void Game::tiempo_Vitamina() { //temporizador vitaminas
 		vitaminas = false;
 }
 
-void Game::update_Fantasmas() { //update de todos los fantsasmas
-	for (int i = 0; i < 4; i++) {
-		//fantasmas[i].update(vitaminas);
-	}
-}
 
 void Game::menu() {
 	texts[4]->Render(renderer);
