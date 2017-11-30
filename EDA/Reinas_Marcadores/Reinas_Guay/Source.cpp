@@ -1,3 +1,12 @@
+//Grupo 22 Diego Baratto Valdivia / Alejandro Marín Pérez
+
+//Descripción de la solución:
+/*
+	Después de introducir el numero de casos de prueba que queremos considerar y el número N de reinas en un tablero de NxN, se 
+	invoca a la función Cuatro_Reinas(...). Dicha función comprueba todo el árbol de soluciones parciales, descartando las que
+	son inválidas bien por que la reina en cuestión está en la misma columna o bien por estar en la misma diagonal, usando 
+	los métodos auxiliares para ello. Para hacerlo más eficiente, hacemos uso de marcadores en las diagonales y en las horizontales.
+*/
 #include <iostream>
 #include <vector>
 #include <string>
@@ -21,7 +30,7 @@ void Cuatro_Reinas(vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vec
 
 	if (fila < n) {
 
-		for (v[fila] = 0; v[fila] < n; v[fila]++) {
+		for (v[fila] = 0; v[fila] < n; v[fila]++) { //coloca la reina en la posicion 0, 1, 2, ... N - 1
 
 			if (es_Solucion(v, d_des, d_asc, hilera, fila, n)) {
 				procesa_Solucion(cont);
@@ -40,57 +49,35 @@ void Cuatro_Reinas(vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vec
 }
 
 bool es_Solucion(const vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vector<bool> &hilera, int posicion_Vector, int n) {
-
-	if (posicion_Vector == (n - 1) && !no_Peligro(v, d_des, d_asc, hilera, posicion_Vector)) {
-		return true;
-	}
-	else
-		return false;
+	return (posicion_Vector == (n - 1) && !no_Peligro(v, d_des, d_asc, hilera, posicion_Vector)); //es solucion si es la ultima reina por colocar y 
+	//si no hay peligro de comerse
 }
 
 bool es_Completable(const vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vector<bool> &hilera, int posicion_Vector, int n) {
-
-	if (posicion_Vector < (n - 1) && !no_Peligro(v, d_des, d_asc, hilera, posicion_Vector)) {
-		return true;
-	}
-	else
-		return false;
+	return (posicion_Vector < (n - 1) && !no_Peligro(v, d_des, d_asc, hilera, posicion_Vector)); //es compeltable si aun quedan reinas por colocar y
+	// si no hay peligro de comerse
 }
 
 bool no_Peligro(const vector<int> &v, vector<bool> &d_des, vector<bool> &d_asc, vector<bool> &hilera, int posicion_Vector) {
 	bool danger = false;
-	//int i = 0;
 	if (hilera[v[posicion_Vector]]) { //se comprueba que esa posicion no haya sido ocupada antes
 		danger = true;
 	}
-	else if (d_asc[diagonal_Ascendente(posicion_Vector, v[posicion_Vector])]) {
+	else if (d_asc[diagonal_Ascendente(posicion_Vector, v[posicion_Vector])]) { //se comprueban las diagonales
 		danger = true;
 	}
 	else if (d_des[diagonal_Descendente(posicion_Vector, v[posicion_Vector], d_des.size())]) {
 		danger = true;
 	}
-	/*while (!danger && i < posicion_Vector) {
-	if (v[i] == v[posicion_Vector]) {  //misma columna
-	danger = true;
-	}
-	else if (diagonal_Descendente(i, v[i]) == diagonal_Descendente(posicion_Vector, v[posicion_Vector])) {
-	danger = true;
-	}
-	else if (diagonal_Ascendente(i, v[i]) == diagonal_Ascendente(posicion_Vector, v[posicion_Vector])) {
-	danger = true;
-	}
-	i++;
-	}*/
-
 	return danger;
 }
 
 void procesa_Solucion(int &cont) {
-	cont++;
+	cont++; //aumenta el contador de soluciones que ha encontrado
 }
 int diagonal_Descendente(int x, int y, int tam) {
 	if ((x - y) < 0) {
-		return tam + (x - y);
+		return tam + (x - y); //cambios para los numeros negativos
 	}
 	else {
 		return x - y;
@@ -101,7 +88,7 @@ int diagonal_Ascendente(int x, int y) {
 	return x + y;
 }
 int main() {
-	int m;
+	int m; //petición de datos y mostrar la solución
 	cin >> m;
 	int i = 0;
 	while (i < m) {
