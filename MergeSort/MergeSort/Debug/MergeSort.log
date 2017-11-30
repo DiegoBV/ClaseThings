@@ -1,0 +1,6 @@
+﻿  Source.cpp
+c:\users\usuario\desktop\2ºvideojuegos\clasethings\clasethings\eda\mergesort\mergesort\source.cpp(22): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\clasethings\clasethings\eda\mergesort\mergesort\source.cpp(106): warning C4018: '<': signed/unsigned mismatch
+  LINK : C:\Users\Usuario\Desktop\2ºVideojuegos\ClaseThings\ClaseThings\EDA\MergeSort\Debug\MergeSort.exe not found or not built by the last incremental link; performing full link
+  MergeSort.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\ClaseThings\ClaseThings\EDA\MergeSort\Debug\MergeSort.exe
+  MergeSort.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\ClaseThings\ClaseThings\EDA\MergeSort\Debug\MergeSort.pdb (Partial PDB)
