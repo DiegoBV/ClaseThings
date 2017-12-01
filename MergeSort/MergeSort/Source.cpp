@@ -1,3 +1,11 @@
+//Grupo VJ22 Diego Baratto Valdivia y Alejandro Marín Pérez
+
+/*
+	El programa recibe un vector desordenado, lo divide en dos y ordena esas partes. Recursivamente vuelve a dividir en 2 para ordenar 
+	las mitades que ha generado y así hasta que llega a una mitad de tamaño 1. Una vez hecho esto, ordena y mezcla los distintos vectores
+	mitad que tiene ya ordenados. Si sobra algún elemento cuando hace y ordena las mitades, los añade a sus respectivos vectores. 
+*/
+
 #include <iostream>
 #include <string>
 #include <vector>
@@ -57,7 +65,7 @@ void merge(vector < int >& v, int ini, int mid, int fin) {
 	for (int q = ini, i = 0;  i < n1; q++, i++) {
 		aux1[i] = v[q];
 	}
-	                                                      //copio los arrays desde ini hasta med y desde med hasta fin
+	                                             //copio los arrays desde ini hasta med y desde med hasta fin
 	for (int q = mid, i = 0; i < n2; i++, q++) {
 		aux2[i] = v[q];
 	}
@@ -90,9 +98,6 @@ void merge(vector < int >& v, int ini, int mid, int fin) {
 		j++;
 		k++;
 	}
-
-
-
 }
 
 void rellenaVector(vector<int>& v) {
