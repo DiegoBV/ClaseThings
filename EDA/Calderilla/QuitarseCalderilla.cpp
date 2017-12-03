@@ -1,3 +1,14 @@
+//Grupo VJ22 Alejandro Marín Pérez y Diego Baratto Valdivia
+/*
+	El programa recibe un precio y una cantidad de monedas que se tienen. Para buscar la solución más efectiva, es 
+	decir, la que da el mayor número de monedas, se explora un árbol de posibilidades usando sólo una moneda, después otra 
+	del mismo tipo y así hasta que encuentra una buena solución. Para comprobarlo se usa el es_solución para saber si es posible 
+	sea una solución. El propio procesa solución ya comprueba si esa es la mejor solución (cantidad > cant_Max) siendo cant_Max
+	la cantidad máxima hasta el momento. SI no es una solución se comprueba si es completable (se puede llegar a una solución) y 
+	si esa rama es prometedora (se puede llegar a alcanzar una cantidad mayor que cant_Max) y si no es ese el caso, se vuelve a la
+	opción anterior.
+*/
+
 #include <string>
 #include <vector>
 #include <iostream>
