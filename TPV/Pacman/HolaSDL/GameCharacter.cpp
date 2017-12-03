@@ -23,15 +23,15 @@ GameCharacter::GameCharacter(int posX, int posY, Texture* text, Game* gam) {
 	rectDest.y = posY * game->dame_Altura() / game->dame_FilasTablero();
 	rectDest.w = game->dame_Anchura() / game->dame_FilasTablero(); //establece anchura y altura del fantasma
 	rectDest.h = game->dame_Altura() / game->dame_ColumnasTablero();
-	//dirX = dirY = nX = nY = 0;
-	this->textura->ModificaRectangulo(0, 10);
+	actualDir.dirX = actualDir.dirY = 0;
+	filaSheet = 0;
 }
 
 void GameCharacter::donut() { //hace las comprobaciones para el movimiento toroidal
 	if (posActY < 0) {
-		posActY = game->dame_FilasTablero() - 1;
+		posActY = game->dame_FilasTablero() - 2;
 	}
-	if (posActY >= game->dame_FilasTablero()) {
+	if (posActY >= game->dame_FilasTablero() - 1) {
 		posActY = 0;
 	}
 	if (posActX < 0) {
@@ -46,6 +46,25 @@ void GameCharacter::muerte() {
 	//Ponemos la posición en el comienzo
 	posActX = iniX;
 	posActY = iniY;
+}
+
+void GameCharacter::animar() {
+	if (this->GameCharacter::actualDir.dirX == 1) {
+		filaSheet = 0;
+	}
+	else if (this->GameCharacter::actualDir.dirX == -1) {
+		filaSheet = 2;
+	}
+	else if (this->GameCharacter::actualDir.dirY == 1) {
+		filaSheet = 1;
+	}
+	else {
+		filaSheet = 3;
+	}
+}
+
+void GameCharacter::render() {
+	this->textura->RenderFrame(game->dame_Renderer(), rectDest);
 }
 
 int GameCharacter::dame_IniX() {
@@ -63,5 +82,6 @@ int GameCharacter::get_PosActX() {
 int GameCharacter::get_PosActY() {
 	return this->posActY;
 }
+
 
 

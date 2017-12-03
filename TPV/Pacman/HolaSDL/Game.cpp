@@ -78,7 +78,7 @@ void Game::carga_Archivo(string name){
 					pacman = Pacman(i, j, texts[3], this);
 				}
 				else if (pos != 4) {
-					//fantasmas[pos - 5] = Ghost(renderer, "..\\images\\characters1.png", i, j, pos, texts[3], this);
+					fantasmas[pos - 5] = Ghost(i, j, pos, texts[3], this);
 					map->modifica_Posicion(i, j, Empty);
 				}
 			}
@@ -163,21 +163,21 @@ void Game::handle_Events() {
 
 void Game::update() {
 	delay();
-	//comprueba_colisiones(pacman.GameCharacter::get_PosActX(), pacman.GameCharacter::get_PosActY); //comprueba que los fantasmas y pacman se han o no chocado
+	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 	for (int i = 0; i < 4; i++) {
-		//fantasmas[i].update();
+		fantasmas[i].update();
 	}
 	pacman.update(); //update del pacman
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
+	pacman.render();
 	for (int i = 0; i < 4; i++) {
-		//fantasmas[i].render(vitaminas);
+		fantasmas[i].render(vitaminas);
 	}
 	animaciones_Extra(); //anima las vitaminas
-	pacman.render();
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
@@ -191,7 +191,7 @@ void Game::run() {
 	siguiente_Estado();
 }
 
-/*bool Game::comprueba_colisiones(int x, int y){
+bool Game::comprueba_colisiones(int x, int y){
 	for (int i = 0; i < 4; i++){
 		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
 			if (vitaminas){
@@ -199,7 +199,7 @@ void Game::run() {
 			}
 			else{
 				pacman.reduceVidas();
-				pacman.GameCharacter::muerte(); //esto funciona increíblemente
+				pacman.muerte(); //esto funciona increíblemente
 			}
 		}
 	}
@@ -209,7 +209,7 @@ void Game::run() {
 	}
 
 	return exit;
-}*/
+}
 
 //los gets de altura, anchura, renderer...
 int Game::dame_Altura() {
@@ -271,7 +271,7 @@ void Game::menu() {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_n) {
-					this->carga_Archivo(levels[levels_Index]);
+					this->carga_Archivo(levels[2]);
 					finish = true;
 				}
 				else if (event.key.keysym.sym == SDLK_c) {
@@ -293,10 +293,10 @@ void Game::guarda_Partida() {
 		for (int i = 0; i < this->dame_FilasTablero(); i++) {
 			for (int j = 0; j < this->dame_ColumnasTablero(); j++) {
 				for (int r = 0; r < 4; r++) { //esto se podria hacer mejor. Recorre todos los fantasmas buscando la posIniX y la posIniY y los coloca en el archivo
-					/*if (fantasmas[r].posInX == i && fantasmas[r].posInY == j) {
+					if (fantasmas[r].dame_IniX() == i && fantasmas[r].dame_IniY() == j) {
 						partidaGuardada << r + 5 << " ";
 						noEscribir = true; //si se pone a true, no puede sobreescribir
-					}*/
+					}
 				}
 				if (pacman.dame_IniY() == i && pacman.dame_IniX() == j) { //coloca a Pacman en su posicion original
 					partidaGuardada << 9 << " ";
