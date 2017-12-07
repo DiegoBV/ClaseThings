@@ -17,7 +17,6 @@ private:
 	ofstream partidaGuardada;
 	int winWidth;
 	int winHeight;
-	int filasTablero, colsTablero;
 	int winX, winY;
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
 	Texture* texts[6];
@@ -40,6 +39,7 @@ private:
 public:
 	Game();
 	~Game();
+	int filasTablero, colsTablero;
 	void carga_Archivo(string name);//carga el archivo
 	void pinta_Mapa();
 	void handle_Events(); //se encarga de manejar los eventos de teclado para controlar a Pacman

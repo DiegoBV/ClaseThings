@@ -1,8 +1,9 @@
 #pragma once
 #include "Texture.h"
+#include "GameObject.h"
 
 class Game;
-class GameCharacter
+class GameCharacter: public GameObject
 {
 protected:
 	struct Dirs {
@@ -10,16 +11,17 @@ protected:
 		int dirY;
 	};
 	Dirs actualDir; //direccion actual
-	Game* game; //puntero a Game
+	//Game* game; //puntero a Game
 	Texture* textura; //textura
 	int iniX, iniY; //pos inicial
 	SDL_Rect rectDest; //rectangulo para dibujarlo 			   
 	int posActX, posActY; //Posicion actual
 	void donut();
 	int filaSheet; //animar el frame correcto...
-	virtual void animar(); //se podrá implementar cuando tengamos las direcciones en esta clase...
+	virtual void animar(); 
 	virtual void update() = 0;
 	virtual void render();
+	virtual void loadFromFile(ifstream file);
 public:
 	GameCharacter();
 	~GameCharacter();

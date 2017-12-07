@@ -63,6 +63,10 @@ void GameCharacter::animar() {
 	}
 }
 
+void GameCharacter::loadFromFile(ifstream file) {
+	file >> posActX >> posActY >> iniX >> iniY >> actualDir.dirX >> actualDir.dirY;
+}
+
 void GameCharacter::render() {
 	this->textura->RenderFrame(game->dame_Renderer(), rectDest);
 }
