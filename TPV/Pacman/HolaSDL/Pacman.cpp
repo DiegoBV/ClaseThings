@@ -70,6 +70,18 @@ void Pacman::animar() {
 	GameCharacter::textura->Anima(100, filaSheet, 10, 1, 2);
 }
 
+void Pacman::loadFromFile(ifstream file) {
+	//GameCharacter::loadFromFile(file);
+	int aux; //para saber si el archivo acaba o no
+	if (file.fail()) {
+		file.clear();
+	}
+	else {
+		//remEnergy = aux;
+		file >> vidas;
+	}
+}
+
 
 
 

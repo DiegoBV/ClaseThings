@@ -87,3 +87,24 @@ void GameMap::render_Mapa() {
 		}
 	}
 }
+
+void GameMap::loadFromFile(ifstream file) {
+	int fils, cols;
+	if (file.is_open()) {
+		file >> fils >> cols;
+		game->filasTablero = fils;
+		game->colsTablero = cols;
+		for (int i = 0; i < fils; i++) {
+			for (int j = 0; j < cols; j++) {
+				int pos;
+				file >> pos;
+				this->modifica_Posicion(i, j, (MapCell)pos);
+				if (pos == 2 || pos == 3) {
+					game->setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
+				}
+			}
+		}
+		/*archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
+		archivo.close();*/
+	}
+}
