@@ -53,7 +53,10 @@ Game::~Game() //destruye el renderer y la ventana
 }
 
 void Game::carga_Archivo(string name){
-	int fils, cols;
+	archivo.open(name);
+	map = new GameMap(29, 28, texts[0], texts[1], texts[2], this);
+	map->loadFromFile(archivo);
+	/*int fils, cols;
 
 
 	archivo.open(name);
@@ -85,7 +88,7 @@ void Game::carga_Archivo(string name){
 		}
 		archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
 		archivo.close();
-	}
+	}*/
 }
 
 void Game::pinta_Mapa() {
@@ -162,22 +165,22 @@ void Game::handle_Events() {
 }
 
 void Game::update() {
-	delay();
+	/*delay();
 	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].update();
 	}
-	pacman.update(); //update del pacman
+	pacman.update(); //update del pacman*/
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
-	pacman.render();
+	/*pacman.render();
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].render(vitaminas);
 	}
-	animaciones_Extra(); //anima las vitaminas
+	animaciones_Extra(); //anima las vitaminas*/
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
@@ -271,7 +274,7 @@ void Game::menu() {
 		while (SDL_PollEvent(&event)) {
 			if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_n) {
-					this->carga_Archivo(levels[2]);
+					this->carga_Archivo(levels[1]);
 					finish = true;
 				}
 				else if (event.key.keysym.sym == SDLK_c) {

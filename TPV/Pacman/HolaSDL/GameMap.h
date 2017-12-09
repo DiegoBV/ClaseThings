@@ -18,7 +18,7 @@ public:
 	GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam);//constructora con parámetros
 	MapCell getCell(int fils, int cols); //devuelve una celda
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
-	virtual void loadFromFile(ifstream file);
+	virtual void loadFromFile(ifstream& file);
 	void render_Mapa();
 };
 

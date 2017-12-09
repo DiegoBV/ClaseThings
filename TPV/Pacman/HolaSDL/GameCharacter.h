@@ -21,7 +21,7 @@ protected:
 	virtual void animar(); 
 	virtual void update() = 0;
 	virtual void render();
-	virtual void loadFromFile(ifstream file);
+	virtual void loadFromFile(ifstream& file);
 public:
 	GameCharacter();
 	~GameCharacter();

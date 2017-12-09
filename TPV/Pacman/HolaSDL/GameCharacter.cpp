@@ -63,7 +63,7 @@ void GameCharacter::animar() {
 	}
 }
 
-void GameCharacter::loadFromFile(ifstream file) {
+void GameCharacter::loadFromFile(ifstream& file) {
 	file >> posActX >> posActY >> iniX >> iniY >> actualDir.dirX >> actualDir.dirY;
 }
 

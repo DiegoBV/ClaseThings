@@ -88,7 +88,7 @@ void GameMap::render_Mapa() {
 	}
 }
 
-void GameMap::loadFromFile(ifstream file) {
+void GameMap::loadFromFile(ifstream& file) {
 	int fils, cols;
 	if (file.is_open()) {
 		file >> fils >> cols;
