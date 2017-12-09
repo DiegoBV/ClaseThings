@@ -180,7 +180,7 @@ void Game::render() {
 	for (int i = 0; i < 4; i++) {
 		fantasmas[i].render(vitaminas);
 	}
-	animaciones_Extra(); //anima las vitaminas*/
+	*/animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
