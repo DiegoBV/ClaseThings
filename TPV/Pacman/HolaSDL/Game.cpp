@@ -58,17 +58,20 @@ void Game::carga_Archivo(string name){
 	map->loadFromFile(archivo);
 	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
 	archivo >> numGhost;
+	fantasma = new GameObject* [numGhost];
 	for (int i = 0; i < numGhost; i++) {
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			fantasmas[i] = Ghost(0, 0, i + 4, texts[3], this);
-			fantasmas[i].loadFromFile(archivo);
+			fantasma[i] = &Ghost(0, 0, i + 4, texts[3], this);
+			fantasma[i]->loadFromFile(archivo);
 		}
 		else {
-			fantasmas[i] = Ghost(0, 0, i + 4, texts[3], this);
-			fantasmas[i].loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
-			int kk;
+			fantasma[i] = &Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
+			fantasma[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
+			int kk;        //Esto hay  que definirlo de alguna manera, igual redefiniendo el 
+						   //constructor en el SmartGhost para ponerle la Edad a 1, a menos que ya vengan
+						   //con la edad
 			archivo >> kk; //la edad y tal, q mierda molesta
 		}
 	}

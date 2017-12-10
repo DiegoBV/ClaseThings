@@ -4,6 +4,7 @@
 #include "GameMap.h"
 #include "Ghost.h"
 #include "Pacman.h"
+#include <vector>
 #include <fstream>
 using namespace std;
 class Game
@@ -21,6 +22,8 @@ private:
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
 	Texture* texts[6];
 	GameMap* map;
+	vector <GameObject*> fantasmas1[4];
+	GameObject** fantasma;
 	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos
 	Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos

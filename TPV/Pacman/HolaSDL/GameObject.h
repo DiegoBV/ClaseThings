@@ -6,12 +6,14 @@ class GameObject
 {
 protected:
 	Game* game;
-	//virtual void render() = 0;
-	//virtual void update() = 0;
-	virtual void loadFromFile(ifstream& file) = 0;
-	//virtual void saveToFile() = 0;
+	
 public:
 	GameObject();
 	~GameObject();
+	virtual void render();
+	virtual void render(bool);
+	virtual void update();
+	virtual void loadFromFile(ifstream& file);
+	virtual void saveToFile();
 };
 

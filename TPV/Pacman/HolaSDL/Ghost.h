@@ -24,9 +24,9 @@ public:
 
 
 	//Métodos del juego
-	virtual void update(); //Actualiza la posición del fantasma en la dirección actual y 
+	void update(); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
-	virtual void render(bool vitamina); //Pinta el estado actual en pantalla
+	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	virtual void animar(bool vitamina);
 };

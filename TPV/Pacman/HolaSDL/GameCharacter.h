@@ -18,10 +18,7 @@ protected:
 	int posActX, posActY; //Posicion actual
 	void donut();
 	int filaSheet; //animar el frame correcto...
-	virtual void animar(); 
-	virtual void update() = 0;
-	virtual void render();
-	virtual void loadFromFile(ifstream& file);
+	
 public:
 	GameCharacter();
 	~GameCharacter();
@@ -31,5 +28,10 @@ public:
 	int dame_IniY();
 	int get_PosActX();
 	int get_PosActY();
+	virtual void animar();
+	virtual void update() = 0;
+	virtual void render();
+	virtual void render(bool);
+	virtual void loadFromFile(ifstream& file);
 };
 
