@@ -64,7 +64,9 @@ void GameCharacter::animar() {
 }
 
 void GameCharacter::loadFromFile(ifstream& file) {
-	file >> posActX >> posActY >> iniX >> iniY >> actualDir.dirX >> actualDir.dirY;
+	file >> posActY >> posActX >> iniY >> iniX >> actualDir.dirX >> actualDir.dirY;
+	rectDest.x = posActY * this->game->dame_Anchura() / game->dame_ColumnasTablero(); //esto hay que quitarlo wey
+	rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
 }
 
 void GameCharacter::render() {

@@ -71,7 +71,7 @@ void Pacman::animar() {
 }
 
 void Pacman::loadFromFile(ifstream& file) {
-	//GameCharacter::loadFromFile(file);
+	GameCharacter::loadFromFile(file);
 	int aux; //para saber si el archivo acaba o no
 	if (file.fail()) {
 		file.clear();

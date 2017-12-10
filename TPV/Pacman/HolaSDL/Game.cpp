@@ -56,6 +56,26 @@ void Game::carga_Archivo(string name){
 	archivo.open(name);
 	map = new GameMap(29, 28, texts[0], texts[1], texts[2], this);
 	map->loadFromFile(archivo);
+	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
+	archivo >> numGhost;
+	for (int i = 0; i < numGhost; i++) {
+		int typeGhost;
+		archivo >> typeGhost;
+		if (typeGhost == 0) {
+			fantasmas[i] = Ghost(0, 0, i + 4, texts[3], this);
+			fantasmas[i].loadFromFile(archivo);
+		}
+		else {
+			fantasmas[i] = Ghost(0, 0, i + 4, texts[3], this);
+			fantasmas[i].loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
+			int kk;
+			archivo >> kk; //la edad y tal, q mierda molesta
+		}
+	}
+	pacman = Pacman(0, 0, texts[3], this); //esto de aqui hay que quitarlo, tener un array de cosas y tal, pero por ahora
+	pacman.loadFromFile(archivo);
+
+	archivo.close();
 	/*int fils, cols;
 
 
@@ -165,10 +185,10 @@ void Game::handle_Events() {
 }
 
 void Game::update() {
-	/*delay();
+	delay();
 	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
-	for (int i = 0; i < 4; i++) {
+	for (int i = 0; i < 3; i++) {
 		fantasmas[i].update();
 	}
 	pacman.update(); //update del pacman*/
@@ -176,11 +196,11 @@ void Game::update() {
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
-	/*pacman.render();
-	for (int i = 0; i < 4; i++) {
+	pacman.render();
+	for (int i = 0; i < 3; i++) {
 		fantasmas[i].render(vitaminas);
 	}
-	*/animaciones_Extra(); //anima las vitaminas
+	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
