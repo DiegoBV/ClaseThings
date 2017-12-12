@@ -82,6 +82,10 @@ void Pacman::loadFromFile(ifstream& file) {
 	}
 }
 
+void Pacman::render(bool) {
+	int k = 1;
+}
+
 
 
 

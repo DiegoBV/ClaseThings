@@ -19,6 +19,8 @@ public:
 	MapCell getCell(int fils, int cols); //devuelve una celda
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
 	virtual void loadFromFile(ifstream& file);
-	void render_Mapa();
+	virtual void render();
+	virtual void render(bool);
+	virtual void update();
 };
 

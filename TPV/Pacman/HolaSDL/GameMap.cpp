@@ -72,7 +72,7 @@ void GameMap::modifica_Posicion(int x, int y, MapCell nuevoObjeto) {
 	tablero[x][y] = nuevoObjeto;
 }
 
-void GameMap::render_Mapa() {
+void GameMap::render() {
 	for (int i = 0; i < fils; i++) {
 		for (int j = 0; j < cols; j++) {
 			SDL_Rect des;
@@ -107,4 +107,11 @@ void GameMap::loadFromFile(ifstream& file) {
 		/*archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
 		archivo.close();*/
 	}
+}
+
+void GameMap::render(bool) {
+	int k = 1;
+}
+void GameMap::update() {
+	int k = 1;
 }

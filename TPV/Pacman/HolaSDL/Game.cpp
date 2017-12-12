@@ -37,6 +37,8 @@ Game::Game()
 	for (int i = 1; i < 6; i++) {
 		this->levels[i] = "..\\level0" + to_string(i) + ".dat";
 	}
+
+	fantasmas1.resize(4);
 }
 
 
@@ -50,6 +52,9 @@ Game::~Game() //destruye el renderer y la ventana
 	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
+	for (int i = 0; i < fantasmas1.size(); i++) {
+		delete fantasmas1[i];
+	}
 }
 
 void Game::carga_Archivo(string name){
@@ -58,17 +63,17 @@ void Game::carga_Archivo(string name){
 	map->loadFromFile(archivo);
 	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
 	archivo >> numGhost;
-	fantasma = new GameObject* [numGhost];
+	//fantasma = new GameObject* [numGhost];
 	for (int i = 0; i < numGhost; i++) {
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			fantasma[i] = &Ghost(0, 0, i + 4, texts[3], this);
-			fantasma[i]->loadFromFile(archivo);
+			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this);
+			fantasmas1[i]->loadFromFile(archivo);
 		}
 		else {
-			fantasma[i] = &Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
-			fantasma[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
+			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
+			fantasmas1[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
 			int kk;        //Esto hay  que definirlo de alguna manera, igual redefiniendo el 
 						   //constructor en el SmartGhost para ponerle la Edad a 1, a menos que ya vengan
 						   //con la edad
@@ -115,7 +120,7 @@ void Game::carga_Archivo(string name){
 }
 
 void Game::pinta_Mapa() {
-	map->render_Mapa();
+	map->render();
 }
 
 bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
@@ -192,7 +197,7 @@ void Game::update() {
 	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 	for (int i = 0; i < 3; i++) {
-		fantasmas[i].update();
+		fantasmas1[i]->update();
 	}
 	pacman.update(); //update del pacman*/
 }
@@ -201,7 +206,7 @@ void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
 	pacman.render();
 	for (int i = 0; i < 3; i++) {
-		fantasmas[i].render(vitaminas);
+		fantasmas1[i]->render(vitaminas);
 	}
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
@@ -309,6 +314,7 @@ void Game::menu() {
 	}
 	this->run();
 }
+
 void Game::guarda_Partida() {
 	bool noEscribir = false; //para no sobreescribir
 	partidaGuardada.open(levels[0]);
