@@ -66,7 +66,7 @@ public:
 	bool comprueba_colisiones(int x, int y);
 	void tiempo_Vitamina();
 	void menu();
-	void guarda_Partida();
+	void guarda_Partida(string lvl);
 	void game_Over();
 	void save();
 };

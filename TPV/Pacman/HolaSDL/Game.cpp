@@ -185,7 +185,7 @@ void Game::handle_Events() {
 					exit = true; //añadido de si le das a escape sales tambien
 				}
 				else if (event.key.keysym.sym == SDLK_g) { //guardar partida
-					this->guarda_Partida();
+					saveState = true;
 				}
 			}
 		}
@@ -318,9 +318,9 @@ void Game::menu() {
 	this->run();
 }
 
-void Game::guarda_Partida() {
+void Game::guarda_Partida(string lvl) {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open(levels[0]);
+	partidaGuardada.open("level" + lvl + ".dat");
 	map->saveToFile(partidaGuardada);
 	partidaGuardada << fantasmas1.size() << endl;
 	for (int i = 0; i < fantasmas1.size(); i++){
@@ -378,10 +378,16 @@ void Game::save() {
 	SDL_Event evento;
 	int code = 0;
 	while (saveState && !exit) {
-		/*if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
-			code = code * 10 + (evento.key.keysym.sym - SDLK_0);
-		}*/
+		while (SDL_PollEvent(&evento) && saveState) {
+			SDL_Delay(100);
+			if (evento.key.keysym.sym == SDLK_o) {
+				saveState = false;
+			}
+			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+			}
+		}
 	}
-
-	//faltan cosas yey
+	this->guarda_Partida(to_string(code));
+	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
 }
