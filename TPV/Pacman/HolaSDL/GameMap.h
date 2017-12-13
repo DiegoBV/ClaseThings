@@ -22,5 +22,6 @@ public:
 	virtual void render();
 	virtual void render(bool);
 	virtual void update();
+	virtual void saveToFile(ofstream& file);
 };
 

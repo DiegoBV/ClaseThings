@@ -38,6 +38,7 @@ private:
 	void siguiente_Estado();
 	void update();
 	void render();
+	bool saveState = false;
 
 public:
 	Game();
@@ -67,6 +68,7 @@ public:
 	void menu();
 	void guarda_Partida();
 	void game_Over();
+	void save();
 };
 
  

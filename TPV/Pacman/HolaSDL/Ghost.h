@@ -29,5 +29,6 @@ public:
 	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	virtual void animar(bool vitamina);
+	virtual void saveToFile(ofstream& file);
 };
 

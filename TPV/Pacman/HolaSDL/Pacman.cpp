@@ -82,6 +82,11 @@ void Pacman::loadFromFile(ifstream& file) {
 	}
 }
 
+void Pacman::saveToFile(ofstream& file) {
+	GameCharacter::saveToFile(file);
+	file << this->vidas;
+}
+
 void Pacman::render(bool) {
 	int k = 1;
 }

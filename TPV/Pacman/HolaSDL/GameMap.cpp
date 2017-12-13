@@ -109,9 +109,20 @@ void GameMap::loadFromFile(ifstream& file) {
 	}
 }
 
+void GameMap::saveToFile(ofstream& file) {
+	file << this->fils << " " << this->cols << endl;
+	for (int i = 0; i < fils; i++) {
+		for (int j = 0; j < cols; j++) {
+			file << (int)this->getCell(i, j) << " ";
+		}
+		file << endl;
+	}
+}
+
 void GameMap::render(bool) {
 	int k = 1;
 }
+
 void GameMap::update() {
 	int k = 1;
 }

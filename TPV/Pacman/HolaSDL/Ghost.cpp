@@ -29,7 +29,7 @@ Ghost::~Ghost()
 }
 
 void Ghost::update() {
-	GameCharacter::game->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
+	game->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
 	GameCharacter::donut();
 
@@ -110,4 +110,10 @@ void Ghost::animar(bool vitamina){
 		filaSheet = 0;
 		GameCharacter::textura->Anima(100, filaSheet, 12, 1, 2);
 	}
+}
+
+void Ghost::saveToFile(ofstream& file) {
+	file << "0" << " "; //guardamos el tipo del fantasma
+	GameCharacter::saveToFile(file);
+	file << endl;
 }

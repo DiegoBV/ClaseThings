@@ -31,7 +31,8 @@ public:
 	virtual void animar();
 	virtual void update() = 0;
 	virtual void render();
-	//virtual void render(bool);
+	virtual void render(bool)=0;
 	virtual void loadFromFile(ifstream& file);
+	virtual void saveToFile(ofstream& file);
 };
 

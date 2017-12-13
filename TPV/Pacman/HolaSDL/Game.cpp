@@ -218,17 +218,20 @@ void Game::run() {
 		handle_Events(); //controla los eventos de teclado
 		update(); //update de tooodo
 		render();  //render de tooodo
+		if (saveState) {
+			save();
+		}
 	}
 	siguiente_Estado();
 }
 
-bool Game::comprueba_colisiones(int x, int y){
-	for (int i = 0; i < 4; i++){
-		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
-			if (vitaminas){
+bool Game::comprueba_colisiones(int x, int y) {
+	for (int i = 0; i < 4; i++) {
+		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x) {
+			if (vitaminas) {
 				fantasmas[i].muerte();
 			}
-			else{
+			else {
 				pacman.reduceVidas();
 				pacman.muerte(); //esto funciona increíblemente
 			}
@@ -268,13 +271,13 @@ SDL_Renderer* Game::dame_Renderer() {
 
 void Game::delay() { //hace lo del Delay más eficiente
 	startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime; 
+	frameTime = SDL_GetTicks() - startTime;
 	if (frameTime < frameRate) {
 		SDL_Delay(frameRate - frameTime);
 	}
 }
 
-int Game::obtenerPixelX(int posicion){
+int Game::obtenerPixelX(int posicion) {
 	return (winWidth / colsTablero) * posicion;
 }
 
@@ -282,7 +285,7 @@ void Game::animaciones_Extra() {
 	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 }
 
-int Game::obtenerPixelY(int posicion){
+int Game::obtenerPixelY(int posicion) {
 	return (winHeight / filasTablero) * posicion;
 }
 
@@ -318,7 +321,13 @@ void Game::menu() {
 void Game::guarda_Partida() {
 	bool noEscribir = false; //para no sobreescribir
 	partidaGuardada.open(levels[0]);
-	if (partidaGuardada.is_open()) {
+	map->saveToFile(partidaGuardada);
+	partidaGuardada << fantasmas1.size() << endl;
+	for (int i = 0; i < fantasmas1.size(); i++){
+		fantasmas1[i]->saveToFile(partidaGuardada);
+	}
+	pacman.saveToFile(partidaGuardada);
+	/*if (partidaGuardada.is_open()) {
 		partidaGuardada << this->dame_FilasTablero() << " " << this->dame_ColumnasTablero();
 		partidaGuardada << endl;
 
@@ -342,7 +351,7 @@ void Game::guarda_Partida() {
 			partidaGuardada << endl;
 		}
 	}
-	partidaGuardada << levels_Index; //guarda el nivel en el que estamos
+	partidaGuardada << levels_Index; //guarda el nivel en el que estamos*/
 	partidaGuardada.close();
 }
 
@@ -363,4 +372,16 @@ void Game::game_Over() {
 	texts[5]->Render(renderer);
 	SDL_RenderPresent(renderer);
 	SDL_Delay(1000);
+}
+
+void Game::save() {
+	SDL_Event evento;
+	int code = 0;
+	while (saveState && !exit) {
+		/*if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+			code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+		}*/
+	}
+
+	//faltan cosas yey
 }
