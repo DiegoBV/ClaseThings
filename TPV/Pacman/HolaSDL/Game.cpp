@@ -1,7 +1,6 @@
 #include "Game.h"
 
 
-
 Game::Game()
 {
 	window = nullptr;
@@ -38,7 +37,7 @@ Game::Game()
 		this->levels[i] = "..\\level0" + to_string(i) + ".dat";
 	}
 
-	fantasmas1.resize(4);
+	personajes.resize(5);
 }
 
 
@@ -47,13 +46,11 @@ Game::~Game() //destruye el renderer y la ventana
 	//Finalization
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-
-	delete map; //borra el mapa
 	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
-	for (int i = 0; i < fantasmas1.size(); i++) {
-		delete fantasmas1[i];
+	for (int i = 0; i < personajes.size(); i++) {
+		delete personajes[i];
 	}
 }
 
@@ -68,18 +65,19 @@ void Game::carga_Archivo(string name){
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this);
-			fantasmas1[i]->loadFromFile(archivo);
+			personajes[i] = new Ghost(0, 0, i + 4, texts[3], this);
+			personajes[i]->loadFromFile(archivo);
 		}
 		else {
-			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
-			fantasmas1[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
+			personajes[i] = new Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
+			personajes[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
 			int kk;        //Esto hay  que definirlo de alguna manera, igual redefiniendo el 
 						   //constructor en el SmartGhost para ponerle la Edad a 1, a menos que ya vengan
 						   //con la edad
 			archivo >> kk; //la edad y tal, q mierda molesta
 		}
 	}
+	personajes[4] = map;
 	pacman = Pacman(0, 0, texts[3], this); //esto de aqui hay que quitarlo, tener un array de cosas y tal, pero por ahora
 	pacman.loadFromFile(archivo);
 
@@ -120,7 +118,7 @@ void Game::carga_Archivo(string name){
 }
 
 void Game::pinta_Mapa() {
-	map->render();
+	personajes[4]->render();;
 }
 
 bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
@@ -197,7 +195,7 @@ void Game::update() {
 	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
 	for (int i = 0; i < 3; i++) {
-		fantasmas1[i]->update();
+		personajes[i]->update();
 	}
 	pacman.update(); //update del pacman*/
 }
@@ -206,7 +204,7 @@ void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
 	pacman.render();
 	for (int i = 0; i < 3; i++) {
-		fantasmas1[i]->render(vitaminas);
+		personajes[i]->render(vitaminas);
 	}
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
@@ -322,9 +320,9 @@ void Game::guarda_Partida(string lvl) {
 	bool noEscribir = false; //para no sobreescribir
 	partidaGuardada.open("level" + lvl + ".dat");
 	map->saveToFile(partidaGuardada);
-	partidaGuardada << fantasmas1.size() << endl;
-	for (int i = 0; i < fantasmas1.size(); i++){
-		fantasmas1[i]->saveToFile(partidaGuardada);
+	partidaGuardada << personajes.size() << endl;
+	for (int i = 0; i < personajes.size(); i++){
+		personajes[i]->saveToFile(partidaGuardada);
 	}
 	pacman.saveToFile(partidaGuardada);
 	/*if (partidaGuardada.is_open()) {

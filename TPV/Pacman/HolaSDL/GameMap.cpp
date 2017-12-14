@@ -120,9 +120,7 @@ void GameMap::saveToFile(ofstream& file) {
 }
 
 void GameMap::render(bool) {
-	int k = 1;
 }
 
 void GameMap::update() {
-	int k = 1;
 }

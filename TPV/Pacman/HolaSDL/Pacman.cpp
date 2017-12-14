@@ -88,7 +88,6 @@ void Pacman::saveToFile(ofstream& file) {
 }
 
 void Pacman::render(bool) {
-	int k = 1;
 }
 
 
