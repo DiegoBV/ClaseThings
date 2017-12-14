@@ -7,6 +7,7 @@
 #include <vector>
 #include <fstream>
 using namespace std;
+const int vitaminasTiempo = 30;
 class Game
 {
 private:
@@ -23,15 +24,15 @@ private:
 	Texture* texts[6];
 	GameMap* map;
 	vector <GameObject*> personajes;
-	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos
-	Pacman pacman; //GameObject Pacman
+	//Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos
+	//Pacman pacman; //GameObject Pacman
 	SDL_Event event; //maneja eventos
 	int startTime;
 	int frameTime; // mediciones del tiempo para un Delay "eficiente"
 	int frameRate;
 	string path; //path de las texturas
 	bool vitaminas = false;
-	int vitaminasTiempo = 0;
+	int vitaminasTiempoAux = vitaminasTiempo;
 	string levels[6];
 	int levels_Index = 1;  //cambiar de nivel al ganar
 	void siguiente_Estado();

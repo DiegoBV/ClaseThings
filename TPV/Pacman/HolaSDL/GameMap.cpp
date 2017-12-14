@@ -89,9 +89,7 @@ void GameMap::render() {
 }
 
 void GameMap::loadFromFile(ifstream& file) {
-	int fils, cols;
 	if (file.is_open()) {
-		file >> fils >> cols;
 		game->filasTablero = fils;
 		game->colsTablero = cols;
 		for (int i = 0; i < fils; i++) {
