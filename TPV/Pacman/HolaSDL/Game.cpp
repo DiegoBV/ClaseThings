@@ -9,7 +9,6 @@ Game::Game()
 	winHeight = 644;
 	int winX, winY;
 	winX = winY = SDL_WINDOWPOS_CENTERED;
-	this->path = "..\\images\\textura";
 	//Inicialización del sistema y renderer
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
@@ -27,17 +26,13 @@ Game::Game()
 		else {
 			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 1);
 		}
-	}
-
-	//FrameRate
-	this->frameRate = 120; //a + alto, + lento
-	
+	}	
 	this->levels[0] = "..\\partidaGuardada.txt";  //guarda los niveles en un array
 	for (int i = 1; i < 6; i++) {
 		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
 	}
 
-	personajes.resize(6);
+	personajes.resize(5);
 }
 
 
@@ -66,27 +61,19 @@ void Game::carga_Archivo(string name){
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			personajes[i] = new Ghost(0, 0, i + 4, texts[3], this);
-			personajes[i]->loadFromFile(archivo);
-		}
-		else {
-			personajes[i] = new Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
-			personajes[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
-			int kk;        //Esto hay  que definirlo de alguna manera, igual redefiniendo el 
-						   //constructor en el SmartGhost para ponerle la Edad a 1, a menos que ya vengan
-						   //con la edad
-			archivo >> kk; //la edad y tal, q mierda molesta
+			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this);
+			fantasmita->loadFromFile(archivo); //se leen de archivo
+			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
 	}
-	personajes[4] = map;
-	personajes[5] = new Pacman(0, 0, texts[3], this); //esto de aqui hay que quitarlo, tener un array de cosas y tal, pero por ahora
-	personajes[5]->loadFromFile(archivo);
-
+	pacman = new Pacman(0, 0, texts[3], this);
+	objects.push_back(pacman); //pusheamos a pacman al final de la lista
+	pacman->loadFromFile(archivo); //se lee de archivo
 	archivo.close();
 }
 
 void Game::pinta_Mapa() {
-	personajes[4]->render();;
+	map->render();;
 }
 
 bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
@@ -136,16 +123,16 @@ void Game::handle_Events() {
 		else {
 			if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_RIGHT) {
-					static_cast<Pacman*>(personajes[5])->siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
+					pacman->siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
 				}
 				else if (event.key.keysym.sym == SDLK_UP) {
-					static_cast<Pacman*>(personajes[5])->siguiente_Dir(0, -1);
+					pacman->siguiente_Dir(0, -1);
 				}
 				else if (event.key.keysym.sym == SDLK_DOWN) {
-					static_cast<Pacman*>(personajes[5])->siguiente_Dir(0, 1);
+					pacman->siguiente_Dir(0, 1);
 				}
 				else if (event.key.keysym.sym == SDLK_LEFT) {
-					static_cast<Pacman*>(personajes[5])->siguiente_Dir(-1, 0);
+					pacman->siguiente_Dir(-1, 0);
 				}
 				else if (event.key.keysym.sym == SDLK_ESCAPE) {
 					exit = true; //añadido de si le das a escape sales tambien
@@ -160,20 +147,20 @@ void Game::handle_Events() {
 
 void Game::update() {
 	delay();
-	comprueba_colisiones(static_cast<Pacman*>(personajes[5])->get_PosActX(), static_cast<Pacman*>(personajes[5])->get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
+	comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
-	for (int i = 0; i < 3; i++) {
-		personajes[i]->update();
+	for (GameCharacter* it : objects) { //iterador que recorre toda la lista de GameCharacters y updatea
+		it->update();
 	}
-	personajes[5]->update(); //update del pacman*/
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
-	personajes[5]->render();
-	for (int i = 0; i < 3; i++) {
-		personajes[i]->render(vitaminas);
+	ghost = objects.rbegin(); //empieza el iterador en el final
+	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+		static_cast<Ghost*>(*ghost)->render(vitaminas); //enlace estatico a la clase Ghost para llamar al render de la clase hija especifica
 	}
+	pacman->render();
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
@@ -191,24 +178,25 @@ void Game::run() {
 	siguiente_Estado();
 }
 
-bool Game::comprueba_colisiones(int x, int y) {
-	for (int i = 0; i < 4; i++) {
-		if (static_cast<Ghost*>(personajes[i])->posActX == y && static_cast<Ghost*>(personajes[i])->posActX == x) {
-			if (vitaminas) {
-				static_cast<Ghost*>(personajes[i])->muerte();
-			}
-			else {
-				static_cast<Pacman*>(personajes[5])->reduceVidas();
-				static_cast<Pacman*>(personajes[5])->muerte(); //esto funciona increíblemente
+bool Game::comprueba_colisiones(int x, int y) { 
+	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
+	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+			if (static_cast<Ghost*>(*ghost)->get_PosActY() == x && static_cast<Ghost*>(*ghost)->get_PosActX() == y) { //static cast para acceder a los de la clase hija
+				if (vitaminas) {
+					static_cast<Ghost*>(*ghost)->muerte();
+				}
+				else {
+					pacman->reduceVidas();
+					pacman->muerte();
+				}
 			}
 		}
-	}
 
-	if (static_cast<Pacman*>(personajes[5])->he_Muerto()) {
-		exit = true;
-	}
+		if (pacman->he_Muerto()) {
+			exit = true;
+		}
 
-	return exit;
+		return exit;
 }
 
 //los gets de altura, anchura, renderer...
@@ -292,7 +280,7 @@ void Game::guarda_Partida(string lvl) {
 	for (int i = 0; i < personajes.size(); i++){
 		personajes[i]->saveToFile(partidaGuardada);
 	}
-	personajes[5]->saveToFile(partidaGuardada);
+	personajes[personajes.size() - 1]->saveToFile(partidaGuardada);
 	partidaGuardada.close();
 }
 
@@ -303,7 +291,7 @@ void Game::siguiente_Estado() {
 			this->carga_Archivo(levels[levels_Index]); //carga el siguiente archivo
 			this->run(); //run!
 	}
-	else if (static_cast<Pacman*>(personajes[5])->he_Muerto()) {
+	else if (pacman->he_Muerto()) {
 		game_Over(); 
 	}
 }
