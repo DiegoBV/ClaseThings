@@ -1,4 +1,15 @@
 ﻿  Game.cpp
-c:\hlocal\tpv\clasethings-pruebaspolimorfismo\tpv\pacman\holasdl\game.cpp(49): warning C4018: '<': no coinciden signed/unsigned
-  HolaSDL.vcxproj -> C:\hlocal\TPV\ClaseThings-PruebasPolimorfismo\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\hlocal\TPV\ClaseThings-PruebasPolimorfismo\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+  Generating Code...
+  Compiling...
+  main.cpp
+  Pacman.cpp
+  Ghost.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\ghost.cpp(23): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+  GameMap.cpp
+  GameCharacter.cpp
+  Generating Code...
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\gamemap.cpp(69): warning C4715: 'GameMap::getCell': not all control paths return a value
+  Skipping... (no relevant changes detected)
+  GameObject.cpp
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)

@@ -16,7 +16,7 @@ private:
 	int filas;
 	int columnas;
 public:
-	Texture(); //contructora por defecto
+	Texture(): textura(nullptr), filas(1), columnas(1){}; //contructora por defecto
 	Texture(SDL_Renderer* &renderer, string filename, int fils, int cols);//crea la textura a partir del archivo
 	~Texture();
 	void ModificaRectangulo(int fil, int col); //modifica el rectangulo origen

@@ -1,9 +1,6 @@
 #include "Texture.h"
 
 
-Texture::Texture()
-{
-}
 Texture::Texture(SDL_Renderer* &renderer, string filename, int fils, int cols)
 {
 	this->filas = fils;
@@ -57,6 +54,8 @@ bool Texture::loadFromText(SDL_Renderer* renderer, string text, const Font& font
 		else {
 			textH = textSurf->h;
 			textW = textSurf->w;
+			rect.w = textW / columnas;
+			rect.h = textH / filas;
 		}
 		SDL_FreeSurface(textSurf);
 	}

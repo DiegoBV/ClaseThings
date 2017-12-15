@@ -32,9 +32,14 @@ Game::Game()
 	for (int i = 1; i < 6; i++) {
 		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
 	}
-	
-	texts[6] = new Texture(renderer, path + to_string(0) + ".png", 1, 4);
-	personajes.resize(5);
+	texts[6] = new Texture();
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	hudScore.h = 40;
+	hudScore.w = 50;
+	hudScore.x = 800;
+	hudScore.y = 0;
 }
 
 
@@ -46,81 +51,15 @@ Game::~Game() //destruye el renderer y la ventana
 	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
-	for (int i = 0; i < personajes.size(); i++) {
-		delete personajes[i];
+	for (GameCharacter* it: objects) {
+		delete it;
 	}
 	TTF_Quit();
 }
 
-void Game::carga_Archivo(string name){
-	archivo.open(name);
-	int fils, cols;
-	archivo >> fils >> cols;
-	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
-	map->loadFromFile(archivo);
-	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
-	archivo >> numGhost;
-	for (int i = 0; i < numGhost; i++) {
-		int typeGhost;
-		archivo >> typeGhost;
-		if (typeGhost == 0) {
-			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this);
-			fantasmita->loadFromFile(archivo); //se leen de archivo
-			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
-		}
-	}
-	pacman = new Pacman(0, 0, texts[3], this);
-	objects.push_back(pacman); //pusheamos a pacman al final de la lista
-	pacman->loadFromFile(archivo); //se lee de archivo
-	archivo.close();
-}
-
+//------------------------------------MetodosPrincipales-----------------------------
 void Game::pinta_Mapa() {
 	map->render();;
-}
-
-bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
-	//Primero calculamos la casilla siguiente
-	int tempX = X + dirX;
-	int tempY = Y + dirY;
-
-	//Comprueba el tipo de casilla que es
-	MapCell casilla = map->getCell(tempY, tempX);
-
-	//Miramos si puede mover
-	if (casilla != Wall) {
-		X += dirX;
-		Y += dirY;
-		return true;
-	}
-	else
-		return false;
-}
-
-void Game::setComida(int a) {
-	numComida += a;
-}
-
-void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
-	if (map->getCell(x, y) == Vitamins){
-		vitaminas = true;
-		vitaminasTiempoAux = vitaminasTiempo;
-		sumaScore(30);
-	}
-	else {
-		sumaScore(10);
-	}
-	map->modifica_Posicion(x, y, Empty);
-	setComida(-1);
-
-}
-
-MapCell Game::consulta(int x, int y) {
-	return map->getCell(x, y);
-}
-
-bool Game::win() { //comprueba si se ha comido todo e.e
-	return (numComida == 0);
 }
 
 void Game::handle_Events() {
@@ -152,7 +91,6 @@ void Game::handle_Events() {
 		}
 	}
 }
-
 void Game::update() {
 	delay();
 	comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
@@ -163,25 +101,16 @@ void Game::update() {
 }
 
 void Game::render() {
-	SDL_RenderClear(renderer); //limpia el render
-	SDL_Color color;
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
+	SDL_RenderClear(renderer); //limpia el render	
 	texts[6]->loadFromText(renderer, to_string(score), *fuente, color);
-	SDL_Rect DEST;
-	DEST.h = 40;
-	DEST.w = 50;
-	DEST.x = 800;
-	DEST.y = 0;
 	ghost = objects.rbegin(); //empieza el iterador en el final
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
-		(*ghost)->render(vitaminas); 
+		(*ghost)->render(vitaminas);
 	}
 	pacman->render();
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
-	texts[6]->RenderFrame(renderer, DEST);
+	texts[6]->RenderFrame(renderer, hudScore);
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
 
@@ -197,29 +126,105 @@ void Game::run() {
 	siguiente_Estado();
 }
 
-bool Game::comprueba_colisiones(int x, int y) { 
-	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
-	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
-			if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
-				if (vitaminas) {
-					sumaScore(100);
-					(*ghost)->muerte();
-				}
-				else {
-					pacman->reduceVidas();
-					pacman->muerte();
-				}
-			}
-		}
+//------------------------------------Informacion/modificar Mapa-----------------------------
 
-		if (pacman->he_Muerto()) {
-			exit = true;
-		}
+bool Game::siguiente_casilla(int &X, int &Y, int dirX, int dirY) {
+	//Primero calculamos la casilla siguiente
+	int tempX = X + dirX;
+	int tempY = Y + dirY;
 
-		return exit;
+	//Comprueba el tipo de casilla que es
+	MapCell casilla = map->getCell(tempY, tempX);
+
+	//Miramos si puede mover
+	if (casilla != Wall) {
+		X += dirX;
+		Y += dirY;
+		return true;
+	}
+	else
+		return false;
 }
 
-//los gets de altura, anchura, renderer...
+MapCell Game::consulta(int x, int y) {
+	return map->getCell(x, y);
+}
+
+void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
+	if (map->getCell(x, y) == Vitamins) {
+		vitaminas = true;
+		vitaminasTiempoAux = vitaminasTiempo;
+		sumaScore(ptosVitamina);
+	}
+	else {
+		sumaScore(ptosComida);
+	}
+	map->modifica_Posicion(x, y, Empty);
+	setComida(-1);
+
+}
+
+//------------------------------------Auxiliares-----------------------------
+
+void Game::setComida(int a) {
+	numComida += a;
+}
+
+bool Game::win() { //comprueba si se ha comido todo e.e
+	return (numComida == 0);
+}
+
+bool Game::comprueba_colisiones(int x, int y) {
+	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
+	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+		if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
+			if (vitaminas) {
+				sumaScore(ptosFantasma);
+				(*ghost)->muerte();
+			}
+			else {
+				pacman->reduceVidas();
+				pacman->muerte();
+			}
+		}
+	}
+
+	if (pacman->he_Muerto()) {
+		exit = true;
+	}
+
+	return exit;
+}
+
+void Game::delay() { //hace lo del Delay más eficiente
+	startTime = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - startTime;
+	if (frameTime < frameRate) {
+		SDL_Delay(frameRate - frameTime);
+	}
+}
+
+void Game::tiempo_Vitamina() { //temporizador vitaminas
+	if (vitaminasTiempoAux > 0)
+		vitaminasTiempoAux--;
+	else
+		vitaminas = false;
+}
+
+void Game::game_Over() {
+	SDL_RenderClear(renderer);
+	texts[5]->Render(renderer);
+	SDL_RenderPresent(renderer);
+	SDL_Delay(1000);
+}
+
+
+void Game::sumaScore(int suma) {
+	score += suma;
+}
+
+//------------------------------------Gets-----------------------------
+
 int Game::dame_Altura() {
 	return this->winHeight;
 }
@@ -243,14 +248,6 @@ SDL_Renderer* Game::dame_Renderer() {
 	return this->renderer;
 }
 
-void Game::delay() { //hace lo del Delay más eficiente
-	startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime;
-	if (frameTime < frameRate) {
-		SDL_Delay(frameRate - frameTime);
-	}
-}
-
 int Game::obtenerPixelX(int posicion) {
 	return (winWidth / colsTablero) * posicion;
 }
@@ -263,13 +260,39 @@ int Game::obtenerPixelY(int posicion) {
 	return (winHeight / filasTablero) * posicion;
 }
 
-void Game::tiempo_Vitamina() { //temporizador vitaminas
-	if (vitaminasTiempoAux > 0)
-		vitaminasTiempoAux--;
-	else
-		vitaminas = false;
-}
+//------------------------------------Archivo-----------------------------
 
+void Game::carga_Archivo(string name){
+	archivo.open(name);
+	int fils, cols;
+	archivo >> fils >> cols;
+	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
+	map->loadFromFile(archivo);
+	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
+	archivo >> numGhost;
+	for (int i = 0; i < numGhost; i++) {
+		int typeGhost;
+		archivo >> typeGhost;
+		if (typeGhost == 0) {
+			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this);
+			fantasmita->loadFromFile(archivo); //se leen de archivo
+			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+		}
+	}
+	pacman = new Pacman(0, 0, texts[3], this);
+	objects.push_back(pacman); //pusheamos a pacman al final de la lista
+	pacman->loadFromFile(archivo); //se lee de archivo
+
+	int aux; //para saber si el archivo acaba o no
+	archivo >> aux;
+	if (archivo.fail()) {
+		archivo.clear();
+	}
+	else {
+		score = aux;
+	}
+	archivo.close();
+}
 
 void Game::menu() {
 	texts[4]->Render(renderer);
@@ -283,7 +306,9 @@ void Game::menu() {
 					finish = true;
 				}
 				else if (event.key.keysym.sym == SDLK_c) {
-					this->carga_Archivo(levels[0]); //carga la partida guardada
+					saveState = true;
+					int code = this->escribe_Code();
+					this->carga_Archivo("..\\level" + to_string(code) + ".dat"); //CAMBIAR!
 					finish = true;
 				}
 			}
@@ -294,13 +319,13 @@ void Game::menu() {
 
 void Game::guarda_Partida(string lvl) {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open("level" + lvl + ".dat");
+	partidaGuardada.open("..\\level" + lvl + ".dat"); //CAMBIAR!
 	map->saveToFile(partidaGuardada);
-	partidaGuardada << personajes.size() << endl;
-	/*for (int i = 0; i < personajes.size(); i++){
-		objects>saveToFile(partidaGuardada);
-	}*/
-	//personajes[personajes.size() - 1]->saveToFile(partidaGuardada);
+	partidaGuardada << objects.size() - 1 << endl;
+	for (GameCharacter* it: objects){
+		it->saveToFile(partidaGuardada);
+	}
+	partidaGuardada << endl << score << endl;
 	partidaGuardada.close();
 }
 
@@ -316,29 +341,23 @@ void Game::siguiente_Estado() {
 	}
 }
 
-void Game::game_Over() {
-	SDL_RenderClear(renderer);
-	texts[5]->Render(renderer);
-	SDL_RenderPresent(renderer);
-	SDL_Delay(1000);
-}
-
-void Game::save() {
-	SDL_Event evento;
-	int code = 0;
-	while (saveState && !exit) {
-		SDL_WaitEvent(&evento);
-			if (evento.key.keysym.sym == SDLK_RETURN) {
-				saveState = false;
-			}
-			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
-				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
-			}
-	}
+void Game::save() {	
+	int code = escribe_Code();
 	this->guarda_Partida(to_string(code));
 	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
 }
 
-void Game::sumaScore(int suma) {
-	score += suma;
+int Game::escribe_Code() {
+	SDL_Event evento;
+	int code = 0;
+	while (saveState && !exit) {
+		SDL_WaitEvent(&evento);
+		if (evento.key.keysym.sym == SDLK_RETURN) {
+			saveState = false;
+		}
+		else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+			code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+		}
+	}
+	return code;
 }
