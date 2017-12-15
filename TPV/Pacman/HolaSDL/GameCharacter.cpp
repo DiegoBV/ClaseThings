@@ -69,6 +69,9 @@ void GameCharacter::loadFromFile(ifstream& file) {
 	rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
 }
 
+void GameCharacter::saveToFile(ofstream& file) {
+	file << this->posActY << " " << this->posActX << " " << this->iniY << " " << this->iniX << " " << this->actualDir.dirX << " " << this->actualDir.dirY << " ";
+}
 void GameCharacter::render() {
 	this->textura->RenderFrame(game->dame_Renderer(), rectDest);
 }

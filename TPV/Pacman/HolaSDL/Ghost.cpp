@@ -48,7 +48,7 @@ void Ghost::render(bool vitamina) {
 	}
 
 	animar(vitamina);
-
+	
 	render();
 }
 
@@ -109,4 +109,10 @@ void Ghost::animar(bool vitamina){
 		filaSheet = 0;
 		textura->Anima(100, filaSheet, 12, 1, 2);
 	}
+}
+
+void Ghost::saveToFile(ofstream& file) {
+	file << "0" << " "; //guardamos el tipo del fantasma
+	saveToFile(file);
+	file << endl;
 }

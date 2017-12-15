@@ -89,9 +89,7 @@ void GameMap::render() {
 }
 
 void GameMap::loadFromFile(ifstream& file) {
-	int fils, cols;
 	if (file.is_open()) {
-		file >> fils >> cols;
 		game->filasTablero = fils;
 		game->colsTablero = cols;
 		for (int i = 0; i < fils; i++) {
@@ -109,9 +107,18 @@ void GameMap::loadFromFile(ifstream& file) {
 	}
 }
 
-void GameMap::render(bool) {
-	int k = 1;
+void GameMap::saveToFile(ofstream& file) {
+	file << this->fils << " " << this->cols << endl;
+	for (int i = 0; i < fils; i++) {
+		for (int j = 0; j < cols; j++) {
+			file << (int)this->getCell(i, j) << " ";
+		}
+		file << endl;
+	}
 }
+
+void GameMap::render(bool) {
+}
+
 void GameMap::update() {
-	int k = 1;
 }

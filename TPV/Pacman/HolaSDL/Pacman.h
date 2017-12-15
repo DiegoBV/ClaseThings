@@ -18,6 +18,7 @@ public:
 	virtual void update();
 	virtual void animar();
 	virtual void loadFromFile(ifstream& file);
+	virtual void saveToFile(ofstream& file);
 	bool siguiente_Dir(int dX, int dY);
 	void reduceVidas();
 	bool he_Muerto();

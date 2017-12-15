@@ -27,9 +27,9 @@ public:
 	virtual void update(); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
 	void render(bool vitamina); //Pinta el estado actual en pantalla
+	virtual void render();
 	void cambiaDir();
 	virtual void animar(bool vitamina);
-	virtual void render();
-	virtual void loadFromFile(ifstream& file);
+	virtual void saveToFile(ofstream& file);
 };
 

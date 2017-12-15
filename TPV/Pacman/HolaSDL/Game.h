@@ -6,7 +6,11 @@
 #include "Pacman.h"
 #include <vector>
 #include <fstream>
+#include <list>
 using namespace std;
+const int vitaminasTiempo = 30;
+const int frameRate = 120;
+const string path = "..\\images\\textura";
 class Game
 {
 private:
@@ -22,22 +26,21 @@ private:
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
 	Texture* texts[6];
 	GameMap* map;
-	vector <GameObject*> fantasmas1;
-	GameObject** fantasma;
-	Ghost fantasmas [4]; //array de fantasma, se crean dichos objetos
-	Pacman pacman; //GameObject Pacman
+	vector <GameCharacter*> personajes;
 	SDL_Event event; //maneja eventos
 	int startTime;
 	int frameTime; // mediciones del tiempo para un Delay "eficiente"
-	int frameRate;
-	string path; //path de las texturas
 	bool vitaminas = false;
-	int vitaminasTiempo = 0;
+	int vitaminasTiempoAux = vitaminasTiempo;
 	string levels[6];
 	int levels_Index = 1;  //cambiar de nivel al ganar
 	void siguiente_Estado();
 	void update();
 	void render();
+	bool saveState = false;
+	list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
+	list<GameCharacter*>::reverse_iterator ghost; //iterador que va desde el final hasta el principio para recorrer los fantasmas
+	Pacman *pacman; //variable auxiliar para controlar al pacman (duda que tngo que preguntarle al profe)
 
 public:
 	Game();
@@ -65,8 +68,9 @@ public:
 	bool comprueba_colisiones(int x, int y);
 	void tiempo_Vitamina();
 	void menu();
-	void guarda_Partida();
+	void guarda_Partida(string lvl);
 	void game_Over();
+	void save();
 };
 
  

@@ -1,7 +1,6 @@
 #include "Game.h"
 
 
-
 Game::Game()
 {
 	window = nullptr;
@@ -10,7 +9,6 @@ Game::Game()
 	winHeight = 644;
 	int winX, winY;
 	winX = winY = SDL_WINDOWPOS_CENTERED;
-	this->path = "..\\images\\textura";
 	//Inicialización del sistema y renderer
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
@@ -28,17 +26,13 @@ Game::Game()
 		else {
 			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 1);
 		}
-	}
-
-	//FrameRate
-	this->frameRate = 120; //a + alto, + lento
-	
+	}	
 	this->levels[0] = "..\\partidaGuardada.txt";  //guarda los niveles en un array
 	for (int i = 1; i < 6; i++) {
-		this->levels[i] = "..\\level0" + to_string(i) + ".dat";
+		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
 	}
 
-	fantasmas1.resize(4);
+	personajes.resize(5);
 }
 
 
@@ -47,80 +41,39 @@ Game::~Game() //destruye el renderer y la ventana
 	//Finalization
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-
-	delete map; //borra el mapa
 	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
-	for (int i = 0; i < fantasmas1.size(); i++) {
-		delete fantasmas1[i];
+	for (int i = 0; i < personajes.size(); i++) {
+		delete personajes[i];
 	}
 }
 
 void Game::carga_Archivo(string name){
 	archivo.open(name);
-	map = new GameMap(29, 28, texts[0], texts[1], texts[2], this);
+	int fils, cols;
+	archivo >> fils >> cols;
+	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
 	map->loadFromFile(archivo);
 	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
 	archivo >> numGhost;
-	//fantasma = new GameObject* [numGhost];
 	for (int i = 0; i < numGhost; i++) {
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this);
-			fantasmas1[i]->loadFromFile(archivo);
-		}
-		else {
-			fantasmas1[i] = new Ghost(0, 0, i + 4, texts[3], this); //añade un fantasma al final del vector
-			fantasmas1[i]->loadFromFile(archivo); //esto es pa q lea al 4 fantasma pero meh, hay que quitarlo, se supone que es un smartGhost
-			int kk;        //Esto hay  que definirlo de alguna manera, igual redefiniendo el 
-						   //constructor en el SmartGhost para ponerle la Edad a 1, a menos que ya vengan
-						   //con la edad
-			archivo >> kk; //la edad y tal, q mierda molesta
+			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this);
+			fantasmita->loadFromFile(archivo); //se leen de archivo
+			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
 	}
-	pacman = Pacman(0, 0, texts[3], this); //esto de aqui hay que quitarlo, tener un array de cosas y tal, pero por ahora
-	pacman.loadFromFile(archivo);
-
+	pacman = new Pacman(0, 0, texts[3], this);
+	objects.push_back(pacman); //pusheamos a pacman al final de la lista
+	pacman->loadFromFile(archivo); //se lee de archivo
 	archivo.close();
-	/*int fils, cols;
-
-
-	archivo.open(name);
-
-	if (archivo.is_open()){
-		archivo >> fils >> cols;
-		this->filasTablero = fils;
-		this->colsTablero = cols;
-		map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
-		for (int i = 0; i < fils; i++){
-			for (int j = 0; j < cols; j++){
-				int pos;
-				archivo >> pos;
-				if (pos < 4) {
-					map->modifica_Posicion(i, j, (MapCell)pos);
-					if (pos == 2 || pos == 3) {
-						setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
-					}
-				}
-				else if (pos == 9) {
-					map->modifica_Posicion(i, j, Empty);
-					pacman = Pacman(i, j, texts[3], this);
-				}
-				else if (pos != 4) {
-					fantasmas[pos - 5] = Ghost(i, j, pos, texts[3], this);
-					map->modifica_Posicion(i, j, Empty);
-				}
-			}
-		}
-		archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
-		archivo.close();
-	}*/
 }
 
 void Game::pinta_Mapa() {
-	map->render();
+	map->render();;
 }
 
 bool Game::siguiente_casilla (int &X, int &Y, int dirX, int dirY) {
@@ -148,7 +101,7 @@ void Game::setComida(int a) {
 void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
 	if (map->getCell(x, y) == Vitamins){
 		vitaminas = true;
-		vitaminasTiempo = 30;
+		vitaminasTiempoAux = vitaminasTiempo;
 	}
 	map->modifica_Posicion(x, y, Empty);
 	setComida(-1);
@@ -170,22 +123,22 @@ void Game::handle_Events() {
 		else {
 			if (event.type == SDL_KEYDOWN) {
 				if (event.key.keysym.sym == SDLK_RIGHT) {
-					pacman.siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
+					pacman->siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
 				}
 				else if (event.key.keysym.sym == SDLK_UP) {
-					pacman.siguiente_Dir(0, -1);
+					pacman->siguiente_Dir(0, -1);
 				}
 				else if (event.key.keysym.sym == SDLK_DOWN) {
-					pacman.siguiente_Dir(0, 1);
+					pacman->siguiente_Dir(0, 1);
 				}
 				else if (event.key.keysym.sym == SDLK_LEFT) {
-					pacman.siguiente_Dir(-1, 0);
+					pacman->siguiente_Dir(-1, 0);
 				}
 				else if (event.key.keysym.sym == SDLK_ESCAPE) {
 					exit = true; //añadido de si le das a escape sales tambien
 				}
 				else if (event.key.keysym.sym == SDLK_g) { //guardar partida
-					this->guarda_Partida();
+					saveState = true;
 				}
 			}
 		}
@@ -194,20 +147,20 @@ void Game::handle_Events() {
 
 void Game::update() {
 	delay();
-	comprueba_colisiones(pacman.get_PosActX(), pacman.get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
+	comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
 	tiempo_Vitamina(); //tiempo que los fantasmas están asustados
-	for (int i = 0; i < 3; i++) {
-		fantasmas1[i]->update();
+	for (GameCharacter* it : objects) { //iterador que recorre toda la lista de GameCharacters y updatea
+		it->update();
 	}
-	pacman.update(); //update del pacman*/
 }
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
-	pacman.render();
-	for (int i = 0; i < 3; i++) {
-		fantasmas1[i]->render(vitaminas);
+	ghost = objects.rbegin(); //empieza el iterador en el final
+	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+		static_cast<Ghost*>(*ghost)->render(vitaminas); //enlace estatico a la clase Ghost para llamar al render de la clase hija especifica
 	}
+	pacman->render();
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
@@ -218,28 +171,32 @@ void Game::run() {
 		handle_Events(); //controla los eventos de teclado
 		update(); //update de tooodo
 		render();  //render de tooodo
+		if (saveState) {
+			save();
+		}
 	}
 	siguiente_Estado();
 }
 
-bool Game::comprueba_colisiones(int x, int y){
-	for (int i = 0; i < 4; i++){
-		if (fantasmas[i].posActX == y && fantasmas[i].posActY == x){
-			if (vitaminas){
-				fantasmas[i].muerte();
-			}
-			else{
-				pacman.reduceVidas();
-				pacman.muerte(); //esto funciona increíblemente
+bool Game::comprueba_colisiones(int x, int y) { 
+	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
+	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+			if (static_cast<Ghost*>(*ghost)->get_PosActY() == x && static_cast<Ghost*>(*ghost)->get_PosActX() == y) { //static cast para acceder a los de la clase hija
+				if (vitaminas) {
+					static_cast<Ghost*>(*ghost)->muerte();
+				}
+				else {
+					pacman->reduceVidas();
+					pacman->muerte();
+				}
 			}
 		}
-	}
 
-	if (pacman.he_Muerto()) {
-		exit = true;
-	}
+		if (pacman->he_Muerto()) {
+			exit = true;
+		}
 
-	return exit;
+		return exit;
 }
 
 //los gets de altura, anchura, renderer...
@@ -268,13 +225,13 @@ SDL_Renderer* Game::dame_Renderer() {
 
 void Game::delay() { //hace lo del Delay más eficiente
 	startTime = SDL_GetTicks();
-	frameTime = SDL_GetTicks() - startTime; 
+	frameTime = SDL_GetTicks() - startTime;
 	if (frameTime < frameRate) {
 		SDL_Delay(frameRate - frameTime);
 	}
 }
 
-int Game::obtenerPixelX(int posicion){
+int Game::obtenerPixelX(int posicion) {
 	return (winWidth / colsTablero) * posicion;
 }
 
@@ -282,13 +239,13 @@ void Game::animaciones_Extra() {
 	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 }
 
-int Game::obtenerPixelY(int posicion){
+int Game::obtenerPixelY(int posicion) {
 	return (winHeight / filasTablero) * posicion;
 }
 
 void Game::tiempo_Vitamina() { //temporizador vitaminas
-	if (vitaminasTiempo > 0)
-		vitaminasTiempo--;
+	if (vitaminasTiempoAux > 0)
+		vitaminasTiempoAux--;
 	else
 		vitaminas = false;
 }
@@ -315,34 +272,15 @@ void Game::menu() {
 	this->run();
 }
 
-void Game::guarda_Partida() {
+void Game::guarda_Partida(string lvl) {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open(levels[0]);
-	if (partidaGuardada.is_open()) {
-		partidaGuardada << this->dame_FilasTablero() << " " << this->dame_ColumnasTablero();
-		partidaGuardada << endl;
-
-		for (int i = 0; i < this->dame_FilasTablero(); i++) {
-			for (int j = 0; j < this->dame_ColumnasTablero(); j++) {
-				for (int r = 0; r < 4; r++) { //esto se podria hacer mejor. Recorre todos los fantasmas buscando la posIniX y la posIniY y los coloca en el archivo
-					if (fantasmas[r].dame_IniX() == i && fantasmas[r].dame_IniY() == j) {
-						partidaGuardada << r + 5 << " ";
-						noEscribir = true; //si se pone a true, no puede sobreescribir
-					}
-				}
-				if (pacman.dame_IniY() == i && pacman.dame_IniX() == j) { //coloca a Pacman en su posicion original
-					partidaGuardada << 9 << " ";
-				}
-				else {
-					if (!noEscribir)//si ningun fantasma se ha escrito, escribe la posicion adecuada
-						partidaGuardada << (int)this->consulta(i, j) << " ";
-				}
-				noEscribir = false;
-			}
-			partidaGuardada << endl;
-		}
+	partidaGuardada.open("level" + lvl + ".dat");
+	map->saveToFile(partidaGuardada);
+	partidaGuardada << personajes.size() << endl;
+	for (int i = 0; i < personajes.size(); i++){
+		personajes[i]->saveToFile(partidaGuardada);
 	}
-	partidaGuardada << levels_Index; //guarda el nivel en el que estamos
+	personajes[personajes.size() - 1]->saveToFile(partidaGuardada);
 	partidaGuardada.close();
 }
 
@@ -353,7 +291,7 @@ void Game::siguiente_Estado() {
 			this->carga_Archivo(levels[levels_Index]); //carga el siguiente archivo
 			this->run(); //run!
 	}
-	else if (pacman.he_Muerto()) {
+	else if (pacman->he_Muerto()) {
 		game_Over(); 
 	}
 }
@@ -363,4 +301,22 @@ void Game::game_Over() {
 	texts[5]->Render(renderer);
 	SDL_RenderPresent(renderer);
 	SDL_Delay(1000);
+}
+
+void Game::save() {
+	SDL_Event evento;
+	int code = 0;
+	while (saveState && !exit) {
+		while (SDL_PollEvent(&evento) && saveState) {
+			SDL_Delay(100);
+			if (evento.key.keysym.sym == SDLK_RETURN) {
+				saveState = false;
+			}
+			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+			}
+		}
+	}
+	this->guarda_Partida(to_string(code));
+	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
 }
