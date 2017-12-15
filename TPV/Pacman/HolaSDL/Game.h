@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "GameMap.h"
 #include "Ghost.h"
+#include "SmartGhost.h"
 #include "Pacman.h"
 #include <vector>
 #include <fstream>
@@ -71,6 +72,7 @@ public:
 	void guarda_Partida(string lvl);
 	void game_Over();
 	void save();
+	void give_posPacman(int &posX, int &posY);
 };
 
  

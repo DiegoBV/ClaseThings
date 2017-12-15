@@ -65,6 +65,11 @@ void Game::carga_Archivo(string name){
 			fantasmita->loadFromFile(archivo); //se leen de archivo
 			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
+		else {
+			SmartGhost* fantasmita = new SmartGhost(0, 0, i + 4, texts[3], this, 1);
+			fantasmita->loadFromFile(archivo); //se leen de archivo
+			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+		}
 	}
 	pacman = new Pacman(0, 0, texts[3], this);
 	objects.push_back(pacman); //pusheamos a pacman al final de la lista
@@ -319,4 +324,9 @@ void Game::save() {
 	}
 	this->guarda_Partida(to_string(code));
 	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
+}
+
+void Game::give_posPacman(int &posX, int &posY){
+	posX = pacman->get_PosActX();
+	posY = pacman->get_PosActY();
 }

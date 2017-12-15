@@ -6,6 +6,7 @@ class SmartGhost : public Ghost
 private:
 	int age;
 	bool adult;
+	Dirs direcciones[4] = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } }; //Array de direcciones para el pathfinding
 
 public:
 	SmartGhost();
@@ -15,7 +16,7 @@ public:
 	virtual void update(); //Cambiamos el cambiaDir de los fantasmas originales, por lo que redefinimos update
 	virtual void animar(bool vitamina);
 	virtual void render();
-	void changeDir(); //Cambia la direccion para
+	void changeDir(); //Cambia la direccion para seguir a Pacman
 	virtual void loadFromFile(ifstream& file);
 };
 
