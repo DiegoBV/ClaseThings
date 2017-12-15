@@ -1,7 +1,8 @@
 #pragma once
 #include <fstream>
+#include "Game.h"
 using namespace std;
-class Game;
+
 class GameObject
 {
 protected:

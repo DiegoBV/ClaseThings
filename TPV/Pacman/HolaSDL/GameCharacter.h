@@ -29,9 +29,8 @@ public:
 	int get_PosActX();
 	int get_PosActY();
 	virtual void animar();
-	virtual void update() = 0;
+	virtual void animar(bool);
 	virtual void render();
-	//virtual void render(bool);
 	virtual void loadFromFile(ifstream& file);
 };
 

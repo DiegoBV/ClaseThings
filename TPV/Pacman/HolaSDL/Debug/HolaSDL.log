@@ -1,4 +1,102 @@
-﻿  Game.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(55): warning C4018: '<': signed/unsigned mismatch
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Compilación iniciada a las 13/12/2017 18:36:55.
+     1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameMap.cpp GameObject.cpp Ghost.cpp GameCharacter.cpp main.cpp Pacman.cpp SmartGhost.cpp Texture.cpp
+         Texture.cpp
+         SmartGhost.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(9): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(6): error C2504: 'GameCharacter' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C2146: error de sintaxis : falta ';' delante del identificador 'nuevaDir'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(27): error C2146: error de sintaxis : falta ';' delante del identificador 'fantasmas'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(27): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+         Pacman.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(9): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(11): error C2504: 'GameCharacter' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(16): error C2146: error de sintaxis : falta ';' delante del identificador 'posiblesDirs'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(16): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(28): error C2146: error de sintaxis : falta ';' delante del identificador 'pacman'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(28): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+         main.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gameobject.h(9): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gameobject.h(9): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+         GameCharacter.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(9): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(11): error C2504: 'GameCharacter' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(16): error C2146: error de sintaxis : falta ';' delante del identificador 'posiblesDirs'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.h(16): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(6): error C2504: 'GameCharacter' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C2146: error de sintaxis : falta ';' delante del identificador 'nuevaDir'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+         Ghost.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(9): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(6): error C2504: 'GameCharacter' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C2146: error de sintaxis : falta ';' delante del identificador 'nuevaDir'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\pacman.h(8): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(27): error C2146: error de sintaxis : falta ';' delante del identificador 'fantasmas'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(27): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp(22): warning C4244: 'argumento' : conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+         GameObject.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(9): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamecharacter.h(7): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+         GameMap.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamecharacter.h(7): error C2504: 'GameObject' : clase base sin definir
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(24): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(24): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2065: 'GameObject' : identificador no declarado
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2059: error de sintaxis : '>'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(25): error C2976: 'std::vector' : no hay suficientes argumentos de plantilla
+                 c:\program files (x86)\microsoft visual studio 12.0\vc\include\vector(650) : vea la declaración de 'std::vector'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(26): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(52): error C2146: error de sintaxis : falta ';' delante del identificador 'consulta'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(52): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.h(52): warning C4183: 'consulta': falta el tipo de valor devuelto; se supone que se trata de una función miembro que devuelve 'int'
+         Game.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gameobject.h(9): error C2143: error de sintaxis : falta ';' delante de '*'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gameobject.h(9): error C4430: falta el especificador de tipo; se presupone int. Nota: C++ no admite default-int
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.h(18): error C2061: error de sintaxis : identificador 'Game'
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(55): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(62): error C2661: 'GameMap::GameMap' : ninguna función sobrecargada acepta 6 argumentos
+         Generando código...
+     1>Compilación del proyecto terminada "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build destinos) -- ERROR.
+
+ERROR al compilar.
+
+Tiempo transcurrido 00:00:06.94

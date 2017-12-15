@@ -49,13 +49,13 @@ void GameCharacter::muerte() {
 }
 
 void GameCharacter::animar() {
-	if (this->GameCharacter::actualDir.dirX == 1) {
+	if (this->actualDir.dirX == 1) {
 		filaSheet = 0;
 	}
-	else if (this->GameCharacter::actualDir.dirX == -1) {
+	else if (this->actualDir.dirX == -1) {
 		filaSheet = 2;
 	}
-	else if (this->GameCharacter::actualDir.dirY == 1) {
+	else if (this->actualDir.dirY == 1) {
 		filaSheet = 1;
 	}
 	else {
