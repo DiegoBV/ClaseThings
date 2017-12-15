@@ -13,7 +13,8 @@ Game::Game()
 	SDL_Init(SDL_INIT_EVERYTHING);
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-
+	TTF_Init();
+	fuente = new Font("..\\images\\fuente2.ttf", 10);
 	//Texturas
 	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver
 	for (int i = 0; i < 6; i++) {
@@ -31,7 +32,8 @@ Game::Game()
 	for (int i = 1; i < 6; i++) {
 		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
 	}
-
+	
+	texts[6] = new Texture(renderer, path + to_string(0) + ".png", 1, 4);
 	personajes.resize(5);
 }
 
@@ -47,6 +49,7 @@ Game::~Game() //destruye el renderer y la ventana
 	for (int i = 0; i < personajes.size(); i++) {
 		delete personajes[i];
 	}
+	TTF_Quit();
 }
 
 void Game::carga_Archivo(string name){
@@ -102,9 +105,14 @@ void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numer
 	if (map->getCell(x, y) == Vitamins){
 		vitaminas = true;
 		vitaminasTiempoAux = vitaminasTiempo;
+		sumaScore(30);
+	}
+	else {
+		sumaScore(10);
 	}
 	map->modifica_Posicion(x, y, Empty);
 	setComida(-1);
+
 }
 
 MapCell Game::consulta(int x, int y) {
@@ -156,13 +164,24 @@ void Game::update() {
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render
+	SDL_Color color;
+	color.r = 255;
+	color.g = 255;
+	color.b = 255;
+	texts[6]->loadFromText(renderer, to_string(score), *fuente, color);
+	SDL_Rect DEST;
+	DEST.h = 40;
+	DEST.w = 50;
+	DEST.x = 800;
+	DEST.y = 0;
 	ghost = objects.rbegin(); //empieza el iterador en el final
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
-		static_cast<Ghost*>(*ghost)->render(vitaminas); //enlace estatico a la clase Ghost para llamar al render de la clase hija especifica
+		(*ghost)->render(vitaminas); 
 	}
 	pacman->render();
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
+	texts[6]->RenderFrame(renderer, DEST);
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
 
@@ -181,9 +200,10 @@ void Game::run() {
 bool Game::comprueba_colisiones(int x, int y) { 
 	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
-			if (static_cast<Ghost*>(*ghost)->get_PosActY() == x && static_cast<Ghost*>(*ghost)->get_PosActX() == y) { //static cast para acceder a los de la clase hija
+			if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
 				if (vitaminas) {
-					static_cast<Ghost*>(*ghost)->muerte();
+					sumaScore(100);
+					(*ghost)->muerte();
 				}
 				else {
 					pacman->reduceVidas();
@@ -277,10 +297,10 @@ void Game::guarda_Partida(string lvl) {
 	partidaGuardada.open("level" + lvl + ".dat");
 	map->saveToFile(partidaGuardada);
 	partidaGuardada << personajes.size() << endl;
-	for (int i = 0; i < personajes.size(); i++){
-		personajes[i]->saveToFile(partidaGuardada);
-	}
-	personajes[personajes.size() - 1]->saveToFile(partidaGuardada);
+	/*for (int i = 0; i < personajes.size(); i++){
+		objects>saveToFile(partidaGuardada);
+	}*/
+	//personajes[personajes.size() - 1]->saveToFile(partidaGuardada);
 	partidaGuardada.close();
 }
 
@@ -307,16 +327,18 @@ void Game::save() {
 	SDL_Event evento;
 	int code = 0;
 	while (saveState && !exit) {
-		while (SDL_PollEvent(&evento) && saveState) {
-			SDL_Delay(100);
+		SDL_WaitEvent(&evento);
 			if (evento.key.keysym.sym == SDLK_RETURN) {
 				saveState = false;
 			}
 			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
 				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
 			}
-		}
 	}
 	this->guarda_Partida(to_string(code));
 	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
+}
+
+void Game::sumaScore(int suma) {
+	score += suma;
 }

@@ -7,6 +7,8 @@
 #include <vector>
 #include <fstream>
 #include <list>
+#include <SDL_ttf.h>
+#include "Font.h"
 using namespace std;
 const int vitaminasTiempo = 30;
 const int frameRate = 120;
@@ -24,7 +26,7 @@ private:
 	int winHeight;
 	int winX, winY;
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
-	Texture* texts[6];
+	Texture* texts[7];
 	GameMap* map;
 	vector <GameCharacter*> personajes;
 	SDL_Event event; //maneja eventos
@@ -41,6 +43,8 @@ private:
 	list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
 	list<GameCharacter*>::reverse_iterator ghost; //iterador que va desde el final hasta el principio para recorrer los fantasmas
 	Pacman *pacman; //variable auxiliar para controlar al pacman (duda que tngo que preguntarle al profe)
+	Font* fuente;
+	int score = 0;
 
 public:
 	Game();
@@ -71,6 +75,7 @@ public:
 	void guarda_Partida(string lvl);
 	void game_Over();
 	void save();
+	void sumaScore(int suma);
 };
 
  

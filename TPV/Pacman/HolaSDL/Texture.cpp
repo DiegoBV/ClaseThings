@@ -42,3 +42,23 @@ void Texture::Anima(int veloc, int posInicialX, int posInicialY, int fil, int co
 	//por ejemplo, en la imagen que tenemos del pacman empieza siempre en la posInicial = 10 y varía la posInicialX, mientras que, como solo hay dos frames
 	//tiene 1 fila de frames y dos columnas (no sé si se entiende o_O)
 }
+
+bool Texture::loadFromText(SDL_Renderer* renderer, string text, const Font& font, SDL_Color color) {
+	SDL_Surface* textSurf = font.generateSurface(text, color);
+	if (textSurf == nullptr) {
+		cout << "No esta el archivo";
+	}
+	else {
+		textura = SDL_CreateTextureFromSurface(renderer, textSurf);
+		if (textura == nullptr) {
+			cout << "Error";
+			textH = textW = 0;
+		}
+		else {
+			textH = textSurf->h;
+			textW = textSurf->w;
+		}
+		SDL_FreeSurface(textSurf);
+	}
+	return textura != nullptr;
+}
