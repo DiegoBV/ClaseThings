@@ -48,19 +48,20 @@ void GameCharacter::muerte() {
 	posActY = iniY;
 }
 
-void GameCharacter::animar() {
-	if (this->GameCharacter::actualDir.dirX == 1) {
+void GameCharacter::animar(int posIn, int fils, int cols) {
+	if (actualDir.dirX == 1) {
 		filaSheet = 0;
 	}
-	else if (this->GameCharacter::actualDir.dirX == -1) {
+	else if (actualDir.dirX == -1) {
 		filaSheet = 2;
 	}
-	else if (this->GameCharacter::actualDir.dirY == 1) {
+	else if (actualDir.dirY == 1) {
 		filaSheet = 1;
 	}
 	else {
 		filaSheet = 3;
 	}
+	textura->Anima(velAnimacion, filaSheet, posIn, fils, cols);
 }
 
 void GameCharacter::loadFromFile(ifstream& file) {

@@ -1,7 +1,7 @@
 #pragma once
 #include "Texture.h"
 #include "GameObject.h"
-
+const int velAnimacion = 100;
 class Game;
 class GameCharacter: public GameObject
 {
@@ -28,7 +28,7 @@ public:
 	int dame_IniY();
 	int get_PosActX();
 	int get_PosActY();
-	virtual void animar();
+	virtual void animar(int posIn, int fils, int cols);
 	virtual void update() = 0;
 	virtual void render();
 	virtual void render(bool)=0;

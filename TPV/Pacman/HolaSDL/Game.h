@@ -16,6 +16,9 @@ const string path = "..\\images\\textura";
 const int ptosFantasma = 100;
 const int ptosComida = 1;
 const int ptosVitamina = 10;
+const int r = 255;
+const int g = 255; //color
+const int b = 255;
 class Game
 {
 private:

@@ -1,6 +1,9 @@
 #pragma once
 #include "Texture.h"
 #include "GameCharacter.h"
+const int IniText = 10;
+const int TextsFils = 1;
+const int ColsText = 2;
 class Game;
 class Pacman: public GameCharacter
 {

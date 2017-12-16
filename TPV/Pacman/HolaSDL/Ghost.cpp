@@ -17,8 +17,8 @@ Ghost::Ghost(int orX, int orY, int numFant, Texture* text, Game* gam): GameChara
 	posiblesDirs[3].dirX = 1; //Dcha
 	posiblesDirs[3].dirY = 0;
 
-	GameCharacter::actualDir.dirX = 0;  //Inicializamos de base hacia arriba, para probar cosas
-	GameCharacter::actualDir.dirY = 0;
+	actualDir.dirX = 0;  //Inicializamos de base hacia arriba, para probar cosas
+	actualDir.dirY = 0;
 
 	srand(time(nullptr));
 }
@@ -31,21 +31,21 @@ Ghost::~Ghost()
 void Ghost::update() {
 	game->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
-	GameCharacter::donut();
+	donut();
 
 	cambiaDir();
 
-	GameCharacter::rectDest.x = GameCharacter::game->obtenerPixelX(posActY);
-	GameCharacter::rectDest.y = GameCharacter::game->obtenerPixelY(posActX);
+	rectDest.x = game->obtenerPixelX(posActY);
+	rectDest.y = game->obtenerPixelY(posActX);
 
 }
 
 void Ghost::render(bool vitamina) {
 	if (vitamina){
-		GameCharacter::textura->ModificaRectangulo(0, 13);
+		textura->ModificaRectangulo(0, 13);
 	}
 	else {
-		GameCharacter::textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
+		textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
 	}
 
 	animar(vitamina);
@@ -72,7 +72,7 @@ int Ghost::posibles_Dirs() {
 		else if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
 			backward = i;
 		}
-		else if (GameCharacter::game->siguiente_casilla(tempX, tempY, posiblesDirs[i].dirX, posiblesDirs[i].dirY)) { //Comprobamos que no hay muro
+		else if (game->siguiente_casilla(tempX, tempY, posiblesDirs[i].dirX, posiblesDirs[i].dirY)) { //Comprobamos que no hay muro
 			posibles[j] = i;
 			j++;
 		}
@@ -102,13 +102,12 @@ void Ghost::cambiaDir() {
 
 void Ghost::animar(bool vitamina){
 	if (!vitamina){
-		GameCharacter::animar();
-		GameCharacter::textura->Anima(100, filaSheet, (this->numFantasma - 4) * 2, 1, 2);
+		GameCharacter::animar((this->numFantasma - 4) * auxText, filsTex, colsTex);
 	}
 	else
 	{
 		filaSheet = 0;
-		GameCharacter::textura->Anima(100, filaSheet, 12, 1, 2);
+		textura->Anima(100, filaSheet, posAsustado, filsTex, colsTex);
 	}
 }
 

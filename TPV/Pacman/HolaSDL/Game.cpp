@@ -14,7 +14,7 @@ Game::Game()
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
-	fuente = new Font("..\\images\\fuente2.ttf", 10);
+	fuente = new Font("..\\images\\fuente2.ttf", 10); //CAMBIAR
 	//Texturas
 	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver
 	for (int i = 0; i < 6; i++) {
@@ -33,11 +33,11 @@ Game::Game()
 		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
 	}
 	texts[6] = new Texture();
-	color.r = 255;
-	color.g = 255;
-	color.b = 255;
+	color.r = r;
+	color.g = g;
+	color.b = b;
 	hudScore.h = 40;
-	hudScore.w = 50;
+	hudScore.w = 50; //posiciones del HUD del score
 	hudScore.x = 800;
 	hudScore.y = 0;
 }
@@ -308,7 +308,7 @@ void Game::menu() {
 				else if (event.key.keysym.sym == SDLK_c) {
 					saveState = true;
 					int code = this->escribe_Code();
-					this->carga_Archivo("..\\level" + to_string(code) + ".dat"); //CAMBIAR!
+					this->carga_Archivo("..\\level" + to_string(code) + ".pac"); //CAMBIAR!
 					finish = true;
 				}
 			}
@@ -319,7 +319,7 @@ void Game::menu() {
 
 void Game::guarda_Partida(string lvl) {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open("..\\level" + lvl + ".dat"); //CAMBIAR!
+	partidaGuardada.open("..\\level" + lvl + ".pac"); //CAMBIAR!
 	map->saveToFile(partidaGuardada);
 	partidaGuardada << objects.size() - 1 << endl;
 	for (GameCharacter* it: objects){
