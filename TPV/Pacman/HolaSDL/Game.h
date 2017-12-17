@@ -13,6 +13,8 @@ using namespace std;
 const int vitaminasTiempo = 30;
 const int frameRate = 120;
 const string path = "..\\images\\textura";
+const string pathTxt = "..\\level0";
+const string extTxt = ".pac";
 const int ptosFantasma = 100;
 const int ptosComida = 1;
 const int ptosVitamina = 10;
@@ -39,12 +41,13 @@ private:
 	Pacman *pacman; //variable auxiliar para controlar al pacman (duda que tngo que preguntarle al profe)
 	Texture* texts[7];
 	GameMap* map;
-	string levels[6];
 
 	//-------------------------------Métodos ----------------------------
 	void siguiente_Estado();
 	void update();
 	void render();
+	string nombreFichero(string path, int num, string ext);
+	void deleteObjects();
 
 	//-------------------------------Auxiliares ----------------------------
 	ifstream archivo;
@@ -78,8 +81,8 @@ public:
 	bool comprueba_colisiones(int x, int y);
 	void tiempo_Vitamina();
 	void menu();
-	void carga_Archivo(string name);//carga el archivo
-	void guarda_Partida(string lvl);
+	void carga_Archivo(int lvl);//carga el archivo
+	void guarda_Partida(int lvl);
 	void save();
 	int escribe_Code();
 	void sumaScore(int suma);

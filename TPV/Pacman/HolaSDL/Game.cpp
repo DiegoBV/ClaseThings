@@ -1,6 +1,5 @@
 #include "Game.h"
-
-
+#include <sstream>
 Game::Game()
 {
 	window = nullptr;
@@ -28,10 +27,6 @@ Game::Game()
 			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 1);
 		}
 	}	
-	this->levels[0] = "..\\partidaGuardada.txt";  //guarda los niveles en un array
-	for (int i = 1; i < 6; i++) {
-		this->levels[i] = "..\\level0" + to_string(i) + ".pac";
-	}
 	texts[6] = new Texture();
 	color.r = r;
 	color.g = g;
@@ -51,15 +46,14 @@ Game::~Game() //destruye el renderer y la ventana
 	for (int i = 0; i < 6; i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
-	for (GameCharacter* it: objects) {
-		delete it;
-	}
+	deleteObjects();
+	delete pacman;
 	TTF_Quit();
 }
 
 //------------------------------------MetodosPrincipales-----------------------------
 void Game::pinta_Mapa() {
-	map->render();;
+	map->render();
 }
 
 void Game::handle_Events() {
@@ -84,7 +78,7 @@ void Game::handle_Events() {
 				else if (event.key.keysym.sym == SDLK_ESCAPE) {
 					exit = true; //añadido de si le das a escape sales tambien
 				}
-				else if (event.key.keysym.sym == SDLK_g) { //guardar partida
+				else if (event.key.keysym.sym == SDLK_s) { //guardar partida
 					saveState = true;
 				}
 			}
@@ -223,6 +217,14 @@ void Game::sumaScore(int suma) {
 	score += suma;
 }
 
+void Game::deleteObjects() {
+	delete map;
+	ghost = objects.rbegin(); //empieza el iterador en el final, se salta a pacman
+	for (ghost++; ghost != objects.rend(); ghost++) {
+		delete *ghost;
+	}
+	objects.clear();
+}
 //------------------------------------Gets-----------------------------
 
 int Game::dame_Altura() {
@@ -262,8 +264,14 @@ int Game::obtenerPixelY(int posicion) {
 
 //------------------------------------Archivo-----------------------------
 
-void Game::carga_Archivo(string name){
+void Game::carga_Archivo(int lvl){
+	string name = nombreFichero(pathTxt, lvl, extTxt);
 	archivo.open(name);
+	if (!archivo.is_open()) {
+		string fileName = nombreFichero(pathTxt, 1, extTxt);
+		levels_Index = 1;
+		archivo.open(fileName);
+	}
 	int fils, cols;
 	archivo >> fils >> cols;
 	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
@@ -296,19 +304,33 @@ void Game::carga_Archivo(string name){
 
 void Game::menu() {
 	texts[4]->Render(renderer);
-	SDL_RenderPresent(renderer);
 	bool finish = false;
+	int x, y;
+	x = y = 0;
+	SDL_Rect rectNew;
+	rectNew.h = 75;
+	rectNew.w = 400;
+	rectNew.x = 200;
+	rectNew.y = 400;
+	SDL_Rect rectLoad;  //rectángulos de los botones del menú
+	rectLoad.h = 75;
+	rectLoad.w = 400;
+	rectLoad.x = 200;
+	rectLoad.y = 500;
+	SDL_RenderPresent(renderer);
 	while (!finish) {
 		while (SDL_PollEvent(&event)) {
-			if (event.type == SDL_KEYDOWN) {
-				if (event.key.keysym.sym == SDLK_n) {
-					this->carga_Archivo(levels[1]);
+			if (event.type == SDL_MOUSEBUTTONDOWN) {
+				x = event.button.x;
+				y = event.button.y;
+				if (x > rectNew.x && x < rectNew.x + rectNew.w && y > rectNew.y && y < rectNew.y + rectNew.h) {
+					this->carga_Archivo(1);
 					finish = true;
 				}
-				else if (event.key.keysym.sym == SDLK_c) {
+				else if (x > rectLoad.x && x < rectLoad.x + rectLoad.w && y > rectLoad.y && y < rectLoad.y + rectLoad.h) {
 					saveState = true;
 					int code = this->escribe_Code();
-					this->carga_Archivo("..\\level" + to_string(code) + ".pac"); //CAMBIAR!
+					this->carga_Archivo(code);
 					finish = true;
 				}
 			}
@@ -317,9 +339,10 @@ void Game::menu() {
 	this->run();
 }
 
-void Game::guarda_Partida(string lvl) {
+void Game::guarda_Partida(int lvl) {
 	bool noEscribir = false; //para no sobreescribir
-	partidaGuardada.open("..\\level" + lvl + ".pac"); //CAMBIAR!
+	string name = nombreFichero(pathTxt, lvl, extTxt);
+	partidaGuardada.open(name);
 	map->saveToFile(partidaGuardada);
 	partidaGuardada << objects.size() - 1 << endl;
 	for (GameCharacter* it: objects){
@@ -330,10 +353,10 @@ void Game::guarda_Partida(string lvl) {
 }
 
 void Game::siguiente_Estado() {
-	if (this->win() && levels_Index < 5) { //comrpueba que haya comido todo y ademas sigan existiendo niveles
+	if (this->win()) { //comrpueba que haya comido todo
 			levels_Index++;
-			delete map; //deletea el map anterior para construir el siguiente
-			this->carga_Archivo(levels[levels_Index]); //carga el siguiente archivo
+			deleteObjects();
+			this->carga_Archivo(levels_Index); //carga el siguiente archivo
 			this->run(); //run!
 	}
 	else if (pacman->he_Muerto()) {
@@ -343,8 +366,7 @@ void Game::siguiente_Estado() {
 
 void Game::save() {	
 	int code = escribe_Code();
-	this->guarda_Partida(to_string(code));
-	//ESTO FUNCIONA PERO XD DUPLICA LOS NUMEROS LO CUAL NO ENTIENDO JEJE CREO QUE DETECTA VARIAS PULSACIONES A LA VEZ O ALGO ASI
+	this->guarda_Partida(code);
 }
 
 int Game::escribe_Code() {
@@ -360,4 +382,10 @@ int Game::escribe_Code() {
 		}
 	}
 	return code;
+}
+
+string Game::nombreFichero(string path, int num, string ext) {
+	stringstream ss;
+	ss << path << num << ext;
+	return ss.str();
 }

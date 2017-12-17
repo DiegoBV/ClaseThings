@@ -29,7 +29,7 @@ void Texture::Render(SDL_Renderer* rnd){
 }
 
 void Texture::RenderFrame(SDL_Renderer* rnd, const SDL_Rect dest) {
-	SDL_RenderCopy(rnd, textura, &rect, &dest);
+		SDL_RenderCopy(rnd, textura, &rect, &dest);
 }
 
 void Texture::Anima(int veloc, int posInicialX, int posInicialY, int fil, int col){
