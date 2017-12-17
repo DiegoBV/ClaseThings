@@ -73,8 +73,6 @@ void GameMap::loadFromFile(ifstream& file) {
 				}
 			}
 		}
-		/*archivo >> levels_Index; //si existe, se guarda el nivel en que nos quedamos
-		archivo.close();*/
 	}
 }
 

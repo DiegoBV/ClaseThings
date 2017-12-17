@@ -13,21 +13,9 @@ Game::Game()
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
-	fuente = new Font("..\\images\\fuente2.ttf", 10); //CAMBIAR
 	//Texturas
-	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver
-	for (int i = 0; i < 6; i++) {
-		if (i == 0) {
-			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 4); //vitamina animada
-		}
-		else if (i == 3) {
-			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 4, 14); //carga las texturas de todos los personajes
-		}
-		else {
-			texts[i] = new Texture(renderer, path + to_string(i) + ".png", 1, 1);
-		}
-	}	
-	texts[6] = new Texture();
+	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver, texts[6] = fuente
+	leeTexturas();
 	color.r = r;
 	color.g = g;
 	color.b = b;
@@ -43,10 +31,11 @@ Game::~Game() //destruye el renderer y la ventana
 	//Finalization
 	SDL_DestroyRenderer(renderer);
 	SDL_DestroyWindow(window);
-	for (int i = 0; i < 6; i++) {
+	for (int i = 0; i < texts.size(); i++) {
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
 	deleteObjects();
+	delete fuente;
 	delete pacman;
 	TTF_Quit();
 }
@@ -96,7 +85,7 @@ void Game::update() {
 
 void Game::render() {
 	SDL_RenderClear(renderer); //limpia el render	
-	texts[6]->loadFromText(renderer, to_string(score), *fuente, color);
+	texts[texts.size() - 1]->loadFromText(renderer, to_string(score), *fuente, color);
 	ghost = objects.rbegin(); //empieza el iterador en el final
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
 		(*ghost)->render(vitaminas);
@@ -104,7 +93,7 @@ void Game::render() {
 	pacman->render();
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
-	texts[6]->RenderFrame(renderer, hudScore);
+	texts[texts.size() - 1]->RenderFrame(renderer, hudScore);
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
 
@@ -274,10 +263,13 @@ void Game::carga_Archivo(int lvl){
 	}
 	int fils, cols;
 	archivo >> fils >> cols;
+
 	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
 	map->loadFromFile(archivo);
+
 	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
 	archivo >> numGhost;
+
 	for (int i = 0; i < numGhost; i++) {
 		int typeGhost;
 		archivo >> typeGhost;
@@ -287,6 +279,7 @@ void Game::carga_Archivo(int lvl){
 			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
 	}
+
 	pacman = new Pacman(0, 0, texts[3], this);
 	objects.push_back(pacman); //pusheamos a pacman al final de la lista
 	pacman->loadFromFile(archivo); //se lee de archivo
@@ -298,6 +291,7 @@ void Game::carga_Archivo(int lvl){
 	}
 	else {
 		score = aux;
+		archivo >> levels_Index;
 	}
 	archivo.close();
 }
@@ -348,7 +342,7 @@ void Game::guarda_Partida(int lvl) {
 	for (GameCharacter* it: objects){
 		it->saveToFile(partidaGuardada);
 	}
-	partidaGuardada << endl << score << endl;
+	partidaGuardada << endl << score << endl << levels_Index << endl;
 	partidaGuardada.close();
 }
 
@@ -388,4 +382,27 @@ string Game::nombreFichero(string path, int num, string ext) {
 	stringstream ss;
 	ss << path << num << ext;
 	return ss.str();
+}
+
+void Game::leeTexturas() {
+	ifstream texturas;
+	texturas.open("..\\infoTexturas" + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
+	int numText = 0;
+	texturas >> numText;
+	for (int i = 0; i < numText; i++) {
+		string fileName;
+		int fils, cols;
+		texturas >> fileName;
+		if (fileName == "Fuente") { //si es la fuente crea una textura vacia y la fuente
+			int tamanyo;
+			texturas >> fileName >> tamanyo;
+			fuente = new Font(fileName, tamanyo);
+			texts.push_back(new Texture());
+		}
+		else {
+			texturas >> fils >> cols;
+			texts.push_back(new Texture(renderer, fileName, fils, cols));
+		}
+	}
+	texturas.close();
 }
