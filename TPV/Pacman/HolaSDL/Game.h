@@ -20,6 +20,8 @@ const int ptosVitamina = 10;
 const int r = 255;
 const int g = 255; //color
 const int b = 255;
+const SDL_Rect hudScore = { 800, 0, 50, 40 };
+const SDL_Rect hudVidas = { 0, 0, 35, 35 };
 class Game
 {
 private:
@@ -32,7 +34,6 @@ private:
 	SDL_Event termina;
 	Font* fuente;
 	SDL_Color color;
-	SDL_Rect hudScore;
 	SDL_Event event; //maneja eventos
 
 	//-------------------------------Lista/ObjetosGame ----------------------------
@@ -64,6 +65,8 @@ private:
 	void game_Over();
 	void delay();
 	void leeTexturas();
+	void plasmaMensaje();
+	void plasmaVidas();
 
 	//-------------------------------Auxiliares ----------------------------
 

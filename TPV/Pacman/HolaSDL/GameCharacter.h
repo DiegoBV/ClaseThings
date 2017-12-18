@@ -18,17 +18,20 @@ protected:
 	int posActX, posActY; //Posicion actual
 	void donut();
 	int filaSheet; //animar el frame correcto...
+
+	//-----------------------------------Metodos----------------------------------
+
+	virtual void animar(int posIn, int fils, int cols);
+	int dame_IniX();
+	int dame_IniY();
 	
 public:
 	GameCharacter();
 	~GameCharacter();
 	GameCharacter(int posX, int posY, Texture* text, Game* gam); //fantasma y pacman tienen el mismo constructor, salvo el numFantasma
 	virtual void muerte(); //Muere y vuelve a la posición inicial
-	int dame_IniX();
-	int dame_IniY();
 	int get_PosActX();
 	int get_PosActY();
-	virtual void animar(int posIn, int fils, int cols);
 	virtual void update() = 0;
 	virtual void render();
 	virtual void render(bool)=0;

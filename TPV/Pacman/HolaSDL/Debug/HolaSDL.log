@@ -1,5 +1,5 @@
 ﻿  Game.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(34): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(30): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Compiling...
   main.cpp

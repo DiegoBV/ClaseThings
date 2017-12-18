@@ -13,18 +13,25 @@ private:
 	void modifica_Rectangulo();
 	void comer();
 	void mueve_Pacman();
+
+	//---------------------------Metodos--------------------------------
+	virtual void animar();
+	
+	
+
 public:
 	Pacman();
 	~Pacman();
 	Pacman(int posX, int posY, Texture* text, Game* gam);	
 	virtual void render();	
 	virtual void update();
-	virtual void animar();
 	virtual void loadFromFile(ifstream& file);
 	virtual void saveToFile(ofstream& file);
 	bool siguiente_Dir(int dX, int dY);
 	void reduceVidas();
 	bool he_Muerto();
 	virtual void render(bool);
+	int dame_Vidas();
+	
 };
 

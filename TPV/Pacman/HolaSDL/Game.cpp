@@ -19,10 +19,6 @@ Game::Game()
 	color.r = r;
 	color.g = g;
 	color.b = b;
-	hudScore.h = 40;
-	hudScore.w = 50; //posiciones del HUD del score
-	hudScore.x = 800;
-	hudScore.y = 0;
 }
 
 
@@ -84,7 +80,7 @@ void Game::update() {
 }
 
 void Game::render() {
-	SDL_RenderClear(renderer); //limpia el render	
+	SDL_RenderClear(renderer); //limpia el render
 	texts[texts.size() - 1]->loadFromText(renderer, to_string(score), *fuente, color);
 	ghost = objects.rbegin(); //empieza el iterador en el final
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
@@ -94,6 +90,7 @@ void Game::render() {
 	animaciones_Extra(); //anima las vitaminas
 	pinta_Mapa();   //pinta el tablero
 	texts[texts.size() - 1]->RenderFrame(renderer, hudScore);
+	plasmaVidas();
 	SDL_RenderPresent(renderer); //plasma el renderer en pantalla
 }
 
@@ -214,6 +211,21 @@ void Game::deleteObjects() {
 	}
 	objects.clear();
 }
+
+void Game::plasmaMensaje() {
+	SDL_Rect r = { dame_Anchura() / 3 - 50, dame_Anchura() / 4, 400, 200 };
+	texts[6]->RenderFrame(renderer, r);
+	SDL_RenderPresent(renderer);
+}
+
+void Game::plasmaVidas() {
+	SDL_Rect re = hudVidas;
+	for (int i = 0; i < pacman->dame_Vidas(); i++) {
+		re.x = i * 50;
+		texts[7]->RenderFrame(renderer, re);
+	}
+}
+
 //------------------------------------Gets-----------------------------
 
 int Game::dame_Altura() {
@@ -301,16 +313,8 @@ void Game::menu() {
 	bool finish = false;
 	int x, y;
 	x = y = 0;
-	SDL_Rect rectNew;
-	rectNew.h = 75;
-	rectNew.w = 400;
-	rectNew.x = 200;
-	rectNew.y = 400;
-	SDL_Rect rectLoad;  //rectángulos de los botones del menú
-	rectLoad.h = 75;
-	rectLoad.w = 400;
-	rectLoad.x = 200;
-	rectLoad.y = 500;
+	SDL_Rect rectNew = {200, 400, 400, 75};
+	SDL_Rect rectLoad = {200, 500, 400, 75};  //rectángulos de los botones del menú
 	SDL_RenderPresent(renderer);
 	while (!finish) {
 		while (SDL_PollEvent(&event)) {
@@ -323,6 +327,7 @@ void Game::menu() {
 				}
 				else if (x > rectLoad.x && x < rectLoad.x + rectLoad.w && y > rectLoad.y && y < rectLoad.y + rectLoad.h) {
 					saveState = true;
+					plasmaMensaje();
 					int code = this->escribe_Code();
 					this->carga_Archivo(code);
 					finish = true;
@@ -358,7 +363,8 @@ void Game::siguiente_Estado() {
 	}
 }
 
-void Game::save() {	
+void Game::save() {
+	plasmaMensaje();
 	int code = escribe_Code();
 	this->guarda_Partida(code);
 }
