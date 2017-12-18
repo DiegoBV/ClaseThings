@@ -14,7 +14,7 @@ Game::Game()
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
 	//Texturas
-	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver, texts[6] = fuente
+	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver, texts[6] = mensaje, texts[7] = vidas. texts[8]  = fuente
 	leeTexturas();
 	color.r = r;
 	color.g = g;
@@ -237,11 +237,11 @@ int Game::dame_Anchura() {
 }
 
 int Game::dame_FilasTablero() {
-	return this->filasTablero;
+	return this->map->fils;
 }
 
 int Game::dame_ColumnasTablero() {
-	return this->colsTablero;
+	return this->map->cols;
 }
 
 bool Game::dame_exit() {
@@ -252,7 +252,7 @@ SDL_Renderer* Game::dame_Renderer() {
 }
 
 int Game::obtenerPixelX(int posicion) {
-	return (winWidth / colsTablero) * posicion;
+	return (winWidth / this->map->cols) * posicion;
 }
 
 void Game::animaciones_Extra() {
@@ -260,7 +260,7 @@ void Game::animaciones_Extra() {
 }
 
 int Game::obtenerPixelY(int posicion) {
-	return (winHeight / filasTablero) * posicion;
+	return (winHeight / this->map->fils) * posicion;
 }
 
 //------------------------------------Archivo-----------------------------
@@ -273,10 +273,8 @@ void Game::carga_Archivo(int lvl){
 		levels_Index = 1;
 		archivo.open(fileName);
 	}
-	int fils, cols;
-	archivo >> fils >> cols;
 
-	map = new GameMap(fils, cols, texts[0], texts[1], texts[2], this);
+	map = new GameMap(this);
 	map->loadFromFile(archivo);
 
 	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
@@ -292,7 +290,8 @@ void Game::carga_Archivo(int lvl){
 		}
 	}
 
-	pacman = new Pacman(0, 0, texts[3], this);
+	if(pacman == nullptr)
+		pacman = new Pacman(0, 0, texts[3], this);
 	objects.push_back(pacman); //pusheamos a pacman al final de la lista
 	pacman->loadFromFile(archivo); //se lee de archivo
 
@@ -305,6 +304,7 @@ void Game::carga_Archivo(int lvl){
 		score = aux;
 		archivo >> levels_Index;
 	}
+	numComida = 50;
 	archivo.close();
 }
 
@@ -374,11 +374,13 @@ int Game::escribe_Code() {
 	int code = 0;
 	while (saveState && !exit) {
 		SDL_WaitEvent(&evento);
-		if (evento.key.keysym.sym == SDLK_RETURN) {
-			saveState = false;
-		}
-		else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
-			code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+		if (evento.type == SDL_KEYDOWN) {
+			if (evento.key.keysym.sym == SDLK_RETURN) {
+				saveState = false;
+			}
+			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+			}
 		}
 	}
 	return code;
@@ -392,7 +394,7 @@ string Game::nombreFichero(string path, int num, string ext) {
 
 void Game::leeTexturas() {
 	ifstream texturas;
-	texturas.open("..\\infoTexturas" + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
+	texturas.open(pathInfoTexturas + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
 	int numText = 0;
 	texturas >> numText;
 	for (int i = 0; i < numText; i++) {

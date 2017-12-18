@@ -14,6 +14,7 @@ const int vitaminasTiempo = 30;
 const int frameRate = 100;
 const string pathTxt = "..\\level0";
 const string extTxt = ".pac";
+const string pathInfoTexturas = "..\\infoTexturas";
 const int ptosFantasma = 100;
 const int ptosComida = 1;
 const int ptosVitamina = 10;
@@ -41,7 +42,6 @@ private:
 	list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
 	list<GameCharacter*>::reverse_iterator ghost; //iterador que va desde el final hasta el principio para recorrer los fantasmas
 	Pacman *pacman; //variable auxiliar para controlar al pacman (duda que tngo que preguntarle al profe)
-	vector <Texture*> texts;
 	GameMap* map;
 
 	//-------------------------------Métodos ----------------------------
@@ -87,7 +87,7 @@ private:
 public:
 	Game();
 	~Game();
-	int filasTablero, colsTablero;
+	vector <Texture*> texts;
 	void menu();
 	bool siguiente_casilla(int &X, int &Y, int dirX, int dirY); //Le pasamos la casilla actual y calcula la siguiente
 	void come(int x, int y); //cambia casilla de vitamina o de comida a vacia

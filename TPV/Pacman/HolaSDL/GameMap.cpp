@@ -5,7 +5,13 @@
 GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
 }
-GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam) { //Constructora con parámetros
+GameMap::GameMap(Game* game) {
+	this->game = game;
+	textsMapa[0] = this->game->texts[1];
+	textsMapa[1] = this->game->texts[2];
+	textsMapa[2] = this->game->texts[0];
+};
+GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam){ //Constructora con parámetros
 	textsMapa[0] = m;
 	textsMapa[1] = com; //asignacion de punteros
 	textsMapa[2] = vit;
@@ -13,12 +19,7 @@ GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Gam
 	if (fils != 0 && cols != 0) {
 		this->fils = fils;
 		this->cols = cols;
-
-		//Creación de la matriz
-		tablero = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
-		for (int r = 0; r < fils; r++) {
-			tablero[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
-		}
+		vector_Dinamico();
 	}
 	else {
 		tablero = nullptr;
@@ -61,8 +62,11 @@ void GameMap::render() {
 
 void GameMap::loadFromFile(ifstream& file) {
 	if (file.is_open()) {
-		game->filasTablero = fils;
-		game->colsTablero = cols;
+		int fils, cols;
+		file >> fils >> cols;
+		this->fils = fils;
+		this->cols = cols;
+		vector_Dinamico();
 		for (int i = 0; i < fils; i++) {
 			for (int j = 0; j < cols; j++) {
 				int pos;
@@ -85,6 +89,15 @@ void GameMap::saveToFile(ofstream& file) {
 		file << endl;
 	}
 }
+
+void GameMap::vector_Dinamico() {
+	//Creación de la matriz
+	tablero = new MapCell*[fils]; //Es una matriz de punteros, para referenciar las casillas
+	for (int r = 0; r < fils; r++) {
+		tablero[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
+	}
+}
+
 
 void GameMap::render(bool) {
 }
