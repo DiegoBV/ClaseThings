@@ -17,15 +17,13 @@ friend class Game;
 private:
 	//Número Fantasma
 	int numFantasma;
-	Dirs posiblesDirs [4];
 	int posibles_Dirs();
-	
-	
 public:
 	Ghost();
 	Ghost(int orX, int orY, int numFant, Texture* text, Game* gam);
 	~Ghost();
-
+	vector <int> posibles;
+	Dirs posiblesDirs[4];
 
 	//Métodos del juego
 	void update(); //Actualiza la posición del fantasma en la dirección actual y 

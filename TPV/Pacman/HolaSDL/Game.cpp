@@ -290,7 +290,7 @@ void Game::carga_Archivo(int lvl){
 			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
 		else { //Fantasmas inteligentes
-			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, i + 4, texts[3], this, 1);
+			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1);
 			fantasmitaInt->loadFromFile(archivo); //se leen de archivo
 			objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
 		}

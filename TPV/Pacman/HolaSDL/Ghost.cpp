@@ -29,6 +29,7 @@ Ghost::~Ghost()
 }
 
 void Ghost::update() {
+	posibles.clear();
 	game->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
 
 	donut();
@@ -57,7 +58,7 @@ int Ghost::posibles_Dirs() {
 	int tempX;
 	int tempY;
 	int backward = 0;
-	int posibles [4];
+	
 	int j = 0; //Control del array de posibles
 
 	//Exploramos las posibilidades 
@@ -66,14 +67,14 @@ int Ghost::posibles_Dirs() {
 		tempY = posActX;
 
 		if (actualDir.dirX == 0 && actualDir.dirY == 0){ //Para que se pueda iniciar
-			posibles[j] = i;
+			posibles.push_back(i);
 			j++;
 		}
 		else if ((posiblesDirs[i].dirX == (actualDir.dirX*-1)) && (posiblesDirs[i].dirY == (actualDir.dirY*-1))) { //Primero comprobamos que no es la dir contraria
 			backward = i;
 		}
 		else if (game->siguiente_casilla(tempX, tempY, posiblesDirs[i].dirX, posiblesDirs[i].dirY)) { //Comprobamos que no hay muro
-			posibles[j] = i;
+			posibles.push_back(i);
 			j++;
 		}
 	}
@@ -93,7 +94,7 @@ int Ghost::posibles_Dirs() {
 void Ghost::cambiaDir() {
 	int direction = -1;
 	direction = posibles_Dirs();
-
+	//posibles.clear();
 	if (direction >= 0) { //Si puede cambiar de direccion ponemos la nueva direccion
 		actualDir.dirX = posiblesDirs[direction].dirX;
 		actualDir.dirY = posiblesDirs[direction].dirY;

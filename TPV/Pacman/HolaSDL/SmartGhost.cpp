@@ -14,21 +14,22 @@ SmartGhost::~SmartGhost()
 SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, int edad): Ghost(orX, orY, numFant, text, gam){
 	age = edad;
 	adult = false;
+	ancho = rectDest.w;
+	alto = rectDest.h;
 }
 
 void SmartGhost::update(){
-	game->siguiente_casilla(posActY, posActX, actualDir.dirX, actualDir.dirY);
-
+	Ghost::update();
+	crece();
 	donut();
+	if (adult) {
+		changeDir();
+	}
 
-	changeDir();
-
-	rectDest.x = game->obtenerPixelX(posActY);
-	rectDest.y = game->obtenerPixelY(posActX);
 
 	age++;
 
-	if (age > 20) { //El pequeñajo crece
+	if (age > edadAdulta) { //El pequeñajo crece
 		adult = true;
 	}
 }
@@ -40,14 +41,28 @@ seguimos el mismo camino. Obviamente si estamos en un callejón, volvemos atrás d
 */
 void SmartGhost::changeDir(){
 	int posPacX, posPacY;
-	int tempX = posActX;
-	int tempY = posActY;
-	bool y, x; //La y indica que la pos de pacman en y es mayor que la del fantasma
+	//int tempX = posActX;
+	//int tempY = posActY;
+	//bool y, x; //La y indica que la pos de pacman en y es mayor que la del fantasma
 	//La x indica si la posición de pacman en x es mayor que la del fantasma
 
 	game->give_posPacman(posPacX, posPacY);
-
-	y = posPacY >= posActY;
+	bool found = false;
+	int i = 0;
+	while(i < posibles.size() && !found) {
+		int pos = posibles[i];
+		int vX, vY;
+		vX = abs(posActY + posiblesDirs[pos].dirX -  posPacX);
+		vY = abs(posActX + posiblesDirs[pos].dirY - posPacY);
+		if (vX < abs(posActY - posPacX) || vY < abs(posActX - posPacY)) {
+			actualDir.dirX = posiblesDirs[pos].dirX;
+			actualDir.dirY = posiblesDirs[pos].dirY;
+			found = true;
+		}
+		i++;
+	}
+	posibles.clear();
+	/*y = posPacY >= posActY;
 	x = posPacX >= posActX;
 
 	if (x && y){ //Primero comprueba si se puede acercar a Pacman con la dirección calculada, si no coge una aleatoria
@@ -64,11 +79,11 @@ void SmartGhost::changeDir(){
 					actualDir.dirY = 0;
 				}
 				else {
-					cambiaDir();
+					//cambiaDir();
 				}
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else if (game->siguiente_casilla(tempY, tempX, 1, 0)) {
@@ -77,11 +92,11 @@ void SmartGhost::changeDir(){
 				actualDir.dirY = 0;
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else {
-			cambiaDir();
+			//cambiaDir();
 		}
 	}
 
@@ -97,11 +112,11 @@ void SmartGhost::changeDir(){
 					actualDir.dirY = 0;
 				}
 				else {
-					cambiaDir();
+					//cambiaDir();
 				}
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else if (game->siguiente_casilla(tempY, tempX, -1, 0)) {
@@ -110,11 +125,11 @@ void SmartGhost::changeDir(){
 				actualDir.dirY = 0;
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else {
-			cambiaDir();
+			//cambiaDir();
 		}
 	}
 
@@ -130,11 +145,11 @@ void SmartGhost::changeDir(){
 					actualDir.dirY = -1;
 				}
 				else {
-					cambiaDir();
+					//cambiaDir();
 				}
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
@@ -143,11 +158,11 @@ void SmartGhost::changeDir(){
 				actualDir.dirY = -1;
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else {
-			cambiaDir();
+			//cambiaDir();
 		}
 	}
 	else{  //Cuadrante arriba izquierda
@@ -162,11 +177,11 @@ void SmartGhost::changeDir(){
 					actualDir.dirY = -1;
 				}
 				else {
-					cambiaDir();
+					//cambiaDir();
 				}
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
@@ -175,13 +190,13 @@ void SmartGhost::changeDir(){
 				actualDir.dirY = -1;
 			}
 			else {
-				cambiaDir();
+				//cambiaDir();
 			}
 		}
 		else {
-			cambiaDir();
+			//cambiaDir();
 		}
-	}
+	}*/
 }
 
 bool SmartGhost::backward(int dirX, int dirY) { //Devolverá false si la dirección no es la contraria o si está en un callejon sin salida
@@ -195,4 +210,15 @@ bool SmartGhost::backward(int dirX, int dirY) { //Devolverá false si la direcció
 
 bool SmartGhost::reproduce() {
 	return adult;
+}
+
+void SmartGhost::crece() {
+	if (age < edadAdulta) {
+		rectDest.w = ancho - tamanyoBaby;
+		rectDest.h = alto - tamanyoBaby;
+	}
+	else {
+		rectDest.w = ancho;
+		rectDest.h = alto;
+	}
 }

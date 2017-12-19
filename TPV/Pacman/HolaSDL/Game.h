@@ -21,6 +21,7 @@ const int ptosVitamina = 10;
 const int r = 255;
 const int g = 255; //color
 const int b = 255;
+const int numFantasmaInteligente = 8; //numero en la textura proporcionada
 const SDL_Rect hudScore = { 800, 0, 50, 40 };
 const SDL_Rect hudVidas = { 0, 0, 35, 35 };
 class Game

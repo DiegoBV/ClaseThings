@@ -1,12 +1,14 @@
 #pragma once
 #include "Ghost.h"
 #include "Game.h"
-
+const int tamanyoBaby = 10;
+const int edadAdulta = 50;
 class SmartGhost : public Ghost
 {
 private:
 	int age;
 	bool adult;
+	int ancho, alto;
 	//Dirs direcciones[4] = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } }; //Array de direcciones para el pathfinding
 
 public:
@@ -20,6 +22,7 @@ public:
 	void changeDir(); //Cambia la direccion para seguir a Pacman
 	bool backward(int dirX, int dirY); //Comprueba que la nueva dirección no sea la contraria y sólo la coja si no se puede mover atrás
 	bool reproduce(); //Devuelve true si adult está a true
+	void crece();
 	//virtual void loadFromFile(ifstream& file);
 };
 
