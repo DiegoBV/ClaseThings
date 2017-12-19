@@ -18,6 +18,7 @@ public:
 	//virtual void animar(bool vitamina);
 	//virtual void render();
 	void changeDir(); //Cambia la direccion para seguir a Pacman
+	bool backward(int dirX, int dirY); //Comprueba que la nueva dirección no sea la contraria y sólo la coja si no se puede mover atrás
 	bool reproduce(); //Devuelve true si adult está a true
 	//virtual void loadFromFile(ifstream& file);
 };

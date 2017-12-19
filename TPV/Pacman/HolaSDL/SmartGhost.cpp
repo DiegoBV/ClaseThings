@@ -11,10 +11,9 @@ SmartGhost::~SmartGhost()
 {
 }
 
-SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, int edad){
+SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, int edad): Ghost(orX, orY, numFant, text, gam){
 	age = edad;
 	adult = false;
-	Ghost(orX, orY, numFant, text, gam);
 }
 
 void SmartGhost::update(){
@@ -48,20 +47,38 @@ void SmartGhost::changeDir(){
 
 	game->give_posPacman(posPacX, posPacY);
 
-	y = posPacY > posActY;
-	x = posPacX > posActX;
+	y = posPacY >= posActY;
+	x = posPacX >= posActX;
 
 	if (x && y){ //Primero comprueba si se puede acercar a Pacman con la dirección calculada, si no coge una aleatoria
 				 //Si la x y la y son mayores (haciendo un eje de coordenadas sobre el fantasma, estando este en la (0, 0) virtual
 				 //Cuadrante abajo a la derecha
-		if (game->siguiente_casilla(tempX, tempY, 0, 1)){
-			actualDir.dirX = 0;
-			actualDir.dirY = 1;
+		if (game->siguiente_casilla(tempY, tempX, 0, 1)){
+			if (!backward(0, 1)) {
+				actualDir.dirX = 0;
+				actualDir.dirY = 1;
+			}
+			else if (game->siguiente_casilla(tempY, tempX, 1, 0)) {
+				if (!backward(1, 0)) {
+					actualDir.dirX = 1;
+					actualDir.dirY = 0;
+				}
+				else {
+					cambiaDir();
+				}
+			}
+			else {
+				cambiaDir();
+			}
 		}
-			
-		else if (game->siguiente_casilla(tempX, tempY, 1, 0)){
-			actualDir.dirX = 1;
-			actualDir.dirY = 0;
+		else if (game->siguiente_casilla(tempY, tempX, 1, 0)) {
+			if (!backward(1, 0)) {
+				actualDir.dirX = 1;
+				actualDir.dirY = 0;
+			}
+			else {
+				cambiaDir();
+			}
 		}
 		else {
 			cambiaDir();
@@ -69,13 +86,32 @@ void SmartGhost::changeDir(){
 	}
 
 	else if (y && !x){ //Cuadrante abajo a la izquierda (x menor que la X del fantasma
-		if (game->siguiente_casilla(tempX, tempY, 0, 1)){
-			actualDir.dirX = 0;
-			actualDir.dirY = 1;
+		if (game->siguiente_casilla(tempY, tempX, 0, 1)){
+			if (!backward(0, 1)) {
+				actualDir.dirX = 0;
+				actualDir.dirY = 1;
+			}
+			else if (game->siguiente_casilla(tempY, tempX, -1, 0)) {
+				if (!backward(-1, 0)) {
+					actualDir.dirX = -1;
+					actualDir.dirY = 0;
+				}
+				else {
+					cambiaDir();
+				}
+			}
+			else {
+				cambiaDir();
+			}
 		}
-		else if (game->siguiente_casilla(tempX, tempY, -1, 0)){
-			actualDir.dirX = -1;
-			actualDir.dirY = 0;
+		else if (game->siguiente_casilla(tempY, tempX, -1, 0)) {
+			if (!backward(-1, 0)) {
+				actualDir.dirX = -1;
+				actualDir.dirY = 0;
+			}
+			else {
+				cambiaDir();
+			}
 		}
 		else {
 			cambiaDir();
@@ -83,30 +119,77 @@ void SmartGhost::changeDir(){
 	}
 
 	else if (!y && x){ //Cuadrante arriba a la derecha
-		if (game->siguiente_casilla(tempX, tempY, 1, 0)){
-			actualDir.dirX = 1;
-			actualDir.dirY = 0;
+		if (game->siguiente_casilla(tempY, tempX, 1, 0)){
+			if (!backward(1, 0)) {
+				actualDir.dirX = 1;
+				actualDir.dirY = 0;
+			}
+			else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
+				if (!backward(0, -1)) {
+					actualDir.dirX = 0;
+					actualDir.dirY = -1;
+				}
+				else {
+					cambiaDir();
+				}
+			}
+			else {
+				cambiaDir();
+			}
 		}
-		else if (game->siguiente_casilla(tempX, tempY, 0, -1)){
-			actualDir.dirX = 0;
-			actualDir.dirY = -1;
+		else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
+			if (!backward(0, -1)) {
+				actualDir.dirX = 0;
+				actualDir.dirY = -1;
+			}
+			else {
+				cambiaDir();
+			}
 		}
 		else {
 			cambiaDir();
 		}
 	}
 	else{  //Cuadrante arriba izquierda
-		if (x && game->siguiente_casilla(tempX, tempY, -1, 0)){
-			actualDir.dirX = -1;
-			actualDir.dirY = 0;
+		if (game->siguiente_casilla(tempY, tempX, -1, 0)){
+			if (!backward(-1, 0)) {
+				actualDir.dirX = -1;
+				actualDir.dirY = 0;
+			}
+			else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
+				if (!backward(0, -1)) {
+					actualDir.dirX = 0;
+					actualDir.dirY = -1;
+				}
+				else {
+					cambiaDir();
+				}
+			}
+			else {
+				cambiaDir();
+			}
 		}
-		else if (game->siguiente_casilla(tempX, tempY, 0, -1)){
-			actualDir.dirX = 0;
-			actualDir.dirY = -1;
+		else if (game->siguiente_casilla(tempY, tempX, 0, -1)) {
+			if (!backward(0, -1)) {
+				actualDir.dirX = 0;
+				actualDir.dirY = -1;
+			}
+			else {
+				cambiaDir();
+			}
 		}
 		else {
 			cambiaDir();
 		}
+	}
+}
+
+bool SmartGhost::backward(int dirX, int dirY) { //Devolverá false si la dirección no es la contraria o si está en un callejon sin salida
+	if (dirX == (actualDir.dirX*-1) && dirY == (actualDir.dirY*-1)) { //Si es la drirección contraria no la pillamos a menos que no haya salida
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 

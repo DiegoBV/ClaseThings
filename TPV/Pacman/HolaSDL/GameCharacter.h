@@ -11,7 +11,6 @@ protected:
 		int dirY;
 	};
 	Dirs actualDir; //direccion actual
-	//Game* game; //puntero a Game
 	Texture* textura; //textura
 	int iniX, iniY; //pos inicial
 	SDL_Rect rectDest; //rectangulo para dibujarlo 			   

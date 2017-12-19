@@ -1,15 +1,2 @@
-﻿  Texture.cpp
-  SmartGhost.cpp
-  Pacman.cpp
-  main.cpp
-  GameCharacter.cpp
-  Ghost.cpp
-c:\users\mrcorner\desktop\cosas git\clasethings\tpv\pacman\holasdl\ghost.cpp(23): warning C4244: 'argument' : conversion from 'time_t' to 'unsigned int', possible loss of data
-  GameObject.cpp
-  GameMap.cpp
-  Game.cpp
-c:\users\mrcorner\desktop\cosas git\clasethings\tpv\pacman\holasdl\game.cpp(31): warning C4018: '<' : signed/unsigned mismatch
-  Font.cpp
-  Generating Code...
-c:\users\mrcorner\desktop\cosas git\clasethings\tpv\pacman\holasdl\gamemap.cpp(41): warning C4715: 'GameMap::getCell' : not all control paths return a value
+﻿  SmartGhost.cpp
   HolaSDL.vcxproj -> C:\Users\MrCorner\Desktop\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
