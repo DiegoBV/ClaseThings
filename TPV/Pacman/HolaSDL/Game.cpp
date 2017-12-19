@@ -264,6 +264,10 @@ int Game::obtenerPixelY(int posicion) {
 	return (winHeight / this->map->fils) * posicion;
 }
 
+void Game::give_posPacman(int &posX, int &posY) {
+	posX = pacman->get_PosActX();
+	posY = pacman->get_PosActY();
+}
 //------------------------------------Archivo-----------------------------
 
 void Game::carga_Archivo(int lvl){
@@ -310,7 +314,6 @@ void Game::carga_Archivo(int lvl){
 		score = aux;
 		archivo >> levels_Index;
 	}
-	numComida = 10000;
 	archivo.close();
 }
 
@@ -419,9 +422,4 @@ void Game::leeTexturas() {
 		}
 	}
 	texturas.close();
-}
-
-void Game::give_posPacman(int &posX, int &posY){
-	posX = pacman->get_PosActX();
-	posY = pacman->get_PosActY();
 }

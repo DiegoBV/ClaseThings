@@ -6,10 +6,10 @@
 #include <random>
 #include "GameCharacter.h"
 //using namespace std;
-const int auxText = 2;
-const int filsTex = 1;
-const int colsTex = 2;
-const int posAsustado = 12;
+static const int auxText = 2;
+static const int filsTex = 1;
+static const int colsTex = 2;
+static const int posAsustado = 12;
 class Game;
 class Ghost : public GameCharacter
 {

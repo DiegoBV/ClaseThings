@@ -62,6 +62,7 @@ void SmartGhost::changeDir(){
 		i++;
 	}
 	posibles.clear();
+
 	/*y = posPacY >= posActY;
 	x = posPacX >= posActX;
 

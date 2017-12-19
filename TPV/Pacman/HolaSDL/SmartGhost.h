@@ -1,8 +1,8 @@
 #pragma once
 #include "Ghost.h"
 #include "Game.h"
-const int tamanyoBaby = 10;
-const int edadAdulta = 50;
+static const int tamanyoBaby = 10;
+static const int edadAdulta = 50;
 class SmartGhost : public Ghost
 {
 private:
