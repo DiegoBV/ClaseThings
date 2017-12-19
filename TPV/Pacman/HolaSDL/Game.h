@@ -90,6 +90,7 @@ public:
 	vector <Texture*> texts;
 	void menu();
 	bool siguiente_casilla(int &X, int &Y, int dirX, int dirY); //Le pasamos la casilla actual y calcula la siguiente
+	void give_posPacman(int &posX, int &posY);
 	void come(int x, int y); //cambia casilla de vitamina o de comida a vacia
 	MapCell consulta(int x, int y); //devuelve el tipo de casilla que le indicas
 	bool comprueba_colisiones(int x, int y);

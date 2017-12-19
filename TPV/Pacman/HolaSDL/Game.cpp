@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "SmartGhost.h"
 #include <sstream>
 Game::Game()
 {
@@ -288,6 +289,11 @@ void Game::carga_Archivo(int lvl){
 			fantasmita->loadFromFile(archivo); //se leen de archivo
 			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
+		else { //Fantasmas inteligentes
+			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, i + 4, texts[3], this, 1);
+			fantasmitaInt->loadFromFile(archivo); //se leen de archivo
+			objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+		}
 	}
 
 	if(pacman == nullptr)
@@ -304,7 +310,7 @@ void Game::carga_Archivo(int lvl){
 		score = aux;
 		archivo >> levels_Index;
 	}
-	numComida = 50;
+	numComida = 10000;
 	archivo.close();
 }
 
@@ -413,4 +419,9 @@ void Game::leeTexturas() {
 		}
 	}
 	texturas.close();
+}
+
+void Game::give_posPacman(int &posX, int &posY){
+	posX = pacman->get_PosActX();
+	posY = pacman->get_PosActY();
 }
