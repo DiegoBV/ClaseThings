@@ -14,7 +14,7 @@ class Game;
 class Ghost : public GameCharacter
 {
 friend class Game;
-private:
+protected:
 	//Número Fantasma
 	int numFantasma;
 	int posibles_Dirs();
@@ -31,9 +31,11 @@ public:
 				  //actualiza la direccion aleatoriamente
 	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
-	int ghostType();
-	virtual void muerte() = 0;
+	virtual int ghostType();
+	virtual void muerte();
 	virtual void animar(bool vitamina);
 	virtual void saveToFile(ofstream& file);
+	virtual bool reproduce();
+	virtual bool dead();
 };
 

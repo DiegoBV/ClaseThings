@@ -93,6 +93,21 @@ int Pacman::dame_Vidas(){
 	return this->vidas;
 }
 
+int Pacman::ghostType() {
+	return 0;
+}
+
+bool Pacman::reproduce(){
+	return false;
+}
+
+void Pacman::muerte(){
+}
+
+bool Pacman::dead(){
+	return false;
+}
+
 
 
 

@@ -123,3 +123,14 @@ void Ghost::saveToFile(ofstream& file) {
 int Ghost::ghostType() {
 	return this->type;
 }
+
+bool Ghost::reproduce(){
+	return false;
+}
+
+void Ghost::muerte(){
+}
+
+bool Ghost::dead(){
+	return false;
+}

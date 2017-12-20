@@ -157,29 +157,31 @@ bool Game::win() { //comprueba si se ha comido todo e.e
 
 bool Game::comprueba_colisiones(int x, int y) {
 	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
+	bool ghostDead = false;
+	int i = 0;
+	ghost++;
 
-	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+	while ( ghost != objects.rend()) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+		ghostDead = false;
 		if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
 			if (vitaminas) {
 				sumaScore(ptosFantasma);
 				(*ghost)->muerte();
 			}
+			else if ((*ghost)->ghostType() == 1 && (*ghost)->dead()){
+				objects.remove((*ghost));
+				ghostDead = true;
+				sumaScore(ptosFantasma);
+			}
 			else {
-				pacman->reduceVidas();
+				//pacman->reduceVidas();
 				pacman->muerte();
 			}
 		}
-		else { //Si no se choca con Pacman, comprobamos que no choque con otros fantasmas
-			ghost2 = objects.rbegin();
-			for (ghost2++; ghost2 != objects.rend(); ghost2++) {
-				if ((ghost2 != ghost) && ((*ghost2)->ghostType() == 1 && (*ghost)->ghostType() == 1)) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
-					if (((*ghost)->get_PosActY() == (*ghost2)->get_PosActX && (*ghost)->get_PosActX() == (*ghost2)->get_PosActY) && ((*ghost2)->reproduce() && (*ghost)->reproduce())) {
-						SmartGhost* son = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
-						objects.push_front(son);
-					}
-				}
-			}
-		}
+
+		i++;
+		if (!ghostDead)
+			ghost++;
 	}
 
 	if (pacman->he_Muerto()) {

@@ -32,6 +32,10 @@ public:
 	bool he_Muerto();
 	virtual void render(bool);
 	int dame_Vidas();
+	virtual int ghostType();
+	virtual bool reproduce();
+	virtual void muerte();
+	virtual bool dead();
 	
 };
 

@@ -28,13 +28,16 @@ public:
 	GameCharacter();
 	~GameCharacter();
 	GameCharacter(int posX, int posY, Texture* text, Game* gam); //fantasma y pacman tienen el mismo constructor, salvo el numFantasma
-	virtual void muerte(); //Muere y vuelve a la posición inicial
+	virtual void muerte() = 0; //Muere y vuelve a la posición inicial
 	int get_PosActX();
 	int get_PosActY();
 	virtual void update() = 0;
+	virtual bool dead() = 0; //comprueba que el el gamecharacter está muerto
 	virtual void render();
 	virtual void render(bool)=0;
 	virtual void loadFromFile(ifstream& file);
 	virtual void saveToFile(ofstream& file);
+	virtual int ghostType() = 0;
+	virtual bool reproduce() = 0;
 };
 
