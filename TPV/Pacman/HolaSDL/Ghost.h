@@ -18,9 +18,10 @@ private:
 	//Número Fantasma
 	int numFantasma;
 	int posibles_Dirs();
+	int type;
 public:
 	Ghost();
-	Ghost(int orX, int orY, int numFant, Texture* text, Game* gam);
+	Ghost(int orX, int orY, int numFant, Texture* text, Game* gam, int type);
 	~Ghost();
 	vector <int> posibles;
 	Dirs posiblesDirs[4];
@@ -30,6 +31,8 @@ public:
 				  //actualiza la direccion aleatoriamente
 	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
+	int ghostType();
+	virtual void muerte() = 0;
 	virtual void animar(bool vitamina);
 	virtual void saveToFile(ofstream& file);
 };

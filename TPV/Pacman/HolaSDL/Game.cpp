@@ -157,6 +157,7 @@ bool Game::win() { //comprueba si se ha comido todo e.e
 
 bool Game::comprueba_colisiones(int x, int y) {
 	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
+
 	for (ghost++; ghost != objects.rend(); ghost++) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
 		if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
 			if (vitaminas) {
@@ -166,6 +167,17 @@ bool Game::comprueba_colisiones(int x, int y) {
 			else {
 				pacman->reduceVidas();
 				pacman->muerte();
+			}
+		}
+		else { //Si no se choca con Pacman, comprobamos que no choque con otros fantasmas
+			ghost2 = objects.rbegin();
+			for (ghost2++; ghost2 != objects.rend(); ghost2++) {
+				if ((ghost2 != ghost) && ((*ghost2)->ghostType() == 1 && (*ghost)->ghostType() == 1)) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
+					if (((*ghost)->get_PosActY() == (*ghost2)->get_PosActX && (*ghost)->get_PosActX() == (*ghost2)->get_PosActY) && ((*ghost2)->reproduce() && (*ghost)->reproduce())) {
+						SmartGhost* son = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
+						objects.push_front(son);
+					}
+				}
 			}
 		}
 	}
@@ -289,12 +301,12 @@ void Game::carga_Archivo(int lvl){
 		int typeGhost;
 		archivo >> typeGhost;
 		if (typeGhost == 0) {
-			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this);
+			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this, 0);
 			fantasmita->loadFromFile(archivo); //se leen de archivo
 			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 		}
 		else { //Fantasmas inteligentes
-			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1);
+			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
 			fantasmitaInt->loadFromFile(archivo); //se leen de archivo
 			objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
 		}

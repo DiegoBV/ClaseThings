@@ -4,8 +4,10 @@
 
 Ghost::Ghost(): GameCharacter() {} //constructora por defecto
 
-Ghost::Ghost(int orX, int orY, int numFant, Texture* text, Game* gam): GameCharacter(orX, orY, text, gam), numFantasma(numFant)
+Ghost::Ghost(int orX, int orY, int numFant, Texture* text, Game* gam, int type): GameCharacter(orX, orY, text, gam), numFantasma(numFant)
 {	
+
+	this->type = type; //Para que game sepa qué tipo de fantasma es
 	//Array con las posibles direcciones que puede tomar el fantasma
 	//Rellenado con esas direcciones
 	posiblesDirs[0].dirX = 0; //Arriba
@@ -116,4 +118,8 @@ void Ghost::saveToFile(ofstream& file) {
 	file << "0" << " "; //guardamos el tipo del fantasma
 	GameCharacter::saveToFile(file);
 	file << endl;
+}
+
+int Ghost::ghostType() {
+	return this->type;
 }

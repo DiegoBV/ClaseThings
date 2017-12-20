@@ -11,26 +11,33 @@ SmartGhost::~SmartGhost()
 {
 }
 
-SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, int edad): Ghost(orX, orY, numFant, text, gam){
+SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, int edad, int type): Ghost(orX, orY, numFant, text, gam, type){
 	age = edad;
 	adult = false;
+	dead = false;
 	ancho = rectDest.w;
 	alto = rectDest.h;
 }
 
 void SmartGhost::update(){
-	Ghost::update();
-	crece();
-	donut();
-	if (adult) {
-		changeDir();
-	}
+	if (!dead) {
+		Ghost::update();
+		crece();
+		donut();
+		if (adult) {
+			changeDir();
+		}
 
 
-	age++;
+		age++;
 
-	if (age > edadAdulta) { //El pequeñajo crece
-		adult = true;
+		if (age > edadAdulta) { //El pequeñajo crece
+			adult = true;
+		}
+
+		else if (age >= edadMuerte) {
+			muerte();
+		}
 	}
 }
 /*Primero vamos a buscar la dirección que más nos acerca a Pacman, es decir:
@@ -222,4 +229,8 @@ void SmartGhost::crece() {
 		rectDest.w = ancho;
 		rectDest.h = alto;
 	}
+}
+
+void SmartGhost::muerte() {
+	dead = true;
 }
