@@ -5,8 +5,8 @@
 using namespace std;
 
 static const int tamanyoBaby = 10;
-static const int edadAdulta = 50;
-static const int edadMuerte = 10000;
+static const int edadAdulta = 100;
+static const int edadMuerte = 200;
 
 class SmartGhost : public Ghost
 {
@@ -15,6 +15,7 @@ private:
 	bool adult;
 	bool deadState;
 	int ancho, alto;
+	int fertilidad;
 	//Dirs direcciones[4] = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } }; //Array de direcciones para el pathfinding
 
 public:

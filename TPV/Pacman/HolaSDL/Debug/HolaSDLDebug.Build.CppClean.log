@@ -1,7 +1,6 @@
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\vc120.pdb
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\vc120.idb
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\font.obj
-c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\game.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\gamemap.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\gameobject.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\ghost.obj
@@ -10,6 +9,7 @@ c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\main.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\pacman.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\smartghost.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\texture.obj
+c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\debug\game.obj
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\bin\holasdldebug.ilk
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\bin\holasdldebug.exe
 c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\bin\holasdldebug.pdb

@@ -28,7 +28,7 @@ public:
 	GameCharacter();
 	~GameCharacter();
 	GameCharacter(int posX, int posY, Texture* text, Game* gam); //fantasma y pacman tienen el mismo constructor, salvo el numFantasma
-	virtual void muerte() = 0; //Muere y vuelve a la posición inicial
+	virtual void muerte(); //Muere y vuelve a la posición inicial
 	int get_PosActX();
 	int get_PosActY();
 	virtual void update() = 0;

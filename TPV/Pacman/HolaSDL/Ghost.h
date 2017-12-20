@@ -32,7 +32,6 @@ public:
 	void render(bool vitamina); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	virtual int ghostType();
-	virtual void muerte();
 	virtual void animar(bool vitamina);
 	virtual void saveToFile(ofstream& file);
 	virtual bool reproduce();

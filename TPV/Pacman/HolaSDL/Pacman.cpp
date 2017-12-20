@@ -101,9 +101,6 @@ bool Pacman::reproduce(){
 	return false;
 }
 
-void Pacman::muerte(){
-}
-
 bool Pacman::dead(){
 	return false;
 }

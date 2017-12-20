@@ -1,9 +1,13 @@
-﻿Compilación iniciada a las 20/12/2017 17:34:49.
+﻿Compilación iniciada a las 20/12/2017 19:07:03.
      1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp main.cpp
+         main.cpp
          Game.cpp
      1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(31): warning C4018: '<' : no coinciden signed/unsigned
+         Generando código...
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(165): warning C4715: 'Game::colision_Fantasma' : no todas las rutas de acceso de control devuelven un valor
+     1>cl : Línea de comandos warning D9028: error de recompilación mínimo, revirtiendo a la compilación normal
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\Font.obj
          Debug\Game.obj
@@ -20,4 +24,4 @@
 
 Compilación correcta.
 
-Tiempo transcurrido 00:00:02.04
+Tiempo transcurrido 00:00:02.77

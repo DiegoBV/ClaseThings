@@ -17,10 +17,19 @@ SmartGhost::SmartGhost(int orX, int orY, int numFant, Texture* text, Game* gam, 
 	deadState = false;
 	ancho = rectDest.w;
 	alto = rectDest.h;
+	fertilidad = 0;
 }
 
 void SmartGhost::update(){
+	int tempX = posActX;
+	int tempY = posActY;
+
 	if (!deadState) {
+		if ((fertilidad == 0) && game->colision_Fantasma(tempX + actualDir.dirY, posActY + actualDir.dirX) && !deadState && adult){
+			game->nace_Fantasma(posActX - actualDir.dirY, posActY - actualDir.dirX);
+			fertilidad = 20;
+		}
+
 		Ghost::update();
 		crece();
 		donut();
@@ -39,6 +48,11 @@ void SmartGhost::update(){
 			olddie();
 			cout << "SEMOS AGÜELOS" << endl;
 		}
+
+		if (fertilidad > 0){
+			fertilidad--;
+		}
+
 	}
 }
 

@@ -101,6 +101,8 @@ public:
 	int dame_Anchura();  //los gets para saber las dimensiones del tablero y pantalla
 	int dame_FilasTablero();
 	int dame_ColumnasTablero();
+	bool colision_Fantasma(int posX, int posY);
+	void nace_Fantasma(int posX, int posY);
 	bool dame_exit();
 	SDL_Renderer* dame_Renderer();
 	int obtenerPixelX(int casilla);

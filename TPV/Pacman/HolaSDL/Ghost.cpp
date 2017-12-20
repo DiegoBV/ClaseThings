@@ -128,9 +128,6 @@ bool Ghost::reproduce(){
 	return false;
 }
 
-void Ghost::muerte(){
-}
-
 bool Ghost::dead(){
 	return false;
 }

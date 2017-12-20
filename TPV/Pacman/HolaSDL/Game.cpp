@@ -32,8 +32,9 @@ Game::~Game() //destruye el renderer y la ventana
 		delete texts[i]; //bora cada una de las texturas creadas
 	}
 	deleteObjects();
-	delete fuente;
 	delete pacman;
+	delete fuente;
+	objects.clear();
 	TTF_Quit();
 }
 
@@ -146,6 +147,27 @@ void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numer
 }
 
 //------------------------------------Auxiliares-----------------------------
+bool Game::colision_Fantasma(int posX, int posY){
+	ghost2 = objects.rbegin();
+	for (ghost2++; ghost2 != objects.rend(); ghost2++) {
+		if ((*ghost2)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
+			if (((posY == (*ghost2)->get_PosActX()  && posX == (*ghost2)->get_PosActY()) && (*ghost2)->reproduce())) {
+				return true;
+			}
+			else{
+				return false;
+			}
+		}
+		else{
+			return false;
+		}
+	}
+}
+
+void Game::nace_Fantasma(int posX, int posY){
+	SmartGhost* son = new SmartGhost(posX, posY, numFantasmaInteligente, texts[3], this, 1, 1);
+	objects.push_front(son);
+}
 
 void Game::setComida(int a) {
 	numComida += a;
@@ -158,28 +180,31 @@ bool Game::win() { //comprueba si se ha comido todo e.e
 bool Game::comprueba_colisiones(int x, int y) {
 	ghost = objects.rbegin(); //empieza el iterador en el final//se salta a pacman
 	bool ghostDead = false;
-	int i = 0;
+	bool muerePacman = true;
 	ghost++;
 
 	while ( ghost != objects.rend()) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
 		ghostDead = false;
+		muerePacman = true;
 		if ((*ghost)->get_PosActY() == x && (*ghost)->get_PosActX() == y) {
 			if (vitaminas) {
 				sumaScore(ptosFantasma);
 				(*ghost)->muerte();
+				muerePacman = false;
 			}
-			else if ((*ghost)->ghostType() == 1 && (*ghost)->dead()){
+			if ((*ghost)->ghostType() == 1 && (*ghost)->dead()){
+				delete *ghost;
 				objects.remove((*ghost));
 				ghostDead = true;
 				sumaScore(ptosFantasma);
+				muerePacman = false;
 			}
-			else {
-				//pacman->reduceVidas();
+			if(muerePacman) {
+				pacman->reduceVidas();
 				pacman->muerte();
 			}
 		}
 
-		i++;
 		if (!ghostDead)
 			ghost++;
 	}
