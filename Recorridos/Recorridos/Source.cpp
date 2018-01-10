@@ -5,12 +5,14 @@ using namespace std;
 
 int main() {
 	bintree<int> hji(2);
-	bintree<int> hjd(0);
+	bintree<int> hjd(3);
 	bintree<int> hojaiz(hji, 10, hjd);
-	bintree<int> hojader(50);
+	bintree<int> hj2(100);
+	bintree<int> hj3(200);
+	bintree<int> hojader(hj2, 50, hj3);
 	bintree<int> arbol(hojaiz, 5, hojader);
 	
-	vector<int> v = arbol.preorder();
+	vector<int> v = arbol.inorder();
 	for (int i = 0; i < v.size(); i++) {
 		cout << v[i] << " ";
 	}

@@ -62,13 +62,38 @@ private:
 
 	void preorder_rec(vector<T>& v, Link n) const{
 		if (n->elem != 0) {
-			v.push_back(n->elem);
-			if(n->der != nullptr)
-				preorder_rec(v, n->der);
-			if(n->izq != nullptr)
-				preorder_rec(v, n->izq);
-		}
+			v.push_back(n->elem); //push de la raiz del elemento de la raiz
 
+			if(n->izq != nullptr)
+				preorder_rec(v, n->izq); //si el hijo izquierdo no es nulo, recursion por la izquierda
+
+			if (n->der != nullptr)
+				preorder_rec(v, n->der); //si el hijo derecho no es nulo, recursion por la derecha
+		}
+	}
+
+	void inorder_rec(vector<T>& v, Link n) const {
+		if (n->elem != 0) {	
+			if (n->izq != nullptr) //primero se recorre por la izquierda
+				inorder_rec(v, n->izq);
+
+			v.push_back(n->elem); //se pushea el elemento
+
+			if (n->der != nullptr) //se recorre por la derecha
+				inorder_rec(v, n->der);
+		}
+	}
+	
+	void postorder_rec(vector<T>& v, Link n) const {
+		if (n->elem != 0) {
+			if (n->izq != nullptr)
+				postorder_rec(v, n->izq);
+
+			if (n->der != nullptr)
+				postorder_rec(v, n->der);
+
+			v.push_back(n->elem);
+		}
 	}
 
 public:
@@ -130,7 +155,19 @@ public:
 	vector<T> preorder() const {
 		vector<T> v;
 		preorder_rec(v, raiz);
-		return (v);
+		return v;
+	}
+
+	vector<T> inorder() const {
+		vector<T> v;
+		inorder_rec(v, raiz);
+		return v;
+	}
+
+	vector<T> postorder() const {
+		vector<T> v;
+		postorder_rec(v, raiz);
+		return v;
 	}
 };
 
