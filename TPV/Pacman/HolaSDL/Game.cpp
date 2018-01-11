@@ -1,5 +1,7 @@
 #include "Game.h"
 #include "SmartGhost.h"
+#include "SDLError.h"
+#include "FileNotFoundError.h"
 #include <sstream>
 Game::Game()
 {
@@ -14,12 +16,13 @@ Game::Game()
 	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
 	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
 	TTF_Init();
-	//Texturas
-	//texts[0] = vitaminas, texts[1] = muro, texts[2] = comida, texts[3] = spritesheet, texts[4] = menu, texts[5] = gameOver, texts[6] = mensaje, texts[7] = vidas. texts[8]  = fuente
 	leeTexturas();
 	color.r = r;
 	color.g = g;
 	color.b = b;
+	if (window == nullptr || renderer == nullptr) {
+		throw SDLError(SDL_GetError());
+	}
 }
 
 
@@ -151,17 +154,12 @@ bool Game::colision_Fantasma(int posX, int posY){
 	ghost2 = objects.rbegin();
 	for (ghost2++; ghost2 != objects.rend(); ghost2++) {
 		if ((*ghost2)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
-			if (((posY == (*ghost2)->get_PosActX()  && posX == (*ghost2)->get_PosActY()) && (*ghost2)->reproduce())) {
+			if (((posY == (*ghost2)->get_PosActX() && posX == (*ghost2)->get_PosActY()) && (*ghost2)->reproduce())) {
 				return true;
 			}
-			else{
-				return false;
-			}
-		}
-		else{
-			return false;
 		}
 	}
+		return false;
 }
 
 void Game::nace_Fantasma(int posX, int posY){
@@ -313,47 +311,50 @@ void Game::carga_Archivo(int lvl){
 	string name = nombreFichero(pathTxt, lvl, extTxt);
 	archivo.open(name);
 	if (!archivo.is_open()) {
-		string fileName = nombreFichero(pathTxt, 1, extTxt);
+		throw FileNotFoundError("Archivo: " + name + " no encontrado");  //error de archivo no encontrado
+		/*string fileName = nombreFichero(pathTxt, 1, extTxt);
 		levels_Index = 1;
-		archivo.open(fileName);
-	}
-
-	map = new GameMap(this);
-	map->loadFromFile(archivo);
-
-	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
-	archivo >> numGhost;
-
-	for (int i = 0; i < numGhost; i++) {
-		int typeGhost;
-		archivo >> typeGhost;
-		if (typeGhost == 0) {
-			Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this, 0);
-			fantasmita->loadFromFile(archivo); //se leen de archivo
-			objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
-		}
-		else { //Fantasmas inteligentes
-			SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
-			fantasmitaInt->loadFromFile(archivo); //se leen de archivo
-			objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
-		}
-	}
-
-	if(pacman == nullptr)
-		pacman = new Pacman(0, 0, texts[3], this);
-	objects.push_back(pacman); //pusheamos a pacman al final de la lista
-	pacman->loadFromFile(archivo); //se lee de archivo
-
-	int aux; //para saber si el archivo acaba o no
-	archivo >> aux;
-	if (archivo.fail()) {
-		archivo.clear();
+		archivo.open(fileName);*/
+		this->menu();
 	}
 	else {
-		score = aux;
-		archivo >> levels_Index;
+		map = new GameMap(this);
+		map->loadFromFile(archivo);
+
+		int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
+		archivo >> numGhost;
+
+		for (int i = 0; i < numGhost; i++) {
+			int typeGhost;
+			archivo >> typeGhost;
+			if (typeGhost == 0) {
+				Ghost* fantasmita = new Ghost(0, 0, i + 4, texts[3], this, 0);
+				fantasmita->loadFromFile(archivo); //se leen de archivo
+				objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+			}
+			else { //Fantasmas inteligentes
+				SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
+				fantasmitaInt->loadFromFile(archivo); //se leen de archivo
+				objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+			}
+		}
+
+		if (pacman == nullptr)
+			pacman = new Pacman(0, 0, texts[3], this);
+		objects.push_back(pacman); //pusheamos a pacman al final de la lista
+		pacman->loadFromFile(archivo); //se lee de archivo
+
+		int aux; //para saber si el archivo acaba o no
+		archivo >> aux;
+		if (archivo.fail()) {
+			archivo.clear();
+		}
+		else {
+			score = aux;
+			archivo >> levels_Index;
+		}
+		archivo.close();
 	}
-	archivo.close();
 }
 
 void Game::menu() {
@@ -404,7 +405,7 @@ void Game::siguiente_Estado() {
 			levels_Index++;
 			deleteObjects();
 			this->carga_Archivo(levels_Index); //carga el siguiente archivo
-			this->run(); //run!
+			this->run(); //run! CAMBIARLO!!
 	}
 	else if (pacman->he_Muerto()) {
 		game_Over(); 
@@ -443,22 +444,33 @@ string Game::nombreFichero(string path, int num, string ext) {
 void Game::leeTexturas() {
 	ifstream texturas;
 	texturas.open(pathInfoTexturas + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
-	int numText = 0;
-	texturas >> numText;
-	for (int i = 0; i < numText; i++) {
-		string fileName;
-		int fils, cols;
-		texturas >> fileName;
-		if (fileName == "Fuente") { //si es la fuente crea una textura vacia y la fuente
-			int tamanyo;
-			texturas >> fileName >> tamanyo;
-			fuente = new Font(fileName, tamanyo);
-			texts.push_back(new Texture());
-		}
-		else {
-			texturas >> fils >> cols;
-			texts.push_back(new Texture(renderer, fileName, fils, cols));
-		}
+	if (!texturas.is_open()) {
+		throw FileNotFoundError("Archivo: " + pathInfoTexturas + extTxt + " no encontrado"); //error de archivo no encontrado
 	}
-	texturas.close();
+	else {
+		int numText = 0;
+		texturas >> numText;
+		for (int i = 0; i < numText; i++) {
+			string fileName;
+			int fils, cols;
+			texturas >> fileName;
+			if (fileName == "Fuente") { //si es la fuente crea una textura vacia y la fuente
+				int tamanyo;
+				texturas >> fileName >> tamanyo;
+				fuente = new Font(fileName, tamanyo);
+				texts.push_back(new Texture());
+			}
+			else {
+				texturas >> fils >> cols;
+				texts.push_back(new Texture(renderer, fileName, fils, cols));
+			}
+		}
+
+		for (int i = 0; i < numText; i++) {
+			if (texts[i] == nullptr) {
+				throw SDLError(IMG_GetError()); //controlar el error de texturas nulas
+			}
+		}
+		texturas.close();
+	}
 }

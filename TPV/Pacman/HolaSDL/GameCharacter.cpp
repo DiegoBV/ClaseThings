@@ -66,8 +66,10 @@ void GameCharacter::animar(int posIn, int fils, int cols) {
 
 void GameCharacter::loadFromFile(ifstream& file) {
 	file >> posActY >> posActX >> iniY >> iniX >> actualDir.dirX >> actualDir.dirY;
-	rectDest.x = posActY * this->game->dame_Anchura() / game->dame_ColumnasTablero(); //esto hay que quitarlo wey
-	rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
+	if (game->dame_ColumnasTablero() != 0 && game->dame_FilasTablero() != 0) {
+		rectDest.x = posActY * this->game->dame_Anchura() / game->dame_ColumnasTablero();
+		rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
+	}
 }
 
 void GameCharacter::saveToFile(ofstream& file) {
