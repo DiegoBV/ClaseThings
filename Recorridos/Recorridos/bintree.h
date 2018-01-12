@@ -18,6 +18,7 @@
 #include <memory>    // shared_ptr, make_shared
 #include <iomanip>   // setw
 #include <vector>
+#include <queue>
 using namespace std;
 
 
@@ -96,6 +97,20 @@ private:
 		}
 	}
 
+	void levels_it(vector<T>& v, Link n) const {
+		if (n->elem != 0) {
+			queue<Link> cola; //usamos una cola de ayuda
+			cola.push(n); //push del nodo N
+			while (!cola.empty()) { //meintras no este vacía
+				Link aux = cola.front(); //cogemos el primer elemento que entró
+				v.push_back(aux->elem); //guardamos
+				cola.pop(); //popeamos
+				if (aux->izq != 0 && aux->izq != nullptr) { cola.push(aux->izq); } //si el izquierdo no es nulo, lo guardamos
+				if (aux->der != 0 && aux->der != nullptr) { cola.push(aux->der); } //si el derecho no es nulo, lo guardamos
+			}
+		}
+	}
+
 public:
 	// constructor de árbol vacío
 	bintree() : raiz(nullptr) {} // O(1)
@@ -167,6 +182,12 @@ public:
 	vector<T> postorder() const {
 		vector<T> v;
 		postorder_rec(v, raiz);
+		return v;
+	}
+
+	vector<T> levels() const {
+		vector<T> v;
+		levels_it(v, raiz);
 		return v;
 	}
 };

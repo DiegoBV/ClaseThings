@@ -1,6 +1,7 @@
 #include "bintree.h"
 #include <vector>
 #include <iostream>
+#include <queue>
 using namespace std;
 
 int main() {
@@ -12,7 +13,7 @@ int main() {
 	bintree<int> hojader(hj2, 50, hj3);
 	bintree<int> arbol(hojaiz, 5, hojader);
 	
-	vector<int> v = arbol.inorder();
+	vector<int> v = arbol.levels();
 	for (int i = 0; i < v.size(); i++) {
 		cout << v[i] << " ";
 	}

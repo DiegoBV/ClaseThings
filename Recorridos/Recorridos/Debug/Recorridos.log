@@ -1,8 +1,8 @@
-﻿  Source.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\recorridos\recorridos\source.cpp(16): warning C4018: '<': signed/unsigned mismatch
+﻿  bintree.cpp
   Generating Code...
   Compiling...
-  bintree.cpp
+  Source.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\recorridos\recorridos\source.cpp(17): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Recorridos.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\Recorridos\Debug\Recorridos.exe
   Recorridos.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\Recorridos\Debug\Recorridos.pdb (Partial PDB)
