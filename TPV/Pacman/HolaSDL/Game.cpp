@@ -2,6 +2,7 @@
 #include "SmartGhost.h"
 #include "SDLError.h"
 #include "FileNotFoundError.h"
+#include "FileFormatError.h"
 #include <sstream>
 Game::Game()
 {
@@ -332,10 +333,13 @@ void Game::carga_Archivo(int lvl){
 				fantasmita->loadFromFile(archivo); //se leen de archivo
 				objects.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
 			}
-			else { //Fantasmas inteligentes
+			else if(typeGhost == 1){ //Fantasmas inteligentes
 				SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, texts[3], this, 1, 1);
 				fantasmitaInt->loadFromFile(archivo); //se leen de archivo
 				objects.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+			}
+			else {
+				throw FileFormatError("Tipo No Valido de Fantasma: " + typeGhost);
 			}
 		}
 
@@ -465,7 +469,6 @@ void Game::leeTexturas() {
 				texts.push_back(new Texture(renderer, fileName, fils, cols));
 			}
 		}
-
 		for (int i = 0; i < numText; i++) {
 			if (texts[i] == nullptr) {
 				throw SDLError(IMG_GetError()); //controlar el error de texturas nulas

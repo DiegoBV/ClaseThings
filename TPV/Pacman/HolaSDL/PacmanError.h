@@ -7,7 +7,6 @@ using namespace std;
 class PacmanError: public logic_error
 {
 public:
-	PacmanError(const string& c) : logic_error("PacmanError " + c) {};
-	~PacmanError();
+	PacmanError(const string& c) : logic_error("PacmanError: " + c) {};
 };
 

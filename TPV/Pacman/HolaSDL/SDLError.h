@@ -8,6 +8,5 @@ class SDLError: public PacmanError
 {
 public:
 	SDLError(const string& c) : PacmanError(c) {};
-	~SDLError();
 };
 
