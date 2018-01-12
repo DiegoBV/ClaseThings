@@ -1,6 +1,7 @@
 #include "GameMap.h"
 #include "Game.h"
-
+#include "FileFormatError.h"
+#include "FileNotFoundError.h"
 
 GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
@@ -64,6 +65,9 @@ void GameMap::loadFromFile(ifstream& file) {
 	if (file.is_open()) {
 		int fils, cols;
 		file >> fils >> cols;
+		if (fils < 0 || cols < 0) { //tamaño de mapa no valido
+			throw FileFormatError("Tamaño de mapa invalido: " + to_string(fils) + "  " + to_string(cols));
+		}
 		this->fils = fils;
 		this->cols = cols;
 		vector_Dinamico();
@@ -71,12 +75,18 @@ void GameMap::loadFromFile(ifstream& file) {
 			for (int j = 0; j < cols; j++) {
 				int pos;
 				file >> pos;
+				if (pos > 3 || pos < 0) { //valor de celda incorrecto
+					throw FileFormatError("Posicion no valida: Fila: " + to_string(i) + " Columna: " + to_string(j) + " Numero: " + to_string(pos));
+				}
 				this->modifica_Posicion(i, j, (MapCell)pos);
 				if (pos == 2 || pos == 3) {
 					game->setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
 				}
 			}
 		}
+	}
+	else {
+		throw FileNotFoundError("Archivo no encontrado");
 	}
 }
 
