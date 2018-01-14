@@ -126,22 +126,13 @@ private:
 		}
 	}
 
-	// cálculo recursivo de la altura
-	size_t alturaIzq(const Link& nodo) const {
+	// cálculo recursivo de la altura 
+	size_t height(const Link& nodo) const {
 		if (nodo == nullptr) {
 			return 0;
 		}
 		else {
-			return alturaIzq(nodo->izq) + 1;
-		}
-	}
-
-	size_t alturaDer(const Link& nodo) const {
-		if (nodo == nullptr) {
-			return 0;
-		}
-		else {
-			return alturaDer(nodo->der) + 1;
+			return max(height(nodo->izq), height(nodo->der)) + 1;
 		}
 	}
 
@@ -223,10 +214,12 @@ private:
 
 	int diametro_rec(Link n) const {
 		if (n != nullptr) {
-			//size_t d1 = alturaIzq(n) + alturaDer(n);
-			size_t d2 = diametro_rec(n->izq) + 1;
-			size_t d3 = diametro_rec(n->der) + 1;
-			int diam = max(d2, d3);
+			int leftHeight = height(n->izq); //calculamos la altura del hijo izquierdo
+			int rightHeight = height(n->der); //calculamos la altura del hijo derecho
+			int leftDiametro = diametro_rec(n->izq); //calculamos el diametro del hijo izquierdo (puede darse el caso de que el diam max no se encuentre pasando la raiz...)
+			int rightDiametro = diametro_rec(n->der); //same para el derecho
+			int diam = max(leftHeight + rightHeight + 1, max(leftDiametro, rightDiametro));
+			//calculamos el maximo entre las dos alturas + 1 (la raiz) y el maximo entre los diametros de los hijos (esto es to dificil de explicar con palabras)
 			return diam;
 		}
 		else {
@@ -305,7 +298,7 @@ public:
 	}
 	
 	int diametro() const {
-		return diametro_rec(raiz) + 1;
+		return diametro_rec(raiz) - 1;
 	}
 };
 
