@@ -222,24 +222,15 @@ private:
 	}
 
 	int diametro_rec(Link n) const {
-		size_t d1;
-		size_t d2;
-		size_t d3;
 		if (n != nullptr) {
-			if (n->izq == nullptr) {
-				d1 = alturaDer(n) + 1;
-			}
-			else if (n->der == nullptr) {
-				d1 = alturaIzq(n) + 1;
-			}
-			else {
-				d1 = alturaIzq(n) + alturaDer(n) - 2;
-			}
 			//size_t d1 = alturaIzq(n) + alturaDer(n);
-			size_t d2 = diametro_rec(n->izq);
-			size_t d3 = diametro_rec(n->izq);
-			int diam = max(max(d1, d2), d3);
+			size_t d2 = diametro_rec(n->izq) + 1;
+			size_t d3 = diametro_rec(n->der) + 1;
+			int diam = max(d2, d3);
 			return diam;
+		}
+		else {
+			return 0; //caso de que sea nullptr
 		}
 	}
 
@@ -314,7 +305,7 @@ public:
 	}
 	
 	int diametro() const {
-		return diametro_rec(raiz);
+		return diametro_rec(raiz) + 1;
 	}
 };
 
