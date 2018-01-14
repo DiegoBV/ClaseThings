@@ -1,0 +1,10 @@
+﻿  Source.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(227): warning C4101: 'd3': unreferenced local variable
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(224): note: while compiling class template member function 'int bst<int,std::less<int>>::diametro_rec(std::shared_ptr<bst<int,std::less<int>>::Nodo>) const'
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(317): note: see reference to function template instantiation 'int bst<int,std::less<int>>::diametro_rec(std::shared_ptr<bst<int,std::less<int>>::Nodo>) const' being compiled
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(327): note: see reference to class template instantiation 'bst<int,std::less<int>>' being compiled
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(226): warning C4101: 'd2': unreferenced local variable
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(244): warning C4715: 'bst<int,std::less<int> >::diametro_rec': not all control paths return a value
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\diametrodistancia arboles\diametrodistancia arboles\source.cpp(101): warning C4715: 'bst<int,std::less<int> >::contNodos_rec': not all control paths return a value
+  DiametroDistancia Arboles.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\DiametroDistancia Arboles\Debug\DiametroDistancia Arboles.exe
+  DiametroDistancia Arboles.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\DiametroDistancia Arboles\Debug\DiametroDistancia Arboles.pdb (Partial PDB)
