@@ -21,7 +21,7 @@ Game::Game()
 	color.r = r;
 	color.g = g;
 	color.b = b;
-	//stateMachine = new GameStateMachine();
+	stateMachine = new GameStateMachine();
 	//stateMachine->pushState(new MainMenu...);
 	if (window == nullptr || renderer == nullptr) {
 		throw SDLError(SDL_GetError());

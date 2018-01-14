@@ -1,6 +1,8 @@
 #pragma once
 #include "GameObject.h"
-#include "Game.h"
+#include <list>
+#include <SDL.h>
+class Game;
 class GameState
 {
 private:

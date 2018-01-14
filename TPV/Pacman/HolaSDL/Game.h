@@ -46,7 +46,7 @@ private:
 	list <GameCharacter*>::reverse_iterator ghost2; //Iterador para las colisiones entre fantasmas
 	Pacman *pacman;
 	GameMap* map;
-	//GameStateMachine* stateMachine;
+	GameStateMachine* stateMachine;
 
 	//-------------------------------Métodos ----------------------------
 

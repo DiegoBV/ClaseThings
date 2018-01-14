@@ -1,4 +1,5 @@
 ﻿  GameStateMachine.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.h(12): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\gamestatemachine.cpp(29): warning C4715: 'GameStateMachine::currentState': not all control paths return a value
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
   HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
