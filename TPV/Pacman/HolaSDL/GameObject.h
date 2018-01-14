@@ -13,5 +13,6 @@ public:
 	virtual void update()=0;
 	virtual void loadFromFile(ifstream& file)=0;
 	virtual void saveToFile(ofstream& file)=0;
+	//bool handleEvent(SDL_Event& e) {};
 };
 

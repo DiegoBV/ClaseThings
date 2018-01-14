@@ -73,6 +73,8 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameMap.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameState.cpp" />
+    <ClCompile Include="GameStateMachine.cpp" />
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GameCharacter.cpp" />
     <ClCompile Include="main.cpp" />
@@ -89,6 +91,8 @@
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameMap.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameState.h" />
+    <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="GameCharacter.h" />
     <ClInclude Include="Pacman.h" />

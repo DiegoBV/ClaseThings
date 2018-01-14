@@ -9,6 +9,7 @@
 #include <list>
 #include <SDL_ttf.h>
 #include "Font.h"
+#include "GameStateMachine.h";
 using namespace std;
 const int vitaminasTiempo = 30;
 const int frameRate = 100;
@@ -43,8 +44,9 @@ private:
 	list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
 	list <GameCharacter*>::reverse_iterator ghost; //iterador que va desde el final hasta el principio para recorrer los fantasmas
 	list <GameCharacter*>::reverse_iterator ghost2; //Iterador para las colisiones entre fantasmas
-	Pacman *pacman; //variable auxiliar para controlar al pacman (duda que tngo que preguntarle al profe)
+	Pacman *pacman;
 	GameMap* map;
+	//GameStateMachine* stateMachine;
 
 	//-------------------------------Métodos ----------------------------
 

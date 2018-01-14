@@ -21,6 +21,8 @@ Game::Game()
 	color.r = r;
 	color.g = g;
 	color.b = b;
+	//stateMachine = new GameStateMachine();
+	//stateMachine->pushState(new MainMenu...);
 	if (window == nullptr || renderer == nullptr) {
 		throw SDLError(SDL_GetError());
 	}
@@ -75,6 +77,11 @@ void Game::handle_Events() {
 			}
 		}
 	}
+
+	/*while (SDL_PollEvent(&event) && !exit) {
+		if (event.type == SDL_QUIT) { exit = true; }
+		else { stateMachine->currentState()->handleEvents(event); }
+	}*/
 }
 void Game::update() {
 	delay();
@@ -83,6 +90,7 @@ void Game::update() {
 	for (GameCharacter* it : objects) { //iterador que recorre toda la lista de GameCharacters y updatea
 		it->update();
 	}
+	siguiente_Estado(); // realiza las comprobaciones necesarias para ver si se ha comido la comida o has muerto y cambia de nivel
 }
 
 void Game::render() {
@@ -109,7 +117,6 @@ void Game::run() {
 			save();
 		}
 	}
-	siguiente_Estado();
 }
 
 //------------------------------------Informacion/modificar Mapa-----------------------------
@@ -409,7 +416,6 @@ void Game::siguiente_Estado() {
 			levels_Index++;
 			deleteObjects();
 			this->carga_Archivo(levels_Index); //carga el siguiente archivo
-			this->run(); //run! CAMBIARLO!!
 	}
 	else if (pacman->he_Muerto()) {
 		game_Over(); 
