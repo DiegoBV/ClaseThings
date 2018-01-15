@@ -1,0 +1,56 @@
+﻿  Source.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(89): error C2664: 'bool std::less<int>::operator ()(const _Ty &,const _Ty &) const': cannot convert argument 1 from 'const std::pair<Key,Value>' to 'const int &'
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              Key=int,
+              Value=char
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(89): note: Reason: cannot convert from 'const std::pair<Key,Value>' to 'const int'
+          with
+          [
+              Key=int,
+              Value=char
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(89): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(85): note: while compiling class template member function 'void bst<std::pair<Key,Value>,std::less<int>>::insert_rec(std::shared_ptr<bst<std::pair<Key,Value>,std::less<int>>::Nodo> &,const T &)'
+          with
+          [
+              Key=int,
+              Value=char,
+              T=std::pair<int,char>
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(200): note: see reference to function template instantiation 'void bst<std::pair<Key,Value>,std::less<int>>::insert_rec(std::shared_ptr<bst<std::pair<Key,Value>,std::less<int>>::Nodo> &,const T &)' being compiled
+          with
+          [
+              Key=int,
+              Value=char,
+              T=std::pair<int,char>
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(227): note: see reference to class template instantiation 'bst<std::pair<Key,Value>,std::less<int>>' being compiled
+          with
+          [
+              Key=int,
+              Value=char
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(251): note: see reference to class template instantiation 'map<int,char,std::less<int>>' being compiled
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(92): error C2664: 'bool std::less<int>::operator ()(const _Ty &,const _Ty &) const': cannot convert argument 1 from 'std::pair<Key,Value>' to 'const int &'
+          with
+          [
+              _Ty=int
+          ]
+          and
+          [
+              Key=int,
+              Value=char
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(92): note: Reason: cannot convert from 'std::pair<Key,Value>' to 'const int'
+          with
+          [
+              Key=int,
+              Value=char
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tarjetascredito\tarjetascredito\source.cpp(92): note: No user-defined-conversion operator available that can perform this conversion, or the operator cannot be called
