@@ -29,12 +29,14 @@ public:
 	//Métodos del juego
 	void update(); //Actualiza la posición del fantasma en la dirección actual y 
 				  //actualiza la direccion aleatoriamente
-	void render(bool vitamina); //Pinta el estado actual en pantalla
+	void render(); //Pinta el estado actual en pantalla
 	void cambiaDir();
 	virtual int ghostType();
 	virtual void animar(bool vitamina);
 	virtual void saveToFile(ofstream& file);
 	virtual bool reproduce();
 	virtual bool dead();
+	virtual bool handleEvent(SDL_Event& e) { return false; }
+	virtual void render(bool) {};
 };
 

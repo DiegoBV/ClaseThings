@@ -4,7 +4,259 @@
 #include "FileNotFoundError.h"
 #include "FileFormatError.h"
 #include <sstream>
-Game::Game()
+
+Game::Game(SDLApp* app): app(app) {
+	for (int i = 0; i < this->app->texts.size(); i++) {
+		texts.push_back(this->app->texts[i]);
+	}
+	this->carga_Archivo(1);
+}
+
+string Game::nombreFichero(string path, int num, string ext) {
+	stringstream ss;
+	ss << path << num << ext;
+	return ss.str();
+}
+
+void Game::carga_Archivo(int lvl){
+	string name = nombreFichero(pathTxt, lvl, extTxt);
+	archivo.open(name);
+	if (!archivo.is_open()) {
+		throw FileNotFoundError("Archivo: " + name + " no encontrado");  //error de archivo no encontrado
+		string fileName = nombreFichero(pathTxt, 1, extTxt);
+		archivo.open(fileName);
+	}
+	else {
+		map = new GameMap(this);
+		map->loadFromFile(archivo);
+		stage.push_back(map);
+		int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
+		archivo >> numGhost;
+
+		for (int i = 0; i < numGhost; i++) {
+			int typeGhost;
+			archivo >> typeGhost;
+			if (typeGhost == 0) {
+				Ghost* fantasmita = new Ghost(0, 0, i + 4, app->texts[3], this, 0);
+				fantasmita->loadFromFile(archivo); //se leen de archivo
+				stage.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+			}
+			else if(typeGhost == 1){ //Fantasmas inteligentes
+				SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, app->texts[3], this, 1, 1);
+				fantasmitaInt->loadFromFile(archivo); //se leen de archivo
+				stage.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+			}
+			else {
+				throw FileFormatError("Tipo No Valido de Fantasma: " + typeGhost); //BORJA JELPPPPPP!!!!!!!!!!!!!!!!!!!!!!
+			}
+		}
+
+		pacman = new Pacman(0, 0, app->texts[3], this);
+		stage.push_back(pacman); //pusheamos a pacman al final de la lista
+		pacman->loadFromFile(archivo); //se lee de archivo
+
+		int aux; //para saber si el archivo acaba o no
+		archivo >> aux;
+		if (archivo.fail()) {
+			archivo.clear();
+		}
+		else {
+			score = aux;
+			//archivo >> levels_Index;
+		}
+		archivo.close();
+	}
+}
+
+//------------------------------------Gets-----------------------------
+
+int Game::dame_Altura() {
+	return this->app->winHeight;
+}
+
+int Game::dame_Anchura() {
+	return this->app->winWidth;
+}
+
+int Game::dame_FilasTablero() {
+	return this->map->fils;
+}
+
+int Game::dame_ColumnasTablero() {
+	return this->map->cols;
+}
+
+SDL_Renderer* Game::dame_Renderer() {
+	return this->app->renderer;
+}
+
+int Game::obtenerPixelX(int posicion) {
+	return (dame_Anchura() / this->map->cols) * posicion;
+}
+
+void Game::animaciones_Extra() {
+	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
+}
+
+int Game::obtenerPixelY(int posicion) {
+	return (dame_Altura() / this->map->fils) * posicion;
+}
+
+void Game::give_posPacman(int &posX, int &posY) {
+	posX = pacman->get_PosActX();
+	posY = pacman->get_PosActY();
+}
+
+void Game::nace_Fantasma(int posX, int posY) {
+	SmartGhost* son = new SmartGhost(posX, posY, numFantasmaInteligente, texts[3], this, 1, 1);
+	stage.push_front(son);
+}
+
+MapCell Game::consulta(int x, int y) {
+	return map->getCell(x, y);
+}
+
+bool Game::comprueba_colisiones(int x, int y) {
+	bool exit = false;
+	obj = stage.rbegin(); //empieza el iterador en el final//se salta a pacman
+	bool ghostDead = false;
+	bool muerePacman = true;
+	obj++;
+	obj++;
+	while (obj != stage.rend()) { //se salta a pacman y hasta que no llegue al principio de la lista, continua
+		ghostDead = false;
+		muerePacman = true;
+		if (static_cast<GameCharacter *>(*obj)->get_PosActY() == x && static_cast<GameCharacter *>(*obj)->get_PosActX() == y) {
+			if (vitaminas) {
+				sumaScore(ptosFantasma);
+				static_cast<GameCharacter *>(*obj)->muerte();
+				muerePacman = false;
+			}
+			if (static_cast<GameCharacter *>(*obj)->ghostType() == 1 && static_cast<GameCharacter *>(*obj)->dead()) {
+				delete *obj;
+				stage.remove((*obj));
+				ghostDead = true;
+				sumaScore(ptosFantasma);
+				muerePacman = false;
+			}
+			if (muerePacman) {
+				pacman->reduceVidas();
+				pacman->muerte();
+			}
+		}
+
+		if (!ghostDead)
+			obj++;
+	}
+
+	if (pacman->he_Muerto()) {
+		exit = true;
+	}
+
+	return exit;
+	return false;
+}
+
+bool Game::siguiente_casilla(int &X, int &Y, int dirX, int dirY) {
+	//Primero calculamos la casilla siguiente
+	int tempX = X + dirX;
+	int tempY = Y + dirY;
+
+	//Comprueba el tipo de casilla que es
+	MapCell casilla = map->getCell(tempY, tempX);
+
+	//Miramos si puede mover
+	if (casilla != Wall) {
+		X += dirX;
+		Y += dirY;
+		return true;
+	}
+	else
+		return false;
+}
+
+void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
+	if (map->getCell(x, y) == Vitamins) {
+		vitaminas = true;
+		vitaminasTiempoAux = vitaminasTiempo;
+		sumaScore(ptosVitamina);
+	}
+	else {
+		sumaScore(ptosComida);
+	}
+	map->modifica_Posicion(x, y, Empty);
+	setComida(-1);
+
+}
+
+void Game::setComida(int a) {
+	numComida += a;
+}
+
+void Game::sumaScore(int suma) {
+	score += suma;
+}
+
+bool Game::colision_Fantasma(int posX, int posY) {
+	obj = stage.rbegin();
+	obj++;
+	for (obj++; obj != stage.rend(); obj++) {
+		if (static_cast<Ghost *>(*obj)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
+			if (((posY == static_cast<GameCharacter *>(*obj)->get_PosActX() && posX == static_cast<GameCharacter *>(*obj)->get_PosActY()) && static_cast<GameCharacter *>(*obj)->reproduce())) {
+				return true;
+			}
+		}
+	}
+	return false;
+}
+
+void Game::delay() { //hace lo del Delay más eficiente
+	startTime = SDL_GetTicks();
+	frameTime = SDL_GetTicks() - startTime;
+	if (frameTime < frameRate) {
+		SDL_Delay(frameRate - frameTime);
+	}
+}
+
+void Game::tiempo_Vitamina() { //temporizador vitaminas
+	if (vitaminasTiempoAux > 0)
+		vitaminasTiempoAux--;
+	else
+		vitaminas = false;
+}
+
+void Game::plasmaVidas() {
+	SDL_Rect re = hudVidas;
+	for (int i = 0; i < pacman->dame_Vidas(); i++) {
+		re.x = i * 50;
+		texts[7]->RenderFrame(this->app->renderer, re);
+	}
+}
+
+bool Game::win() { //comprueba si se ha comido todo e.e
+	return (numComida == 0);
+}
+
+void Game::siguiente_Estado() {
+	if (this->win()) { //comrpueba que haya comido todo
+		levels_Index++;
+		deleteObjects();
+		this->carga_Archivo(levels_Index); //carga el siguiente archivo
+	}
+	else if (pacman->he_Muerto()) {
+		//game_Over();
+	}
+}
+
+void Game::deleteObjects() {
+	obj = stage.rbegin(); //empieza el iterador en el final, se salta a pacman
+	for (obj; obj != stage.rend(); obj++) {
+		delete *obj;
+	}
+	stage.clear();
+}
+
+/*Game::Game()
 {
 	window = nullptr;
 	renderer = nullptr;
@@ -45,9 +297,6 @@ Game::~Game() //destruye el renderer y la ventana
 }
 
 //------------------------------------MetodosPrincipales-----------------------------
-void Game::pinta_Mapa() {
-	map->render();
-}
 
 void Game::handle_Events() {
 	while (SDL_PollEvent(&event)) {
@@ -82,7 +331,7 @@ void Game::handle_Events() {
 		if (event.type == SDL_QUIT) { exit = true; }
 		else { stateMachine->currentState()->handleEvents(event); }
 	}*/
-}
+/*}
 void Game::update() {
 	delay();
 	comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY()); //comprueba que los fantasmas y pacman se han o no chocado
@@ -323,7 +572,7 @@ void Game::carga_Archivo(int lvl){
 		/*string fileName = nombreFichero(pathTxt, 1, extTxt);
 		levels_Index = 1;
 		archivo.open(fileName);*/
-		this->menu();
+		/*this->menu();
 	}
 	else {
 		map = new GameMap(this);
@@ -482,4 +731,4 @@ void Game::leeTexturas() {
 		}
 		texturas.close();
 	}
-}
+}*/

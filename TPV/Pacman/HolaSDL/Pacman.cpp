@@ -105,6 +105,27 @@ bool Pacman::dead(){
 	return false;
 }
 
+bool Pacman::handleEvent(SDL_Event& e) {
+	if (e.type == SDL_KEYDOWN) {
+		if (e.key.keysym.sym == SDLK_RIGHT) {
+			this->siguiente_Dir(1, 0);  //si es derecha le pasa la direccion derecha(1,0) y así con todas las direcciones
+		}
+		else if (e.key.keysym.sym == SDLK_UP) {
+			this->siguiente_Dir(0, -1);
+		}
+		else if (e.key.keysym.sym == SDLK_DOWN) {
+			this->siguiente_Dir(0, 1);
+		}
+		else if (e.key.keysym.sym == SDLK_LEFT) {
+			this->siguiente_Dir(-1, 0);
+		}
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
 
 
 

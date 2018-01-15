@@ -11,7 +11,7 @@ GameCharacter::~GameCharacter()
 {
 }
 
-GameCharacter::GameCharacter(int posX, int posY, Texture* text, Game* gam) {
+GameCharacter::GameCharacter(int posX, int posY, Texture* text, Game* gam){
 
 	this->game = gam; //asignacion de punteros a jueGameCharacter y textura
 	this->textura = text;

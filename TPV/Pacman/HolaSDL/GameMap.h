@@ -1,11 +1,11 @@
 #pragma once
 #include "Texture.h"
 #include "SDL.h"
-#include "GameObject.h"
+#include "PacmanObject.h"
 
 using namespace std;
 enum MapCell { Empty, Wall, Food, Vitamins };
-class GameMap: public GameObject
+class GameMap: public PacmanObject
 {
 private:
 	MapCell** tablero; //Matriz dinámica para el tablero
@@ -25,5 +25,6 @@ public:
 	virtual void render(bool);
 	virtual void update();
 	virtual void saveToFile(ofstream& file);
+	virtual bool handleEvent(SDL_Event& e) { return false; }
 };
 

@@ -35,6 +35,7 @@ public:
 	virtual int ghostType();
 	virtual bool reproduce();
 	virtual bool dead();
+	virtual bool handleEvent(SDL_Event& e);
 	
 };
 

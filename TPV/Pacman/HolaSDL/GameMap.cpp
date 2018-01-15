@@ -6,12 +6,13 @@
 GameMap::GameMap() //Crea un tablero con un array dinámico
 {	
 }
-GameMap::GameMap(Game* game) {
+GameMap::GameMap(Game* game){
 	this->game = game;
 	textsMapa[0] = this->game->texts[1];
 	textsMapa[1] = this->game->texts[2];
 	textsMapa[2] = this->game->texts[0];
-};
+}
+
 GameMap::GameMap(int fils, int cols, Texture* vit, Texture* m, Texture* com, Game* gam){ //Constructora con parámetros
 	textsMapa[0] = m;
 	textsMapa[1] = com; //asignacion de punteros

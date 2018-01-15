@@ -1,9 +1,9 @@
 #pragma once
 #include "Texture.h"
-#include "GameObject.h"
+#include "PacmanObject.h"
 const int velAnimacion = 100;
 class Game;
-class GameCharacter: public GameObject
+class GameCharacter: public PacmanObject
 {
 protected:
 	struct Dirs {

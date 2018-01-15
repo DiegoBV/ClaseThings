@@ -82,6 +82,8 @@
     <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanError.cpp" />
+    <ClCompile Include="PacmanObject.cpp" />
+    <ClCompile Include="SDLApp.cpp" />
     <ClCompile Include="SDLError.cpp" />
     <ClCompile Include="SmartGhost.cpp" />
     <ClCompile Include="Texture.cpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="PacmanError.h" />
+    <ClInclude Include="PacmanObject.h" />
+    <ClInclude Include="SDLApp.h" />
     <ClInclude Include="SDLError.h" />
     <ClInclude Include="SmartGhost.h" />
     <ClInclude Include="Texture.h" />

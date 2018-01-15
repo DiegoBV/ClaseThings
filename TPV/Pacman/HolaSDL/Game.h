@@ -9,13 +9,13 @@
 #include <list>
 #include <SDL_ttf.h>
 #include "Font.h"
-#include "GameStateMachine.h";
+#include "GameState.h"
+#include "SDLApp.h"
+#include "GameObject.h"
 using namespace std;
 const int vitaminasTiempo = 30;
 const int frameRate = 130;
 const string pathTxt = "..\\level0";
-const string extTxt = ".pac";
-const string pathInfoTexturas = "..\\infoTexturas";
 const int ptosFantasma = 100;
 const int ptosComida = 1;
 const int ptosVitamina = 10;
@@ -25,28 +25,97 @@ const int b = 255;
 const int numFantasmaInteligente = 8; //numero en la textura proporcionada
 const SDL_Rect hudScore = { 800, 0, 50, 40 };
 const SDL_Rect hudVidas = { 0, 0, 35, 35 };
-class Game
+class Game: public GameState
 {
 private:
+	GameMap* map;
+	Pacman* pacman;
+	SDLApp* app;
+	ifstream archivo;
+	ofstream partidaGuardada;
+	int score = 0;
+	list <GameObject*>::reverse_iterator obj;
+	bool vitaminas;
+	int vitaminasTiempoAux = 0;
+	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
+	int startTime;
+	int frameTime; // mediciones del tiempo para un Delay "eficiente"
+	int levels_Index = 1;
+
+public:
+	vector<Texture*> texts;
+	Game(SDLApp* app);
+	~Game();
+	void carga_Archivo(int lvl);
+	string nombreFichero(string path, int num, string ext);
+
+	virtual void handleEvent(SDL_Event& e) {
+		if (e.type == SDL_KEYDOWN) {
+			if (e.key.keysym.sym == SDLK_ESCAPE) {
+				//this->app->getStateMachine()->pushState();
+			}
+			else pacman->handleEvent(e);
+		}
+	}
+
+	void update() {
+		comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY());
+		tiempo_Vitamina();
+		GameState::update();
+		this->delay();
+		siguiente_Estado();
+		//if de pasar de lvl y tal
+	}
+	void render() {
+		GameState::render();
+		this->animaciones_Extra();
+		plasmaVidas();
+	}
+
+	int dame_Altura();
+	int dame_Anchura();  //los gets para saber las dimensiones del tablero y pantalla
+	int dame_FilasTablero();
+	int dame_ColumnasTablero();
+	SDL_Renderer* dame_Renderer();
+	int obtenerPixelX(int casilla);
+	int obtenerPixelY(int casilla);
+	void give_posPacman(int &posX, int &posY);
+	void nace_Fantasma(int posX, int posY);
+	MapCell consulta(int x, int y);
+	bool comprueba_colisiones(int x, int y);
+	bool siguiente_casilla(int &X, int &Y, int dirX, int dirY);
+	void come(int x, int y);
+	void setComida(int a);
+	void sumaScore(int suma);
+	bool colision_Fantasma(int posX, int posY);
+	void delay();
+	void animaciones_Extra();
+	void tiempo_Vitamina();
+	void plasmaVidas();
+	void siguiente_Estado();
+	bool win();
+	void deleteObjects();
+
+};
+/*private:
 	bool exit = false; //booleano que indica si se ha salido del juego o no
 
 	//-------------------------------SDL----------------------------
 
-	SDL_Window* window;
+	/*SDL_Window* window;
 	SDL_Renderer* renderer;
 	SDL_Event termina;
 	Font* fuente;
 	SDL_Color color;
-	SDL_Event event; //maneja eventos
+	SDL_Event event; //maneja eventos*/
 
 	//-------------------------------Lista/ObjetosGame ----------------------------
 
-	list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
+	/*list <GameCharacter*>objects; //lista de objetos del juego (fantasmas y pacman)
 	list <GameCharacter*>::reverse_iterator ghost; //iterador que va desde el final hasta el principio para recorrer los fantasmas
 	list <GameCharacter*>::reverse_iterator ghost2; //Iterador para las colisiones entre fantasmas
 	Pacman *pacman;
 	GameMap* map;
-	GameStateMachine* stateMachine;
 
 	//-------------------------------Métodos ----------------------------
 
@@ -109,6 +178,6 @@ public:
 	SDL_Renderer* dame_Renderer();
 	int obtenerPixelX(int casilla);
 	int obtenerPixelY(int casilla);
-};
+};*/
 
  
