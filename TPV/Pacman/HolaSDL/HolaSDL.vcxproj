@@ -78,6 +78,8 @@
     <ClCompile Include="Ghost.cpp" />
     <ClCompile Include="GameCharacter.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MainMenuState.cpp" />
+    <ClCompile Include="MenuButton.cpp" />
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanError.cpp" />
     <ClCompile Include="SDLError.cpp" />
@@ -95,6 +97,8 @@
     <ClInclude Include="GameStateMachine.h" />
     <ClInclude Include="Ghost.h" />
     <ClInclude Include="GameCharacter.h" />
+    <ClInclude Include="MainMenuState.h" />
+    <ClInclude Include="MenuButton.h" />
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="PacmanError.h" />
     <ClInclude Include="SDLError.h" />

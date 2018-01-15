@@ -12,7 +12,7 @@
 #include "GameStateMachine.h";
 using namespace std;
 const int vitaminasTiempo = 30;
-const int frameRate = 100;
+const int frameRate = 130;
 const string pathTxt = "..\\level0";
 const string extTxt = ".pac";
 const string pathInfoTexturas = "..\\infoTexturas";
