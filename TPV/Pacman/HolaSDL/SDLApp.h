@@ -14,13 +14,14 @@ private:
 
 	SDL_Window* window;
 	//SDL_Event termina;
-	Font* fuente;
+	
 	SDL_Color color;
 	SDL_Event event; //maneja eventos
 	bool exit = false;
 	void leeTexturas();
 
 public:
+	Font* fuente;
 	vector <Texture*> texts;
 	SDL_Renderer* renderer;
 	int winWidth;

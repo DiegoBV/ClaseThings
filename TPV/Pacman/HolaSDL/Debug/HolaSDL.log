@@ -1,5 +1,68 @@
-﻿  Game.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(35): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(10): warning C4018: '<': signed/unsigned mismatch
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Compilación iniciada a las 16/01/2018 20:07:19.
+     1>Proyecto "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" en el nodo 2 (Build destinos).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameCharacter.cpp GameMap.cpp GameObject.cpp GameState.cpp Ghost.cpp MainMenuState.cpp MenuButton.cpp Pacman.cpp PacmanObject.cpp PauseState.cpp SDLApp.cpp SmartGhost.cpp main.cpp
+         Game.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\game.cpp(13): warning C4018: '<' : no coinciden signed/unsigned
+         Generando código...
+         Compilando...
+         main.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\main.cpp(11): warning C4101: 'E' : variable local sin referencia
+         SmartGhost.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\smartghost.cpp(65): warning C4018: '<' : no coinciden signed/unsigned
+         SDLApp.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         PauseState.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         PacmanObject.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         Pacman.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         MenuButton.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         MainMenuState.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         Ghost.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\ghost.cpp(25): warning C4244: 'argumento' : conversión de 'time_t' a 'unsigned int'; posible pérdida de datos
+         GameState.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         GameObject.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         GameMap.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         GameCharacter.cpp
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\sdlapp.h(36): warning C4018: '<' : no coinciden signed/unsigned
+         Generando código...
+     1>c:\users\mrcorner\desktop\git\clasethings\tpv\pacman\holasdl\gamemap.cpp(43): warning C4715: 'GameMap::getCell' : no todas las rutas de acceso de control devuelven un valor
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\FileFormatError.obj
+         Debug\FileNotFoundError.obj
+         Debug\Font.obj
+         Debug\Game.obj
+         Debug\GameMap.obj
+         Debug\GameObject.obj
+         Debug\GameState.obj
+         Debug\GameStateMachine.obj
+         Debug\Ghost.obj
+         Debug\GameCharacter.obj
+         Debug\main.obj
+         Debug\MainMenuState.obj
+         Debug\MenuButton.obj
+         Debug\Pacman.obj
+         Debug\PacmanError.obj
+         Debug\PacmanObject.obj
+         Debug\PauseState.obj
+         Debug\SDLApp.obj
+         Debug\SDLError.obj
+         Debug\SmartGhost.obj
+         Debug\Texture.obj
+         HolaSDL.vcxproj -> C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
+     1>Compilación del proyecto terminada "C:\Users\mrcorner\Desktop\GIT\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build destinos).
+
+Compilación correcta.
+
+Tiempo transcurrido 00:00:19.15

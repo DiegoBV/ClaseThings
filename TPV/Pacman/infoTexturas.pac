@@ -27,6 +27,6 @@ Fuente
 ..\\images\\fuente2.ttf
 20
 
-//Información de las texturas, sus rutas, sus filas, columnas, numero de texturas totales y, en caso de la fuente, su tipo. El orden 
+//Información de las texturas, sus rutas, sus filas, columnas, numero de texturas totales y, en caso de la fuente, su tipo. El orden
 //sería la 0 son las vitaminas, la 1 los muros, la 2 la comida, la 3 los personajes, la 4 y la 5 menu y GameOver y la 6 la fuente (siempre la última)
 //En caso de querer añadir más, se añadirían por debajo de la 5, dejando la fuente siempre en último lugar

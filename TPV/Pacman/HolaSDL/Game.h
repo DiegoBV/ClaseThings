@@ -35,6 +35,7 @@ private:
 	ofstream partidaGuardada;
 	int score = 0;
 	list <GameObject*>::reverse_iterator obj;
+	SDL_Color color;
 	bool vitaminas;
 	int vitaminasTiempoAux = 0;
 	int numComida = 0; //numero de comida y vitaminas, para ver si se ha ganado o no
@@ -70,7 +71,9 @@ public:
 	}
 	void render() {
 		GameState::render();
+		texts[texts.size() - 1]->loadFromText(app->renderer, to_string(score), *(app->fuente), color);
 		this->animaciones_Extra();
+		texts[texts.size() - 1]->RenderFrame(app->renderer, hudScore);
 		plasmaVidas();
 	}
 

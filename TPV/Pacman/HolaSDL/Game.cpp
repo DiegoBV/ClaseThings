@@ -6,12 +6,18 @@
 #include <sstream>
 
 Game::Game(SDLApp* app): GameState(app) {
+	color.r = r;
+	color.g = g;
+	color.b = b;
 
 	for (int i = 0; i < this->app->texts.size(); i++) {
 		texts.push_back(this->app->texts[i]);
 	}
 	this->carga_Archivo(1);
 }
+
+
+//---------------------------Principales-------------------------//
 
 string Game::nombreFichero(string path, int num, string ext) {
 	stringstream ss;
@@ -74,43 +80,36 @@ void Game::carga_Archivo(int lvl){
 	}
 }
 
-//------------------------------------Gets-----------------------------
 
-int Game::dame_Altura() {
-	return this->app->winHeight;
+//-----------------------Estados------------------------//
+
+
+void Game::siguiente_Estado() {
+	if (this->win()) { //comrpueba que haya comido todo
+		levels_Index++;
+		deleteObjects();
+		this->carga_Archivo(levels_Index); //carga el siguiente archivo
+	}
+	else if (pacman->he_Muerto()) {
+		//game_Over();
+	}
 }
 
-int Game::dame_Anchura() {
-	return this->app->winWidth;
-}
 
-int Game::dame_FilasTablero() {
-	return this->map->fils;
-}
+//------------------------------Modificaciones del mapa------------------------//
 
-int Game::dame_ColumnasTablero() {
-	return this->map->cols;
-}
+void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
+	if (map->getCell(x, y) == Vitamins) {
+		vitaminas = true;
+		vitaminasTiempoAux = vitaminasTiempo;
+		sumaScore(ptosVitamina);
+	}
+	else {
+		sumaScore(ptosComida);
+	}
+	map->modifica_Posicion(x, y, Empty);
+	setComida(-1);
 
-SDL_Renderer* Game::dame_Renderer() {
-	return this->app->renderer;
-}
-
-int Game::obtenerPixelX(int posicion) {
-	return (dame_Anchura() / this->map->cols) * posicion;
-}
-
-void Game::animaciones_Extra() {
-	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
-}
-
-int Game::obtenerPixelY(int posicion) {
-	return (dame_Altura() / this->map->fils) * posicion;
-}
-
-void Game::give_posPacman(int &posX, int &posY) {
-	posX = pacman->get_PosActX();
-	posY = pacman->get_PosActY();
 }
 
 void Game::nace_Fantasma(int posX, int posY) {
@@ -118,12 +117,37 @@ void Game::nace_Fantasma(int posX, int posY) {
 	stage.push_front(son);
 }
 
-bool Game::dameVitamina() {
-	return vitaminas;
+//------------------------------Comprobaciones del mapa------------------------//
+
+bool Game::siguiente_casilla(int &X, int &Y, int dirX, int dirY) {
+	//Primero calculamos la casilla siguiente
+	int tempX = X + dirX;
+	int tempY = Y + dirY;
+
+	//Comprueba el tipo de casilla que es
+	MapCell casilla = map->getCell(tempY, tempX);
+
+	//Miramos si puede mover
+	if (casilla != Wall) {
+		X += dirX;
+		Y += dirY;
+		return true;
+	}
+	else
+		return false;
 }
 
-MapCell Game::consulta(int x, int y) {
-	return map->getCell(x, y);
+bool Game::colision_Fantasma(int posX, int posY) {
+	obj = stage.rbegin();
+	obj++;
+	for (obj++; obj != stage.rend(); obj++) {
+		if (static_cast<Ghost *>(*obj)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
+			if (((posX == static_cast<GameCharacter *>(*obj)->get_PosActX() && posY == static_cast<GameCharacter *>(*obj)->get_PosActY()) && static_cast<GameCharacter *>(*obj)->reproduce())) {
+				return true;
+			}
+		}
+	}
+	return false;
 }
 
 bool Game::comprueba_colisiones(int x, int y) {
@@ -167,59 +191,19 @@ bool Game::comprueba_colisiones(int x, int y) {
 	return false;
 }
 
-bool Game::siguiente_casilla(int &X, int &Y, int dirX, int dirY) {
-	//Primero calculamos la casilla siguiente
-	int tempX = X + dirX;
-	int tempY = Y + dirY;
+//------------------------------------Auxiliares-----------------------//
 
-	//Comprueba el tipo de casilla que es
-	MapCell casilla = map->getCell(tempY, tempX);
-
-	//Miramos si puede mover
-	if (casilla != Wall) {
-		X += dirX;
-		Y += dirY;
-		return true;
+void Game::deleteObjects() {
+	obj = stage.rbegin(); //empieza el iterador en el final, se salta a pacman
+	for (obj; obj != stage.rend(); obj++) {
+		delete *obj;
 	}
-	else
-		return false;
+	stage.clear();
 }
 
-void Game::come(int x, int y) { //modifica la posicion a empty y reduce el numero de comida en 1
-	if (map->getCell(x, y) == Vitamins) {
-		vitaminas = true;
-		vitaminasTiempoAux = vitaminasTiempo;
-		sumaScore(ptosVitamina);
-	}
-	else {
-		sumaScore(ptosComida);
-	}
-	map->modifica_Posicion(x, y, Empty);
-	setComida(-1);
-
+void Game::animaciones_Extra() {
+	this->texts[0]->Anima(500, 0, 0, 1, 4); //anima las vitaminas fancy
 }
-
-void Game::setComida(int a) {
-	numComida += a;
-}
-
-void Game::sumaScore(int suma) {
-	score += suma;
-}
-
-bool Game::colision_Fantasma(int posX, int posY) {
-	obj = stage.rbegin();
-	obj++;
-	for (obj++; obj != stage.rend(); obj++) {
-		if (static_cast<Ghost *>(*obj)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
-			if (((posX == static_cast<GameCharacter *>(*obj)->get_PosActX() && posY == static_cast<GameCharacter *>(*obj)->get_PosActY()) && static_cast<GameCharacter *>(*obj)->reproduce())) {
-				return true;
-			}
-		}
-	}
-	return false;
-}
-
 
 void Game::delay() { //hace lo del Delay más eficiente
 	startTime = SDL_GetTicks();
@@ -244,28 +228,62 @@ void Game::plasmaVidas() {
 	}
 }
 
+void Game::setComida(int a) {
+	numComida += a;
+}
+
+void Game::sumaScore(int suma) {
+	score += suma;
+}
+
+//------------------------------------Gets-----------------------------//
+
+int Game::dame_Altura() {
+	return this->app->winHeight;
+}
+
+int Game::dame_Anchura() {
+	return this->app->winWidth;
+}
+
+int Game::dame_FilasTablero() {
+	return this->map->fils;
+}
+
+int Game::dame_ColumnasTablero() {
+	return this->map->cols;
+}
+
+SDL_Renderer* Game::dame_Renderer() {
+	return this->app->renderer;
+}
+
+int Game::obtenerPixelX(int posicion) {
+	return (dame_Anchura() / this->map->cols) * posicion;
+}
+
+
+int Game::obtenerPixelY(int posicion) {
+	return (dame_Altura() / this->map->fils) * posicion;
+}
+
+void Game::give_posPacman(int &posX, int &posY) {
+	posX = pacman->get_PosActX();
+	posY = pacman->get_PosActY();
+}
+
+bool Game::dameVitamina() {
+	return vitaminas;
+}
+
+MapCell Game::consulta(int x, int y) {
+	return map->getCell(x, y);
+}
+
 bool Game::win() { //comprueba si se ha comido todo e.e
 	return (numComida == 0);
 }
 
-void Game::siguiente_Estado() {
-	if (this->win()) { //comrpueba que haya comido todo
-		levels_Index++;
-		deleteObjects();
-		this->carga_Archivo(levels_Index); //carga el siguiente archivo
-	}
-	else if (pacman->he_Muerto()) {
-		//game_Over();
-	}
-}
-
-void Game::deleteObjects() {
-	obj = stage.rbegin(); //empieza el iterador en el final, se salta a pacman
-	for (obj; obj != stage.rend(); obj++) {
-		delete *obj;
-	}
-	stage.clear();
-}
 
 /*Game::Game()
 {
