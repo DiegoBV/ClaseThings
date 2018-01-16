@@ -115,7 +115,7 @@ void Ghost::animar(bool vitamina){
 }
 
 void Ghost::saveToFile(ofstream& file) {
-	file << "0" << " "; //guardamos el tipo del fantasma
+	file << type << " "; //guardamos el tipo del fantasma
 	GameCharacter::saveToFile(file);
 	file << endl;
 }

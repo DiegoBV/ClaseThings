@@ -27,3 +27,9 @@ GameState* GameStateMachine::currentState() {
 		return states.top();
 	}
 }
+
+void GameStateMachine::libera() {
+	while (!states.empty()) {
+		popState();
+	}
+}

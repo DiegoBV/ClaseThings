@@ -5,7 +5,7 @@
 #include "FileFormatError.h"
 #include <sstream>
 
-Game::Game(SDLApp* app): GameState(app) {
+Game::Game(SDLApp* app, int lvl): levels_Index(lvl), GameState(app) {
 	color.r = r;
 	color.g = g;
 	color.b = b;
@@ -13,11 +13,11 @@ Game::Game(SDLApp* app): GameState(app) {
 	for (int i = 0; i < this->app->texts.size(); i++) {
 		texts.push_back(this->app->texts[i]);
 	}
-	this->carga_Archivo(1);
+	this->carga_Archivo(levels_Index);
 }
 
 
-//---------------------------Principales-------------------------//
+//---------------------------Archivo-------------------------//
 
 string Game::nombreFichero(string path, int num, string ext) {
 	stringstream ss;
@@ -78,6 +78,28 @@ void Game::carga_Archivo(int lvl){
 		}
 		archivo.close();
 	}
+}
+
+void Game::guarda_Partida(int lvl) {
+	bool noEscribir = false; //para no sobreescribir
+	string name = nombreFichero(pathTxt, lvl, extTxt);
+	partidaGuardada.open(name);
+	map->saveToFile(partidaGuardada);
+	partidaGuardada << stage.size() - 2 << endl; //guarda el numero de fantasmas
+	obj = stage.rbegin();
+	obj++; //se salta mapa y pacman
+	for (obj++; obj != stage.rend(); obj++) {
+		static_cast<PacmanObject* >(*obj)->saveToFile(partidaGuardada);
+	}
+	pacman->saveToFile(partidaGuardada);
+	partidaGuardada << endl << score << endl << levels_Index << endl;
+	partidaGuardada.close();
+}
+
+void Game::save() {
+	app->plasmaMensaje();
+	int code = app->escribe_Code();
+	this->guarda_Partida(code);
 }
 
 

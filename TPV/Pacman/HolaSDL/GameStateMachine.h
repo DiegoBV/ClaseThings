@@ -11,5 +11,6 @@ public:
 	void popState();
 	void pushState(GameState* newState);
 	GameState* currentState();
+	void libera();
 };
 

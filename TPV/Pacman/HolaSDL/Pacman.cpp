@@ -86,9 +86,6 @@ void Pacman::saveToFile(ofstream& file) {
 	file << this->vidas;
 }
 
-void Pacman::render(bool) {
-}
-
 int Pacman::dame_Vidas(){
 	return this->vidas;
 }

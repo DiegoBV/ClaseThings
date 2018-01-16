@@ -1,4 +1,4 @@
-9
+13
 ..\\images\\textura0.png
 1
 4
@@ -21,6 +21,18 @@
 1
 1
 ..\\images\\vida.png
+1
+1
+..\\images\\textura6.png
+1
+1
+..\\images\\textura7.png
+1
+1
+..\\images\\textura8.png
+1
+1
+..\\images\\textura9.png
 1
 1
 Fuente

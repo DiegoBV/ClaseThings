@@ -30,7 +30,6 @@ public:
 	bool siguiente_Dir(int dX, int dY);
 	void reduceVidas();
 	bool he_Muerto();
-	virtual void render(bool);
 	int dame_Vidas();
 	virtual int ghostType();
 	virtual bool reproduce();

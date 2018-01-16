@@ -6,6 +6,10 @@
 #include "Texture.h"
 const string pathInfoTexturas = "..\\infoTexturas";
 const string extTxt = ".pac";
+const int numTexturaMensaje = 6;
+const int numTexturaMenu = 4;
+const int anchura = 400; //de los botones y eso
+const int altura = 100;
 class SDLApp
 {
 private:
@@ -33,7 +37,9 @@ public:
 	void render() { SDL_RenderClear(renderer); maquinaEstados->currentState()->render(); SDL_RenderPresent(renderer); }
 	void handleEvent();
 	void run() { while (!this->exit) { handleEvent(); update(); render(); } }
-	void libera() { for (int i = 0; i < texts.size(); i++) delete texts[i]; SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); TTF_Quit(); }
+	void libera() { maquinaEstados->libera(); for (int i = 0; i < texts.size(); i++) delete texts[i]; SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); TTF_Quit(); }
 	void setExit(bool b) { exit = b; }
+	int SDLApp::escribe_Code();
+	void plasmaMensaje();
 };
 

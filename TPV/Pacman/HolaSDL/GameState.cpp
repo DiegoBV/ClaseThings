@@ -9,7 +9,7 @@ GameState::GameState()
 void GameState::handleEvent(SDL_Event &e) {
 	bool handled = false;
 	list<GameObject*>::iterator it = stage.begin();
-	while (it != stage.end() && !handled) {
+	while (!handled && it != stage.end()) {
 		if ((*it)->handleEvent(e)) { handled = true; }
 		else { it++; }
 	}

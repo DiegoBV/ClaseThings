@@ -34,7 +34,6 @@ public:
 	virtual void update() = 0;
 	virtual bool dead() = 0; //comprueba que el el gamecharacter está muerto
 	virtual void render();
-	virtual void render(bool)=0;
 	virtual void loadFromFile(ifstream& file);
 	virtual void saveToFile(ofstream& file);
 	virtual int ghostType() = 0;

@@ -9,7 +9,6 @@ int main(int argc, char* argv[]) {
 	//Game juego;
 	SDLApp app;
 	SDL_Event E;
-	app.getStateMachine()->pushState(new MainMenuState(&app, app.texts[4]));
 	app.run();
 	SDL_Quit();
 	return 0;

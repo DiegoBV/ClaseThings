@@ -45,17 +45,18 @@ private:
 
 public:
 	vector<Texture*> texts;
-	Game(SDLApp* app);
-	~Game() { deleteObjects(); };
+	Game(SDLApp* app, int lvl);
+	~Game() { /*deleteObjects();*/ };
 	void carga_Archivo(int lvl);
 	string nombreFichero(string path, int num, string ext);
 
 	virtual void handleEvent(SDL_Event& e) {
 		if (e.type == SDL_KEYDOWN) {
 			if (e.key.keysym.sym == SDLK_ESCAPE) {
-				//this->app->setExit(true);
-				//estado pausa, no deberia cerrar el juego, pero por ahora nos vale
-				this->app->getStateMachine()->pushState(new PauseState(app));
+				this->app->getStateMachine()->pushState(new PauseState(app, app->texts[numTexturaMenu]));
+			}
+			else if (e.key.keysym.sym == SDLK_s) {
+				this->save();
 			}
 			else pacman->handleEvent(e);
 		}
@@ -67,7 +68,6 @@ public:
 		GameState::update();
 		this->delay();
 		siguiente_Estado();
-		//if de pasar de lvl y tal
 	}
 	void render() {
 		GameState::render();
@@ -101,6 +101,8 @@ public:
 	bool win();
 	void deleteObjects();
 	bool dameVitamina();
+	void save();
+	void guarda_Partida(int lvl);
 
 };
 /*private:

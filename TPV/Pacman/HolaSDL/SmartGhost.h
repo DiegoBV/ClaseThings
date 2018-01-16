@@ -16,7 +16,6 @@ private:
 	bool deadState;
 	int ancho, alto;
 	int fertilidad;
-	//Dirs direcciones[4] = { { 0, -1 }, { -1, 0 }, { 0, 1 }, { 1, 0 } }; //Array de direcciones para el pathfinding
 
 public:
 	SmartGhost();

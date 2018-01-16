@@ -3,20 +3,26 @@
 #include "Texture.h"
 #include "SDLApp.h"
 #include "MenuButton.h"
-const int numTexturaMensaje = 6;
+#include "Game.h"
+const int startLvl = 1;
+const int numTexturaPlay = 8;
+const int numTexturaLoad = 9;
 class MainMenuState: public GameState
 {
 private:
-	//botones
 	Texture* txt;
 public:
 	MainMenuState();
 	~MainMenuState();
 	MainMenuState(SDLApp* app, Texture* txt) : txt(txt), GameState(app) {
-		stage.push_back(new MenuButton(app->winWidth/2, app->winHeight/2, 50, 50, app->texts[6], app)); //""""""Boton"""""" no funciona vaya
+		stage.push_back(new MenuButton(app->winWidth / 2 - anchura / 4, app->winHeight / 2 + altura/2, anchura/2, altura/2, app->texts[numTexturaPlay], start,app)); //colocacion de los botones
+		stage.push_back(new MenuButton(app->winWidth / 2 - anchura / 4, app->winHeight / 2 + altura*1.25, anchura / 2, altura / 2, app->texts[numTexturaLoad], cargaPartida, app));
+		stage.push_back(new MenuButton(app->winWidth / 2 - anchura / 4, app->winHeight / 2 + altura*2, anchura / 2, altura / 2, app->texts[numTexturaQuit], quit, app));
 	}
 	virtual void render() { this->txt->Render(app->renderer); GameState::render(); }
-	void plasmaMensaje();
 	virtual void handleEvent(SDL_Event& e);
+	static void start(SDLApp* app) { app->getStateMachine()->pushState(new Game(app, startLvl));}
+	static void cargaPartida(SDLApp* app) { app->plasmaMensaje(); int code = app->escribe_Code(); app->getStateMachine()->pushState(new Game(app, code)); }
+	static void quit(SDLApp* app) { app->setExit(true); } //esto lo hace tmbn pauseState, estaría bien herencia entre ellas pero no sé yo si hay tiempo
 };
 

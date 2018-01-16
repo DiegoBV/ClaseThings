@@ -1,5 +1,6 @@
 #include "SDLApp.h"
 #include <exception>
+#include "MainMenuState.h"
 
 
 SDLApp::SDLApp()
@@ -21,6 +22,7 @@ SDLApp::SDLApp()
 		if (window == nullptr || renderer == nullptr) {
 			throw SDLError(SDL_GetError());
 		}
+		maquinaEstados->pushState(new MainMenuState(this, texts[numTexturaMenu]));
 	}
 	catch (SDLError& e) {
 		cout << e.what();
@@ -67,4 +69,28 @@ void SDLApp::leeTexturas() {
 		}
 		texturas.close();
 	}
+}
+
+int SDLApp::escribe_Code() {
+	SDL_Event evento;
+	int code = 0;
+	bool saveState = true;
+	while (saveState && !exit) {
+		SDL_WaitEvent(&evento);
+		if (evento.type == SDL_KEYDOWN) {
+			if (evento.key.keysym.sym == SDLK_RETURN) {
+				saveState = false;
+			}
+			else if (evento.key.keysym.sym >= SDLK_0 && evento.key.keysym.sym <= SDLK_9) {
+				code = code * 10 + (evento.key.keysym.sym - SDLK_0);
+			}
+		}
+	}
+	return code;
+}
+
+void SDLApp::plasmaMensaje() {
+	SDL_Rect r = { this->winWidth / 2 - anchura/2, this->winHeight/2 - altura, anchura, altura*2 };
+	texts[numTexturaMensaje]->RenderFrame(renderer, r);
+	SDL_RenderPresent(renderer);
 }

@@ -37,6 +37,6 @@ public:
 	virtual bool reproduce();
 	virtual bool dead();
 	virtual bool handleEvent(SDL_Event& e) { return false; }
-	virtual void render(bool) {};
+	//virtual void render(bool) {};
 };
 
