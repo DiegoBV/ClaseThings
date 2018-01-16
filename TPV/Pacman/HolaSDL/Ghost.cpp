@@ -44,14 +44,14 @@ void Ghost::update() {
 }
 
 void Ghost::render() {
-	/*if (vitamina){
+	if (game->dameVitamina()){
 		textura->ModificaRectangulo(0, 13);
 	}
-	else {*/
+	else {
 		textura->ModificaRectangulo(0, (this->numFantasma - 4) * 2); //modifica el rectángulo origen para dibujar el sprite adecuado...
-	//}
+	}
 
-	animar(false);
+	animar(game->dameVitamina());
 
 	GameCharacter::render();
 }

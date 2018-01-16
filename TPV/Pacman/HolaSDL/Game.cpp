@@ -5,7 +5,8 @@
 #include "FileFormatError.h"
 #include <sstream>
 
-Game::Game(SDLApp* app): app(app) {
+Game::Game(SDLApp* app): GameState(app) {
+
 	for (int i = 0; i < this->app->texts.size(); i++) {
 		texts.push_back(this->app->texts[i]);
 	}
@@ -33,22 +34,27 @@ void Game::carga_Archivo(int lvl){
 		int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
 		archivo >> numGhost;
 
-		for (int i = 0; i < numGhost; i++) {
-			int typeGhost;
-			archivo >> typeGhost;
-			if (typeGhost == 0) {
-				Ghost* fantasmita = new Ghost(0, 0, i + 4, app->texts[3], this, 0);
-				fantasmita->loadFromFile(archivo); //se leen de archivo
-				stage.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+		try {
+			for (int i = 0; i < numGhost; i++) {
+				int typeGhost;
+				archivo >> typeGhost;
+				if (typeGhost == 0) {
+					Ghost* fantasmita = new Ghost(0, 0, i + 4, app->texts[3], this, 0);
+					fantasmita->loadFromFile(archivo); //se leen de archivo
+					stage.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+				}
+				else if (typeGhost == 1) { //Fantasmas inteligentes
+					SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, app->texts[3], this, 1, 1);
+					fantasmitaInt->loadFromFile(archivo); //se leen de archivo
+					stage.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+				}
+				else {
+					throw FileFormatError("Tipo No Valido de Fantasma: " + typeGhost); //BORJA JELPPPPPP!!!!!!!!!!!!!!!!!!!!!!
+				}
 			}
-			else if(typeGhost == 1){ //Fantasmas inteligentes
-				SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, app->texts[3], this, 1, 1);
-				fantasmitaInt->loadFromFile(archivo); //se leen de archivo
-				stage.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
-			}
-			else {
-				throw FileFormatError("Tipo No Valido de Fantasma: " + typeGhost); //BORJA JELPPPPPP!!!!!!!!!!!!!!!!!!!!!!
-			}
+		}
+		catch (FileFormatError& e) {
+			cout << e.what(); //no tira
 		}
 
 		pacman = new Pacman(0, 0, app->texts[3], this);
@@ -62,7 +68,7 @@ void Game::carga_Archivo(int lvl){
 		}
 		else {
 			score = aux;
-			//archivo >> levels_Index;
+			archivo >> levels_Index;
 		}
 		archivo.close();
 	}
@@ -110,6 +116,10 @@ void Game::give_posPacman(int &posX, int &posY) {
 void Game::nace_Fantasma(int posX, int posY) {
 	SmartGhost* son = new SmartGhost(posX, posY, numFantasmaInteligente, texts[3], this, 1, 1);
 	stage.push_front(son);
+}
+
+bool Game::dameVitamina() {
+	return vitaminas;
 }
 
 MapCell Game::consulta(int x, int y) {

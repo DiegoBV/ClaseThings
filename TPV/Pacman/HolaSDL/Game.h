@@ -12,6 +12,7 @@
 #include "GameState.h"
 #include "SDLApp.h"
 #include "GameObject.h"
+#include "PauseState.h"
 using namespace std;
 const int vitaminasTiempo = 30;
 const int frameRate = 130;
@@ -30,7 +31,6 @@ class Game: public GameState
 private:
 	GameMap* map;
 	Pacman* pacman;
-	SDLApp* app;
 	ifstream archivo;
 	ofstream partidaGuardada;
 	int score = 0;
@@ -45,14 +45,16 @@ private:
 public:
 	vector<Texture*> texts;
 	Game(SDLApp* app);
-	~Game();
+	~Game() { deleteObjects(); };
 	void carga_Archivo(int lvl);
 	string nombreFichero(string path, int num, string ext);
 
 	virtual void handleEvent(SDL_Event& e) {
 		if (e.type == SDL_KEYDOWN) {
 			if (e.key.keysym.sym == SDLK_ESCAPE) {
-				//this->app->getStateMachine()->pushState();
+				//this->app->setExit(true);
+				//estado pausa, no deberia cerrar el juego, pero por ahora nos vale
+				this->app->getStateMachine()->pushState(new PauseState(app));
 			}
 			else pacman->handleEvent(e);
 		}
@@ -95,6 +97,7 @@ public:
 	void siguiente_Estado();
 	bool win();
 	void deleteObjects();
+	bool dameVitamina();
 
 };
 /*private:

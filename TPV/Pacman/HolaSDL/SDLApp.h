@@ -26,11 +26,13 @@ public:
 	int winWidth;
 	int winHeight;
 	SDLApp();
-	~SDLApp();
+	~SDLApp() { this->libera(); };
 	GameStateMachine* getStateMachine() { return this->maquinaEstados; }
 	void update() { maquinaEstados->currentState()->update(); }
 	void render() { SDL_RenderClear(renderer); maquinaEstados->currentState()->render(); SDL_RenderPresent(renderer); }
 	void handleEvent();
-	void run() { handleEvent(); update(); render(); }
+	void run() { while (!this->exit) { handleEvent(); update(); render(); } }
+	void libera() { for (int i = 0; i < texts.size(); i++) delete texts[i]; SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); TTF_Quit(); }
+	void setExit(bool b) { exit = b; }
 };
 

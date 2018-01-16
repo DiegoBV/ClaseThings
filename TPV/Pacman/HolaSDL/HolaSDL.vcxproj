@@ -83,6 +83,7 @@
     <ClCompile Include="Pacman.cpp" />
     <ClCompile Include="PacmanError.cpp" />
     <ClCompile Include="PacmanObject.cpp" />
+    <ClCompile Include="PauseState.cpp" />
     <ClCompile Include="SDLApp.cpp" />
     <ClCompile Include="SDLError.cpp" />
     <ClCompile Include="SmartGhost.cpp" />
@@ -104,6 +105,7 @@
     <ClInclude Include="Pacman.h" />
     <ClInclude Include="PacmanError.h" />
     <ClInclude Include="PacmanObject.h" />
+    <ClInclude Include="PauseState.h" />
     <ClInclude Include="SDLApp.h" />
     <ClInclude Include="SDLError.h" />
     <ClInclude Include="SmartGhost.h" />

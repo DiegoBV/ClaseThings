@@ -4,9 +4,11 @@
 class Game;
 class PacmanObject: public GameObject
 {
+protected:
+	Game* game;
 public:
 	PacmanObject();
-	PacmanObject(Game* game) : GameObject(game) {};
+	PacmanObject(Game* game, SDLApp* app) : game(game), GameObject(app) {};
 	~PacmanObject();
 	virtual void loadFromFile(ifstream& file) = 0;
 	virtual void saveToFile(ofstream& file) = 0;

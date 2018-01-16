@@ -7,12 +7,13 @@ class GameState
 {
 protected:
 	list <GameObject*> stage;
-	Game* game;
+	SDLApp* app;
 public:
 	virtual void render() { for (GameObject* it : stage) { it->render(); } };
 	virtual void update() { for (GameObject* it : stage) { it->update(); } };
 	virtual void handleEvent(SDL_Event &e);
 	GameState();
 	~GameState() { for (GameObject* it : stage) { delete it; } };
+	GameState(SDLApp* app) : app(app) {}
 };
 

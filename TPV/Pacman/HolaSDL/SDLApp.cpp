@@ -1,22 +1,30 @@
 #include "SDLApp.h"
-
+#include <exception>
 
 
 SDLApp::SDLApp()
 {
-	window = nullptr;
-	renderer = nullptr;
-	winWidth = 870;
-	winHeight = 644;
-	int winX, winY;
-	winX = winY = SDL_WINDOWPOS_CENTERED;
-	//Inicialización del sistema y renderer
-	SDL_Init(SDL_INIT_EVERYTHING);
-	window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
-	renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
-	TTF_Init();
-	leeTexturas();
-	maquinaEstados = new GameStateMachine();
+	try {
+		window = nullptr;
+		renderer = nullptr;
+		winWidth = 870;
+		winHeight = 644;
+		int winX, winY;
+		winX = winY = SDL_WINDOWPOS_CENTERED;
+		//Inicialización del sistema y renderer
+		SDL_Init(SDL_INIT_EVERYTHING);
+		window = SDL_CreateWindow("First test with SDL", winX, winY, winWidth, winHeight, SDL_WINDOW_SHOWN);
+		renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED);
+		TTF_Init();
+		leeTexturas();
+		maquinaEstados = new GameStateMachine();
+		if (window == nullptr || renderer == nullptr) {
+			throw SDLError(SDL_GetError());
+		}
+	}
+	catch (SDLError& e) {
+		cout << e.what();
+	}
 }
 
 void SDLApp::handleEvent() {
@@ -59,8 +67,4 @@ void SDLApp::leeTexturas() {
 		}
 		texturas.close();
 	}
-}
-
-SDLApp::~SDLApp()
-{
 }

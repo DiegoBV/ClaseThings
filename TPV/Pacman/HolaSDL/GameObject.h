@@ -2,17 +2,16 @@
 #include <fstream>
 #include <SDL.h>
 using namespace std;
-class Game;
+class SDLApp;
 class GameObject
 {
 protected:
-	Game* game;
+	SDLApp* app;
 	
 public:
 	GameObject();
-	GameObject(Game* game) : game(game) {}
+	GameObject(SDLApp* app) : app(app) {}
 	virtual void render()=0;
-	virtual void render(bool)=0;
 	virtual void update()=0;
 	virtual bool handleEvent(SDL_Event& e) = 0;
 };
