@@ -212,13 +212,14 @@ bool Game::colision_Fantasma(int posX, int posY) {
 	obj++;
 	for (obj++; obj != stage.rend(); obj++) {
 		if (static_cast<Ghost *>(*obj)->ghostType() == 1) {//Si no estamos en el mismo elemento(?) y son fantasmas inteligentes
-			if (((posY == static_cast<GameCharacter *>(*obj)->get_PosActX() && posX == static_cast<GameCharacter *>(*obj)->get_PosActY()) && static_cast<GameCharacter *>(*obj)->reproduce())) {
+			if (((posX == static_cast<GameCharacter *>(*obj)->get_PosActX() && posY == static_cast<GameCharacter *>(*obj)->get_PosActY()) && static_cast<GameCharacter *>(*obj)->reproduce())) {
 				return true;
 			}
 		}
 	}
 	return false;
 }
+
 
 void Game::delay() { //hace lo del Delay más eficiente
 	startTime = SDL_GetTicks();
