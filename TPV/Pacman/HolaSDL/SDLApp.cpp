@@ -25,7 +25,10 @@ SDLApp::SDLApp()
 		maquinaEstados->pushState(new MainMenuState(this, texts[numTexturaMenu]));
 	}
 	catch (SDLError& e) {
-		cout << e.what();
+		cerr << "Caught: " << e.what() << endl;
+		cerr << "Tipo: " << typeid(e).name() << endl;
+		system("pause");
+		this->setExit(true); //cerramos, error critico
 	}
 }
 
@@ -40,34 +43,42 @@ void SDLApp::handleEvent() {
 
 void SDLApp::leeTexturas() {
 	ifstream texturas;
-	texturas.open(pathInfoTexturas + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
-	if (!texturas.is_open()) {
-		throw FileNotFoundError("Archivo: " + pathInfoTexturas + extTxt + " no encontrado"); //error de archivo no encontrado
+	try{
+		texturas.open(pathInfoTexturas + extTxt); //archivo de texto donde se encuentra la informacion de las diferentes texturas (ruta, filas, columnas, numero de Texturas, etc)
+		if (!texturas.is_open()) {
+			throw FileNotFoundError("Archivo: " + pathInfoTexturas + extTxt + " no encontrado"); //error de archivo no encontrado
+		}
+		else {
+			int numText = 0;
+			texturas >> numText;
+			for (int i = 0; i < numText; i++) {
+				string fileName;
+				int fils, cols;
+				texturas >> fileName;
+				if (fileName == "Fuente") { //si es la fuente crea una textura vacia y la fuente
+					int tamanyo;
+					texturas >> fileName >> tamanyo;
+					fuente = new Font(fileName, tamanyo);
+					texts.push_back(new Texture());
+				}
+				else {
+					texturas >> fils >> cols;
+					texts.push_back(new Texture(renderer, fileName, fils, cols));
+				}
+			}
+			for (int i = 0; i < numText; i++) {
+				if (texts[i] == nullptr) {
+					throw SDLError(IMG_GetError()); //controlar el error de texturas nulas
+				}
+			}
+			texturas.close();
+		}
 	}
-	else {
-		int numText = 0;
-		texturas >> numText;
-		for (int i = 0; i < numText; i++) {
-			string fileName;
-			int fils, cols;
-			texturas >> fileName;
-			if (fileName == "Fuente") { //si es la fuente crea una textura vacia y la fuente
-				int tamanyo;
-				texturas >> fileName >> tamanyo;
-				fuente = new Font(fileName, tamanyo);
-				texts.push_back(new Texture());
-			}
-			else {
-				texturas >> fils >> cols;
-				texts.push_back(new Texture(renderer, fileName, fils, cols));
-			}
-		}
-		for (int i = 0; i < numText; i++) {
-			if (texts[i] == nullptr) {
-				throw SDLError(IMG_GetError()); //controlar el error de texturas nulas
-			}
-		}
-		texturas.close();
+	catch (exception& e) {
+		cerr << "Caught: " << e.what() << endl;
+		cerr << "Tipo: " << typeid(e).name() << endl;
+		system("pause");
+		this->setExit(true); //cerramos, error critico en las texturas
 	}
 }
 

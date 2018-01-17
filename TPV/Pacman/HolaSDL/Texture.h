@@ -25,6 +25,5 @@ public:
 	void RenderFrame(SDL_Renderer* rnd, SDL_Rect dest); //render un frame espécifico
 	void Anima(int veloc, int posInicialX, int posInicialY,int fil, int col);//anima la textura, hay q modificarlo
 	bool loadFromText(SDL_Renderer* renderer, string text, const Font& font, SDL_Color color);
-	void prueba(int alto, int ancho);
 };
 

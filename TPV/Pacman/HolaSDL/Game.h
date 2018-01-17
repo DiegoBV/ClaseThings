@@ -55,9 +55,6 @@ public:
 			if (e.key.keysym.sym == SDLK_ESCAPE) {
 				this->app->getStateMachine()->pushState(new PauseState(app, app->texts[numTexturaMenu]));
 			}
-			else if (e.key.keysym.sym == SDLK_s) {
-				this->save();
-			}
 			else pacman->handleEvent(e);
 		}
 	}
@@ -103,6 +100,7 @@ public:
 	bool dameVitamina();
 	void save();
 	void guarda_Partida(int lvl);
+	SDLApp* Game::getApp();
 
 };
 /*private:

@@ -66,18 +66,26 @@ void GameCharacter::animar(int posIn, int fils, int cols) {
 
 void GameCharacter::loadFromFile(ifstream& file) {
 	file >> posActY >> posActX >> iniY >> iniX >> actualDir.dirX >> actualDir.dirY;
-	if (posActX < 0 || posActY < 0 || posActX > game->dame_FilasTablero() || posActY > game->dame_ColumnasTablero()) { //error de posiciones actuales no valida
-		throw FileFormatError("Posicion actual no valida: " + to_string(posActX) + "  " + to_string(posActY));
+	try {
+		if (posActX < 0 || posActY < 0 || posActX > game->dame_FilasTablero() || posActY > game->dame_ColumnasTablero()) { //error de posiciones actuales no valida
+			throw FileFormatError("Posicion actual no valida: " + to_string(posActX) + "  " + to_string(posActY));
+		}
+		else if (iniX < 0 || iniY < 0 || iniX > game->dame_FilasTablero() || iniY > game->dame_ColumnasTablero()) { //posiciones iniciales no validas
+			throw FileFormatError("Posicion actual no valida : " + to_string(iniX) + "  " + to_string(iniY));
+		}
+		else if (actualDir.dirX > 1 || actualDir.dirX < -1 || actualDir.dirY > 1 || actualDir.dirY < -1) { //si las direcciones introducidas no son validas
+			throw FileFormatError("Direcciones no validas : " + to_string(actualDir.dirX) + "  " + to_string(actualDir.dirY));
+		}
+		if (game->dame_ColumnasTablero() != 0 && game->dame_FilasTablero() != 0) {
+			rectDest.x = posActY * this->game->dame_Anchura() / game->dame_ColumnasTablero();
+			rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
+		}
 	}
-	else if (iniX < 0 || iniY < 0 || iniX > game->dame_FilasTablero() || iniY > game->dame_ColumnasTablero()) { //posiciones iniciales no validas
-		throw FileFormatError("Posicion actual no valida : " + to_string(iniX) + "  "+ to_string(iniY));
-	}
-	else if (actualDir.dirX > 1 || actualDir.dirX < -1 || actualDir.dirY > 1 || actualDir.dirY < -1) { //si las direcciones introducidas no son validas
-		throw FileFormatError("Direcciones no validas : " + to_string(actualDir.dirX) + "  " + to_string(actualDir.dirY));
-	}
-	if (game->dame_ColumnasTablero() != 0 && game->dame_FilasTablero() != 0) {
-		rectDest.x = posActY * this->game->dame_Anchura() / game->dame_ColumnasTablero();
-		rectDest.y = posActX * this->game->dame_Altura() / game->dame_FilasTablero();
+	catch (exception& e) {
+		cerr << "Caught: " << e.what() << endl;
+		cerr << "Tipo: " << typeid(e).name() << endl;
+		system("pause");
+		this->game->getApp()->setExit(true); //el archivo está corrupto, cerramos
 	}
 }
 

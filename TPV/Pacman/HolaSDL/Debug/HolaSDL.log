@@ -1,38 +1,51 @@
 ﻿  Game.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(13): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(14): warning C4018: '<': signed/unsigned mismatch
   Generating Code...
   Compiling...
   main.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\main.cpp(11): warning C4101: 'E': unreferenced local variable
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\main.cpp(10): warning C4101: 'E': unreferenced local variable
   SmartGhost.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\smartghost.cpp(65): warning C4018: '<': signed/unsigned mismatch
   SDLApp.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   PauseState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   PacmanObject.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Pacman.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   MainMenuState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Ghost.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\ghost.cpp(25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
   GameState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GameObject.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GameMap.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   GameCharacter.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(40): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
   Generating Code...
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\gamemap.cpp(43): warning C4715: 'GameMap::getCell': not all control paths return a value
   HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe

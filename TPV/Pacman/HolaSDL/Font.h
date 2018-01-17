@@ -10,8 +10,14 @@ private:
 public:
 	Font();
 	Font(string fileName, int size) {
-		if (!load(fileName, size)) {
-			throw SDLError(TTF_GetError());
+		try {
+			if (!load(fileName, size)) {
+				throw SDLError(TTF_GetError());
+			}
+		}
+		catch (exception& e) {
+			cerr << "Caught: " << e.what() << endl;
+			cerr << "Tipo: " << typeid(e).name() << endl;
 		}
 	}
 	~Font() { free(); };

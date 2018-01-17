@@ -66,24 +66,40 @@ void GameMap::loadFromFile(ifstream& file) {
 	if (file.is_open()) {
 		int fils, cols;
 		file >> fils >> cols;
-		if (fils < 0 || cols < 0) { //tamaño de mapa no valido
-			throw FileFormatError("Tamaño de mapa invalido: " + to_string(fils) + "  " + to_string(cols));
+		try {
+			if (fils < 0 || cols < 0) { //tamaño de mapa no valido
+				throw FileFormatError("Tamaño de mapa invalido: " + to_string(fils) + "  " + to_string(cols));
+			}
+		}
+		catch (exception& e) {
+			cerr << "Caught: " << e.what() << endl;
+			cerr << "Tipo: " << typeid(e).name() << endl;
+			fils = abs(fils);
+			cols = abs(cols);
 		}
 		this->fils = fils;
 		this->cols = cols;
 		vector_Dinamico();
-		for (int i = 0; i < fils; i++) {
-			for (int j = 0; j < cols; j++) {
-				int pos;
-				file >> pos;
-				if (pos > 3 || pos < 0) { //valor de celda incorrecto
-					throw FileFormatError("Posicion no valida: Fila: " + to_string(i) + " Columna: " + to_string(j) + " Numero: " + to_string(pos));
-				}
-				this->modifica_Posicion(i, j, (MapCell)pos);
-				if (pos == 2 || pos == 3) {
-					game->setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
+		try {
+			for (int i = 0; i < fils; i++) {
+				for (int j = 0; j < cols; j++) {
+					int pos;
+					file >> pos;
+					if (pos > 3 || pos < 0) { //valor de celda incorrecto
+						throw FileFormatError("Posicion no valida: Fila: " + to_string(i) + " Columna: " + to_string(j) + " Numero: " + to_string(pos));
+					}
+					this->modifica_Posicion(i, j, (MapCell)pos);
+					if (pos == 2 || pos == 3) {
+						game->setComida(1); //si es comida o vitamina aumentamos en 1 el numComida
+					}
 				}
 			}
+		}
+		catch (exception& e) {
+			cerr << "Caught: " << e.what() << endl;
+			cerr << "Tipo: " << typeid(e).name() << endl; //archivo corrupto, cerramos
+			system("pause");
+			game->getApp()->setExit(true);
 		}
 	}
 	else {
@@ -107,10 +123,6 @@ void GameMap::vector_Dinamico() {
 	for (int r = 0; r < fils; r++) {
 		tablero[r] = new MapCell[cols]; //Ahora sí son arrays dinámicos completos
 	}
-}
-
-
-void GameMap::render(bool) {
 }
 
 void GameMap::update() {

@@ -8,6 +8,10 @@ const string pathInfoTexturas = "..\\infoTexturas";
 const string extTxt = ".pac";
 const int numTexturaMensaje = 6;
 const int numTexturaMenu = 4;
+const int numTexturaGameOver = 5;
+const int numTexturaResume = 10;
+const int numTexturaQuit = 11;
+const int numTexturaSave = 12;
 const int anchura = 400; //de los botones y eso
 const int altura = 100;
 class SDLApp

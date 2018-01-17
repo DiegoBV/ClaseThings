@@ -3,6 +3,7 @@
 #include "SDLError.h"
 #include "FileNotFoundError.h"
 #include "FileFormatError.h"
+#include "GameOverState.h"
 #include <sstream>
 
 Game::Game(SDLApp* app, int lvl): levels_Index(lvl), GameState(app) {
@@ -28,57 +29,67 @@ string Game::nombreFichero(string path, int num, string ext) {
 void Game::carga_Archivo(int lvl){
 	string name = nombreFichero(pathTxt, lvl, extTxt);
 	archivo.open(name);
-	if (!archivo.is_open()) {
-		throw FileNotFoundError("Archivo: " + name + " no encontrado");  //error de archivo no encontrado
-		string fileName = nombreFichero(pathTxt, 1, extTxt);
-		archivo.open(fileName);
+	try {
+		if (!archivo.is_open()) {
+			throw FileNotFoundError("Archivo: " + name + " no encontrado");  //error de archivo no encontrado
+		}
 	}
-	else {
-		map = new GameMap(this);
-		map->loadFromFile(archivo);
-		stage.push_back(map);
-		int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
-		archivo >> numGhost;
+	catch (exception& e) {
+		cerr << "Caught: " << e.what() << endl;
+		cerr << "Tipo: " << typeid(e).name() << " Volviendo al primer nivel..." << endl;
+		string fileName = nombreFichero(pathTxt, 1, extTxt); //si no encuentra el archivo, carga el primer lvl de todos
+		archivo.open(fileName);
+		this->levels_Index = 1;
+	}
+		
+	map = new GameMap(this);
+	map->loadFromFile(archivo);
+	stage.push_back(map);
+	int numGhost = 0; //numero de fantasmas, maybe deberia ser un atributo del Game...
+	archivo >> numGhost;
 
-		try {
-			for (int i = 0; i < numGhost; i++) {
-				int typeGhost;
-				archivo >> typeGhost;
-				if (typeGhost == 0) {
-					Ghost* fantasmita = new Ghost(0, 0, i + 4, app->texts[3], this, 0);
-					fantasmita->loadFromFile(archivo); //se leen de archivo
-					stage.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
-				}
-				else if (typeGhost == 1) { //Fantasmas inteligentes
-					SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, app->texts[3], this, 1, 1);
-					fantasmitaInt->loadFromFile(archivo); //se leen de archivo
-					stage.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
-				}
-				else {
-					throw FileFormatError("Tipo No Valido de Fantasma: " + typeGhost); //BORJA JELPPPPPP!!!!!!!!!!!!!!!!!!!!!!
-				}
+	try {
+		for (int i = 0; i < numGhost; i++) {
+			int typeGhost;
+			archivo >> typeGhost;
+			if (typeGhost == 0) {
+				Ghost* fantasmita = new Ghost(0, 0, i + 4, app->texts[3], this, 0);
+				fantasmita->loadFromFile(archivo); //se leen de archivo
+				stage.push_front(fantasmita); //pusheamos el fantasma al principio de la lista
+			}
+			else if (typeGhost == 1) { //Fantasmas inteligentes
+				SmartGhost* fantasmitaInt = new SmartGhost(0, 0, numFantasmaInteligente, app->texts[3], this, 1, 1);
+				fantasmitaInt->loadFromFile(archivo); //se leen de archivo
+				stage.push_front(fantasmitaInt); //pusheamos el fantasma al principio de la lista
+			}
+			else {
+				throw FileFormatError("Tipo No Valido de Fantasma: " + to_string(typeGhost)); 
 			}
 		}
-		catch (FileFormatError& e) {
-			cout << e.what(); //no tira
-		}
-
-		pacman = new Pacman(0, 0, app->texts[3], this);
-		stage.push_back(pacman); //pusheamos a pacman al final de la lista
-		pacman->loadFromFile(archivo); //se lee de archivo
-
-		int aux; //para saber si el archivo acaba o no
-		archivo >> aux;
-		if (archivo.fail()) {
-			archivo.clear();
-		}
-		else {
-			score = aux;
-			archivo >> levels_Index;
-		}
-		archivo.close();
 	}
+	catch (exception& e) {
+		cerr << "Caught: " << e.what() << endl;
+		cerr << "Tipo: " << typeid(e).name() << endl;
+		system("pause");
+		this->app->setExit(true); //si el archivo está mal, cerramos
+	}
+
+	pacman = new Pacman(0, 0, app->texts[3], this);
+	stage.push_back(pacman); //pusheamos a pacman al final de la lista
+	pacman->loadFromFile(archivo); //se lee de archivo
+
+	int aux; //para saber si el archivo acaba o no
+	archivo >> aux;
+	if (archivo.fail()) {
+		archivo.clear();
+	}
+	else {
+		score = aux;
+		archivo >> levels_Index;
+	}
+	archivo.close();
 }
+
 
 void Game::guarda_Partida(int lvl) {
 	bool noEscribir = false; //para no sobreescribir
@@ -113,7 +124,7 @@ void Game::siguiente_Estado() {
 		this->carga_Archivo(levels_Index); //carga el siguiente archivo
 	}
 	else if (pacman->he_Muerto()) {
-		//game_Over();
+		this->app->getStateMachine()->pushState(new GameOverState(app, app->texts[numTexturaGameOver]));
 	}
 }
 
@@ -210,7 +221,6 @@ bool Game::comprueba_colisiones(int x, int y) {
 	}
 
 	return exit;
-	return false;
 }
 
 //------------------------------------Auxiliares-----------------------//
@@ -304,6 +314,10 @@ MapCell Game::consulta(int x, int y) {
 
 bool Game::win() { //comprueba si se ha comido todo e.e
 	return (numComida == 0);
+}
+
+SDLApp* Game::getApp() {
+	return app;
 }
 
 

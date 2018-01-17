@@ -22,7 +22,6 @@ public:
 	void modifica_Posicion(int x, int y, MapCell nuevoObjeto);
 	virtual void loadFromFile(ifstream& file);
 	virtual void render();
-	virtual void render(bool);
 	virtual void update();
 	virtual void saveToFile(ofstream& file);
 	virtual bool handleEvent(SDL_Event& e) { return false; }
