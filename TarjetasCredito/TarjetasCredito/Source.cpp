@@ -65,7 +65,7 @@ private:
 			return search_rec(e, raiz->der);
 		}
 		else { // e == nodo->elem
-			return pair<bool, T>(true, e);
+			return pair<bool, T>(true, raiz->elem);
 		}
 	}
 
@@ -224,34 +224,72 @@ using namespace std;
 template <typename Key, typename Value, typename Compare = less<Key>>
 class map {
 private:
-	bst<pair<Key, Value>> arbolBusqueda; //arbol de pares
-public:
+	class FunctorPar {
+	public:
+		bool operator() (const pair<Key, Value> e1, const pair<Key, Value> e2) const {
+			return e1.first < e2.first;
+		}
+	};
+	bst<pair<Key, Value>, FunctorPar> arbolBusqueda; //arbol de pares
+public: //HAY QIE INCLUIR EL COSTE DE TODOS LOS METODOOOOOS
 	map() {}
 	Value get(const Key& key) const {
-		//pair<bool, Key> p = arbolBusqueda.search(key);
-		//return p.second;
+		pair<bool, pair<Key, Value>> p = arbolBusqueda.search(pair<Key, Value>(key, NULL));
+		if (p.first) {
+			return p.second.second;
+		}
 	}
 
 	bool contains(const Key& key) const {
-		return arbolBusqueda.search(key).first;
+		return arbolBusqueda.search(pair<Key, Value>(key, NULL)).first;
 	}
 
 	void insert(const Key& key, const Value& value) {
-		arbolBusqueda.insert(pair<Key, Value>(key, value));
+		if (!this->contains(key)) {
+			arbolBusqueda.insert(pair<Key, Value>(key, value));
+		}
+		else {
+			Value v = this->get(key); //esto...cuesta demasiado eh
+			this->erase(key);
+			arbolBusqueda.insert(pair<Key, Value>(key, v + value));
+		}
 	}
 
 	void erase(const Key& key) {
-		arbolBusqueda.remove(key);
+		arbolBusqueda.remove(pair<Key, Value>(key, NULL));
 	}
 };
 #endif /* MAP_EDA_H_ */
 
 #include <iostream>
 int main() {
-	map<int, char> dic;
-	dic.insert(1, 'c');
-	dic.insert(3, 'd');
-	cout << dic.get((3));
+	int n;
+	cin >> n;
+	int i = 0;
+	while (i < n) {
+		map<int, float> dic;
+		int m;
+		cin >> m; 
+		int j = 0;
+		while (j < m) {
+			int TC;
+			float money;
+			cin >> TC >> money;
+			dic.insert(TC, money);
+			j++;
+		}
+
+		int C;
+		cin >> C;
+		int k = 0;
+		while (k < C) {
+			int nC;
+			cin >> nC;
+			cout << nC << " " << dic.get(nC);
+			k++;
+		}
+		i++;
+	}
 	system("pause");
 	return 0;
 }
