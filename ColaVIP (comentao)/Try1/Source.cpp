@@ -52,7 +52,7 @@ ColaVIP<T>::ColaVIP(int p) {
 	numElementos = 0;
 }
 
-//Método de coste O(p), donde p es la prioridad a buscar (p <= prioridadMax)
+//Método de coste O(p), donde p es la prioridad a buscar (p <= prioridadMax). En el caso peor recorre la cola entera
 template <typename T>
 typename ColaVIP<T>::Nodo* ColaVIP<T>::recorre_Cola(int p) {
 	Nodo* aux = ghost; //nodo auxiliar
