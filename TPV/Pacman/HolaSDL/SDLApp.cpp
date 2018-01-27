@@ -37,7 +37,7 @@ void SDLApp::handleEvent() {
 		if (event.type == SDL_QUIT)
 			exit = true;
 		else
-			maquinaEstados->currentState()->handleEvent(event);
+			maquinaEstados->currentState()->handleEvent(event); //invoca el handleEvent del currentState
 	}
 }
 

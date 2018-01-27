@@ -36,11 +36,11 @@ public:
 	int winHeight;
 	SDLApp();
 	~SDLApp() { this->libera(); };
-	GameStateMachine* getStateMachine() { return this->maquinaEstados; }
-	void update() { maquinaEstados->currentState()->update(); }
-	void render() { SDL_RenderClear(renderer); maquinaEstados->currentState()->render(); SDL_RenderPresent(renderer); }
+	GameStateMachine* getStateMachine() { return this->maquinaEstados; } //return de la maquina de estados
+	void update() { maquinaEstados->currentState()->update(); } //invoca el update del currentState
+	void render() { SDL_RenderClear(renderer); maquinaEstados->currentState()->render(); SDL_RenderPresent(renderer); } //invoca el render del currentState
 	void handleEvent();
-	void run() { while (!this->exit) { handleEvent(); update(); render(); } }
+	void run() { while (!this->exit) { handleEvent(); update(); render(); } } //run
 	void libera() { maquinaEstados->libera(); for (int i = 0; i < texts.size(); i++) delete texts[i]; SDL_DestroyRenderer(renderer); SDL_DestroyWindow(window); TTF_Quit(); }
 	void setExit(bool b) { exit = b; }
 	int SDLApp::escribe_Code();

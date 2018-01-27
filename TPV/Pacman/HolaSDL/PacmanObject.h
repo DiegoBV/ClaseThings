@@ -2,7 +2,7 @@
 #include "GameObject.h"
 
 class Game;
-class PacmanObject: public GameObject
+class PacmanObject: public GameObject //clase intermedia que define los metodos load y save
 {
 protected:
 	Game* game;

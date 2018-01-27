@@ -8,7 +8,7 @@ class MenuButton: public GameObject
 	Texture* boton;
 	SDL_Rect rect;
 	typedef void CallBackOnClick(SDLApp* app);
-	CallBackOnClick* cdOnClick;
+	CallBackOnClick* cdOnClick; //declaracion del callBack (tipo)
 public:
 	MenuButton(int x, int y, int w, int h, Texture * txt, CallBackOnClick* cd,SDLApp* app) : x(x), y(y), w(w), h(h), boton(txt), cdOnClick(cd), GameObject(app) {
 		rect.x = x; rect.y = y; rect.h = h; rect.w = w;

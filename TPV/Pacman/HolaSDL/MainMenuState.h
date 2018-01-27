@@ -22,7 +22,7 @@ public:
 	virtual void render() { this->txt->Render(app->renderer); GameState::render(); }
 	virtual void handleEvent(SDL_Event& e);
 	static void start(SDLApp* app) { app->getStateMachine()->pushState(new Game(app, startLvl));}
-	static void cargaPartida(SDLApp* app) { app->plasmaMensaje(); int code = app->escribe_Code(); app->getStateMachine()->pushState(new Game(app, code)); }
-	static void quit(SDLApp* app) { app->setExit(true); } //esto lo hace tmbn pauseState, estaría bien herencia entre ellas pero no sé yo si hay tiempo
+	static void cargaPartida(SDLApp* app) { app->plasmaMensaje(); int code = app->escribe_Code(); app->getStateMachine()->pushState(new Game(app, code)); } //declaracion de los metodos static (callbacks)
+	static void quit(SDLApp* app) { app->setExit(true); } 
 };
 

@@ -3,7 +3,7 @@
 #include "PacmanObject.h"
 const int velAnimacion = 100;
 class Game;
-class GameCharacter: public PacmanObject
+class GameCharacter: public PacmanObject //Pacman y Fantasmas
 {
 protected:
 	struct Dirs {
