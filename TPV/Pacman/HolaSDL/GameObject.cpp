@@ -1,5 +1,5 @@
 #include "GameObject.h"
-#include "Game.h"
+#include "SDLApp"
 
 GameObject::GameObject() {
 
