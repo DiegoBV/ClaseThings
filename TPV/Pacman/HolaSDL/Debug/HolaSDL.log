@@ -1,64 +1,70 @@
-﻿  Texture.cpp
-  SmartGhost.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\smartghost.cpp(65): warning C4018: '<': signed/unsigned mismatch
-  SDLError.cpp
-  SDLApp.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  PauseState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  PacmanObject.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  PacmanError.cpp
-  Pacman.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  MenuButton.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-  MainMenuState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  main.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\mainmenustate.h(19): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\main.cpp(10): warning C4101: 'E': unreferenced local variable
-  GameCharacter.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Ghost.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\ghost.cpp(25): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  GameStateMachine.cpp
-  GameState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  GameOverState.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-  GameObject.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  GameMap.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-  Game.cpp
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument': conversion from 'double' to 'int', possible loss of data
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\game.cpp(14): warning C4018: '<': signed/unsigned mismatch
-  Font.cpp
-  Generating Code...
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\gamemap.cpp(43): warning C4715: 'GameMap::getCell': not all control paths return a value
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\pacman\holasdl\gamestatemachine.cpp(29): warning C4715: 'GameStateMachine::currentState': not all control paths return a value
-  Compiling...
-  FileNotFoundError.cpp
-  FileFormatError.cpp
-  Generating Code...
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
-  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb (Full PDB)
+﻿Build started 30/01/2018 0:31:43.
+     1>Project "D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Game.cpp GameCharacter.cpp GameMap.cpp GameObject.cpp GameState.cpp Ghost.cpp MainMenuState.cpp Pacman.cpp PacmanObject.cpp PauseState.cpp SDLApp.cpp SmartGhost.cpp TimeLimitState.cpp main.cpp
+         TimeLimitState.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+         Generating Code...
+         Compiling...
+         main.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(21): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(22): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(23): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\main.cpp(10): warning C4101: 'E' : unreferenced local variable
+         SDLApp.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(21): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(22): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(23): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+         MainMenuState.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\sdlapp.h(44): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\pausestate.h(13): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(21): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(22): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\tpv\pacman\holasdl\mainmenustate.h(23): warning C4244: 'argument' : conversion from 'double' to 'int', possible loss of data
+         Generating Code...
+         Skipping... (no relevant changes detected)
+         SmartGhost.cpp
+         PauseState.cpp
+         PacmanObject.cpp
+         Pacman.cpp
+         Ghost.cpp
+         GameState.cpp
+         GameObject.cpp
+         GameMap.cpp
+         GameCharacter.cpp
+         Game.cpp
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe" /INCREMENTAL /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.lib" /MACHINE:X86 Debug\FileFormatError.obj
+         Debug\FileNotFoundError.obj
+         Debug\Font.obj
+         Debug\Game.obj
+         Debug\GameMap.obj
+         Debug\GameObject.obj
+         Debug\GameOverState.obj
+         Debug\GameState.obj
+         Debug\GameStateMachine.obj
+         Debug\Ghost.obj
+         Debug\GameCharacter.obj
+         Debug\main.obj
+         Debug\MainMenuState.obj
+         Debug\MenuButton.obj
+         Debug\Pacman.obj
+         Debug\PacmanError.obj
+         Debug\PacmanObject.obj
+         Debug\PauseState.obj
+         Debug\SDLApp.obj
+         Debug\SDLError.obj
+         Debug\SmartGhost.obj
+         Debug\Texture.obj
+         Debug\TimeLimitState.obj
+         HolaSDL.vcxproj -> D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\bin\HolaSDLDebug.exe
+     1>Done Building Project "D:\CosasImportabiles\Cosas git\ClaseThings\TPV\Pacman\HolaSDL\HolaSDL.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:04.68

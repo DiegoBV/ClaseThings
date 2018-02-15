@@ -28,7 +28,7 @@ const SDL_Rect hudScore = { 800, 0, 50, 40 };
 const SDL_Rect hudVidas = { 0, 0, 35, 35 };
 class Game: public GameState
 {
-private:
+protected:
 	GameMap* map;
 	Pacman* pacman;
 	ifstream archivo;
@@ -59,14 +59,14 @@ public:
 		}
 	}
 
-	void update() {
+	virtual void update() {
 		comprueba_colisiones(pacman->get_PosActX(), pacman->get_PosActY());
 		tiempo_Vitamina();
 		GameState::update();
 		this->delay();
 		siguiente_Estado();
 	}
-	void render() {
+	virtual void render() {
 		GameState::render();
 		texts[texts.size() - 1]->loadFromText(app->renderer, to_string(score), *(app->fuente), color);
 		this->animaciones_Extra();
@@ -94,7 +94,7 @@ public:
 	void animaciones_Extra();
 	void tiempo_Vitamina();
 	void plasmaVidas();
-	void siguiente_Estado();
+	virtual void siguiente_Estado();
 	bool win();
 	void deleteObjects();
 	bool dameVitamina();
