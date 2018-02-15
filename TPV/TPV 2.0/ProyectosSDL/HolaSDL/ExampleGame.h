@@ -43,6 +43,7 @@ private:
 	InputComponent* keyboardIC1_;
 	InputComponent* keyboardIC2_;
 	InputComponent* mouseIC1_;
+	InputComponent* accelerationComp;
 
 	PhysicsComponent* paddlePC_;
 	PhysicsComponent* paddleAIPC_;

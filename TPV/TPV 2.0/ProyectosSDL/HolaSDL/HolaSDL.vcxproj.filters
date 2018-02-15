@@ -120,6 +120,9 @@
     <ClCompile Include="CircularMotionPhysics.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
+    <ClCompile Include="AccelerationInputComponent.cpp">
+      <Filter>Archivos de código fuente</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Vector2D.h">
@@ -225,6 +228,9 @@
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
     <ClInclude Include="CircularMotionPhysics.h">
+      <Filter>Archivos de encabezado</Filter>
+    </ClInclude>
+    <ClInclude Include="AccelerationInputComponent.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

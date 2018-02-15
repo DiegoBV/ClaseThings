@@ -9,6 +9,7 @@
 #include "TranRectRenderer.h"
 #include "BounceOnBordersPhysics.h"
 #include "ImageRenderer.h"
+#include "AccelerationInputComponent.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -63,6 +64,7 @@ void ExampleGame::initGame() {
 	keyboardIC2_ = new PaddleKeyboardComponent(SDLK_a, SDLK_z, SDLK_s);
 	mouseIC1_ = new PaddleMouseInputComponent();
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
+	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
 
 	paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
@@ -102,6 +104,7 @@ void ExampleGame::initGame() {
 	caza_->addRenderComponent(caza2_);
 	caza_->addInputComponent(rotater);
 	caza_->addPhysicsComponent(circular_);
+	caza_->addInputComponent(accelerationComp);
 
 	cs1_->setMode(0);
 	cs2_->setMode(0);
