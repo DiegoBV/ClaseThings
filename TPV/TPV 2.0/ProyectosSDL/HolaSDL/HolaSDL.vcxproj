@@ -71,7 +71,9 @@
   <ItemGroup>
     <ClCompile Include="AccelerationInputComponent.cpp" />
     <ClCompile Include="Ball.cpp" />
+    <ClCompile Include="BasicMotionPhysics.cpp" />
     <ClCompile Include="BounceOnBordersPhysics.cpp" />
+    <ClCompile Include="BulletsManager.cpp" />
     <ClCompile Include="CircularMotionPhysics.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="ComponentSwitcher.cpp" />
@@ -102,14 +104,18 @@
     <ClCompile Include="SDLGame.cpp" />
     <ClCompile Include="SkeletonRenderer.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="StarWarsBulletsManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TranRectRenderer.cpp" />
     <ClCompile Include="Vector2D.cpp" />
+    <ClCompile Include="Weapon.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationInputComponent.h" />
     <ClInclude Include="Ball.h" />
+    <ClInclude Include="BasicMotionPhysics.h" />
     <ClInclude Include="BounceOnBordersPhysics.h" />
+    <ClInclude Include="BulletsManager.h" />
     <ClInclude Include="CircularMotionPhysics.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="ComponentSwitcher.h" />
@@ -140,9 +146,11 @@
     <ClInclude Include="sdl_includes.h" />
     <ClInclude Include="SkeletonRenderer.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="StarWarsBulletsManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TranRectRenderer.h" />
     <ClInclude Include="Vector2D.h" />
+    <ClInclude Include="Weapon.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

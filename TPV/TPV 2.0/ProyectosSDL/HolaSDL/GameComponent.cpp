@@ -5,6 +5,18 @@ GameComponent::GameComponent(SDLGame* game) :
 }
 
 GameComponent::~GameComponent() {
+	/*for (InputComponent* ic : inputComp_) {
+		delete ic;
+		
+	}
+	for (RenderComponent* rc : renderComp_) {
+		delete rc;
+		rc = inputComp_.erase(ic);
+	}
+	for (InputComponent* ic : inputComp_) {
+		delete ic;
+		ic = inputComp_.erase(ic);
+	}*/
 }
 
 void GameComponent::handleInput(Uint32 time, const SDL_Event& event) {

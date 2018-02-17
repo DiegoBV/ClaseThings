@@ -10,6 +10,8 @@
 #include "BounceOnBordersPhysics.h"
 #include "ImageRenderer.h"
 #include "AccelerationInputComponent.h"
+#include "StarWarsBulletsManager.h"
+#include "Weapon.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -36,12 +38,16 @@ void ExampleGame::initGame() {
 	velPrub.setX(-1);
 	velPrub.setY(-2);
 
+
 	caza_ = new GameComponent(this);
 	caza_->setDirection(dirPrub);
 	caza_->setWidth(30);
 	caza_->setHeight(30);
 	caza_->setPosition(Vector2D(getWindowWidth() / 2 - 6, getWindowHeight() / 2 - 6));
 	caza_->setVelocity(velPrub);
+
+
+	StarWarsBulletsManager* stw = new StarWarsBulletsManager(this);
 
 	ball_ = new GameComponent(this);
 	ball_->setWidth(11);
@@ -65,6 +71,7 @@ void ExampleGame::initGame() {
 	mouseIC1_ = new PaddleMouseInputComponent();
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
+	InputComponent* gunInput = new Weapon(stw, SDLK_SPACE);
 
 	paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
@@ -105,6 +112,7 @@ void ExampleGame::initGame() {
 	caza_->addInputComponent(rotater);
 	caza_->addPhysicsComponent(circular_);
 	caza_->addInputComponent(accelerationComp);
+	caza_->addInputComponent(gunInput);
 
 	cs1_->setMode(0);
 	cs2_->setMode(0);
@@ -115,6 +123,7 @@ void ExampleGame::initGame() {
 	actors_.push_back(rightPaddle_);
 	actors_.push_back(ball_);
 	actors_.push_back(caza_);
+	actors_.push_back(stw);
 }
 
 void ExampleGame::closeGame() {
