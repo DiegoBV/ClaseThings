@@ -71,7 +71,7 @@ void ExampleGame::initGame() {
 	mouseIC1_ = new PaddleMouseInputComponent();
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
-	InputComponent* gunInput = new Weapon(stw, SDLK_SPACE);
+	InputComponent* gunInput = new Weapon(stw, SDLK_SPACE, 1, 15);
 
 	paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
