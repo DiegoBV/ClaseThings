@@ -169,6 +169,36 @@ Mesh* Mesh::generateContCubo(GLdouble l) {
 	m->colors[7] = dvec4(0.0, 0.0, 0.0, 1.0);*/
 
 	return m;
+}
 
+Mesh* Mesh::generaDragon(GLuint numVert) {
+	Mesh* m = new Mesh();
+	m->type = GL_POINTS;
+	m->numVertices = numVert;
+	double PR1 = 0.787473;
+	double PR2 = 1 - PR1;
 
+	m->vertices = new dvec3[m->numVertices];
+	m->vertices[0] = dvec3(0.0,0.0,0.0);
+
+	int i = 1;
+	
+	while (i < numVert - 1) {
+		double azar = rand() / double(RAND_MAX);
+		if (azar < PR1) {
+			dvec3 newPoint = { 0.824074 * m->vertices[i - 1].x + 0.281482 * m->vertices[i - 1].y - 0.882290, -0.212346 * m->vertices[i - 1].x + 0.864198 * m->vertices[i - 1].y - 0.110607, 0.0 };
+			//newPoint = dvec3 (8 * newPoint.x - 10, 8 * newPoint.y - 35, 0.0);
+			m->vertices[i] = newPoint;
+		}
+		else {
+			dvec3 newPoint = { 0.088272 * m->vertices[i - 1].x + 0.520988 * m->vertices[i - 1].y + 0.785360, -0.463889 * m->vertices[i - 1].x - 0.377778 * m->vertices[i - 1].y + 8.095795 , 0.0 };
+			//newPoint = dvec3(8 * newPoint.x - 10, 8 * newPoint.y - 35, 0.0);
+			m->vertices[i] = newPoint;
+		}
+		i++;
+	}
+	m->colors = new dvec4[m->numVertices];
+	m->colors[0] = dvec4(0.0, 0.0, 0.0, 1.0);
+
+	return m;
 }
