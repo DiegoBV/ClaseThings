@@ -129,16 +129,16 @@ Mesh* Mesh::generateContCubo(GLdouble l){
 	m->numVertices = 10;
 
 	m->vertices = new dvec3[m->numVertices];
-	m->vertices[0] = dvec3(-l/2, l, l/2);
-	m->vertices[1] = dvec3(-l/2, 0.0, l/2);
-	m->vertices[2] = dvec3(l / 2, l, l / 2);
-	m->vertices[3] = dvec3(l / 2, 0.0, l / 2);
-	m->vertices[4] = dvec3(l/2, l, -l/2);
-	m->vertices[5] = dvec3(l/2, 0.0, -l /2);
-	m->vertices[6] = dvec3(-l / 2, l, -l / 2);
-	m->vertices[7] = dvec3(-l/2, 0.0, -l/2);
-	m->vertices[8] = dvec3(-l / 2, l, l / 2);
-	m->vertices[9] = dvec3(-l / 2, 0.0, l / 2);
+	m->vertices[0] = dvec3(-l/2, l/2, l/2);
+	m->vertices[1] = dvec3(-l/2, -l / 2, l/2);
+	m->vertices[2] = dvec3(l / 2, l/2, l / 2);
+	m->vertices[3] = dvec3(l / 2, -l / 2, l / 2);
+	m->vertices[4] = dvec3(l/2, l/2, -l/2);
+	m->vertices[5] = dvec3(l/2, -l / 2, -l /2);
+	m->vertices[6] = dvec3(-l / 2, l/2, -l / 2);
+	m->vertices[7] = dvec3(-l/2, -l / 2, -l/2);
+	m->vertices[8] = dvec3(-l / 2, l/2, l / 2);
+	m->vertices[9] = dvec3(-l / 2, -l / 2, l / 2);
 
 	m->colors = new dvec4[m->numVertices];
 	m->colors[0] = dvec4(0.0, 0.0, 0.0, 0.0);
@@ -184,6 +184,24 @@ Mesh* Mesh::generaDragon(GLuint numVert){
 		x = m->vertices[i].x;
 		y = m->vertices[i].y;
 	}
+
+	return m;
+}
+
+//-------------------------------------------------------------------------
+
+Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h) {
+	Mesh* m = new Mesh();
+	m->type = GL_TRIANGLE_STRIP;
+	m->numVertices = 4;
+
+	m->vertices = new dvec3[m->numVertices];
+	m->vertices[0] = dvec3(-w / 2, h / 2 , 0.0);
+	m->vertices[1] = dvec3(-w / 2, -h / 2, 0.0);
+	m->vertices[2] = dvec3(w / 2, h / 2, 0.0);
+	m->vertices[3] = dvec3(w / 2, -h / 2, 0.0);
+
+	m->colors = new dvec4[m->numVertices];
 
 	return m;
 }

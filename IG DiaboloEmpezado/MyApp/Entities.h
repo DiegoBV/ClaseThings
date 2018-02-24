@@ -90,5 +90,16 @@ public:
 };
 
 //-------------------------------------------------------------------------
+class Cubo : public Entity
+{
+protected:
+	GLdouble altura;
+	GLdouble anchura;
+public:
+	Cubo(GLdouble altura, GLdouble anchura) : altura(altura), anchura(anchura) {};
+	~Cubo() { };
+	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
+};
 
 #endif //_H_Entities_H_

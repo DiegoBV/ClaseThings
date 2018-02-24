@@ -28,6 +28,7 @@ void Scene::init()
   //objetos.push_back(new Dragon(30000));
   aux = new Diabolo(30.0, 50.0);
   objetos.push_back(aux);
+  objetos.push_back(new Cubo(150, 150));
 }
 //-------------------------------------------------------------------------
 
