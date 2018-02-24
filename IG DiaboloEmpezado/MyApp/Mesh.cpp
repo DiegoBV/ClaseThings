@@ -99,7 +99,7 @@ Mesh* Mesh::generateTriangleRGB(GLdouble r){  //Generador de triángulo equilater
 
 //-------------------------------------------------------------------------
 
-Mesh* Mesh::generateTriPyramid(GLdouble r, GLdouble h){
+Mesh* Mesh::generateTriPyramid(GLdouble r, GLdouble h, dvec4 c){
 	Mesh* m = new Mesh();
 	m->type = GL_TRIANGLE_FAN;
 	m->numVertices = 5;
@@ -112,11 +112,11 @@ Mesh* Mesh::generateTriPyramid(GLdouble r, GLdouble h){
 	m->vertices[4] = dvec3(0.0, r, 0.0);
 
 	m->colors = new dvec4[m->numVertices];
-	m->colors[0] = dvec4(0.0, 0.0, 0.0, 0.0);
-	m->colors[1] = dvec4(0.0, 0.0, 0.0, 0.0);
-	m->colors[2] = dvec4(0.0, 0.0, 0.0, 0.0);
-	m->colors[3] = dvec4(0.0, 0.0, 0.0, 0.0);
-	m->colors[4] = dvec4(0.0, 0.0, 0.0, 0.0);
+	m->colors[0] = c;
+	m->colors[1] = c;
+	m->colors[2] = c;
+	m->colors[3] = c;
+	m->colors[4] = c;
 
 	return m;
 }

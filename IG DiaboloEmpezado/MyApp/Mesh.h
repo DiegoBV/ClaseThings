@@ -13,7 +13,7 @@ public:
   static Mesh* generateAxesRGB(GLdouble l);
   static Mesh* generateTriangle(GLdouble r);
   static Mesh* generateTriangleRGB(GLdouble r);
-  static Mesh* generateTriPyramid(GLdouble r, GLdouble h);
+  static Mesh* generateTriPyramid(GLdouble r, GLdouble h, glm::dvec4 c);
   static Mesh* generateContCubo(GLdouble l);
   static Mesh* generaDragon(GLuint numVert);
  

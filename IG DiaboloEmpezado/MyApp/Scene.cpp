@@ -8,7 +8,7 @@ void Scene::init()
   glEnable(GL_DEPTH_TEST);  
   
   camera->setAZ();
-
+  angle = 1;
     
   // lights
   // textures  
@@ -19,14 +19,15 @@ void Scene::init()
 
   //objetos.push_back(new TriangleRGB(100.0));
 
-  objetos.push_back(new EjesRGB(200.0));
+  //objetos.push_back(new EjesRGB(200.0));
 
   //objetos.push_back(new TriPyramid(200.0, -500.0));
 
   //objetos.push_back(new Triangle(400.0));
 
   //objetos.push_back(new Dragon(30000));
-  objetos.push_back(new Diabolo(200.0, 500.0));
+  aux = new Diabolo(30.0, 50.0);
+  objetos.push_back(aux);
 }
 //-------------------------------------------------------------------------
 

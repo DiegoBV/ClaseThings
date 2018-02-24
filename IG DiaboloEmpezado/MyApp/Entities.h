@@ -79,11 +79,14 @@ class Diabolo : public Entity
 protected: 
 	GLdouble guardR; 
 	GLdouble guardH;
+	GLdouble angle;
+	glm::dmat4 modelViewMat;
 public:
 	Diabolo(GLdouble r, GLdouble h);
 	~Diabolo() { };
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
+	void setAngle(GLdouble nAngle) { angle = nAngle; };
 };
 
 //-------------------------------------------------------------------------

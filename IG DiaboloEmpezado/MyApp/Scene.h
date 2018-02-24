@@ -15,9 +15,12 @@ public:
     Scene(Camera* cam): camera(cam) { };
 	  ~Scene();
     void init();
-	  void render();    
+	  void render(); 
+	  void sumaAngle() { if (aux != nullptr) { angle+=2;  aux->setAngle(angle); } }
 	  
 protected:
+	Diabolo* aux;
+	GLdouble angle;
 	  Camera* camera;
 	  std::vector<Entity*> objetos;
 };

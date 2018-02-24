@@ -69,7 +69,7 @@ void TriangleRGB::draw(){
 
 //---------------------------------------------------------------------
 TriPyramid::TriPyramid(GLdouble r, GLdouble h) : Entity(){
-	mesh = Mesh::generateTriPyramid(r, h);
+	mesh = Mesh::generateTriPyramid(r, h, glm::dvec4(0.0, 0.0, 0.0, 1.0));
 }
 
 void TriPyramid::draw(){
@@ -105,30 +105,38 @@ void Dragon::draw(){
 }
 
 //--------------------------------------------------------------------
-Diabolo::Diabolo(GLdouble r, GLdouble h) : Entity(){
-	mesh = Mesh::generateTriPyramid(r, h);
-}
+Diabolo::Diabolo(GLdouble r, GLdouble h) : Entity(), guardR(r), guardH(h), angle(1){}
 
 void Diabolo::draw(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-	glPointSize(2);
+	glPointSize(2);	
 	mesh->draw();
 	glLineWidth(1);
 }
 
 void Diabolo::render(glm::dmat4 const& modelViewMat){
-
+	this->modelViewMat = modelViewMat;
 	setMvM(modelViewMat);
 	dmat4 auxMat = modelViewMat * modelMat;
-	auxMat = rotate(auxMat, radians(0.0), glm::dvec3(0.0, 0.0, 1.0));
-	modelMat = auxMat;
+	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 0.0, 1.0));
+	glLoadMatrixd(value_ptr(auxMat));
+	mesh = Mesh::generateTriPyramid(guardR, guardH, glm::dvec4(1.0, 0.0, 0.0, 1.0));
 	draw();
-	auxMat = rotate(auxMat, radians(45.0), glm::dvec3(0.0, 0.0, 1.0));
-	modelMat = auxMat;
+
+	auxMat = rotate(auxMat, radians(angle * 60.0), glm::dvec3(0.0, 0.0, 1.0));
+	glLoadMatrixd(value_ptr(auxMat));
+	mesh = Mesh::generateTriPyramid(guardR, guardH, glm::dvec4(0.0, 1.0, 0.0, 1.0));
 	draw();
-	/*for (int i = 0; i < 2; i++){
-		rotate(dmat4(1), radians(45.0 * i), glm::dvec3(0.0, 0.0, 1.0));
-		draw();
-	}*/
+
+	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 0.0, 1.0));
+	auxMat = translate(auxMat,  glm::dvec3(0.0, 0.0, guardH *2));
+	glLoadMatrixd(value_ptr(auxMat));
+	mesh = Mesh::generateTriPyramid(guardR, -guardH, glm::dvec4(0.0, 0.0, 1.0, 1.0));
+	draw();
+
+	auxMat = rotate(auxMat, radians(angle * 60.0), glm::dvec3(0.0, 0.0, 1.0));
+	glLoadMatrixd(value_ptr(auxMat));
+	mesh = Mesh::generateTriPyramid(guardR, -guardH, glm::dvec4(0.0, 0.0, 0.0, 1.0));
+	draw();
 }
 
