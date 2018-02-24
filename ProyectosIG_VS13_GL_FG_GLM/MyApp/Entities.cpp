@@ -108,5 +108,19 @@ void ContCubo::draw()
 	mesh->draw();
 	glLineWidth(1);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+}
 
+//-------------------------------------------------------------------------
+
+Dragon::Dragon(GLuint numVert) : Entity()
+{
+	mesh = Mesh::generaDragon(numVert);
+}
+//-------------------------------------------------------------------------
+
+void Dragon::draw()
+{
+	glPointSize(2);
+	mesh->draw();
+	glPointSize(1);
 }

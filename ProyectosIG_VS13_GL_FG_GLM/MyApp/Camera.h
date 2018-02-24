@@ -18,6 +18,8 @@ public:
   GLsizei getY() { return y; };
   GLsizei getW() { return w; };
   GLsizei getH() { return h; };
+  void setX(GLint newX) { x = newX; };
+  void setY(GLint newY) { y = newY; };
 
 protected:
   GLint x=0, y=0;

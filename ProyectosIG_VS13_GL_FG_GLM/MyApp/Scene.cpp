@@ -13,11 +13,12 @@ void Scene::init()
   // textures  
 
   // objets
-  objetos.push_back(new EjesRGB(200.0));
-  objetos.push_back(new Triangle(200.0));
-  objetos.push_back(new TriangleRGB(100.0));
-  objetos.push_back(new TriPyramid(100.0, 200.0));
+  //objetos.push_back(new EjesRGB(200.0));
+  //objetos.push_back(new Triangle(200.0));
+  //objetos.push_back(new TriangleRGB(100.0));
+  //objetos.push_back(new TriPyramid(100.0, 200.0));
   //objetos.push_back(new ContCubo(100.0));
+  objetos.push_back(new Dragon(3000));
   
 }
 //-------------------------------------------------------------------------
