@@ -68,10 +68,13 @@ public:
 
 class Dragon : public Entity
 {
+private:
+	GLuint numVertices;
 public:
 	Dragon(GLuint numVertices);
 	~Dragon() { };
 	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
 };
 
 class Diabolo : public Entity
@@ -102,4 +105,13 @@ public:
 	virtual void render(glm::dmat4 const& modelViewMat);
 };
 
+class Poliespiral : public Entity
+{
+public:
+	Poliespiral(glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
+	~Poliespiral() { };
+	virtual void draw();
+};
+
 #endif //_H_Entities_H_
+

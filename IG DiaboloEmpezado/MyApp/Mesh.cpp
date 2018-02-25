@@ -206,3 +206,27 @@ Mesh* Mesh::generateRectangle(GLdouble w, GLdouble h) {
 	return m;
 }
 
+//-------------------------------------------------------------------------
+Mesh* Mesh::generaPoliespiral(dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert) {
+	Mesh* m = new Mesh();
+	m->type = GL_LINE_STRIP;
+	m->numVertices = numVert;
+
+	m->vertices = new dvec3[m->numVertices];
+	m->vertices[0] = dvec3(verIni.x, verIni.y, 0.0);
+	int i = 1;
+	while (i < numVert) {
+		dvec2 newVertex = mover(m->vertices[i - 1].x, m->vertices[i - 1].y, angIni, ladoIni);
+		m->vertices[i] = dvec3(newVertex.x, newVertex.y, 0.0);
+		angIni += incrAng;
+		ladoIni += incrLado;
+		i++;
+	}
+	m->colors = new dvec4[m->numVertices];
+	return m;
+}
+
+glm::dvec2 Mesh::mover(GLdouble x, GLdouble y, GLdouble angle, GLdouble lon) {
+	return dvec2(x + lon*cos(radians(angle)), y + lon*sin(radians(angle)));
+}
+

@@ -94,14 +94,22 @@ void ContCube::draw(){
 }
 
 //--------------------------------------------------------------------
-Dragon::Dragon(GLuint numVertices) : Entity(){
-	mesh = Mesh::generaDragon(numVertices);
-}
+Dragon::Dragon(GLuint numVertices) : Entity(), numVertices(numVertices){}
 
 void Dragon::draw(){
 	glPointSize(2);
 	mesh->draw();
 	glLineWidth(1);
+}
+
+void Dragon::render(glm::dmat4 const& modelViewMat) {
+	setMvM(modelViewMat);
+	dmat4 axMat = modelViewMat * modelMat;
+	axMat = translate(axMat, glm::dvec3(-40.0, -170.0, 0.0));
+	axMat = scale(axMat, glm::dvec3(40.0, 40.0, 0.0));
+	glLoadMatrixd(value_ptr(axMat));
+	mesh = Mesh::generaDragon(numVertices);
+	draw();
 }
 
 //--------------------------------------------------------------------
@@ -115,7 +123,6 @@ void Diabolo::draw(){
 }
 
 void Diabolo::render(glm::dmat4 const& modelViewMat){
-	this->modelViewMat = modelViewMat;
 	setMvM(modelViewMat);
 	dmat4 auxMat = modelViewMat * modelMat; //matriz auxiliar que transforma los vertices
 	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 0.0, 1.0)); //se rota
@@ -169,5 +176,19 @@ void Cubo::render(glm::dmat4 const& modelViewMat) {
 	glLoadMatrixd(value_ptr(auxMat));
 	mesh = Mesh::generateRectangle(altura, anchura);
 	draw();
+}
+
+//--------------------------------------------------------------------
+
+Poliespiral::Poliespiral(dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert) : Entity() {
+	mesh = Mesh::generaPoliespiral(verIni, angIni, incrAng, ladoIni, incrLado, numVert);
+}
+
+void Poliespiral::draw() {
+	glLineWidth(2);
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	mesh->draw();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glLineWidth(1);
 }
 

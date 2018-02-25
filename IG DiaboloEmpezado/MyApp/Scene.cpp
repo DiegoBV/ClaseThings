@@ -25,10 +25,11 @@ void Scene::init()
 
   //objetos.push_back(new Triangle(400.0));
 
-  //objetos.push_back(new Dragon(30000));
+  //objetos.push_back(new Dragon(3000));
   aux = new Diabolo(30.0, 50.0);
   objetos.push_back(aux);
   objetos.push_back(new Cubo(150, 150));
+  objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));
 }
 //-------------------------------------------------------------------------
 
