@@ -15,21 +15,21 @@ void Scene::init()
 
   // objets
 
-  //objetos.push_back(new ContCube(100.0));
+  objetos.push_back(new ContCube(100.0));
 
-  //objetos.push_back(new TriangleRGB(100.0));
+  objetos.push_back(new TriangleRGB(100.0));
 
-  //objetos.push_back(new EjesRGB(200.0));
+  objetos.push_back(new EjesRGB(200.0));
 
-  //objetos.push_back(new TriPyramid(200.0, -500.0));
+  objetos.push_back(new TriPyramid(200.0, -500.0));
 
   //objetos.push_back(new Triangle(400.0));
 
   //objetos.push_back(new Dragon(3000));
-  aux = new Diabolo(30.0, 50.0);
+  /*aux = new Diabolo(30.0, 50.0);
   objetos.push_back(aux);
   objetos.push_back(new Cubo(150, 150));
-  objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));
+  objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
 }
 //-------------------------------------------------------------------------
 
