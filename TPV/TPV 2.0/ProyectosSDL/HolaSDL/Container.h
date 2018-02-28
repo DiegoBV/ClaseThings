@@ -1,5 +1,5 @@
-#ifndef GAMECOMPONENT_H_
-#define GAMECOMPONENT_H_
+#ifndef Container_H_
+#define Container_H_
 
 #include "GameObject.h"
 #include "InputComponent.h"
@@ -11,10 +11,10 @@ using namespace std;
 /*
  *
  */
-class GameComponent: public GameObject {
+class Container: public GameObject {
 public:
-	GameComponent(SDLGame* game);
-	virtual ~GameComponent();
+	Container(SDLGame* game);
+	virtual ~Container();
 
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void update(Uint32 time);
@@ -34,4 +34,4 @@ private:
 	vector<RenderComponent*> renderComp_;
 };
 
-#endif /* GAMECOMPONENT_H_ */
+#endif /* Container_H_ */

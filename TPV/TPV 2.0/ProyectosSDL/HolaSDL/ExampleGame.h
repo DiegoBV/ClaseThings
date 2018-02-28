@@ -5,7 +5,7 @@
 
 #include "SDLGame.h"
 #include "GameObject.h"
-#include "GameComponent.h"
+#include "Container.h"
 #include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
@@ -35,10 +35,10 @@ private:
 	bool exit_;
 	std::vector<GameObject*> actors_;
 
-	GameComponent* leftPaddle_;
-	GameComponent* rightPaddle_;
-	GameComponent* ball_;
-	GameComponent* caza_;
+	Container* leftPaddle_;
+	Container* rightPaddle_;
+	Container* ball_;
+	Container* caza_;
 
 	InputComponent* keyboardIC1_;
 	InputComponent* keyboardIC2_;

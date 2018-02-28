@@ -1,5 +1,5 @@
 #include "StarWarsBulletsManager.h"
-#include "GameComponent.h"
+#include "Container.h"
 #include "FillRectRenderer.h"
 #include "BasicMotionPhysics.h"
 
@@ -9,13 +9,13 @@ StarWarsBulletsManager::~StarWarsBulletsManager()
 
 void StarWarsBulletsManager::shoot(GameObject* o, Vector2D p, Vector2D v) {
 	//Creamos el nuevo game component
-	GameComponent* newCmp = new GameComponent(this->getGame());
+	Container* newCmp = new Container(this->getGame());
 
 	//Creamos los metodos basicos de render y fisicas
 	FillRectRenderer* fillRect = new FillRectRenderer();
 	BasicMotionPhysics* motion = new BasicMotionPhysics();
 
-	//añadimos dichos metodos al GameComponent
+	//añadimos dichos metodos al Container
 	newCmp->addPhysicsComponent(motion);
 	newCmp->addRenderComponent(fillRect);
 

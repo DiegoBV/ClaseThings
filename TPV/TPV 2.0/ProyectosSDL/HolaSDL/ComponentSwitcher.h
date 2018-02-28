@@ -2,7 +2,7 @@
 #define COMPONENTSWITCHER_H_
 
 #include "GameObject.h"
-#include "GameComponent.h"
+#include "Container.h"
 #include "InputComponent.h"
 #include "PhysicsComponent.h"
 #include "RenderComponent.h"
@@ -21,7 +21,7 @@ public:
 		RenderComponent* iconRC;
 	};
 
-	ComponentSwitcher(SDLGame* game, GameComponent* o, SDL_Keycode key);
+	ComponentSwitcher(SDLGame* game, Container* o, SDL_Keycode key);
 	virtual ~ComponentSwitcher();
 
 	virtual void handleInput(Uint32 time, const SDL_Event& event);
@@ -33,7 +33,7 @@ public:
 	void setMode(int i);
 
 private:
-	GameComponent* o_;
+	Container* o_;
 	SDL_Keycode key_;
 	std::vector<ModeInfo> modes_;
 	int currMode_;

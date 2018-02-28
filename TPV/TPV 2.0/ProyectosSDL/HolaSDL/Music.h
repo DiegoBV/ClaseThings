@@ -12,7 +12,9 @@ public:
 
 	bool load(std::string fileName);
 	void play(int repetitions = -1);
+	void stop();
 	void pause();
+	void resume();
 	void close();
 private:
 	Mix_Music* music_;

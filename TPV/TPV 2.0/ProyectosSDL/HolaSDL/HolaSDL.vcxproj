@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccelerationInputComponent.cpp" />
+    <ClCompile Include="AsteroidsManager.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BasicMotionPhysics.cpp" />
     <ClCompile Include="BounceOnBordersPhysics.cpp" />
@@ -77,16 +78,22 @@
     <ClCompile Include="CircularMotionPhysics.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="ComponentSwitcher.cpp" />
+    <ClCompile Include="Container.cpp" />
     <ClCompile Include="DemoActor.cpp" />
     <ClCompile Include="ExampleGame.cpp" />
     <ClCompile Include="FillRectRenderer.cpp" />
     <ClCompile Include="Font.cpp" />
-    <ClCompile Include="GameComponent.cpp" />
+    <ClCompile Include="GameCtrlInputComponent.cpp" />
+    <ClCompile Include="GameManager.cpp" />
+    <ClCompile Include="GameMsgRenderer.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="ImageRenderer.cpp" />
     <ClCompile Include="InputComponent.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ManagerTemplate.cpp" />
     <ClCompile Include="Music.cpp" />
+    <ClCompile Include="Observable.cpp" />
+    <ClCompile Include="Observer.cpp" />
     <ClCompile Include="Paddle.cpp" />
     <ClCompile Include="PaddleAIPhysics.cpp" />
     <ClCompile Include="PaddleKeyboardComponent.cpp" />
@@ -104,6 +111,7 @@
     <ClCompile Include="SDLGame.cpp" />
     <ClCompile Include="SkeletonRenderer.cpp" />
     <ClCompile Include="SoundEffect.cpp" />
+    <ClCompile Include="SoundManager.cpp" />
     <ClCompile Include="StarWarsBulletsManager.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TranRectRenderer.cpp" />
@@ -112,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationInputComponent.h" />
+    <ClInclude Include="AsteroidsManager.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="BasicMotionPhysics.h" />
     <ClInclude Include="BounceOnBordersPhysics.h" />
@@ -119,15 +128,22 @@
     <ClInclude Include="CircularMotionPhysics.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="ComponentSwitcher.h" />
+    <ClInclude Include="Container.h" />
     <ClInclude Include="DemoActor.h" />
     <ClInclude Include="ExampleGame.h" />
     <ClInclude Include="FillRectRenderer.h" />
     <ClInclude Include="Font.h" />
-    <ClInclude Include="GameComponent.h" />
+    <ClInclude Include="GameCtrlInputComponent.h" />
+    <ClInclude Include="GameManager.h" />
+    <ClInclude Include="GameMsgRenderer.h" />
     <ClInclude Include="GameObject.h" />
     <ClInclude Include="ImageRenderer.h" />
     <ClInclude Include="InputComponent.h" />
+    <ClInclude Include="ManagerTemplate.h" />
+    <ClInclude Include="messages.h" />
     <ClInclude Include="Music.h" />
+    <ClInclude Include="Observable.h" />
+    <ClInclude Include="Observer.h" />
     <ClInclude Include="Paddle.h" />
     <ClInclude Include="PaddleAIPhysics.h" />
     <ClInclude Include="PaddleKeyboardComponent.h" />
@@ -140,12 +156,14 @@
     <ClInclude Include="PaddleWithTransRect.h" />
     <ClInclude Include="PhysicsComponent.h" />
     <ClInclude Include="RenderComponent.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="Resources.h" />
     <ClInclude Include="RotationComponent.h" />
     <ClInclude Include="SDLGame.h" />
     <ClInclude Include="sdl_includes.h" />
     <ClInclude Include="SkeletonRenderer.h" />
     <ClInclude Include="SoundEffect.h" />
+    <ClInclude Include="SoundManager.h" />
     <ClInclude Include="StarWarsBulletsManager.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TranRectRenderer.h" />

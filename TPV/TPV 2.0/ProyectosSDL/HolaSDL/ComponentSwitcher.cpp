@@ -1,6 +1,6 @@
 #include "ComponentSwitcher.h"
 
-ComponentSwitcher::ComponentSwitcher(SDLGame* game, GameComponent* o, SDL_Keycode key) :
+ComponentSwitcher::ComponentSwitcher(SDLGame* game, Container* o, SDL_Keycode key) :
 		GameObject(game), o_(o), key_(key), modes_(), currMode_(-1) {
 }
 
