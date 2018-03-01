@@ -7,6 +7,7 @@
 class GameObject {
 
 public:
+	GameObject() {};
 	GameObject(SDLGame* game);
 	virtual ~GameObject();
 

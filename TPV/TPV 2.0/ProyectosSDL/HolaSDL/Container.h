@@ -13,6 +13,7 @@ using namespace std;
  */
 class Container: public GameObject {
 public:
+	Container() {};
 	Container(SDLGame* game);
 	virtual ~Container();
 

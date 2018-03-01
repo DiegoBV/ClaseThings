@@ -13,11 +13,11 @@ AsteroidsManager::~AsteroidsManager()
 
 void AsteroidsManager::updatePool() {
 	if (!renovarPool()) {
-		//creaItem();
+		creaItem();
 	}
 }
 
-bool AsteroidsManager::renovarPool() { //esto se va a tener q repetir en otras clases...
+bool AsteroidsManager::renovarPool() { //esto se va a tener q repetir en otras clases... (bulletManager)
 	Uint32 i = 0;
 	bool encontrado = false;
 	while (i < listaAsteroides->size() && !encontrado) {

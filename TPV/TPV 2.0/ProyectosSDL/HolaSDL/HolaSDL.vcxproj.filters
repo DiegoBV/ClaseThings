@@ -34,6 +34,9 @@
     <Filter Include="Musica/Sonidos">
       <UniqueIdentifier>{aca2ee30-ce63-4da1-a8c6-8fd1d57d1749}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Asteroides">
+      <UniqueIdentifier>{2dd0ac42-74d0-4ae4-b02c-470765d19657}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -178,6 +181,9 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="AsteroidsManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Asteroid.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -330,6 +336,9 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="AsteroidsManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Asteroid.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>

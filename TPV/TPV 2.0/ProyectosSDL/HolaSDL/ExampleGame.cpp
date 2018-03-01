@@ -12,6 +12,7 @@
 #include "AccelerationInputComponent.h"
 #include "StarWarsBulletsManager.h"
 #include "Weapon.h"
+#include "Asteroid.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -124,6 +125,9 @@ void ExampleGame::initGame() {
 	actors_.push_back(ball_);*/
 	actors_.push_back(caza_);
 	actors_.push_back(stw);
+	actors_.push_back(new Asteroid(this, Vector2D(0.25, 0.25)));
+	actors_.push_back(new Asteroid(this, Vector2D(0.25, 0.35)));
+	actors_.push_back(new Asteroid(this, Vector2D(0.5, 0.25)));
 }
 
 void ExampleGame::closeGame() {

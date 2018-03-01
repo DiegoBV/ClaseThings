@@ -17,8 +17,9 @@ public:
 	}
 	int size() { return list.size(); };
 	T getItem(int pos) { return *list[pos]; }
-	/*void addItem() {
-		list.push_back(new);
-	}*/
+	void addItem(T newItem) {
+		list.push_back(&(newItem));
+	}
+
 };
 

@@ -70,6 +70,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AccelerationInputComponent.cpp" />
+    <ClCompile Include="Asteroid.cpp" />
     <ClCompile Include="AsteroidsManager.cpp" />
     <ClCompile Include="Ball.cpp" />
     <ClCompile Include="BasicMotionPhysics.cpp" />
@@ -120,6 +121,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AccelerationInputComponent.h" />
+    <ClInclude Include="Asteroid.h" />
     <ClInclude Include="AsteroidsManager.h" />
     <ClInclude Include="Ball.h" />
     <ClInclude Include="BasicMotionPhysics.h" />
