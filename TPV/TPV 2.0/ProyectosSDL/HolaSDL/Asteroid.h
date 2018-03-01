@@ -12,9 +12,12 @@ private:
 public:
 	Asteroid();
 	virtual ~Asteroid();
-	Asteroid(SDLGame* game, Vector2D velocity) : Container(game), Observer()/*, contGeneraciones(randomEntre1y3)*/ { 
+	Asteroid(SDLGame* game, Vector2D velocity, Vector2D pos) : Container(game), Observer(), contGeneraciones(rand()%3 + 1) {
 		this->addPhysicsComponent(new BasicMotionPhysics()); this->addRenderComponent(new ImageRenderer(getGame()->getResources()->getImageTexture(Resources::Star), rect));
-			this->setVelocity(velocity); this->setWidth(50); this->setHeight(50); this->setPosition(Vector2D(getGame()->getWindowWidth() / 2, getGame()->getWindowHeight() / 2)); 
-				this->addPhysicsComponent(new CircularMotionPhysics());};
-	virtual void receive(Message msg) {};
+			this->setVelocity(velocity); this->setWidth(50); this->setHeight(50); this->setPosition(pos); 
+				this->addPhysicsComponent(new CircularMotionPhysics());;
+	};
+	void split();
+	virtual void receive(Message msg) { if (msg.id_ == HIT) { split(); } };
+	int getCont() { return contGeneraciones; };
 };

@@ -12,6 +12,7 @@
 #include "ComponentSwitcher.h"
 #include "RotationComponent.h"
 #include "CircularMotionPhysics.h"
+#include "AsteroidsManager.h"
 
 class ExampleGame: public SDLGame {
 
@@ -22,6 +23,7 @@ public:
 	// from SDLGame
 	void start();
 	void stop();
+	void pushObject(GameObject* o) { actors_.push_back(o); };
 
 private:
 	void initGame();
@@ -63,6 +65,8 @@ private:
 
 	ComponentSwitcher* cs1_;
 	ComponentSwitcher* cs2_;
+
+	AsteroidsManager* asterManag;
 
 	bool running_;
 	int leftScore_;

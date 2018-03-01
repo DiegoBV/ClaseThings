@@ -5,7 +5,7 @@ template <typename T>
 class ManagerTemplate
 {
 protected:
-	vector<T*> list;
+	vector<T> list;
 
 public:
 
@@ -16,10 +16,11 @@ public:
 	
 	}
 	int size() { return list.size(); };
-	T getItem(int pos) { return *list[pos]; }
-	void addItem(T newItem) {
-		list.push_back(&(newItem));
+	T getItem(int pos) { return list[pos]; }
+	void addNewItem(T newItem) {
+		list.push_back(newItem);
 	}
+	vector<T> get() { return list; };
 
 };
 

@@ -28,7 +28,6 @@ ExampleGame::~ExampleGame() {
 }
 
 void ExampleGame::initGame() {
-
 	// hide cursor
 	SDL_Rect rect = { 47, 90, 207, 247 };
 	SDL_ShowCursor(0);
@@ -125,9 +124,9 @@ void ExampleGame::initGame() {
 	actors_.push_back(ball_);*/
 	actors_.push_back(caza_);
 	actors_.push_back(stw);
-	actors_.push_back(new Asteroid(this, Vector2D(0.25, 0.25)));
-	actors_.push_back(new Asteroid(this, Vector2D(0.25, 0.35)));
-	actors_.push_back(new Asteroid(this, Vector2D(0.5, 0.25)));
+	vector<Asteroid*> aux;
+	aux.push_back(new Asteroid(this, Vector2D(0.25, 0.25), Vector2D(this->getWindowWidth()/2, this->getWindowHeight()/ 2)));
+	asterManag = new AsteroidsManager(this, aux);
 }
 
 void ExampleGame::closeGame() {
@@ -189,6 +188,10 @@ void ExampleGame::stop() {
 void ExampleGame::handleInput(Uint32 time) {
 	SDL_Event event;
 	while (SDL_PollEvent(&event)) {
+		if (event.key.keysym.sym == SDLK_0) {
+			asterManag->kk();
+			asterManag->updatePool(); //pruebas
+		}
 		/*if (event.type == SDL_KEYDOWN) {
 
 			// if any key pressed while not running, we choose a random velocity of the ball
