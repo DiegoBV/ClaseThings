@@ -18,6 +18,7 @@ public:
   static Mesh* generaDragon(GLuint numVert);
   static Mesh* generateRectangle(GLdouble w, GLdouble h);
   static Mesh* generaPoliespiral(glm::dvec2 verIni, GLdouble angIni, GLdouble incrAng, GLdouble ladoIni, GLdouble incrLado, GLuint numVert);
+  static void changeColor(Mesh* m, glm::dvec4 c);
  
   Mesh(void) { };
   ~Mesh(void);

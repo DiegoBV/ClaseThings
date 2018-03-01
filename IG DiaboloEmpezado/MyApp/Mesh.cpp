@@ -230,3 +230,8 @@ glm::dvec2 Mesh::mover(GLdouble x, GLdouble y, GLdouble angle, GLdouble lon) {
 	return dvec2(x + lon*cos(radians(angle)), y + lon*sin(radians(angle)));
 }
 
+void Mesh::changeColor(Mesh* m, dvec4 c) {
+	for (int i = 0; i < m->numVertices; i++) {
+		m->colors[i] = c;
+	}
+}

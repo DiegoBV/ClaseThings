@@ -113,7 +113,7 @@ void Dragon::render(glm::dmat4 const& modelViewMat) {
 }
 
 //--------------------------------------------------------------------
-Diabolo::Diabolo(GLdouble r, GLdouble h) : Entity(), guardR(r), guardH(h), angle(1){}
+Diabolo::Diabolo(GLdouble r, GLdouble h) : Entity(), guardR(r), guardH(h), angle(1){ mesh = Mesh::generateTriPyramid(guardR, guardH, dvec4(0.0,0.0,0.0,0.0)); }
 
 void Diabolo::draw(){
 	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
@@ -122,28 +122,30 @@ void Diabolo::draw(){
 	glLineWidth(1);
 }
 
-void Diabolo::render(glm::dmat4 const& modelViewMat){
+void Diabolo::render(glm::dmat4 const& modelViewMat) {
 	setMvM(modelViewMat);
-	dmat4 auxMat = modelViewMat * modelMat; //matriz auxiliar que transforma los vertices
-	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 0.0, 1.0)); //se rota
-	glLoadMatrixd(value_ptr(auxMat)); // se carga
-	mesh = Mesh::generateTriPyramid(guardR, guardH, glm::dvec4(1.0, 0.0, 0.0, 1.0)); // se genera la piramide que recibe las transformaciones anteriores
-	draw(); //se dibuja
-
-	auxMat = rotate(auxMat, radians(angle * 60.0), glm::dvec3(0.0, 0.0, 1.0));
-	glLoadMatrixd(value_ptr(auxMat));
-	mesh = Mesh::generateTriPyramid(guardR, guardH, glm::dvec4(0.0, 1.0, 0.0, 1.0));
-	draw();
-
+	dmat4 auxMat = modelViewMat * modelMat;
+	auxMat = translate(auxMat, glm::dvec3(0.0, 0.0, -guardH));
 	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 0.0, 1.0));
-	auxMat = translate(auxMat,  glm::dvec3(0.0, 0.0, guardH *2));
 	glLoadMatrixd(value_ptr(auxMat));
-	mesh = Mesh::generateTriPyramid(guardR, -guardH, glm::dvec4(0.0, 0.0, 1.0, 1.0));
+	this->mesh->changeColor(this->mesh, glm::dvec4(1.0, 0.0, 0.0, 1.0));
 	draw();
 
-	auxMat = rotate(auxMat, radians(angle * 60.0), glm::dvec3(0.0, 0.0, 1.0));
+	auxMat = rotate(auxMat, radians(60.0), glm::dvec3(0.0, 0.0, 1.0));
 	glLoadMatrixd(value_ptr(auxMat));
-	mesh = Mesh::generateTriPyramid(guardR, -guardH, glm::dvec4(0.0, 0.0, 0.0, 1.0));
+	this->mesh->changeColor(this->mesh, glm::dvec4(0.0, 1.0, 0.0, 1.0));
+	draw();
+
+	auxMat = scale(auxMat, glm::dvec3(-1.0, -1.0, -1.0));
+	auxMat = translate(auxMat, glm::dvec3(0.0, 0.0, -2 * guardH));
+	auxMat = rotate(auxMat, radians(60.0), glm::dvec3(0.0, 0.0, 1.0));
+	glLoadMatrixd(value_ptr(auxMat));
+	this->mesh->changeColor(this->mesh, glm::dvec4(0.0, 0.0, 1.0, 1.0));
+	draw();
+
+	auxMat = rotate(auxMat, radians(60.0), glm::dvec3(0.0, 0.0, 1.0));
+	glLoadMatrixd(value_ptr(auxMat));
+	this->mesh->changeColor(this->mesh, glm::dvec4(0.0, 0.0, 0.0, 1.0));
 	draw();
 }
 
