@@ -187,10 +187,12 @@ void ExampleGame::stop() {
 
 void ExampleGame::handleInput(Uint32 time) {
 	SDL_Event event;
+	static bool help = false;
 	while (SDL_PollEvent(&event)) {
-		if (event.key.keysym.sym == SDLK_0) {
+		if (event.key.keysym.sym == SDLK_0 && !help) {
 			asterManag->kk();
 			asterManag->updatePool(); //pruebas
+			help = true;
 		}
 		/*if (event.type == SDL_KEYDOWN) {
 
