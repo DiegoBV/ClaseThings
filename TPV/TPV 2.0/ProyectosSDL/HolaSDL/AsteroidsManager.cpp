@@ -19,41 +19,20 @@ AsteroidsManager::AsteroidsManager(SDLGame* game, vector<Asteroid*> asteroides):
 	}
 }
 void AsteroidsManager::updatePool() {
-	pair<bool, vector<Asteroid*>> aux = renovarPool();
-	if (aux.first) { //si ha encontrado alguno inactivo
-		Vector2D velIni = aux.second[0]->getVelocity() * 0.52; //CAMBIAR
-		Vector2D posIni = aux.second[0]->getPosition();
-		int cont = aux.second[0]->getCont();
-			for (int i = 0; i < aux.second.size() && i < cont; i++) { //mientras sea menor que el size y el contGeneraciones del asteroide roto
-				aux.second[i]->setActive(true);
-				aux.second[i]->setVelocity(velIni * (i+1));
-				aux.second[i]->setCont(cont - 1);	
-				aux.second[i]->setPosition(posIni + Vector2D(rand() % 40, rand() % 40));
-			}
-			int restantes = cont - aux.second.size(); //asteroides restantes por crear
-			for (int i = 0; i < restantes; i++)
-				creaItem(velIni * (i + 2) , posIni + Vector2D(rand()%50, rand()% 40), cont - 1);
-	}
-}
 
-pair<bool, vector<Asteroid*>> AsteroidsManager::renovarPool() { //esto se va a tener q repetir en otras clases... (bulletManager)
-	Uint32 i = 0;
-	bool encontrado = false;
-	vector<Asteroid*> aux;
-	while (i < listaAsteroides.size()) {
-		if (!listaAsteroides.getItem(i)->isActive()) {
-			encontrado = true;
-			aux.push_back(listaAsteroides.getItem(i));
+	pair<bool, Asteroid**> par = listaAsteroides.getObjectPool(); //siempre se encontrará uno inactivo (el disparado)
+	Vector2D velIni = (*par.second)->getVelocity();
+	Vector2D posIni = (*par.second)->getPosition();
+	int cont = (*par.second)->getCont();
+	int i = 0;
+	while (i < cont) {
+		par = listaAsteroides.getObjectPool(); //si encuentra objetos inactivos, los activa, si no, crea nuevos
+		(*par.second)->setVelocity(velIni * 0.53 * (i + 1));
+		(*par.second)->setPosition(posIni + Vector2D(rand() % 40, rand() % 40));
+		if (!par.first) { //si se cumple, significa que ha creado uno nuevo, por lo tanto se debe pushear a la lista del game para que se pinte, se actualice...
+			Asteroid* puntero = new Asteroid(**par.second); //4 now
+			static_cast<ExampleGame*>(game)->pushObject(puntero);
 		}
 		i++;
 	}
-	pair<bool, vector<Asteroid*>> resultado(encontrado, aux);
-	return resultado;
-}
-
-void AsteroidsManager::creaItem(Vector2D vel, Vector2D pos, int newCont) {
-	Asteroid* newA = new Asteroid(game, vel, pos);
-	newA->setCont(newCont);
-	listaAsteroides.addNewItem(newA); 
-	static_cast<ExampleGame*>(game)->pushObject(newA);
 }

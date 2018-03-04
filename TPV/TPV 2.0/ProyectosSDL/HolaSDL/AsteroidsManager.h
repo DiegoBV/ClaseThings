@@ -12,8 +12,6 @@ public:
 	~AsteroidsManager();
 	AsteroidsManager(SDLGame* game, vector<Asteroid*> asteroides);
 	void updatePool();
-	pair<bool, vector<Asteroid*>> renovarPool();
-	void creaItem(Vector2D vel, Vector2D pos, int newCont);
 	void kk() { send(HIT); }
 };
 
