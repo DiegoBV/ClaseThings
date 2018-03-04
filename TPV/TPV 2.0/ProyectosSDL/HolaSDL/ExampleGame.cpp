@@ -10,7 +10,6 @@
 #include "BounceOnBordersPhysics.h"
 #include "ImageRenderer.h"
 #include "AccelerationInputComponent.h"
-#include "StarWarsBulletsManager.h"
 #include "Weapon.h"
 #include "Asteroid.h"
 
@@ -47,7 +46,7 @@ void ExampleGame::initGame() {
 	caza_->setVelocity(velPrub);
 
 
-	StarWarsBulletsManager* stw = new StarWarsBulletsManager(this);
+	BulletsManager* bullMan = new BulletsManager(this);
 
 	/*ball_ = new Container(this);
 	ball_->setWidth(11);
@@ -71,7 +70,7 @@ void ExampleGame::initGame() {
 	mouseIC1_ = new PaddleMouseInputComponent();*/
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
-	InputComponent* gunInput = new Weapon(stw, SDLK_SPACE, 1, 15);
+	InputComponent* gunInput = new Weapon(bullMan, SDLK_SPACE, 1, 15);
 
 	/*paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
@@ -123,7 +122,7 @@ void ExampleGame::initGame() {
 	actors_.push_back(rightPaddle_);
 	actors_.push_back(ball_);*/
 	actors_.push_back(caza_);
-	actors_.push_back(stw);
+	actors_.push_back(bullMan);
 	vector<Asteroid*> aux;
 	aux.push_back(new Asteroid(this, Vector2D(0.25, 0.25), Vector2D(this->getWindowWidth()/2, this->getWindowHeight()/ 2)));
 	asterManag = new AsteroidsManager(this, aux);

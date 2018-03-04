@@ -45,9 +45,6 @@
     <ClCompile Include="SoundManager.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
-    <ClCompile Include="StarWarsBulletsManager.cpp">
-      <Filter>Managers</Filter>
-    </ClCompile>
     <ClCompile Include="ManagerTemplate.cpp">
       <Filter>Managers</Filter>
     </ClCompile>
@@ -195,9 +192,6 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="GameManager.h">
-      <Filter>Managers</Filter>
-    </ClInclude>
-    <ClInclude Include="StarWarsBulletsManager.h">
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Texture.h">

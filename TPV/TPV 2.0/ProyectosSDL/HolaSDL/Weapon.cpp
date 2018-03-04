@@ -45,5 +45,5 @@ void Weapon::shoot(GameObject* o) {
 	Vector2D vel = dirAct * max(o->getVelocity().magnitude() * 1.5, 2.0);
 
 	//shoot
-	stw->shoot(o, aux, vel);
+	stw->shoot(aux, vel);
 }
