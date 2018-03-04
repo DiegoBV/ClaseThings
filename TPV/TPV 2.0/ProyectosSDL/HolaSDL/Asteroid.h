@@ -20,14 +20,8 @@ public:
 				this->addPhysicsComponent(new CircularMotionPhysics());
 	}
 	void split();
-<<<<<<< HEAD
-	virtual void receive(Message msg) { if (msg.id_ == HIT) { split(); } }
-	int getCont() { return contGeneraciones; }
-	void setCont(int newCont) { contGeneraciones = newCont; }
-=======
 	virtual void receive(Message msg) { if (msg.id_ == HIT) { split(); } };
 	int getCont() { return contGeneraciones; };
 	void setCont(int newCont) { contGeneraciones = newCont; };
 	void setGame(SDLGame* newGame) { game_ = newGame; }
->>>>>>> 5cfb5322d2ae4ac81b3147bb80db39f73df8c3f4
 };
