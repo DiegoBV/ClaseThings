@@ -77,6 +77,7 @@
     <ClCompile Include="BounceOnBordersPhysics.cpp" />
     <ClCompile Include="BulletsManager.cpp" />
     <ClCompile Include="CircularMotionPhysics.cpp" />
+    <ClCompile Include="CollisionManager.cpp" />
     <ClCompile Include="Collisions.cpp" />
     <ClCompile Include="ComponentSwitcher.cpp" />
     <ClCompile Include="Container.cpp" />
@@ -128,6 +129,7 @@
     <ClInclude Include="BounceOnBordersPhysics.h" />
     <ClInclude Include="BulletsManager.h" />
     <ClInclude Include="CircularMotionPhysics.h" />
+    <ClInclude Include="CollisionManager.h" />
     <ClInclude Include="Collisions.h" />
     <ClInclude Include="ComponentSwitcher.h" />
     <ClInclude Include="Container.h" />

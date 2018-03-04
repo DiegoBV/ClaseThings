@@ -1,6 +1,22 @@
-﻿  AsteroidsManager.cpp
+﻿  ExampleGame.cpp
+  AsteroidsManager.cpp
 c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\asteroidsmanager.cpp(14): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\asteroidsmanager.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\asteroidsmanager.cpp(43): warning C4018: '<': signed/unsigned mismatch
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\managertemplate.h(27): warning C4018: '<': signed/unsigned mismatch
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\managertemplate.h(23): note: while compiling class template member function 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)'
+          with
+          [
+              T=Asteroid *
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\asteroidsmanager.cpp(23): note: see reference to function template instantiation 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)' being compiled
+          with
+          [
+              T=Asteroid *
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\asteroidsmanager.h(8): note: see reference to class template instantiation 'ManagerTemplate<Asteroid *>' being compiled
+  Generating Code...
+cl : Command line warning D9028: minimal rebuild failure, reverting to normal build
+  Compiling...
+  main.cpp
+  Generating Code...
   HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\TPV 2.0\ProyectosSDL\bin\HolaSDLDebug.exe
   HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\TPV\TPV 2.0\ProyectosSDL\bin\HolaSDLDebug.pdb (Full PDB)

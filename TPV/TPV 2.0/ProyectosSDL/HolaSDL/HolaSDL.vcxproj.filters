@@ -184,6 +184,9 @@
       <Filter>Managers</Filter>
     </ClCompile>
     <ClCompile Include="Asteroid.cpp">
+      <Filter>Asteroides</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
       <Filter>Archivos de código fuente</Filter>
     </ClCompile>
   </ItemGroup>
@@ -339,6 +342,9 @@
       <Filter>Managers</Filter>
     </ClInclude>
     <ClInclude Include="Asteroid.h">
+      <Filter>Asteroides</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
       <Filter>Archivos de encabezado</Filter>
     </ClInclude>
   </ItemGroup>
