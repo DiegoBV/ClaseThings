@@ -123,9 +123,7 @@ void ExampleGame::initGame() {
 	actors_.push_back(ball_);*/
 	actors_.push_back(caza_);
 	actors_.push_back(bullMan);
-	vector<Asteroid*> aux;
-	aux.push_back(new Asteroid(this, Vector2D(0.25, 0.25), Vector2D(this->getWindowWidth()/2, this->getWindowHeight()/ 2)));
-	asterManag = new AsteroidsManager(this, aux);
+	asterManag = new AsteroidsManager(this);
 }
 
 void ExampleGame::closeGame() {
@@ -189,7 +187,7 @@ void ExampleGame::handleInput(Uint32 time) {
 	static bool help = false;
 	while (SDL_PollEvent(&event)) {
 		if (event.key.keysym.sym == SDLK_0 && !help) {
-			asterManag->kk();
+			//asterManag->kk();
 			asterManag->updatePool(); //pruebas
 			help = true;
 		}

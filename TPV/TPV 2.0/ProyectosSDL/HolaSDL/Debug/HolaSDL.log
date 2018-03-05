@@ -1,5 +1,3 @@
 ﻿  ExampleGame.cpp
-  BulletsManager.cpp
-d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\bulletsmanager.cpp(35): warning C4018: '<': no coinciden signed/unsigned
-  Generando código...
-  HolaSDL.vcxproj -> D:\CosasImportabiles\Cosas git\ClaseThings\TPV\TPV 2.0\ProyectosSDL\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\ProyectosSDL\bin\HolaSDLDebug.exe
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\ProyectosSDL\bin\HolaSDLDebug.pdb (Full PDB)

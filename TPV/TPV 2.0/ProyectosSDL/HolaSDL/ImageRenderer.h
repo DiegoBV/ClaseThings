@@ -8,6 +8,7 @@
  */
 class ImageRenderer: public RenderComponent {
 public:
+	ImageRenderer() {};
 	ImageRenderer(Texture* image, SDL_Rect clip);
 	ImageRenderer(Texture* image);
 	virtual ~ImageRenderer();

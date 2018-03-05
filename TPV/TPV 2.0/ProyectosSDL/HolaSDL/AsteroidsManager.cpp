@@ -1,6 +1,7 @@
 #include "AsteroidsManager.h"
 #include "ExampleGame.h"
 #include <algorithm>
+
 AsteroidsManager::AsteroidsManager()
 {
 }
@@ -10,29 +11,51 @@ AsteroidsManager::~AsteroidsManager()
 {
 }
 
-AsteroidsManager::AsteroidsManager(SDLGame* game, vector<Asteroid*> asteroides): game(game) {
-	for (int i = 0; i < asteroides.size(); i++) {
-		listaAsteroides.addNewItem(asteroides[i]); //nno se añaden bien
-		registerObserver(asteroides[i]);
-		static_cast<ExampleGame*>(game)->pushObject(asteroides[i]);
-		//listaAsteroides.get().push_back[&asteroides[i]];
+AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
+	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Star), rect); circularPhysics_ = new CircularMotionPhysics();
+	 basicMotionPhysics_ = new BasicMotionPhysics(); numAst = 2; initAsteroides();  }
+
+void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
+	Asteroid* newAst = poolAst.addNewItem();
+	newAst->setCont(5);
+	double u = (double)rand() / (RAND_MAX + 1)*(1 - 0.1) + 0.1;
+	Vector2D vel(u, u);
+	setAsteroid(newAst, vel, Vector2D(rand() % game->getWindowWidth(), rand() % game->getWindowHeight()));
+}
+
+void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos) { //Setea los parámetros de un asteroide
+	newAst->addPhysicsComponent(circularPhysics_);
+	newAst->addPhysicsComponent(basicMotionPhysics_);
+	newAst->addRenderComponent(astroidImage_);
+	newAst->setActive(true);
+	newAst->setHeight(50);
+	newAst->setWidth(50);
+	newAst->setVelocity(vel);
+	newAst->setPosition(pos); // se pasaria por la constructora
+	newAst->setGame(game);
+	asteroides.push_back(newAst);
+	asteroides[0]->setActive(false);
+	poolAst.pushSomething(newAst);
+	static_cast<ExampleGame*>(game)->pushObject(newAst);
+}
+
+void AsteroidsManager::initAsteroides() {
+	for (int i = 0; i < numAst; i++) {
+		newAsteroid();
 	}
 }
-void AsteroidsManager::updatePool() {
 
-	pair<bool, Asteroid**> par = listaAsteroides.getObjectPool(); //siempre se encontrará uno inactivo (el disparado)
-	Vector2D velIni = (*par.second)->getVelocity();
-	Vector2D posIni = (*par.second)->getPosition();
-	int cont = (*par.second)->getCont();
+void AsteroidsManager::updatePool() {
+	pair<bool, Asteroid*> firstInactive = poolAst.getObjectPool();
+	int cont = firstInactive.second->getCont();
 	int i = 0;
+	Vector2D posInicial = Vector2D(firstInactive.second->getPosition());
 	while (i < cont) {
-		par = listaAsteroides.getObjectPool(); //si encuentra objetos inactivos, los activa, si no, crea nuevos
-		(*par.second)->setVelocity(velIni * 0.53 * (i + 1));
-		(*par.second)->setPosition(posIni + Vector2D(rand() % 40, rand() % 40));
-		if (!par.first) { //si se cumple, significa que ha creado uno nuevo, por lo tanto se debe pushear a la lista del game para que se pinte, se actualice...
-			Asteroid* puntero = new Asteroid(**par.second); //4 now
-			static_cast<ExampleGame*>(game)->pushObject(puntero);
+		pair<bool, Asteroid*> newObject = poolAst.getObjectPool();
+		if (!newObject.first) { //se ha creado uno nuevo
+			setAsteroid(newObject.second, Vector2D(0.2, 0.2), posInicial + Vector2D(rand()%20, rand()%20));
 		}
+		newObject.second->setCont(firstInactive.second->getCont() - 1);
 		i++;
 	}
 }

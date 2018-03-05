@@ -2,10 +2,6 @@
 
 
 
-Asteroid::Asteroid()
-{
-}
-
 
 Asteroid::~Asteroid()
 {

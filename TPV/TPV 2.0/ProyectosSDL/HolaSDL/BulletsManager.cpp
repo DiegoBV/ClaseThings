@@ -66,6 +66,6 @@ void BulletsManager::newShoot(Vector2D vel, Vector2D pos) {
 	newBullet->setWidth(5);
 	newBullet->setVelocity(vel);
 	newBullet->setPosition(pos);
-	bullets.addNewItem(newBullet);
+	//bullets.addNewItem(newBullet);
 	static_cast<ExampleGame*>(game)->pushObject(newBullet);
 }

@@ -2,16 +2,26 @@
 #include "ManagerTemplate.h"
 #include "Asteroid.h"
 #include "Observable.h"
-class AsteroidsManager: public Observable //maybe ser observable no se requiere y es mejor ser observador--> que cada asteroide le diga ehhh que mahn dao loko
+class AsteroidsManager: public Observable, public Observer
 {
 private:
-	ManagerTemplate<Asteroid*> listaAsteroides; //cambiar GO x gameObject
+	SDL_Rect rect = { 0, 0, 50, 50 };
+	ManagerTemplate<Asteroid> poolAst; //cambiar GO x gameObject
+	vector <Asteroid*> asteroides;
+	void initAsteroides();
+	void newAsteroid();
+	void setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos);
 	SDLGame* game;
+	ImageRenderer* astroidImage_;
+	CircularMotionPhysics* circularPhysics_;
+	BasicMotionPhysics* basicMotionPhysics_;
+	//RotationPhysics rotationPhysics_;
+	int numAst;
 public:
 	AsteroidsManager();
 	~AsteroidsManager();
-	AsteroidsManager(SDLGame* game, vector<Asteroid*> asteroides);
+	AsteroidsManager(SDLGame* game);
 	void updatePool();
-	void kk() { send(HIT); }
+	virtual void receive(Message msg) {}
 };
 

@@ -13,6 +13,7 @@
 #include "RotationComponent.h"
 #include "CircularMotionPhysics.h"
 #include "AsteroidsManager.h"
+#include "BulletsManager.h"
 
 class ExampleGame: public SDLGame {
 
