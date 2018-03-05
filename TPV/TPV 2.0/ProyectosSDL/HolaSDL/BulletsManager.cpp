@@ -8,10 +8,12 @@ BulletsManager::~BulletsManager()
 }
 
 void BulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
-	pair<bool, int> check = checkBullets();
+	pair<bool, Container*> check = checkBullets();
 
 	if (check.first) { //Si hay alguna inactiva, la activa
-		bullets.getItem(check.second)->setActive(true);
+		check.second->setActive(true);
+		check.second->setPosition(p);
+		check.second->setVelocity(v);
 	}
 	else { //Si no, crea una nueva
 		newShoot(v, p);
@@ -19,35 +21,31 @@ void BulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el estado actua
 }
 
 void BulletsManager::update(Uint32 time) { //Esto sólo actualiza el estado de las balas
-	vector<Container*> bullets2 = bullets.get();
-
 	for (int i = 0; i < bullets.size(); i++) {
-		if (bullets.getItem(i)->isActive()) {
-			static_cast<Container*>(bullets2[i])->update(time);
+		if ((*bullets.getItem(i))->isActive()) {
+			static_cast<Container*>(*bullets.getItem(i))->update(time);
 		}
 	}
 }
 
-pair<bool, int> BulletsManager::checkBullets() {
+pair<bool, Container*> BulletsManager::checkBullets() {
 	Uint32 i = 0;
 	bool encontrado = false;
-	int aux;
+	Container* aux;
 	while (i < bullets.size()) {
-		if (!bullets.getItem(i)->isActive()) {
+		if (!(*bullets.getItem(i))->isActive()) {
 			encontrado = true;
-			aux = i;
+			aux = (*bullets.getItem(i));
 		}
 		i++;
 	}
-	pair<bool, int> resultado(encontrado, aux);
+	pair<bool, Container*> resultado(encontrado, aux);
 	return resultado;
 }
 
 void BulletsManager::render(Uint32 time) {
-	vector<Container*> bullets2 = bullets.get();
-
 	for (int i = 0; i < bullets.size(); i++) {
-		static_cast<GameObject*>(bullets2[i])->render(time);
+		static_cast<Container*>(*bullets.getItem(i))->render(time);
 	}
 }
 

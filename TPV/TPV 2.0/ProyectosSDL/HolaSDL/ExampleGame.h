@@ -67,6 +67,7 @@ private:
 	ComponentSwitcher* cs2_;
 
 	AsteroidsManager* asterManag;
+	BulletsManager* bullMan;
 
 	bool running_;
 	int leftScore_;

@@ -12,7 +12,6 @@ protected:
 	Vector2D basic = {0.0, 0.0};
 public:
 	BulletsManager(SDLGame* game) : GameObject(game) {
-		newShoot(basic, basic);
 	};
 	virtual ~BulletsManager();
 	virtual void update(Uint32 time);
@@ -20,6 +19,6 @@ public:
 	virtual void shoot(Vector2D p, Vector2D v);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
 	void newShoot(Vector2D vel, Vector2D pos);
-	pair<bool, int> checkBullets();
+	pair<bool, Container*> checkBullets();
 };
 

@@ -17,24 +17,13 @@ public:
 	}
 
 	int size() { return list.size(); };
-<<<<<<< HEAD
 
-	T getItem(int pos) { return list[pos]; }
-
-	void addNewItem(T newItem) {
-		list.push_back(newItem);
-	}
-
-	void addList(vector<T*> newList) {
-		list = newList;
-	}
-
-	vector<T> get() { return list; };
-=======
 	T* getItem(int pos) { return &list[pos]; }
+
 	void addNewItem(T newItem) {
 		list.push_back(newItem);
 	}
+
 	pair<bool, T*> getObjectPool() {
 		int i = 0;
 		bool found = false;
@@ -56,7 +45,5 @@ public:
 		return par;
 	}
 	//vector<T> get() { return list; };
->>>>>>> 5cfb5322d2ae4ac81b3147bb80db39f73df8c3f4
-
 };
 

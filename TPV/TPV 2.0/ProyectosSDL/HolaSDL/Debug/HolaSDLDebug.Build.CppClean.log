@@ -1,33 +1,70 @@
-c:\hlocal\proyectossdl\holasdl\debug\vc120.pdb
-c:\hlocal\proyectossdl\holasdl\debug\vc120.idb
-c:\hlocal\proyectossdl\holasdl\debug\ball.obj
-c:\hlocal\proyectossdl\holasdl\debug\collisions.obj
-c:\hlocal\proyectossdl\holasdl\debug\demoactor.obj
-c:\hlocal\proyectossdl\holasdl\debug\examplegame.obj
-c:\hlocal\proyectossdl\holasdl\debug\font.obj
-c:\hlocal\proyectossdl\holasdl\debug\gameobject.obj
-c:\hlocal\proyectossdl\holasdl\debug\main.obj
-c:\hlocal\proyectossdl\holasdl\debug\music.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddle.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddlewithai.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddlewithaiwithtransrect.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddlewithmouse.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddlewithmousewithtransrect.obj
-c:\hlocal\proyectossdl\holasdl\debug\paddlewithtransrect.obj
-c:\hlocal\proyectossdl\holasdl\debug\resources.obj
-c:\hlocal\proyectossdl\holasdl\debug\sdlgame.obj
-c:\hlocal\proyectossdl\holasdl\debug\soundeffect.obj
-c:\hlocal\proyectossdl\holasdl\debug\texture.obj
-c:\hlocal\proyectossdl\holasdl\debug\vector2d.obj
-c:\hlocal\proyectossdl\bin\holasdldebug.lib
-c:\hlocal\proyectossdl\bin\holasdldebug.exp
-c:\hlocal\proyectossdl\bin\holasdldebug.ilk
-c:\hlocal\proyectossdl\bin\holasdldebug.exe
-c:\hlocal\proyectossdl\bin\holasdldebug.pdb
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\cl.command.1.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\cl.read.1.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\cl.write.1.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\holasdl.write.1u.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\link.command.1.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\link.read.1.tlog
-c:\hlocal\proyectossdl\holasdl\debug\holasdl.tlog\link.write.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc120.pdb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc141.pdb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc141.idb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\bulletsmanager.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\examplegame.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc120.idb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\asteroidsmanager.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\main.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\weapon.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\collisionmanager.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\asteroid.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\bin\holasdldebug.lib
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\bin\holasdldebug.exp
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\bin\holasdldebug.exe
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\bin\holasdldebug.ilk
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\bin\holasdldebug.pdb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\accelerationinputcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\ball.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\basicmotionphysics.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\bounceonbordersphysics.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\circularmotionphysics.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\collisions.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\componentswitcher.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\container.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\demoactor.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\fillrectrenderer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\font.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\gamecomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\gamectrlinputcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\gamemanager.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\gamemsgrenderer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\gameobject.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\imagerenderer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\inputcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\managertemplate.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\music.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\observable.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\observer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddle.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddleaiphysics.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlekeyboardcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlemouseinputcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlephysicscomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlewithai.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlewithaiwithtransrect.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlewithmouse.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlewithmousewithtransrect.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\paddlewithtransrect.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\physicscomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\rendercomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\resources.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\rotationcomponent.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\sdlgame.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\skeletonrenderer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\soundeffect.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\soundmanager.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\texture.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\tranrectrenderer.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vector2d.obj
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\weapon.obj.enc
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc140.idb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\vc140.pdb
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\cl.command.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\cl.read.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\cl.write.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\holasdl.write.1u.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\link.command.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\link.delete.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\link.read.1.tlog
+d:\cosasimportabiles\cosas git\clasethings\tpv\tpv 2.0\proyectossdl\holasdl\debug\holasdl.tlog\link.write.1.tlog

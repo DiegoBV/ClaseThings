@@ -45,9 +45,6 @@ void ExampleGame::initGame() {
 	caza_->setPosition(Vector2D(getWindowWidth() / 2 - 6, getWindowHeight() / 2 - 6));
 	caza_->setVelocity(velPrub);
 
-
-	BulletsManager* bullMan = new BulletsManager(this);
-
 	/*ball_ = new Container(this);
 	ball_->setWidth(11);
 	ball_->setHeight(11);
@@ -68,6 +65,9 @@ void ExampleGame::initGame() {
 	keyboardIC1_ = new PaddleKeyboardComponent(SDLK_UP, SDLK_DOWN, SDLK_SPACE);
 	keyboardIC2_ = new PaddleKeyboardComponent(SDLK_a, SDLK_z, SDLK_s);
 	mouseIC1_ = new PaddleMouseInputComponent();*/
+	
+	bullMan = new BulletsManager(this);
+
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
 	InputComponent* gunInput = new Weapon(bullMan, SDLK_SPACE, 1, 15);
