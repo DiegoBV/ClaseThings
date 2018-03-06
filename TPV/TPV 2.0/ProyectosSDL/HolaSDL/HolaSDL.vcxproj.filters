@@ -45,9 +45,6 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>Archivos de código fuente</Filter>
-    </ClCompile>
     <ClCompile Include="SoundManager.cpp">
       <Filter>Sonidos/Musica</Filter>
     </ClCompile>
@@ -191,6 +188,18 @@
     </ClCompile>
     <ClCompile Include="AccelerationInputComponent.cpp">
       <Filter>InputComponent</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullets.cpp">
+      <Filter>Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Objetos</Filter>
+    </ClCompile>
+    <ClCompile Include="StarTrekBulletsManager.cpp">
+      <Filter>Managers</Filter>
+    </ClCompile>
+    <ClCompile Include="Fighter.cpp">
+      <Filter>Objetos</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -346,6 +355,15 @@
     </ClInclude>
     <ClInclude Include="AccelerationInputComponent.h">
       <Filter>InputComponent</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullets.h">
+      <Filter>Objetos</Filter>
+    </ClInclude>
+    <ClInclude Include="StarTrekBulletsManager.h">
+      <Filter>Managers</Filter>
+    </ClInclude>
+    <ClInclude Include="Fighter.h">
+      <Filter>Objetos</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
