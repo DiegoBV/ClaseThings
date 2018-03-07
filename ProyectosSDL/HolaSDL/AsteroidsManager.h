@@ -2,6 +2,7 @@
 #include "ManagerTemplate.h"
 #include "Asteroid.h"
 #include "Observable.h"
+#include "RotationPhysics.h"
 class AsteroidsManager: public Observable, public Observer
 {
 private:
@@ -15,13 +16,14 @@ private:
 	ImageRenderer* astroidImage_;
 	CircularMotionPhysics* circularPhysics_;
 	BasicMotionPhysics* basicMotionPhysics_;
-	//RotationPhysics rotationPhysics_;
+	RotationPhysics* rotationPhysics_;
 	int numAst;
 public:
 	AsteroidsManager();
 	~AsteroidsManager();
 	AsteroidsManager(SDLGame* game);
 	void updatePool();
-	virtual void receive(Message msg) {}
+	virtual void receive(Message msg);
+	vector <Asteroid*> getAsteroidsVector() { return asteroides; }
 };
 

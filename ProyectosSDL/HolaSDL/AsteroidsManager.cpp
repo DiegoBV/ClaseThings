@@ -13,7 +13,8 @@ AsteroidsManager::~AsteroidsManager()
 
 AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
 	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Star), rect); circularPhysics_ = new CircularMotionPhysics();
-	 basicMotionPhysics_ = new BasicMotionPhysics(); numAst = 2; initAsteroides();  }
+	 basicMotionPhysics_ = new BasicMotionPhysics(); rotationPhysics_ = new RotationPhysics(); numAst = 2; initAsteroides();
+}
 
 void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
 	Asteroid* newAst = poolAst.addNewItem();
@@ -26,11 +27,13 @@ void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
 void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos) { //Setea los parámetros de un asteroide
 	newAst->addPhysicsComponent(circularPhysics_);
 	newAst->addPhysicsComponent(basicMotionPhysics_);
+	newAst->addPhysicsComponent(rotationPhysics_);
 	newAst->addRenderComponent(astroidImage_);
 	newAst->setActive(true);
 	newAst->setHeight(50);
 	newAst->setWidth(50);
 	newAst->setVelocity(vel);
+	newAst->setDirection(Vector2D(1, 0));
 	newAst->setPosition(pos); // se pasaria por la constructora
 	newAst->setGame(game);
 	asteroides.push_back(newAst);
@@ -58,4 +61,14 @@ void AsteroidsManager::updatePool() {
 		newObject.second->setCont(firstInactive.second->getCont() - 1);
 		i++;
 	}
+}
+
+void AsteroidsManager::receive(Message msg) {
+	switch (msg.id_) {
+	case BULLET_ASTEROID_COLISION:
+		break;
+	case ROUND_START:
+		initAsteroides(); //en vez de hacerlo en la constructora, se haria al recibir un mensaje del gameManager
+		break;
+	};
 }
