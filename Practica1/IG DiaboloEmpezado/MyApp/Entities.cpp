@@ -83,14 +83,16 @@ void TriPyramid::draw(){
 //--------------------------------------------------------------------
 ContCube::ContCube(GLdouble l) : Entity(){
 	mesh = Mesh::generateContCubo(l);
+	texture.load("..\\Bmps\\Zelda.bmp");
 }
 
 void ContCube::draw(){
+	texture.bind();
 	glLineWidth(3);
-	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
 	mesh->draw();
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glLineWidth(1);
+	texture.unbind();
 }
 
 //--------------------------------------------------------------------

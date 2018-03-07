@@ -140,11 +140,25 @@ Mesh* Mesh::generateContCubo(GLdouble l){
 	m->vertices[8] = dvec3(-l / 2, l/2, l / 2);
 	m->vertices[9] = dvec3(-l / 2, -l / 2, l / 2);
 
-	m->colors = new dvec4[m->numVertices];
+	m->textCoords = new dvec2[m->numVertices];
+	m->textCoords[0] = dvec2(0, 1);
+	m->textCoords[1] = dvec2(0, 0);
+	m->textCoords[2] = dvec2(1, 1);
+	m->textCoords[3] = dvec2(1, 0);
+	m->textCoords[4] = dvec2(2, 1);
+	m->textCoords[5] = dvec2(2, 0);
+	m->textCoords[6] = dvec2(3, 1);
+	m->textCoords[7] = dvec2(3, 0);
+	m->textCoords[8] = dvec2(4, 1);
+	m->textCoords[9] = dvec2(4, 0);
+
+	/*m->colors = new dvec4[m->numVertices];
 	m->colors[0] = dvec4(0.0, 0.0, 0.0, 0.0);
 	m->colors[1] = dvec4(0.0, 0.0, 0.0, 0.0);
 	m->colors[2] = dvec4(0.0, 0.0, 0.0, 0.0);
-	m->colors[3] = dvec4(0.0, 0.0, 0.0, 0.0);
+	m->colors[3] = dvec4(0.0, 0.0, 0.0, 0.0);*/
+
+
 
 	return m;
 }
