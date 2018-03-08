@@ -10,7 +10,10 @@ struct CollisionMessage : public Message {
 };
 
 struct AsteroidBulletCollisionMessage : public Message {
-	AsteroidBulletCollisionMessage(MessageId id, Asteroid* o1, Bullets* o2) : Message(id), o1_(o1), o2_(o2) {}
+	AsteroidBulletCollisionMessage(MessageId id, Asteroid* o1, Bullets* o2) : Message(id) { 
+		o1_ = o1;
+		o2_ = o2; 
+	}
 
 	Asteroid* o1_;
 	Bullets* o2_;

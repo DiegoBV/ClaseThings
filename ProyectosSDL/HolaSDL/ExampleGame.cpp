@@ -12,6 +12,7 @@
 #include "AccelerationInputComponent.h"
 #include "Weapon.h"
 #include "Asteroid.h"
+#include "CollisionManager.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -125,7 +126,9 @@ void ExampleGame::initGame() {
 	actors_.push_back(caza_);
 	actors_.push_back(bullMan);
 	asterManag = new AsteroidsManager(this);
+	CollisionManager* man = new CollisionManager(this, bullMan, asterManag);
 	actors_.push_back(asterManag);
+	actors_.push_back(man);
 }
 
 void ExampleGame::closeGame() {
@@ -191,7 +194,12 @@ void ExampleGame::handleInput(Uint32 time) {
 		if (event.key.keysym.sym == SDLK_0 && !help) {
 			//asterManag->kk();
 			asterManag->updatePool(); //pruebas
+			
 			help = true;
+		}
+		else if (event.key.keysym.sym == SDLK_1) {
+			Fighter* kk = nullptr;
+			bullMan->shoot(kk, Vector2D(0, 0), Vector2D(3, 3));
 		}
 		/*if (event.type == SDL_KEYDOWN) {
 

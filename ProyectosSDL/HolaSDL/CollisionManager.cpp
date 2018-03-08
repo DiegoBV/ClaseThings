@@ -11,7 +11,7 @@ void CollisionManager::update(Uint32 time) {
 	for (int i = 0; i < astroids.size(); i++) {
 		for (int j = 0; j < bullets.size(); j++) {
 			if (Collisions::collides(astroids[i], bullets[j])) {
-				this->send(AsteroidBulletCollisionMessage(BULLET_ASTEROID_COLISION, astroids[i], bullets[j]));
+				//this->send(AsteroidBulletCollisionMessage(BULLET_ASTEROID_COLISION, astroids[i], bullets[j]));
 			}
 		}
 	}

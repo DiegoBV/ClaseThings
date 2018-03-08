@@ -31,9 +31,7 @@ void StarTrekBulletsManager::shoot(Fighter* owner, Vector2D p, Vector2D v) { //C
 
 void StarTrekBulletsManager::update(Uint32 time) { //Esto sólo actualiza el estado de las balas
 	for (int i = 0; i < bullets_.size(); i++) {
-		if ((bullets_.getItem(i))->isActive()) {
-			static_cast<Bullets*>(bullets_.getItem(i))->update(time);
-		}
+		bullets_.getItem(i)->update(time);
 	}
 }
 
@@ -54,7 +52,7 @@ pair<bool, Bullets*> StarTrekBulletsManager::checkBullets() {
 
 void StarTrekBulletsManager::render(Uint32 time) {
 	for (int i = 0; i < bullets_.size(); i++) {
-		static_cast<Bullets*>(bullets_.getItem(i))->render(time);
+		bullets_.getItem(i)->render(time);
 	}
 }
 
@@ -72,6 +70,8 @@ void StarTrekBulletsManager::newShoot(Bullets* bull, Vector2D vel, Vector2D pos)
 	bull->setWidth(5);
 	bull->setVelocity(vel);
 	bull->setPosition(pos);
+	bull->setGame(game_);
+	bullets.push_back(bull);
 }
 
 void StarTrekBulletsManager::roundStart() {

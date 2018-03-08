@@ -18,5 +18,4 @@ public:
 	}
 	int getCont() { return contGeneraciones; };
 	void setCont(int newCont) { contGeneraciones = newCont; };
-	void setGame(SDLGame* newGame) { game_ = newGame; }
 };

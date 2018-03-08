@@ -15,9 +15,10 @@ protected:
 	Vector2D basic = { 0.0, 0.0 }; //Esto es solo para pruebas, no worries
 
 	virtual void receive(Message* msg);
-	virtual void shoot(Fighter* owner, Vector2D p, Vector2D v);
+	
 
 public:
+	virtual void shoot(Fighter* owner, Vector2D p, Vector2D v);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
@@ -25,7 +26,11 @@ public:
 	void roundStart();
 	pair<bool, Bullets*> checkBullets();
 	StarTrekBulletsManager();
-	StarTrekBulletsManager(SDLGame* game) : GameObject(game) {	}
+	StarTrekBulletsManager(SDLGame* game) : GameObject(game) {
+		Bullets* b = new Bullets(game_);
+		bullets_.pushSomething(b);
+		bullets.push_back(b);
+	}
 	~StarTrekBulletsManager();
 	virtual vector<Bullets*>& getBullets() { return bullets; }
 };

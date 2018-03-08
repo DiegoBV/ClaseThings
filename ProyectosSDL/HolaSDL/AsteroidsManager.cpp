@@ -75,8 +75,8 @@ void AsteroidsManager::updatePool() {
 void AsteroidsManager::receive(Message* msg) {
 	switch (msg->id_) {
 	case BULLET_ASTEROID_COLISION:
-		static_cast<AsteroidBulletCollisionMessage*>(msg)->o1_->setActive(false);
-		updatePool();
+		//dynamic_cast<AsteroidBulletCollisionMessage*>(msg)->o1_->setActive(false);
+		//updatePool();
 		break;
 	case ROUND_START:
 		initAsteroides(); //en vez de hacerlo en la constructora, se haria al recibir un mensaje del gameManager
