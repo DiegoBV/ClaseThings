@@ -1,11 +1,6 @@
 #include "Fighter.h"
 
-
-
-Fighter::Fighter()
-{
-}
-
+#include "Observer.h"
 
 Fighter::~Fighter()
 {

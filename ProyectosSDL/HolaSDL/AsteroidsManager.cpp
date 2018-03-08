@@ -1,6 +1,7 @@
 #include "AsteroidsManager.h"
 #include "ExampleGame.h"
 #include <algorithm>
+#include "messages.cpp"
 
 AsteroidsManager::AsteroidsManager()
 {
@@ -18,7 +19,6 @@ AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
 
 void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
 	Asteroid* newAst = poolAst.addNewItem();
-	newAst->setCont(5);
 	double u = (double)rand() / (RAND_MAX + 1)*(1 - 0.1) + 0.1;
 	Vector2D vel(u, u);
 	setAsteroid(newAst, vel, Vector2D(rand() % game->getWindowWidth(), rand() % game->getWindowHeight()));
@@ -33,13 +33,12 @@ void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos)
 	newAst->setHeight(50);
 	newAst->setWidth(50);
 	newAst->setVelocity(vel);
-	newAst->setDirection(Vector2D(1, 0));
+	int n = rand() % 2; if (n == 0) { n = -1; }
+	newAst->setDirection(Vector2D(n , 0));
 	newAst->setPosition(pos); // se pasaria por la constructora
 	newAst->setGame(game);
 	asteroides.push_back(newAst);
 	asteroides[0]->setActive(false);
-	poolAst.pushSomething(newAst);
-	static_cast<ExampleGame*>(game)->pushObject(newAst);
 }
 
 void AsteroidsManager::initAsteroides() {
@@ -51,21 +50,33 @@ void AsteroidsManager::initAsteroides() {
 void AsteroidsManager::updatePool() {
 	pair<bool, Asteroid*> firstInactive = poolAst.getObjectPool();
 	int cont = firstInactive.second->getCont();
-	int i = 0;
-	Vector2D posInicial = Vector2D(firstInactive.second->getPosition());
-	while (i < cont) {
-		pair<bool, Asteroid*> newObject = poolAst.getObjectPool();
-		if (!newObject.first) { //se ha creado uno nuevo
-			setAsteroid(newObject.second, Vector2D(0.2, 0.2), posInicial + Vector2D(rand()%20, rand()%20));
+	if (cont > 1) {
+		int i = 0;
+		Vector2D posInicial = Vector2D(firstInactive.second->getPosition());
+		Vector2D newVel = firstInactive.second->getVelocity();
+		while (i < cont) {
+			pair<bool, Asteroid*> newObject = poolAst.getObjectPool();		
+			newVel.rotate(i * 30);
+			newObject.second->setCont(cont - 1);
+			if (!newObject.first) { //se ha creado uno nuevo
+				setAsteroid(newObject.second, newVel, posInicial + Vector2D(rand() % 20, rand() % 20));
+				asteroides[0]->setActive(true);
+			}
+			else { //si no se ha creado uno nuevo, simplemente se setean sus parámetros
+				newObject.second->setActive(true);
+				newObject.second->setPosition(posInicial + Vector2D(rand() % 20, rand() % 20));
+				newObject.second->setVelocity(newVel);
+			}
+			i++;
 		}
-		newObject.second->setCont(firstInactive.second->getCont() - 1);
-		i++;
 	}
 }
 
-void AsteroidsManager::receive(Message msg) {
-	switch (msg.id_) {
+void AsteroidsManager::receive(Message* msg) {
+	switch (msg->id_) {
 	case BULLET_ASTEROID_COLISION:
+		static_cast<AsteroidBulletCollisionMessage*>(msg)->o1_->setActive(false);
+		updatePool();
 		break;
 	case ROUND_START:
 		initAsteroides(); //en vez de hacerlo en la constructora, se haria al recibir un mensaje del gameManager

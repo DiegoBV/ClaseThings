@@ -10,7 +10,7 @@ Observable::~Observable() {
 
 void Observable::send(Message msg) {
 	for( Observer* o : observers_ ) {
-		o->receive(msg);
+		o->receive(&msg);
 	}
 
 

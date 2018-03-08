@@ -1,4 +1,5 @@
 #include "Weapon.h"
+#include "messages.cpp"
 
 Weapon::~Weapon()
 {
@@ -31,8 +32,10 @@ bool Weapon::puedeDisparar() {
 }
 
 void Weapon::shoot(GameObject* o) {
+
+	send(FighterShootMessage(FIGHTER_SHOOT, o));
 	//Calculo de posicion
-	Vector2D aux = o->getPosition();
+	/*Vector2D aux = o->getPosition();
 	int x = aux.getX() + o->getWidth() / 2;
 	int y = aux.getY() + o->getHeight() / 2;
 	Vector2D dirAct = o->getDirection();
@@ -42,8 +45,5 @@ void Weapon::shoot(GameObject* o) {
 	aux = aux + dirAct * (o->getHeight() / 2);
 
 	//calculo de velocidad
-	Vector2D vel = dirAct * max(o->getVelocity().magnitude() * 1.5, 2.0);
-
-	//shoot
-	//stw->shoot(aux, vel);
+	Vector2D vel = dirAct * max(o->getVelocity().magnitude() * 1.5, 2.0);*/
 }

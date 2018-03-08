@@ -38,7 +38,7 @@ void ExampleGame::initGame() {
 	velPrub.setY(-2);
 
 
-	caza_ = new Container(this);
+	caza_ = new Fighter(this);
 	caza_->setDirection(dirPrub);
 	caza_->setWidth(30);
 	caza_->setHeight(30);
@@ -66,11 +66,11 @@ void ExampleGame::initGame() {
 	keyboardIC2_ = new PaddleKeyboardComponent(SDLK_a, SDLK_z, SDLK_s);
 	mouseIC1_ = new PaddleMouseInputComponent();*/
 	
-	//bullMan = new BulletsManager(this);
+	bullMan = new StarTrekBulletsManager(this);
 
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
-	InputComponent* gunInput = new Weapon(bullMan, SDLK_SPACE, 1, 15);
+	InputComponent* gunInput = new Weapon(static_cast<BulletsManager*>(bullMan), SDLK_SPACE, 1, 15, caza_);
 
 	/*paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
@@ -118,12 +118,14 @@ void ExampleGame::initGame() {
 
 	/*actors_.push_back(cs1_);
 	actors_.push_back(cs2_);
+
 	actors_.push_back(leftPaddle_);
 	actors_.push_back(rightPaddle_);
 	actors_.push_back(ball_);*/
 	actors_.push_back(caza_);
-	//actors_.push_back(bullMan);
+	actors_.push_back(bullMan);
 	asterManag = new AsteroidsManager(this);
+	actors_.push_back(asterManag);
 }
 
 void ExampleGame::closeGame() {

@@ -14,6 +14,7 @@
 #include "CircularMotionPhysics.h"
 #include "AsteroidsManager.h"
 #include "BulletsManager.h"
+#include "StarTrekBulletsManager.h"
 
 class ExampleGame: public SDLGame {
 
@@ -41,7 +42,7 @@ private:
 	Container* leftPaddle_;
 	Container* rightPaddle_;
 	Container* ball_;
-	Container* caza_;
+	Fighter* caza_;
 
 	InputComponent* keyboardIC1_;
 	InputComponent* keyboardIC2_;
@@ -68,7 +69,7 @@ private:
 	ComponentSwitcher* cs2_;
 
 	AsteroidsManager* asterManag;
-	BulletsManager* bullMan;
+	StarTrekBulletsManager* bullMan;
 
 	bool running_;
 	int leftScore_;

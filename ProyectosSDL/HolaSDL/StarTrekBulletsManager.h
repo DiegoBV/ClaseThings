@@ -1,17 +1,17 @@
 #pragma once
 #include "BulletsManager.h"
-#include "GameObject.h"
-#include "Fighter.h"
 #include <vector>
-#include "messages.h"
+#include "Fighter.h"
+#include "FillRectRenderer.h"
 
 class StarTrekBulletsManager : public BulletsManager, public GameObject
 {
 protected:
-	ManagerTemplate<Bullets*> bullets_;
-	//Bullets* getBullet();
-	//FillRectRenderer* fillRect;
-//	BasicMotionPhysics* motion;
+	ManagerTemplate<Bullets> bullets_;
+	vector<Bullets*> bullets;
+	Bullets* getBullet(int i);
+	FillRectRenderer* fillRect;
+	BasicMotionPhysics* motion;
 	Vector2D basic = { 0.0, 0.0 }; //Esto es solo para pruebas, no worries
 
 	virtual void receive(Message* msg);
@@ -22,11 +22,11 @@ public:
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
 	void newShoot(Bullets* bull, Vector2D vel, Vector2D pos);
+	void roundStart();
 	pair<bool, Bullets*> checkBullets();
 	StarTrekBulletsManager();
-	StarTrekBulletsManager(SDLGame* game) : GameObject(game) {
-		
-	}
+	StarTrekBulletsManager(SDLGame* game) : GameObject(game) {	}
 	~StarTrekBulletsManager();
+	virtual vector<Bullets*>& getBullets() { return bullets; }
 };
 

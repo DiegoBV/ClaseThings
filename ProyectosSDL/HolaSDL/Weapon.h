@@ -1,7 +1,11 @@
 #pragma once
 #include "InputComponent.h"
 #include "BulletsManager.h"
-class Weapon : public InputComponent
+#include "Observable.h"
+#include "Observer.h"
+#include "Fighter.h"
+
+class Weapon : public InputComponent, public Observable
 {
 private:
 	BulletsManager* stw;
@@ -11,8 +15,10 @@ private:
 	Uint8 auxShots;
 	Uint32 auxTime;
 public:
-	Weapon(BulletsManager* stw, SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval) : stw(stw), disparo(disparo), 
-				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0) {};
+	Weapon(BulletsManager* stw, SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o) : stw(stw), disparo(disparo), 
+				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0) {
+		registerObserver(o);
+	};
 
 	virtual ~Weapon();
 	virtual void handleInput(GameObject* o, Uint32 time, const SDL_Event& event);

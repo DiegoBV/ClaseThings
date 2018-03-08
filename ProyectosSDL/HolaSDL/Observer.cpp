@@ -1,5 +1,6 @@
 #include "Observer.h"
 
+
 Observer::Observer() {
 	// TODO Auto-generated constructor stub
 

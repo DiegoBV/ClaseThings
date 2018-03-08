@@ -5,7 +5,8 @@
 std::vector<std::string> Resources::imageFiles_ { "images/blank.png",
 		"images/tennis_ball.png", "images/keyboard.png", "images/mouse.png",
 		"images/ai.png", "images/spaceships.png", "images/airplanes.png",
-		"images/star.png" };
+		"images/star.png", "images/astroid.png", "images/explosion.png",
+		"images/badges.png" };
 
 std::vector<Resources::FontInfo> Resources::fontFiles_ {
 		{ "fonts/ARIAL.ttf", 16 }, { "fonts/ARIAL.ttf", 24 }, {
@@ -14,14 +15,15 @@ std::vector<Resources::FontInfo> Resources::fontFiles_ {
 
 std::vector<Resources::TextMsgInfo> Resources::textMsgs_ { { "Hello World", {
 		COLOR(0xaaffffff) }, Resources::ARIAL16 }, { "Press Any Key ...", {
-		COLOR(0xaaffbbff) }, Resources::ARIAL24 }, { "Game Over", { COLOR(
-		0xffffbbff) }, Resources::ARIAL24 } };
+		COLOR(0xaaffbbff) }, Resources::ARIAL24 }, { "Game Over!", { COLOR(
+		0xffffbbff) }, Resources::ARIAL24 }, { "Press ENTER to Continue", {
+		COLOR(0xaaffbbff) }, Resources::ARIAL24 } };
 
 std::vector<std::string> Resources::musicFiles_ { "sound/beat.wav",
-		"sound/cheer.wav", "sound/boooo.wav" };
+		"sound/cheer.wav", "sound/boooo.wav", "sound/imperial_march.wav" };
 
 std::vector<std::string> Resources::soundEffectFiles_ { "sound/wall_hit.wav",
-		"sound/paddle_hit.wav" };
+		"sound/paddle_hit.wav", "sound/GunShot.wav", "sound/explosion.wav" };
 
 #include <iostream>
 

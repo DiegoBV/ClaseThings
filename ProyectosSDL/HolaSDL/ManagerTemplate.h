@@ -5,7 +5,7 @@ template <typename T>
 class ManagerTemplate
 {
 protected:
-	vector<T> list;
+	vector<T*> list;
 
 public:
 
@@ -18,14 +18,15 @@ public:
 
 	int size() { return list.size(); };
 
-	T* getItem(int pos) { return &list[pos]; }
+	T* getItem(int pos) { return list[pos]; }
 
 	void pushSomething(T* newT) {
-		list.push_back(*newT);
+		list.push_back(newT);
 	}
 	
 	T* addNewItem() { //hace un new T()
 		T* nItem = new T();
+		pushSomething(nItem);
 		return nItem;
 	}
 
@@ -36,7 +37,6 @@ public:
 		while (i < list.size() && !found) { //si encuentra el item inactivo, lo devuelve
 			if (!getItem(i)->isActive()) {
 				aux = getItem(i);
-				(aux)->setActive(true);
 				found = true;
 			}
 			else 
