@@ -198,9 +198,8 @@ void Poliespiral::draw() {
 
 //--------------------------------------------------------------------
 
-RectangleText::RectangleText(GLdouble w, GLuint h) {
-	mesh = Mesh::generateRectangleText(w, h);
-
+RectangleText::RectangleText(GLdouble w, GLuint h, GLuint x, GLuint y) {
+	mesh = Mesh::generateRectangleText(w, h, x, y);
 	texture.load("..\\Bmps\\Zelda.bmp");
 }
 

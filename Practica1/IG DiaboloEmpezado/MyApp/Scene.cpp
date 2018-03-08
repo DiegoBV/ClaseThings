@@ -16,7 +16,7 @@ void Scene::init()
 
   // objets
 
-  objetos.push_back(new ContCube(100.0));/*
+  /*objetos.push_back(new ContCube(100.0));/*
 
   objetos.push_back(new TriangleRGB(100.0));
 
@@ -31,7 +31,7 @@ void Scene::init()
   objetos.push_back(aux);
   objetos.push_back(new Cubo(150, 150));
   objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
-  //objetos.push_back(new RectangleText(0, 0, 400.0, 225));
+  objetos.push_back(new RectangleText(400.0, 225, 2, 3));
   //objetos.push_back(new TriPyramidText(100, 200));
 }
 //-------------------------------------------------------------------------

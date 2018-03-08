@@ -250,15 +250,16 @@ void Mesh::changeColor(Mesh* m, dvec4 c) {
 
 //--------------------------------------------------------------------------
 
-Mesh* Mesh::generateRectangleText(GLdouble w, GLuint h) {
+Mesh* Mesh::generateRectangleText(GLdouble w, GLuint h, GLuint x, GLuint y) {
 	Mesh* m = new Mesh();
 	m = generateRectangle(w, h);
-
-	m->textCoords = new dvec2[m->numVertices];
-	m->textCoords[0] = dvec2(0, 1);
+	m->textCoords = new dvec2[m->numVertices*2];
+	if (x == 0) { x = 1; }
+	if (y == 0) { y = 1; }
+	m->textCoords[0] = dvec2(0, x);
 	m->textCoords[1] = dvec2(0, 0);
-	m->textCoords[2] = dvec2(1, 1);
-	m->textCoords[3] = dvec2(1, 0);
+	m->textCoords[2] = dvec2(y, x);
+	m->textCoords[3] = dvec2(y, 0);
 
 	return m;
 }

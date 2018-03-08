@@ -117,7 +117,7 @@ public:
 
 class RectangleText : public Entity {
 public :
-	RectangleText(GLdouble w, GLuint h);
+	RectangleText(GLdouble w, GLuint h, GLuint x, GLuint y);
 	~RectangleText() { }
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
