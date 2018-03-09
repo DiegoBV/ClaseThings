@@ -3,6 +3,7 @@
 #include <vector>
 #include "Fighter.h"
 #include "FillRectRenderer.h"
+#include "BasicMotionPhysics.h"
 
 class StarTrekBulletsManager : public BulletsManager, public GameObject
 {

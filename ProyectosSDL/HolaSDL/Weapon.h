@@ -15,6 +15,7 @@ private:
 	Uint8 auxShots;
 	Uint32 auxTime;
 public:
+	Weapon() {}
 	Weapon(BulletsManager* stw, SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o) : stw(stw), disparo(disparo), 
 				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0) {
 		registerObserver(o);

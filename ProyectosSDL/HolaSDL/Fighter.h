@@ -8,6 +8,7 @@
 class Fighter : public Container, public Observer //solo por ahora, en la practica de verdad no es Observer
 {
 public:
+	Fighter() {}
 	Fighter(SDLGame* game) : Container(game) {}
 	~Fighter();
 	virtual void receive(Message* msg) {}

@@ -42,8 +42,8 @@ void GameManager::setRunning(bool running) {
 	if (running_ != running) {
 		running_ = running;
 
-		Message m = { running ? ROUND_START : ROUND_END };
-		send(m);
+		//Message m = { running ? ROUND_START : ROUND_END };
+		//send(m);
 		if (gameOver_ && running){
 			gameOver_ = false;
 			setLeftScore(0);
@@ -56,7 +56,7 @@ void GameManager::setRunning(bool running) {
 
 void GameManager::receive(Message msg){
 	switch (msg.id_){
-		case BALL_LEAVES_RIGHT:
+		/*case BALL_LEAVES_RIGHT:
 			setRightScore(getRightScore() + 1);
 			setRunning(false);
 			break;
@@ -65,7 +65,7 @@ void GameManager::receive(Message msg){
 			setRunning(false);
 			break;
 		default:
-			break;
+			break;*/
 	}
 }
 

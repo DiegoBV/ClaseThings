@@ -1,7 +1,6 @@
 #include "StarTrekBulletsManager.h"
 #include "BasicMotionPhysics.h"
 #include "ExampleGame.h"
-#include "messages.cpp"
 
 
 
@@ -92,17 +91,17 @@ void StarTrekBulletsManager::receive(Message* msg) {
 	case ROUND_START:
 		roundStart();
 		break;
-	case ROUND_END:
+	case ROUND_OVER:
 		roundStart();
 		break;
-	case BULLET_ASTEROID_COLISION:
-		static_cast<AsteroidBulletCollisionMessage*>(msg)->o2_->setActive(false);
+	case BULLET_ASTROID_COLLISION:
+		static_cast<BulletAstroidCollision*>(msg)->bullet_->setActive(false);
 		break;
 	case BULLET_FIGHTER_COLLISION:
-		static_cast<FighterBulletCollisionMessage*>(msg)->o2_->setActive(false);
+		//static_cast<FighterBulletCollisionMessage*>(msg)->o2_->setActive(false);
 		break;
 	case FIGHTER_SHOOT:
-		shoot(static_cast<FighterShootMessage*>(msg)->o_, static_cast<FighterShootMessage*>(msg)->o_->getPosition(), static_cast<FighterShootMessage*>(msg)->o_->getVelocity());
+		//shoot(static_cast<FighterShootMessage*>(msg)->o_, static_cast<FighterShootMessage*>(msg)->o_->getPosition(), static_cast<FighterShootMessage*>(msg)->o_->getVelocity());
 		break;
 	}
 }

@@ -12,7 +12,7 @@ SoundManager::~SoundManager() {
 
 void SoundManager::receive(Message msg) {
 	switch ( msg.id_ ) {
-	case BALL_TOUCHES_WALL:
+	/*case BALL_TOUCHES_WALL:
 		game_->getResources()->getSoundEffect(Resources::Wall_Hit)->play(0);
 		break;
 	case BALL_TOUCHES_PADDLE:
@@ -24,7 +24,7 @@ void SoundManager::receive(Message msg) {
 	case ROUND_END:
 		game_->getResources()->getMusic(Resources::Beat)->stop();
 		break;
-
+		*/
 
 	}
 }

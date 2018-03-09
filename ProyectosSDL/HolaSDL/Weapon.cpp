@@ -1,5 +1,4 @@
 #include "Weapon.h"
-#include "messages.cpp"
 
 Weapon::~Weapon()
 {
@@ -33,7 +32,7 @@ bool Weapon::puedeDisparar() {
 
 void Weapon::shoot(GameObject* o) {
 
-	send(FighterShootMessage(FIGHTER_SHOOT, o));
+	//send(FighterIsShooting(o));
 	//Calculo de posicion
 	/*Vector2D aux = o->getPosition();
 	int x = aux.getX() + o->getWidth() / 2;

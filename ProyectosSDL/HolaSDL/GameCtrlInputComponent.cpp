@@ -16,7 +16,7 @@ void GameCtrlInputComponent::handleInput(GameObject* o, Uint32 time, const SDL_E
 		// if any key pressed while not running, we choose a random velocity of the ball
 		if (!gm->isRunning()) {
 			gm->setRunning(true);
-			gm->send(Message(ROUND_START));
+			gm->send(&(Message(ROUND_START)));
 			// rest the score if the game is over
 			if (gm->isGameOver()) {
 				gm->setLeftScore(0);

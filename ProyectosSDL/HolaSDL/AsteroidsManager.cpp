@@ -1,7 +1,6 @@
 #include "AsteroidsManager.h"
 #include "ExampleGame.h"
 #include <algorithm>
-#include "messages.cpp"
 
 AsteroidsManager::AsteroidsManager()
 {
@@ -74,12 +73,14 @@ void AsteroidsManager::updatePool() {
 
 void AsteroidsManager::receive(Message* msg) {
 	switch (msg->id_) {
-	case BULLET_ASTEROID_COLISION:
-		//dynamic_cast<AsteroidBulletCollisionMessage*>(msg)->o1_->setActive(false);
-		//updatePool();
-		break;
 	case ROUND_START:
 		initAsteroides(); //en vez de hacerlo en la constructora, se haria al recibir un mensaje del gameManager
 		break;
+	case BULLET_ASTROID_COLLISION:
+		GameObject* aux = static_cast<BulletAstroidCollision*>(msg)->astroid_;
+		aux->setActive(false);
+		updatePool();
+		break;
+
 	};
 }
