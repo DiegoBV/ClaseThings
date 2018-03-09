@@ -253,7 +253,7 @@ void Mesh::changeColor(Mesh* m, dvec4 c) {
 Mesh* Mesh::generateRectangleText(GLdouble w, GLuint h, GLuint x, GLuint y) {
 	Mesh* m = new Mesh();
 	m = generateRectangle(w, h);
-	m->textCoords = new dvec2[m->numVertices*2];
+	m->textCoords = new dvec2[m->numVertices];
 	if (x == 0) { x = 1; }
 	if (y == 0) { y = 1; }
 	m->textCoords[0] = dvec2(0, x);
@@ -270,19 +270,12 @@ Mesh* Mesh::generateTriPyramidText(GLdouble r, GLuint h) {
 	Mesh* m = new Mesh();
 	m = generateTriPyramid(r, h);
 
-	m->textCoords = new dvec2[7];
-	/*m->textCoords[0] = dvec2(0, 0);
-	m->textCoords[1] = dvec2(0.33, 1);
-	m->textCoords[2] = dvec2(0.5, 0); 
-	m->textCoords[3] = dvec2(0.66, 1);
-	m->textCoords[4] = dvec2(1, 0);*/
-	m->textCoords[0] = dvec2(0, 0);
-	m->textCoords[1] = dvec2(0.25, 1);
-	m->textCoords[2] = dvec2(0.33, 0);
-	m->textCoords[3] = dvec2(0.5, 1);
-	m->textCoords[4] = dvec2(0.66, 0);
-	m->textCoords[5] = dvec2(0.75, 1);
-	m->textCoords[6] = dvec2(1, 0);
+	m->textCoords = new dvec2[m->numVertices];
+	m->textCoords[0] = dvec2(0.5, 0.5);
+	m->textCoords[1] = dvec2(0.5, 1);
+	m->textCoords[2] = dvec2(0, 0);
+	m->textCoords[3] = dvec2(1, 0);
+	m->textCoords[4] = dvec2(0.5, 1);
 
 	return m;
 }

@@ -20,6 +20,7 @@ public:
 protected:
   Mesh* mesh = nullptr;
   Texture texture;
+  Texture texture2;
   glm::dmat4 modelMat;
   virtual void draw();
   virtual void setMvM(glm::dmat4 const& modelViewMat);
@@ -62,10 +63,13 @@ public:
 
 class ContCube : public Entity
 {
+private:
+	GLdouble l, x, y;
 public:
-	ContCube(GLdouble l);
+	ContCube(GLdouble l, GLdouble x, GLdouble y);
 	~ContCube() { };
 	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
 };
 
 class Dragon : public Entity
@@ -85,9 +89,10 @@ protected:
 	GLdouble guardR; 
 	GLdouble guardH;
 	GLdouble angle;
+	GLdouble x, y;
 	glm::dmat4 modelViewMat;
 public:
-	Diabolo(GLdouble r, GLdouble h);
+	Diabolo(GLdouble r, GLdouble h, GLdouble x, GLdouble y);
 	~Diabolo() { };
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
@@ -101,7 +106,10 @@ protected:
 	GLdouble altura;
 	GLdouble anchura;
 public:
-	Cubo(GLdouble altura, GLdouble anchura) : altura(altura), anchura(anchura) {};
+	Cubo(GLdouble altura, GLdouble anchura) : altura(altura), anchura(anchura) {
+		texture.load("..\\Bmps\\container.bmp");
+		texture2.load("..\\Bmps\\chuches.bmp");
+	};
 	~Cubo() { };
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
@@ -119,6 +127,17 @@ class RectangleText : public Entity {
 public :
 	RectangleText(GLdouble w, GLuint h, GLuint x, GLuint y);
 	~RectangleText() { }
+	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
+};
+
+class SueloText : public Entity {
+protected:
+	glm::dmat4 auxMat;
+
+public:
+	SueloText(GLdouble w, GLuint h, GLuint x, GLuint y, glm::dmat4 const& modelViewMa);
+	~SueloText() { }
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
 };

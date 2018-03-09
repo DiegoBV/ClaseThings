@@ -16,7 +16,7 @@ void Scene::init()
 
   // objets
 
-  /*objetos.push_back(new ContCube(100.0));/*
+  /*objetos.push_back(new ContCube(100.0, 100, 100));/*
 
   objetos.push_back(new TriangleRGB(100.0));
 
@@ -27,12 +27,14 @@ void Scene::init()
   //objetos.push_back(new Triangle(400.0));
 
   //objetos.push_back(new Dragon(3000));
-  aux = new Diabolo(30.0, 50.0);
-  objetos.push_back(aux);
+  */aux = new Diabolo(30.0, 50.0, 150.0, 50.0);
+  objetos.push_back(aux);/*
   objetos.push_back(new Cubo(150, 150));
   objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
-  objetos.push_back(new RectangleText(400.0, 225, 2, 3));
+  //objetos.push_back(new RectangleText(400.0, 225, 1, 1));
   //objetos.push_back(new TriPyramidText(100, 200));
+  objetos.push_back(new Cubo(150, 150));
+  objetos.push_back(new SueloText(2400, 2250, 20, 20, camera->getViewMat()));
 }
 //-------------------------------------------------------------------------
 
