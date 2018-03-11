@@ -19,7 +19,7 @@ protected:
 	
 
 public:
-	virtual void shoot(Fighter* owner, Vector2D p, Vector2D v);
+	virtual void shoot(Vector2D p, Vector2D v);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
@@ -31,6 +31,7 @@ public:
 		Bullets* b = new Bullets(game_);
 		bullets_.pushSomething(b);
 		bullets.push_back(b);
+		b->setActive(false);
 	}
 	~StarTrekBulletsManager();
 	virtual vector<Bullets*>& getBullets() { return bullets; }

@@ -8,7 +8,6 @@
 class Weapon : public InputComponent, public Observable
 {
 private:
-	BulletsManager* stw;
 	SDL_Keycode disparo;
 	Uint8 shotsPerInterval;
 	Uint32  timeInterval;
@@ -16,7 +15,7 @@ private:
 	Uint32 auxTime;
 public:
 	Weapon() {}
-	Weapon(BulletsManager* stw, SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o) : stw(stw), disparo(disparo), 
+	Weapon(SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o) : disparo(disparo), 
 				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0) {
 		registerObserver(o);
 	};

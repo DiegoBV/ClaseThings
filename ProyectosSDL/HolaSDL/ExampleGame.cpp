@@ -13,6 +13,7 @@
 #include "Weapon.h"
 #include "Asteroid.h"
 #include "CollisionManager.h"
+#include "FightersManager.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -39,12 +40,12 @@ void ExampleGame::initGame() {
 	velPrub.setY(-2);
 
 
-	caza_ = new Fighter(this);
+	/*caza_ = new Fighter(this);
 	caza_->setDirection(dirPrub);
 	caza_->setWidth(30);
 	caza_->setHeight(30);
 	caza_->setPosition(Vector2D(getWindowWidth() / 2 - 6, getWindowHeight() / 2 - 6));
-	caza_->setVelocity(velPrub);
+	caza_->setVelocity(velPrub);*/
 
 	/*ball_ = new Container(this);
 	ball_->setWidth(11);
@@ -71,7 +72,7 @@ void ExampleGame::initGame() {
 
 	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
 	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
-	InputComponent* gunInput = new Weapon(static_cast<BulletsManager*>(bullMan), SDLK_SPACE, 1, 15, caza_);
+	//InputComponent* gunInput = new Weapon(bullMan, SDLK_SPACE, 1, 15, caza_);
 
 	/*paddlePC_ = new PaddlePhysicsComponent();
 	paddleAIPC_ = new PaddleAIPhysics(ball_);
@@ -108,11 +109,11 @@ void ExampleGame::initGame() {
 
 	ball_->addPhysicsComponent(bouncePC_);
 	ball_->addRenderComponent(tennisballRC_);*/
-	caza_->addRenderComponent(caza2_);
-	caza_->addInputComponent(rotater);
-	caza_->addPhysicsComponent(circular_);
-	caza_->addInputComponent(accelerationComp);
-	caza_->addInputComponent(gunInput);
+	//caza_->addRenderComponent(caza2_);
+	//caza_->addInputComponent(rotater);
+	//caza_->addPhysicsComponent(circular_);
+	//caza_->addInputComponent(accelerationComp);
+	//caza_->addInputComponent(gunInput);
 
 	//cs1_->setMode(0);
 	//cs2_->setMode(0);
@@ -123,10 +124,12 @@ void ExampleGame::initGame() {
 	actors_.push_back(leftPaddle_);
 	actors_.push_back(rightPaddle_);
 	actors_.push_back(ball_);*/
-	actors_.push_back(caza_);
+	//actors_.push_back(caza_);
 	actors_.push_back(bullMan);
 	asterManag = new AsteroidsManager(this);
 	CollisionManager* man = new CollisionManager(this, bullMan, asterManag);
+	FightersManager* fMan = new FightersManager(this, bullMan);
+	actors_.push_back(fMan);
 	actors_.push_back(asterManag);
 	actors_.push_back(man);
 }
@@ -198,8 +201,7 @@ void ExampleGame::handleInput(Uint32 time) {
 			help = true;
 		}
 		else if (event.key.keysym.sym == SDLK_1) {
-			Fighter* kk = nullptr;
-			bullMan->shoot(kk, Vector2D(0, 0), Vector2D(3, 3));
+			bullMan->shoot(Vector2D(0, 0), Vector2D(3, 3));
 		}
 		/*if (event.type == SDL_KEYDOWN) {
 

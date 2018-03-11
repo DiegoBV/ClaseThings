@@ -15,7 +15,7 @@ StarTrekBulletsManager::~StarTrekBulletsManager()
 {
 }
 
-void StarTrekBulletsManager::shoot(Fighter* owner, Vector2D p, Vector2D v) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
+void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
 	pair<bool, Bullets*> check = bullets_.getObjectPool();
 
 	if (check.first) { //Si hay alguna inactiva, la activa
@@ -101,7 +101,10 @@ void StarTrekBulletsManager::receive(Message* msg) {
 		//static_cast<FighterBulletCollisionMessage*>(msg)->o2_->setActive(false);
 		break;
 	case FIGHTER_SHOOT:
-		//shoot(static_cast<FighterShootMessage*>(msg)->o_, static_cast<FighterShootMessage*>(msg)->o_->getPosition(), static_cast<FighterShootMessage*>(msg)->o_->getVelocity());
+		FighterIsShooting* aux = static_cast<FighterIsShooting*>(msg);
+		if (aux != nullptr) {
+			shoot(aux->bulletPosition_, aux->bulletVelocity_);
+		}
 		break;
 	}
 }

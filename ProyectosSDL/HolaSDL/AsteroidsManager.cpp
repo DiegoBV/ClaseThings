@@ -37,7 +37,6 @@ void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos)
 	newAst->setPosition(pos); // se pasaria por la constructora
 	newAst->setGame(game);
 	asteroides.push_back(newAst);
-	asteroides[0]->setActive(false);
 }
 
 void AsteroidsManager::initAsteroides() {
