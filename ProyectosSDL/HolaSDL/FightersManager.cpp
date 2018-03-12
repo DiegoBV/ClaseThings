@@ -56,6 +56,9 @@ void FightersManager::receive(Message * msg)
 		break;
 	case BADGE_OFF:
 		break;
+	case ASTROID_FIGHTER_COLLISION:
+		fighter_.setActive(false);
+		break;
 	}
 
 }

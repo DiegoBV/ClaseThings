@@ -21,7 +21,7 @@ void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el esta
 	if (check.first) { //Si hay alguna inactiva, la activa
 		check.second->setActive(true);
 		check.second->setPosition(p);
-		check.second->setVelocity(v + Vector2D(5.0, 5.0));
+		check.second->setVelocity(v /*+ Vector2D(5.0, 5.0)*/);
 	}
 	else { //Si no, crea una nueva
 		newShoot(check.second, v, p);

@@ -127,8 +127,8 @@ void ExampleGame::initGame() {
 	//actors_.push_back(caza_);
 	actors_.push_back(bullMan);
 	asterManag = new AsteroidsManager(this);
-	CollisionManager* man = new CollisionManager(this, bullMan, asterManag);
 	FightersManager* fMan = new FightersManager(this, bullMan);
+	CollisionManager* man = new CollisionManager(this, bullMan, asterManag, fMan);
 	actors_.push_back(fMan);
 	actors_.push_back(asterManag);
 	actors_.push_back(man);
