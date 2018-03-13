@@ -75,6 +75,7 @@ class MainWindow : public BaseWindow<MainWindow>
 	ID2D1SolidColorBrush *pFill;
 	D2D1_POINT_2F ptMouse;
 	MouseTrackEvents mouseTrack;
+	bool stop = false;
 	double IDT_TIMER;
 	TIMERPROC MyTimerProc;
 	void CalculateLayout();
@@ -128,17 +129,19 @@ void MainWindow::RenderScene()
 	// Draw hands
 	SYSTEMTIME time;
 	GetLocalTime(&time);
-	// 60 minutes = 30 degrees, 1 minute = 0.5 degree
-	const float fHourAngle = (360.0f / 12) * (time.wHour) +
-		(time.wMinute * 0.5f);
-	const float fMinuteAngle = (360.0f / 60) * (time.wMinute);
-	const float fSecondAngle = (360.0f / 60) * (time.wSecond);
+	if (!stop) {
+		// 60 minutes = 30 degrees, 1 minute = 0.5 degree
+		const float fHourAngle = (360.0f / 12) * (time.wHour) +
+			(time.wMinute * 0.5f);
+		const float fMinuteAngle = (360.0f / 60) * (time.wMinute);
+		const float fSecondAngle = (360.0f / 60) * (time.wSecond);
 
-	DrawClockHand(0.6f, fHourAngle, 6);
-	DrawClockHand(0.85f, fMinuteAngle, 4);
-	DrawClockHand(0.90f, fSecondAngle, 3);
-	// Restore the identity transformation.
-	pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+		DrawClockHand(0.6f, fHourAngle, 6);
+		DrawClockHand(0.85f, fMinuteAngle, 4);
+		DrawClockHand(0.90f, fSecondAngle, 3);
+		// Restore the identity transformation.
+		pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
 }
 
 void MainWindow::CalculateLayout()
@@ -271,19 +274,19 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		Resize();
 		return 0;
 
-	case WM_LBUTTONDOWN :
-		{
-			POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-			/*if (pt.x < newEllipse.point.x - newEllipse.radiusX && pt.x > newEllipse.point.x + newEllipse.radiusX && pt.y < newEllipse.point.y - newEllipse.radiusY && pt.y > newEllipse.point.y + newEllipse.radiusY) {
-				
-				newEllipse.point = D2D1::Point2F(pt.x, pt.y);
-			}
-			else*/ if (DragDetect(m_hwnd, pt))
-			{
-				OnLButtonDown(pt.x, pt.y, (DWORD)wParam);
-			}
+	case WM_LBUTTONDOWN:
+	{
+		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
+		/*if (pt.x < newEllipse.point.x - newEllipse.radiusX && pt.x > newEllipse.point.x + newEllipse.radiusX && pt.y < newEllipse.point.y - newEllipse.radiusY && pt.y > newEllipse.point.y + newEllipse.radiusY) {
+
+			newEllipse.point = D2D1::Point2F(pt.x, pt.y);
 		}
-		return 0;
+		else*/ if (DragDetect(m_hwnd, pt))
+		{
+			OnLButtonDown(pt.x, pt.y, (DWORD)wParam);
+		}
+	}
+	return 0;
 
 	case WM_LBUTTONUP:
 		OnLButtonUp();
@@ -303,8 +306,36 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		// TODO: Handle the mouse-hover message.
 		mouseTrack.Reset(m_hwnd);
 		return 0;
+	case WM_SYSKEYDOWN:
+		if (GetKeyState(VK_MENU) & 0x8000)
+		{
+			stop = !stop;
+		}
+		//printf(uMsg, L"WM_SYSKEYDOWN: 0x%x\n", wParam);
+		//OutputDebugString(uMsg);
+		break;
+	case WM_SYSCHAR:
+		//swprintf_s(msg, L"WM_SYSCHAR: %c\n", (wchar_t)wParam);
+		//OutputDebugString(uMsg);
+		break;
+	case WM_SYSKEYUP:
+		//swprintf_s(msg, L"WM_SYSKEYUP: 0x%x\n", wParam);
+		//OutputDebugString(msg);
+		break;
+	case WM_KEYDOWN:
+		//swprintf_s(msg, L"WM_KEYDOWN: 0x%x\n", wParam);
+		//OutputDebugString(msg);
+		break;
+	case WM_KEYUP:
+		//swprintf_s(msg, L"WM_KEYUP: 0x%x\n", wParam);
+		//OutputDebugString(msg);
+		break;
+	case WM_CHAR:
+		//swprintf_s(msg, L"WM_CHAR: %c\n", (wchar_t)wParam);
+		//OutputDebugString(msg);
+		break;
+		/* Handle other messages (not shown) */
 	}
-
 	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
 }
 
