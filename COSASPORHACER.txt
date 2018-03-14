@@ -1,0 +1,5 @@
+soundManager(cola de eventos)
+BadgeTimer
+mostrar vidas
+mostrar score
+superArma
