@@ -12,8 +12,6 @@ void Observable::send(Message* msg) {
 	for( Observer* o : observers_ ) {
 		o->receive(msg);
 	}
-
-
 }
 
 void Observable::registerObserver(Observer* o) {

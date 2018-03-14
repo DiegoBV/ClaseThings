@@ -49,16 +49,17 @@ void FightersManager::receive(Message * msg)
 {
 	switch (msg->id_) {
 	case ROUND_START:
+		fighter_.setPosition(Vector2D(game_->getWindowWidth() / 2, game_->getWindowHeight() / 2));
+		fighter_.setActive(true);
+		fighter_.setVelocity(Vector2D(0.0, 0.0));
+		fighter_.setDirection(Vector2D(0.0, -1.0));
 		break;
-//	case ROUND_END:
-	//	break;
+	case ROUND_OVER:
+		fighter_.setActive(false);
+		break;
 	case BADGE_ON:
 		break;
 	case BADGE_OFF:
 		break;
-	case ASTROID_FIGHTER_COLLISION:
-		fighter_.setActive(false);
-		break;
 	}
-
 }

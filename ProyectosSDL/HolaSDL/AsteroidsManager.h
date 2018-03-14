@@ -18,6 +18,7 @@ private:
 	BasicMotionPhysics* basicMotionPhysics_;
 	RotationPhysics* rotationPhysics_;
 	int numAst;
+	int initAsts; 
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
 	virtual void update(Uint32 time) { for (Asteroid* it : asteroides) { it->update(time); } };
 	virtual void render(Uint32 time) { for (Asteroid* it : asteroides) { it->render(time); } };

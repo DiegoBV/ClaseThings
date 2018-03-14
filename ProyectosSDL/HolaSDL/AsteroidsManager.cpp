@@ -12,8 +12,12 @@ AsteroidsManager::~AsteroidsManager()
 }
 
 AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
-	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Star), rect); circularPhysics_ = new CircularMotionPhysics();
-	 basicMotionPhysics_ = new BasicMotionPhysics(); rotationPhysics_ = new RotationPhysics(); numAst = 2; initAsteroides();
+	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Star), rect); 
+	 circularPhysics_ = new CircularMotionPhysics();
+	 basicMotionPhysics_ = new BasicMotionPhysics();
+	 rotationPhysics_ = new RotationPhysics();  
+	 numAst = initAsts = 3;
+	 initAsteroides();
 }
 
 void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
@@ -40,14 +44,23 @@ void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos)
 }
 
 void AsteroidsManager::initAsteroides() {
-	for (int i = 0; i < numAst; i++) {
-		newAsteroid();
+	if (asteroides.size() <= 0) {
+		for (int i = 0; i < initAsts; i++) {
+			newAsteroid();
+		}
+	}
+	else {
+		for (int i = 0; i < initAsts; i++) {
+			asteroides[i]->setActive(true);
+			asteroides[i]->setPosition(Vector2D(rand() % game->getWindowWidth(), rand() % game->getWindowHeight())); //cambiar direccion tambien y tal
+			asteroides[i]->setCont(rand() % 3 + 2);
+		}
 	}
 }
 
 void AsteroidsManager::updatePool() {
 	pair<bool, Asteroid*> firstInactive = poolAst.getObjectPool();
-	int cont = firstInactive.second->getCont();
+ 	int cont = firstInactive.second->getCont();
 	if (cont > 1) {
 		int i = 0;
 		Vector2D posInicial = Vector2D(firstInactive.second->getPosition());
@@ -65,6 +78,7 @@ void AsteroidsManager::updatePool() {
 				newObject.second->setPosition(posInicial + Vector2D(rand() % 20, rand() % 20));
 				newObject.second->setVelocity(newVel);
 			}
+			numAst++;
 			i++;
 		}
 	}
@@ -73,13 +87,19 @@ void AsteroidsManager::updatePool() {
 void AsteroidsManager::receive(Message* msg) {
 	switch (msg->id_) {
 	case ROUND_START:
-		initAsteroides(); //en vez de hacerlo en la constructora, se haria al recibir un mensaje del gameManager
+		for (unsigned int i = 0; i < asteroides.size(); i++) {
+			asteroides[i]->setActive(false);
+		}
+		initAsteroides();
+		break;
+	case ROUND_OVER: //(?)
 		break;
 	case BULLET_ASTROID_COLLISION:
 		GameObject* aux = static_cast<BulletAstroidCollision*>(msg)->astroid_;
 		aux->setActive(false);
+		numAst--; //reduce el numero de asteroides
+		if (numAst == 0) { send(&Message(NO_MORE_ATROIDS)); }
 		updatePool();
 		break;
-
 	};
 }

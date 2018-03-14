@@ -12,7 +12,7 @@ public:
 	~CollisionManager() {};
 	CollisionManager(SDLGame* game, BulletsManager* bulletsManager, AsteroidsManager* astroidManager, FightersManager* fightersManager):GameObject(game), 
 		bulletsManager_(bulletsManager), asteroidsManager_(astroidManager), fightersManager_(fightersManager) {
-		this->registerObserver(asteroidsManager_); this->registerObserver(bulletsManager_); this->registerObserver(fightersManager_); }; //recibe punteros para acceder a las balas, asteroides, nave...
+		this->registerObserver(asteroidsManager_); this->registerObserver(bulletsManager_); }; //recibe punteros para acceder a las balas, asteroides, nave...
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time) {};

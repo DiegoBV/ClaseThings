@@ -11,6 +11,9 @@ Collisions::~Collisions() {
 
 bool Collisions::collides(GameObject* o1, GameObject* o2) {
 
+	if (!o1->isActive() || !o2->isActive()) {
+		return false;
+	}
 	Vector2D o1Pos = o1->getPosition();
 	double o1Width = o1->getWidth();
 	double o1Height = o1->getHeight();

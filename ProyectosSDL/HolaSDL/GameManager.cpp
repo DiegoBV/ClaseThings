@@ -1,8 +1,7 @@
 #include "GameManager.h"
 
-GameManager::GameManager(SDLGame* game, int winningScore) :
-		Container(game), leftScore_(0), rightScore_(0), winningScore_(
-				winningScore), running_(false), gameOver_(false) {
+GameManager::GameManager(SDLGame* game) :
+		Container(game), running_(true), gameOver_(false), lives(3) {
 }
 
 GameManager::~GameManager() {
@@ -12,60 +11,54 @@ bool GameManager::isGameOver() const {
 	return gameOver_;
 }
 
-int GameManager::getLeftScore() const {
-	return leftScore_;
-}
-
-void GameManager::setLeftScore(int leftScore) {
-	leftScore_ = leftScore;
-	if (!gameOver_) {
-		gameOver_ = (leftScore_ == winningScore_);
-	}
-}
-
-int GameManager::getRightScore() const {
-	return rightScore_;
-}
-
-void GameManager::setRightScore(int rightScore) {
-	rightScore_ = rightScore;
-	if (!gameOver_) {
-		gameOver_ = (rightScore_ == winningScore_);
-	}
-}
-
 bool GameManager::isRunning() const {
 	return running_;
 }
 
-void GameManager::setRunning(bool running) {
+void GameManager::setRunning(bool running) { //esto indica ronda
 	if (running_ != running) {
 		running_ = running;
 
-		//Message m = { running ? ROUND_START : ROUND_END };
-		//send(m);
+		Message m = { running ? ROUND_START : ROUND_OVER };
+		send(&m);
 		if (gameOver_ && running){
 			gameOver_ = false;
-			setLeftScore(0);
-			setRightScore(0);
 		}
 
 	}
 
 }
 
-void GameManager::receive(Message msg){
-	switch (msg.id_){
-		/*case BALL_LEAVES_RIGHT:
-			setRightScore(getRightScore() + 1);
-			setRunning(false);
+void GameManager::handleInput(Uint32 time, const SDL_Event& event) {
+	gameCtrl_.handleInput(this, time, event);
+	Container::handleInput(time, event);
+}
+
+void GameManager::receive(Message* msg){
+	switch (msg->id_){
+		case ASTROID_FIGHTER_COLLISION:
+			this->lives--; //si no quedan mas vidas, acabaria el juego, si no, acaba una ronda
+			if (getLives() == 0) { gameOver_ = true;}
+			else { setRunning(false); }
+			setBadge(false);
+			numAstRound = 0;
 			break;
-		case BALL_LEAVES_LEFT:
-			setLeftScore(getLeftScore() + 1);
-			setRunning(false);
+		case BULLET_ASTROID_COLLISION:
+			this->score++; 
+			if (numAstRound == 10) { 
+				numAstRound = 0;
+				setBadge(true); 
+			}
+			else {
+				numAstRound++;
+			}
 			break;
-		default:
-			break;*/
+		case NO_MORE_ATROIDS:
+			//acabar ronda, acaba juego
+			setBadge(false);
+			gameOver_ = true;
+			//ronda (?)
+			break;
 	}
 }
 

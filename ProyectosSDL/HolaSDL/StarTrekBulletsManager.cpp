@@ -65,8 +65,8 @@ void StarTrekBulletsManager::newShoot(Bullets* bull, Vector2D vel, Vector2D pos)
 	bull->addRenderComponent(fillRect);
 
 	//establecemos su tamaño y lo añadimos a la lista de balas
-	bull->setHeight(5);
-	bull->setWidth(5);
+	bull->setHeight(2);
+	bull->setWidth(2);
 	bull->setVelocity(vel);
 	bull->setPosition(pos);
 	bull->setGame(game_);
