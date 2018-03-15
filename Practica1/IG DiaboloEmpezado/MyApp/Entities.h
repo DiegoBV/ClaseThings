@@ -129,6 +129,9 @@ public :
 	~RectangleText() { }
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
+	void setText(GLsizei width, GLsizei height) {
+		texture.load("..\\Bmps\\prueba.bmp"); //esto esta mal, tiene q ser con el color buffer
+	}
 };
 
 class SueloText : public Entity {
@@ -136,7 +139,7 @@ protected:
 	glm::dmat4 auxMat;
 
 public:
-	SueloText(GLdouble w, GLuint h, GLuint x, GLuint y, glm::dmat4 const& modelViewMa);
+	SueloText(GLdouble w, GLuint h, GLuint x, GLuint y);
 	~SueloText() { }
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);

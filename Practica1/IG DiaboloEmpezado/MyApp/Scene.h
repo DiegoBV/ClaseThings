@@ -17,12 +17,15 @@ public:
     void init();
 	  void render(); 
 	  void sumaAngle() { if (aux != nullptr) { angle+=2;  aux->setAngle(angle); } }
+	  RectangleText* help;
 	  
 protected:
 	Diabolo* aux;
 	GLdouble angle;
 	  Camera* camera;
 	  std::vector<Entity*> objetos;
+	  bool change = false;
+	  RectangleText* rect;
 };
 
 //-------------------------------------------------------------------------

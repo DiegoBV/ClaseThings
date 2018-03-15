@@ -22,6 +22,8 @@ Camera camera(&viewPort);
 // Scene entities
 Scene scene(&camera);   
 
+Texture foto;
+
 //----------- Callbacks ----------------------------------------------------
 
 void display();
@@ -110,9 +112,11 @@ void key(unsigned char key, int x, int y)
   case 'a':
 	 scene.sumaAngle();
 	 break;
-  default:
-    need_redisplay = false;
-    break;
+  case 'f':
+	  foto.loadColorBuffer(viewPort.getW(), viewPort.getH());
+	  foto.save("..\\Bmps\\prueba.bmp");
+	  scene.help->setText(viewPort.getW(), viewPort.getH());
+	  break;
   }//switch
 
   if (need_redisplay)

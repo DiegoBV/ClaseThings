@@ -21,5 +21,7 @@ public:
 	{ 
 		glBindTexture(GL_TEXTURE_2D, 0); 
 	}
+	void loadColorBuffer(GLsizei width, GLsizei height);
+	void save(const std::string & BMP_Name);
 };
 

@@ -33,8 +33,10 @@ void Scene::init()
   objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
   //objetos.push_back(new RectangleText(400.0, 225, 1, 1));
   //objetos.push_back(new TriPyramidText(100, 200));
+  help = new RectangleText(400, 100, 1, 1);
   objetos.push_back(new Cubo(150, 150));
-  objetos.push_back(new SueloText(2400, 2250, 20, 20, camera->getViewMat()));
+  objetos.push_back(help);
+  objetos.push_back(new SueloText(2400, 2250, 20, 20));
 }
 //-------------------------------------------------------------------------
 
@@ -55,7 +57,7 @@ void Scene::render()
 
 	for each (Entity* it in objetos)
 	{
-		if (objetos.size() > 3){
+		if (objetos.size() > 3 && change){
 			if (i == 0){
 				camera->getVP()->setPosition((-camera->getVP()->getW() / 4), (camera->getVP()->getH() / 4));
 				it->render(camera->getViewMat());

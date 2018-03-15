@@ -247,7 +247,8 @@ void Poliespiral::draw() {
 
 RectangleText::RectangleText(GLdouble w, GLuint h, GLuint x, GLuint y) {
 	mesh = Mesh::generateRectangleText(w, h, x, y);
-	texture.load("..\\Bmps\\Zelda.bmp");
+	//texture.load("..\\Bmps\\Zelda.bmp");
+
 }
 
 void RectangleText::render(glm::dmat4 const& modelViewMat) {
@@ -283,15 +284,9 @@ void TriPyramidText::draw() {
 }
 
 //------------------------------------------------------------------
-SueloText::SueloText(GLdouble w, GLuint h, GLuint x, GLuint y, glm::dmat4 const& modelViewMat) {
-	
-
-
+SueloText::SueloText(GLdouble w, GLuint h, GLuint x, GLuint y) {
 	mesh = Mesh::generateRectangleText(w, h, x, y);
 	texture.load("..\\Bmps\\baldosaC.bmp");
-
-
-
 }
 
 void SueloText::render(glm::dmat4 const& modelViewMat) {
