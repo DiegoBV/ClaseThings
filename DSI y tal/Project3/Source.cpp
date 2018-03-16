@@ -311,6 +311,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	return 0;
 	case WM_RBUTTONDOWN:
 		changeColour();
+		PostMessage(m_hwnd, WM_PAINT, NULL, NULL);
 		return 0;
 	case WM_LBUTTONUP:
 		OnLButtonUp();
@@ -329,6 +330,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 			}
 		}
 		OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
+		PostMessage(m_hwnd, WM_PAINT, NULL, NULL);
 		return 0;
 
 	case WM_MOUSELEAVE:
