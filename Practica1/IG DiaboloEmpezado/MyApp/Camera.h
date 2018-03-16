@@ -33,7 +33,11 @@ class Camera {
 public:
   Camera(Viewport* avp) : vp(avp), viewMat(1.0), projMat(1.0),
                           xRight(avp->getW() / 2.0), xLeft(-xRight), yTop(avp->getH() / 2.0), yBot(-yTop)  
-                         { };
+  {
+	  n = normalize(eye - look);
+	  u = normalize(cross(up, n));
+	  v = cross(n, u);
+  };
   ~Camera() {};
   Viewport* getVP() { return vp; }
 
@@ -52,11 +56,19 @@ public:
 
   void setSize(GLdouble aw, GLdouble ah);
   void scale(GLdouble s); 
+  void moveLR(GLdouble cs);
+  void moveFB(GLdouble cs);
+  void moveUD(GLdouble cs);
+  void update();
  
 protected:
   glm::dvec3 eye = { 0.0, 0.0, 500.0 };
   glm::dvec3 look = { 0.0, 0.0, 0.0 };
   glm::dvec3 up = { 0.0, 1.0, 0.0 };
+  glm::dvec3 n;
+  glm::dvec3 u;
+  glm::dvec3 v;
+  GLdouble speed = 3.0;
   glm::dmat4 viewMat;  // inverse
 
   GLdouble xRight, xLeft, yTop, yBot;
@@ -64,6 +76,7 @@ protected:
   GLdouble farVal = 10000;
   GLdouble factScale = 1;
   glm::dmat4 projMat;
+
 
   Viewport* vp;
 

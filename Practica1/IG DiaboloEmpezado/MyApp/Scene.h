@@ -18,6 +18,7 @@ public:
 	  void render(); 
 	  void sumaAngle() { if (aux != nullptr) { angle+=2;  aux->setAngle(angle); } }
 	  RectangleText* help;
+	  void update(GLuint timeElapsed) { for each (Entity* it in objetos) {it->update(timeElapsed); } };
 	  
 protected:
 	Diabolo* aux;
@@ -26,6 +27,7 @@ protected:
 	  std::vector<Entity*> objetos;
 	  bool change = false;
 	  RectangleText* rect;
+
 };
 
 //-------------------------------------------------------------------------

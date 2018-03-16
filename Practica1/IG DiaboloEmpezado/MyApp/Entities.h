@@ -16,6 +16,7 @@ public:
   virtual ~Entity() { delete mesh; };
 
   virtual void render(glm::dmat4 const& modelViewMat);
+  virtual void update(GLuint timeElapsed) {};
   
 protected:
   Mesh* mesh = nullptr;
@@ -24,6 +25,7 @@ protected:
   glm::dmat4 modelMat;
   virtual void draw();
   virtual void setMvM(glm::dmat4 const& modelViewMat);
+
 };
 
 //-------------------------------------------------------------------------
@@ -96,6 +98,7 @@ public:
 	~Diabolo() { };
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
+	virtual void update(GLuint timeElapsed);
 	void setAngle(GLdouble nAngle) { angle = nAngle; };
 };
 
@@ -130,7 +133,7 @@ public :
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
 	void setText(GLsizei width, GLsizei height) {
-		texture.load("..\\Bmps\\prueba.bmp"); //esto esta mal, tiene q ser con el color buffer
+		texture.loadColorBuffer(width, height); 
 	}
 };
 
@@ -151,6 +154,22 @@ public:
 	~TriPyramidText() { }
 	virtual void draw();
 	virtual void render(glm::dmat4 const& modelViewMat);
+};
+
+class RectangleTextPhoto : public RectangleText {
+protected:
+	GLsizei width; GLsizei height;
+public:
+	RectangleTextPhoto(GLdouble w, GLuint h, GLuint x, GLuint y, GLsizei width, GLsizei height) : RectangleText(w, h, x, y), width(width), height(height) {
+
+	}
+	~RectangleTextPhoto() { }
+	virtual void draw();
+	virtual void render(glm::dmat4 const& modelViewMat);
+	void setText(GLsizei width, GLsizei height) {
+		texture.loadColorBuffer(width, height);
+	}
+	virtual void update(GLuint timeElapsed) { setText(width, height); };
 };
 
 #endif //_H_Entities_H_

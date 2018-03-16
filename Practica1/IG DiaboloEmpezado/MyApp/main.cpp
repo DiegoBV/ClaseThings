@@ -23,10 +23,12 @@ Camera camera(&viewPort);
 Scene scene(&camera);   
 
 Texture foto;
+GLuint last_update_tick;
 
 //----------- Callbacks ----------------------------------------------------
 
 void display();
+void update();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
@@ -35,6 +37,7 @@ void specialKey(int key, int x, int y);
 
 int main(int argc, char *argv[])
 {
+
   cout << "Starting console..." << '\n';
 
   // Initialization
@@ -55,6 +58,7 @@ int main(int argc, char *argv[])
   glutKeyboardFunc(key);
   glutSpecialFunc(specialKey);
   glutDisplayFunc(display);
+  glutIdleFunc(update);
  
   cout << glGetString(GL_VERSION) << '\n';
   cout << glGetString(GL_VENDOR) << '\n';
@@ -79,6 +83,13 @@ void display()   // double buffer
   glutSwapBuffers();  
 }
 //-------------------------------------------------------------------------
+
+void update() {
+	if (last_update_tick < glutGet(GLUT_ELAPSED_TIME) + 10000) {
+		last_update_tick = glutGet(GLUT_ELAPSED_TIME) + 10000;
+		scene.update(glutGet(GLUT_ELAPSED_TIME));
+	}
+}
 
 void resize(int newWidth, int newHeight)
 {
@@ -110,8 +121,18 @@ void key(unsigned char key, int x, int y)
 	  camera.setAZ();
 	  break;
   case 'a':
-	 scene.sumaAngle();
+	  camera.moveLR(-0.01);
 	 break;
+  case 'd':
+	  camera.moveLR(+0.01);
+	  break;
+  case 'w':
+	  camera.moveFB(+1.0);
+	  break;
+  case 's':
+	  camera.moveFB(-1.0);
+	  break;
+
   case 'f':
 	  foto.loadColorBuffer(viewPort.getW(), viewPort.getH());
 	  foto.save("..\\Bmps\\prueba.bmp");

@@ -76,6 +76,33 @@ void Camera::scale(GLdouble s)
   if (s < 0) s = 0.01;
   setPM(); 
 }
+
+void Camera::moveLR(GLdouble cs)
+{
+	eye = eye + (u * cs);
+	viewMat = lookAt(eye, eye + u, up);
+	update();
+}
+
+void Camera::moveFB(GLdouble cs)
+{
+	eye = eye + ((-n) * cs);
+	viewMat = lookAt(eye, eye - n, up);
+	update();
+}
+
+void Camera::moveUD(GLdouble cs)
+{
+	eye = eye + (v * cs);
+	viewMat = lookAt(eye, eye + v, up);
+	update();
+}
+
+void Camera::update() {
+	n = normalize(eye - look);
+	u = normalize(cross(up, n));
+	v = cross(n, u);
+}
 //-------------------------------------------------------------------------
 
 void Camera::setSize(GLdouble aw, GLdouble ah) 

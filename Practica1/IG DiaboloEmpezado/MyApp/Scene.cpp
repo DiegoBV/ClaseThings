@@ -33,7 +33,7 @@ void Scene::init()
   objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
   //objetos.push_back(new RectangleText(400.0, 225, 1, 1));
   //objetos.push_back(new TriPyramidText(100, 200));
-  help = new RectangleText(400, 100, 1, 1);
+  help = new RectangleTextPhoto(200, 100, 1, 1, camera->getVP()->getW(), camera->getVP()->getH());
   objetos.push_back(new Cubo(150, 150));
   objetos.push_back(help);
   objetos.push_back(new SueloText(2400, 2250, 20, 20));
@@ -77,8 +77,7 @@ void Scene::render()
 		}
 		else {
 			it->render(camera->getViewMat());
-		}
-		
+		}	
 		i++;
 	}
 }

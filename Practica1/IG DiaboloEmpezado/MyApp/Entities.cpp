@@ -150,7 +150,9 @@ void Diabolo::draw(){
 	glLineWidth(1);
 	texture.unbind();
 }
-
+void Diabolo::update(GLuint timeElapsed) {
+	angle = mod(angle + timeElapsed, 360.0);
+}
 void Diabolo::render(glm::dmat4 const& modelViewMat) {
 	setMvM(modelViewMat);
 	dmat4 auxMat = modelViewMat * modelMat;
@@ -305,5 +307,22 @@ void SueloText::draw() {
 	texture.bind();
 	mesh->draw();
 	texture.unbind();
+}
+
+//------------------------------------------------------------------
+void RectangleTextPhoto::draw() {
+	texture.bind();
+	mesh->draw();
+	texture.unbind();
+}
+void RectangleTextPhoto::render(glm::dmat4 const& modelViewMat) {
+	setMvM(modelViewMat);
+	glm::dmat4 auxMat = modelViewMat * modelMat;
+
+	auxMat = translate(auxMat, glm::dvec3(200.0, -66, 0.0));
+	auxMat = rotate(auxMat, radians(-90.0), glm::dvec3(1.0, 0.0, 0.0));
+
+	glLoadMatrixd(value_ptr(auxMat));
+	draw();
 }
 
