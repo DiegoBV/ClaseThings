@@ -3,6 +3,8 @@
 #pragma comment(lib, "d2d1")
 #include "basewin.h"
 #include <windowsx.h>
+#include <algorithm>
+#include <string>
 
 template <class T> void SafeRelease(T **ppT)
 {
@@ -66,6 +68,7 @@ public:
 
 class MainWindow : public BaseWindow<MainWindow>
 {
+	enum EditionMode { SelectMode, DrawMode, DragMode, NormalMode };
 	ID2D1Factory *pFactory;
 	ID2D1HwndRenderTarget *pRenderTarget;
 	ID2D1SolidColorBrush *pBrush;
@@ -83,6 +86,15 @@ class MainWindow : public BaseWindow<MainWindow>
 	void DiscardGraphicsResources();
 	void OnPaint();
 	void Resize();
+	void setMode(EditionMode id) { modo = id; };
+	bool estaEncima(int pixelX, int pixelY);
+	void changeCursor();
+	void changeColour();
+	float fHourAngle;
+	float fMinuteAngle;
+	float fSecondAngle;
+	EditionMode modo;
+	bool isOver = false;
 
 public:
 	MainWindow() : pFactory(NULL), pRenderTarget(NULL), pBrush(NULL),
@@ -126,16 +138,30 @@ void MainWindow::RenderScene()
 	pRenderTarget->DrawEllipse(ellipse, pStroke);
 	pRenderTarget->FillEllipse(newEllipse, pFill);
 	pRenderTarget->DrawEllipse(newEllipse, pStroke);
+
 	// Draw hands
 	SYSTEMTIME time;
 	GetLocalTime(&time);
-	if (!stop) {
-		// 60 minutes = 30 degrees, 1 minute = 0.5 degree
-		const float fHourAngle = (360.0f / 12) * (time.wHour) +
-			(time.wMinute * 0.5f);
-		const float fMinuteAngle = (360.0f / 60) * (time.wMinute);
-		const float fSecondAngle = (360.0f / 60) * (time.wSecond);
 
+
+
+	
+	if (!stop) {
+		fMinuteAngle = (360.0f / 12) * (time.wHour) +
+			(time.wMinute * 0.5f);
+		fMinuteAngle = (360.0f / 60) * (time.wMinute);
+		fSecondAngle = (360.0f / 60) * (time.wSecond);
+
+		// 60 minutes = 30 degrees, 1 minute = 0.5 degree
+		DrawClockHand(0.6f, fHourAngle, 6);
+		DrawClockHand(0.85f, fMinuteAngle, 4);
+		DrawClockHand(0.90f, fSecondAngle, 3);
+		// Restore the identity transformation.
+		pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
+	else 
+	{
+		// 60 minutes = 30 degrees, 1 minute = 0.5 degree
 		DrawClockHand(0.6f, fHourAngle, 6);
 		DrawClockHand(0.85f, fMinuteAngle, 4);
 		DrawClockHand(0.90f, fSecondAngle, 3);
@@ -275,26 +301,37 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_LBUTTONDOWN:
-	{
+	{	
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
-		/*if (pt.x < newEllipse.point.x - newEllipse.radiusX && pt.x > newEllipse.point.x + newEllipse.radiusX && pt.y < newEllipse.point.y - newEllipse.radiusY && pt.y > newEllipse.point.y + newEllipse.radiusY) {
-
-			newEllipse.point = D2D1::Point2F(pt.x, pt.y);
-		}
-		else*/ if (DragDetect(m_hwnd, pt))
+		if (DragDetect(m_hwnd, pt))
 		{
 			OnLButtonDown(pt.x, pt.y, (DWORD)wParam);
+			EditionMode newMode = DrawMode;
+			setMode(newMode);
 		}
 	}
 	return 0;
-
+	case WM_RBUTTONDOWN:
+		changeColour();
+		return 0;
 	case WM_LBUTTONUP:
 		OnLButtonUp();
 		return 0;
 
 	case WM_MOUSEMOVE:
+		changeCursor();
 		OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
 		mouseTrack.OnMouseMove(m_hwnd);
+		if (estaEncima(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))){
+			isOver = true;
+			EditionMode newMode = SelectMode; setMode(newMode);
+		}
+		else{
+			isOver = false;
+			if (modo != DrawMode){
+				EditionMode newMode = NormalMode; setMode(newMode);
+			}
+		}
 		return 0;
 
 	case WM_MOUSELEAVE:
@@ -307,10 +344,6 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		mouseTrack.Reset(m_hwnd);
 		return 0;
 	case WM_SYSKEYDOWN:
-		if (GetKeyState(VK_MENU) & 0x8000)
-		{
-			stop = !stop;
-		}
 		//printf(uMsg, L"WM_SYSKEYDOWN: 0x%x\n", wParam);
 		//OutputDebugString(uMsg);
 		break;
@@ -323,6 +356,16 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//OutputDebugString(msg);
 		break;
 	case WM_KEYDOWN:
+		if (GetKeyState(VK_SPACE))
+		{
+			stop = !stop;
+		}
+		else if (GetKeyState(VK_ESCAPE))
+		{
+			DiscardGraphicsResources();
+			SafeRelease(&pFactory);
+			PostQuitMessage(0);
+		}
 		//swprintf_s(msg, L"WM_KEYDOWN: 0x%x\n", wParam);
 		//OutputDebugString(msg);
 		break;
@@ -334,6 +377,27 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//swprintf_s(msg, L"WM_CHAR: %c\n", (wchar_t)wParam);
 		//OutputDebugString(msg);
 		break;
+	case WM_COMMAND:
+		/*switch (LOWORD(wParam))
+		{
+		case ID_DRAW_MODE:
+			SetMode(DrawMode);
+			break;
+		case ID_SELECT_MODE:
+			SetMode(SelectMode);
+			break;
+		case ID_TOGGLE_MODE:
+			if (mode == DrawMode)
+			{
+				SetMode(SelectMode);
+			}
+			else
+			{
+				SetMode(DrawMode);
+			}
+			break;
+		}*/
+		return 0;
 		/* Handle other messages (not shown) */
 	}
 	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
@@ -341,6 +405,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void MainWindow::OnLButtonDown(int pixelX, int pixelY, DWORD flags)
 {
+
 	SetCapture(m_hwnd);
 	newEllipse.point = ptMouse = DPIScale::PixelsToDips(pixelX, pixelY);
 	newEllipse.radiusX = newEllipse.radiusY = 1.0f;
@@ -364,6 +429,8 @@ void MainWindow::OnMouseMove(int pixelX, int pixelY, DWORD flags)
 void MainWindow::OnLButtonUp()
 {
 	ReleaseCapture();
+	EditionMode newMode = NormalMode;
+	setMode(newMode);
 }
 
 UINT GetMouseHoverTime()
@@ -376,5 +443,55 @@ UINT GetMouseHoverTime()
 	else
 	{
 		return 0;
+	}
+}
+
+bool MainWindow::estaEncima(int pixelX, int pixelY){
+	double local = (pow(pixelX - newEllipse.point.x, 2) / pow(newEllipse.radiusX, 2)) +
+		(pow(pixelY - newEllipse.point.y, 2) / pow(newEllipse.radiusY, 2));
+	/*if (local <= 1.0){
+		EditionMode newMode = SelectMode;
+		setMode(newMode);
+	}
+	else{
+		EditionMode newMode = NormalMode;
+		setMode(newMode);
+	}*/
+	return local <= 1.0;
+}
+
+void MainWindow::changeCursor(){
+	//if enuim== click
+	if (modo == SelectMode)
+		SetCursor(LoadCursor(NULL, IDC_HAND));
+	else if (modo == DrawMode)
+		SetCursor(LoadCursor(NULL, IDC_CROSS));
+	else
+		SetCursor(LoadCursor(NULL, IDC_ARROW));
+}
+
+void MainWindow::changeColour(){
+	if (isOver){
+		CHOOSECOLOR cc; // common dialog box structure
+		static COLORREF acrCustClr[16]; // array of custom colors
+		static DWORD rgbCurrent; // initial color selection
+		// Initialize CHOOSECOLOR
+		ZeroMemory(&cc, sizeof(cc));
+		cc.lStructSize = sizeof(cc);
+		cc.hwndOwner = m_hwnd;
+		cc.lpCustColors = (LPDWORD)acrCustClr;
+		cc.rgbResult = rgbCurrent;
+		cc.Flags = CC_FULLOPEN | CC_RGBINIT;
+		if (ChooseColor(&cc) == TRUE)
+		{
+			DWORD KK  = cc.rgbResult;
+			D2D1_COLOR_F color2 = D2D1::ColorF((float)GetRValue(cc.rgbResult) / 255, 
+				(float)GetGValue(cc.rgbResult) / 255, (float)GetBValue(cc.rgbResult) / 255);
+			color2.a = 1;
+			pFill->SetColor(color2);
+			//En cc.rgbResult tenemos el color seleccionado
+			//Utilizarlo para configurar nuestra brocha
+			//Es necesario transformarlo al formato de color de D2D
+		}
 	}
 }
