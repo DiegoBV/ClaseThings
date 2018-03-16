@@ -306,8 +306,6 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		if (DragDetect(m_hwnd, pt))
 		{
 			OnLButtonDown(pt.x, pt.y, (DWORD)wParam);
-			EditionMode newMode = DrawMode;
-			setMode(newMode);
 		}
 	}
 	return 0;
@@ -320,18 +318,17 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 	case WM_MOUSEMOVE:
 		changeCursor();
-		OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
-		mouseTrack.OnMouseMove(m_hwnd);
-		if (estaEncima(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))){
+		if (estaEncima(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam))) {
 			isOver = true;
-			EditionMode newMode = SelectMode; setMode(newMode);
+			EditionMode newMode = DragMode; setMode(newMode);
 		}
-		else{
+		else {
 			isOver = false;
-			if (modo != DrawMode){
+			if (modo != DrawMode) {
 				EditionMode newMode = NormalMode; setMode(newMode);
 			}
 		}
+		OnMouseMove(GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam), (DWORD)wParam);
 		return 0;
 
 	case WM_MOUSELEAVE:
@@ -405,10 +402,11 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 
 void MainWindow::OnLButtonDown(int pixelX, int pixelY, DWORD flags)
 {
-
 	SetCapture(m_hwnd);
-	newEllipse.point = ptMouse = DPIScale::PixelsToDips(pixelX, pixelY);
-	newEllipse.radiusX = newEllipse.radiusY = 1.0f;
+	if (modo != DragMode) {
+		newEllipse.point = ptMouse = DPIScale::PixelsToDips(pixelX, pixelY);
+		newEllipse.radiusX = newEllipse.radiusY = 1.0f;
+	}
 	InvalidateRect(m_hwnd, NULL, FALSE);
 }
 
@@ -417,12 +415,18 @@ void MainWindow::OnMouseMove(int pixelX, int pixelY, DWORD flags)
 	if (flags & MK_LBUTTON)
 	{
 		const D2D1_POINT_2F dips = DPIScale::PixelsToDips(pixelX, pixelY);
-		const float width = (dips.x - ptMouse.x) / 2;
-		const float height = (dips.y - ptMouse.y) / 2;
-		const float x1 = ptMouse.x + width;
-		const float y1 = ptMouse.y + height;
-		newEllipse = D2D1::Ellipse(D2D1::Point2F(x1, y1), width, height);
-		InvalidateRect(m_hwnd, NULL, FALSE);
+		if (modo != DragMode) {
+			const float width = (dips.x - ptMouse.x) / 2;
+			const float height = (dips.y - ptMouse.y) / 2;
+			const float x1 = ptMouse.x + width;
+			const float y1 = ptMouse.y + height;
+			newEllipse = D2D1::Ellipse(D2D1::Point2F(x1, y1), width, height);
+			InvalidateRect(m_hwnd, NULL, FALSE);
+		}
+		else  {
+			newEllipse.point = ptMouse = dips;
+			SetCursor(LoadCursor(NULL, IDC_SIZEALL));
+		}
 	}
 }
 
@@ -449,20 +453,12 @@ UINT GetMouseHoverTime()
 bool MainWindow::estaEncima(int pixelX, int pixelY){
 	double local = (pow(pixelX - newEllipse.point.x, 2) / pow(newEllipse.radiusX, 2)) +
 		(pow(pixelY - newEllipse.point.y, 2) / pow(newEllipse.radiusY, 2));
-	/*if (local <= 1.0){
-		EditionMode newMode = SelectMode;
-		setMode(newMode);
-	}
-	else{
-		EditionMode newMode = NormalMode;
-		setMode(newMode);
-	}*/
 	return local <= 1.0;
 }
 
 void MainWindow::changeCursor(){
 	//if enuim== click
-	if (modo == SelectMode)
+	if (modo == DragMode)
 		SetCursor(LoadCursor(NULL, IDC_HAND));
 	else if (modo == DrawMode)
 		SetCursor(LoadCursor(NULL, IDC_CROSS));
