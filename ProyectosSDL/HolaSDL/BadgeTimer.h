@@ -6,8 +6,8 @@ class BadgeTimer :
 public:
 	BadgeTimer();
 	virtual ~BadgeTimer();
-	//virtual void update(GameObject* o, Uint32 time);
-	//void start(Uint32 timeInterval);
+	virtual void update(GameObject* o, Uint32 time);
+	void start(Uint32 timeInterval);
 
 private:
 	bool on_;

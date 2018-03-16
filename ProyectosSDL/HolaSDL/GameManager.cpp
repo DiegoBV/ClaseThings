@@ -2,6 +2,7 @@
 
 GameManager::GameManager(SDLGame* game) :
 		Container(game), running_(true), gameOver_(false), lives(3) {
+	badgeTimer_.start(100);
 }
 
 GameManager::~GameManager() {
@@ -18,15 +19,12 @@ bool GameManager::isRunning() const {
 void GameManager::setRunning(bool running) { //esto indica ronda
 	if (running_ != running) {
 		running_ = running;
-
 		Message m = { running ? ROUND_START : ROUND_OVER };
 		send(&m);
 		if (gameOver_ && running){
 			gameOver_ = false;
 		}
-
 	}
-
 }
 
 void GameManager::handleInput(Uint32 time, const SDL_Event& event) {
@@ -59,6 +57,14 @@ void GameManager::receive(Message* msg){
 			gameOver_ = true;
 			//ronda (?)
 			break;
+		case BADGE_ON:
+			badgeTimer_.start(100);
+			break;
 	}
+}
+
+void GameManager::update(Uint32 time) {
+	badgeTimer_.update(this, time);
+	Container::update(time);
 }
 
