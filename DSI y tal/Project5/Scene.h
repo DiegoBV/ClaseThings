@@ -30,6 +30,7 @@ public:
 	void changeColour(HWND m_hwnd);
 	bool isOver = false;
 	float fSecondAngle;
+	bool stop = false;
 	
 
 	//Manejar recursos gráficos
@@ -42,7 +43,7 @@ public:
 	void    CalculateLayout(RECT rc);
 	void	DrawClockHand(float fHandLength, float fAngle, float fStrokeWidth);
 	void	DrawEsfera();
-	void	RenderScene(bool stop);
+	void	RenderScene();
 	bool estaEncima(int pixelX, int pixelY);
 
 };

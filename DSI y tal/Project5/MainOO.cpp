@@ -59,8 +59,6 @@ public:
 float DPIScale::scaleX = 1.0f;
 float DPIScale::scaleY = 1.0f;
 
-
-
 class MainWindow : public BaseWindow<MainWindow>
 {
 	Scene   Escena;			//Objeto que gestiona la Escena
@@ -85,7 +83,7 @@ class MainWindow : public BaseWindow<MainWindow>
 	EditionMode modo;
 
 public:
-	MainWindow() : ptMouse(D2D1::Point2F()) {	}
+	MainWindow() : ptMouse(D2D1::Point2F()) {}
 	PCWSTR ClassName() const { return L"Circle Window Class"; }
 	LRESULT HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam);
 	void MainWindow::DrawClockHand(float fHandLength, float fAngle, float
@@ -121,9 +119,10 @@ void MainWindow::OnPaint()
 {
 	if (SUCCEEDED(Escena.CreateGraphicsResources(m_hwnd, AreaCliente)))
 	{
+		OnResize();
 		PAINTSTRUCT ps;
 		BeginPaint(m_hwnd, &ps);
-		Escena.RenderScene(stop);
+		Escena.RenderScene();
 		EndPaint(m_hwnd, &ps);
 	}
 }
@@ -247,7 +246,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 	case WM_KEYDOWN:
 		if (GetKeyState(VK_SPACE))
 		{
-			stop = !stop;
+			Escena.stop = !Escena.stop;
 		}
 		else if (GetKeyState(VK_ESCAPE))
 		{
@@ -267,28 +266,11 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		//OutputDebugString(msg);
 		break;
 	case WM_COMMAND:
-		/*switch (LOWORD(wParam))
-		{
-		case ID_DRAW_MODE:
-		SetMode(DrawMode);
-		break;
-		case ID_SELECT_MODE:
-		SetMode(SelectMode);
-		break;
-		case ID_TOGGLE_MODE:
-		if (mode == DrawMode)
-		{
-		SetMode(SelectMode);
-		}
-		else
-		{
-		SetMode(DrawMode);
-		}
-		break;
-		}*/
 		return 0;
 	}
+
 	return DefWindowProc(m_hwnd, uMsg, wParam, lParam);
+
 }
 
 
@@ -346,7 +328,7 @@ UINT GetMouseHoverTime()
 
 void MainWindow::changeCursor() {
 	//if enuim== click
-	if (modo == SelectMode)
+	if (modo == DragMode)
 		SetCursor(LoadCursor(NULL, IDC_HAND));
 	else if (modo == DrawMode)
 		SetCursor(LoadCursor(NULL, IDC_CROSS));

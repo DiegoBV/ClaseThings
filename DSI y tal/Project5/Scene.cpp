@@ -34,25 +34,21 @@ void Scene::DrawClockHand(float fHandLength, float fAngle, float fStrokeWidth)
 
 void Scene::DrawEsfera()
 {
-	ellipse = D2D1::Ellipse(D2D1::Point2F(x, y), radio, radio);
+	ellipse = D2D1::Ellipse(D2D1::Point2F(x/8, y/8), radio/8, radio/8);
 	pRenderTarget->FillEllipse(ellipse, pBrush);
 	pRenderTarget->DrawEllipse(ellipse, pStroke);
 }
-void Scene::RenderScene(bool stop)
+void Scene::RenderScene()
 {
-
+	pRenderTarget->BeginDraw();
 	pRenderTarget->Clear(D2D1::ColorF(D2D1::ColorF::SkyBlue));
-	pRenderTarget->FillEllipse(ellipse, pBrush);
-	pRenderTarget->DrawEllipse(ellipse, pStroke);
+	DrawEsfera();
 	pRenderTarget->FillEllipse(newEllipse, pFill);
 	pRenderTarget->DrawEllipse(newEllipse, pStroke);
 
 	// Draw hands
 	SYSTEMTIME time;
 	GetLocalTime(&time);
-
-
-
 
 	if (!stop) {
 		fMinuteAngle = (360.0f / 12) * (time.wHour) +
@@ -75,6 +71,12 @@ void Scene::RenderScene(bool stop)
 		DrawClockHand(0.90f, fSecondAngle, 3);
 		// Restore the identity transformation.
 		pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
+	}
+
+	HRESULT hr = pRenderTarget->EndDraw();
+	if (FAILED(hr) || hr == D2DERR_RECREATE_TARGET)
+	{
+		DiscardGraphicsResources();
 	}
 }
 // Recalculate drawing layout when the size of the window changes.
