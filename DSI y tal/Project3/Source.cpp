@@ -120,12 +120,12 @@ void MainWindow::DrawClockHand(float fHandLength, float fAngle, float
 {
 	pRenderTarget->SetTransform(
 		D2D1::Matrix3x2F::Rotation(fAngle, ellipse.point)
-		);
+	);
 	// endPoint defines one end of the hand.
 	D2D_POINT_2F endPoint = D2D1::Point2F(
 		ellipse.point.x,
 		ellipse.point.y - (ellipse.radiusY * fHandLength)
-		);
+	);
 	// Draw a line from the center of the ellipse to endPoint.
 	pRenderTarget->DrawLine(
 		ellipse.point, endPoint, pStroke, fStrokeWidth);
@@ -145,7 +145,7 @@ void MainWindow::RenderScene()
 
 
 
-	
+
 	if (!stop) {
 		fMinuteAngle = (360.0f / 12) * (time.wHour) +
 			(time.wMinute * 0.5f);
@@ -159,7 +159,7 @@ void MainWindow::RenderScene()
 		// Restore the identity transformation.
 		pRenderTarget->SetTransform(D2D1::Matrix3x2F::Identity());
 	}
-	else 
+	else
 	{
 		// 60 minutes = 30 degrees, 1 minute = 0.5 degree
 		DrawClockHand(0.6f, fHourAngle, 6);
@@ -178,7 +178,7 @@ void MainWindow::CalculateLayout()
 		const float x = size.width / 2;
 		const float y = size.height / 2;
 		const float radius = min(x, y);
-		ellipse = D2D1::Ellipse(D2D1::Point2F(x/8, y/8), radius/8, radius/8);
+		ellipse = D2D1::Ellipse(D2D1::Point2F(x / 8, y / 8), radius / 8, radius / 8);
 	}
 }
 HRESULT MainWindow::CreateGraphicsResources()
@@ -301,7 +301,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		return 0;
 
 	case WM_LBUTTONDOWN:
-	{	
+	{
 		POINT pt = { GET_X_LPARAM(lParam), GET_Y_LPARAM(lParam) };
 		if (DragDetect(m_hwnd, pt))
 		{
@@ -380,21 +380,21 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		/*switch (LOWORD(wParam))
 		{
 		case ID_DRAW_MODE:
-			SetMode(DrawMode);
-			break;
+		SetMode(DrawMode);
+		break;
 		case ID_SELECT_MODE:
-			SetMode(SelectMode);
-			break;
+		SetMode(SelectMode);
+		break;
 		case ID_TOGGLE_MODE:
-			if (mode == DrawMode)
-			{
-				SetMode(SelectMode);
-			}
-			else
-			{
-				SetMode(DrawMode);
-			}
-			break;
+		if (mode == DrawMode)
+		{
+		SetMode(SelectMode);
+		}
+		else
+		{
+		SetMode(DrawMode);
+		}
+		break;
 		}*/
 		return 0;
 		/* Handle other messages (not shown) */
@@ -425,7 +425,7 @@ void MainWindow::OnMouseMove(int pixelX, int pixelY, DWORD flags)
 			newEllipse = D2D1::Ellipse(D2D1::Point2F(x1, y1), width, height);
 			InvalidateRect(m_hwnd, NULL, FALSE);
 		}
-		else  {
+		else {
 			newEllipse.point = ptMouse = dips;
 			SetCursor(LoadCursor(NULL, IDC_SIZEALL));
 		}
@@ -452,13 +452,13 @@ UINT GetMouseHoverTime()
 	}
 }
 
-bool MainWindow::estaEncima(int pixelX, int pixelY){
+bool MainWindow::estaEncima(int pixelX, int pixelY) {
 	double local = (pow(pixelX - newEllipse.point.x, 2) / pow(newEllipse.radiusX, 2)) +
 		(pow(pixelY - newEllipse.point.y, 2) / pow(newEllipse.radiusY, 2));
 	return local <= 1.0;
 }
 
-void MainWindow::changeCursor(){
+void MainWindow::changeCursor() {
 	//if enuim== click
 	if (modo == DragMode)
 		SetCursor(LoadCursor(NULL, IDC_HAND));
@@ -468,12 +468,12 @@ void MainWindow::changeCursor(){
 		SetCursor(LoadCursor(NULL, IDC_ARROW));
 }
 
-void MainWindow::changeColour(){
-	if (isOver){
+void MainWindow::changeColour() {
+	if (isOver) {
 		CHOOSECOLOR cc; // common dialog box structure
 		static COLORREF acrCustClr[16]; // array of custom colors
 		static DWORD rgbCurrent; // initial color selection
-		// Initialize CHOOSECOLOR
+								 // Initialize CHOOSECOLOR
 		ZeroMemory(&cc, sizeof(cc));
 		cc.lStructSize = sizeof(cc);
 		cc.hwndOwner = m_hwnd;
@@ -482,14 +482,11 @@ void MainWindow::changeColour(){
 		cc.Flags = CC_FULLOPEN | CC_RGBINIT;
 		if (ChooseColor(&cc) == TRUE)
 		{
-			DWORD KK  = cc.rgbResult;
-			D2D1_COLOR_F color2 = D2D1::ColorF((float)GetRValue(cc.rgbResult) / 255, 
+			DWORD KK = cc.rgbResult;
+			D2D1_COLOR_F color2 = D2D1::ColorF((float)GetRValue(cc.rgbResult) / 255,
 				(float)GetGValue(cc.rgbResult) / 255, (float)GetBValue(cc.rgbResult) / 255);
 			color2.a = 1;
 			pFill->SetColor(color2);
-			//En cc.rgbResult tenemos el color seleccionado
-			//Utilizarlo para configurar nuestra brocha
-			//Es necesario transformarlo al formato de color de D2D
 		}
 	}
 }
