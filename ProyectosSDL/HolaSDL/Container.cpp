@@ -7,15 +7,12 @@ Container::Container(SDLGame* game) :
 Container::~Container() {
 	/*for (InputComponent* ic : inputComp_) {
 		delete ic;
-		
 	}
 	for (RenderComponent* rc : renderComp_) {
 		delete rc;
-		rc = inputComp_.erase(ic);
 	}
 	for (InputComponent* ic : inputComp_) {
 		delete ic;
-		ic = inputComp_.erase(ic);
 	}*/
 }
 

@@ -28,12 +28,14 @@ public:
 	pair<bool, Bullets*> checkBullets();
 	StarTrekBulletsManager();
 	StarTrekBulletsManager(SDLGame* game) : GameObject(game) {
-		Bullets* b = new Bullets(game_);
-		bullets_.pushSomething(b);
+		Bullets* b = bullets_.addNewItem();
 		bullets.push_back(b);
 		b->setActive(false);
+		//Creamos los metodos basicos de render y fisicas
+		fillRect = new FillRectRenderer();
+		motion = new BasicMotionPhysics();
 	}
-	~StarTrekBulletsManager();
+	virtual ~StarTrekBulletsManager();
 	virtual vector<Bullets*>& getBullets() { return bullets; }
 };
 

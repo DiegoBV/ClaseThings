@@ -3,6 +3,10 @@
 GameManager::GameManager(SDLGame* game) :
 		Container(game), running_(true), gameOver_(false), lives(3) {
 	badgeTimer_.start(100);
+	this->addRenderComponent(&scoreRenderer_);
+	this->addRenderComponent(&gameMsg_);
+	this->addRenderComponent(&livesRenderer_);
+	this->addInputComponent(&gameCtrl_);
 }
 
 GameManager::~GameManager() {
@@ -27,10 +31,10 @@ void GameManager::setRunning(bool running) { //esto indica ronda
 	}
 }
 
-void GameManager::handleInput(Uint32 time, const SDL_Event& event) {
+/*oid GameManager::handleInput(Uint32 time, const SDL_Event& event) {
 	gameCtrl_.handleInput(this, time, event);
 	Container::handleInput(time, event);
-}
+}*/
 
 void GameManager::receive(Message* msg){
 	switch (msg->id_){
@@ -40,6 +44,7 @@ void GameManager::receive(Message* msg){
 			else { setRunning(false); }
 			setBadge(false);
 			numAstRound = 0;
+			//poner score a 0?
 			break;
 		case BULLET_ASTROID_COLLISION:
 			this->score++; 

@@ -13,6 +13,10 @@ StarTrekBulletsManager::StarTrekBulletsManager()
 
 StarTrekBulletsManager::~StarTrekBulletsManager()
 {
+	if (fillRect != nullptr)
+		delete fillRect;
+	if (motion != nullptr)
+		delete motion;
 }
 
 void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
@@ -56,14 +60,9 @@ void StarTrekBulletsManager::render(Uint32 time) {
 }
 
 void StarTrekBulletsManager::newShoot(Bullets* bull, Vector2D vel, Vector2D pos) {
-	//Creamos los metodos basicos de render y fisicas
-	FillRectRenderer* fillRect = new FillRectRenderer();
-	BasicMotionPhysics* motion = new BasicMotionPhysics();
-
 	//añadimos dichos metodos al Container
-	bull->addPhysicsComponent(motion);
+    bull->addPhysicsComponent(motion);
 	bull->addRenderComponent(fillRect);
-
 	//establecemos su tamaño y lo añadimos a la lista de balas
 	bull->setHeight(2);
 	bull->setWidth(2);

@@ -6,7 +6,7 @@
 class AsteroidsManager: public GameObject, public Observable, public Observer
 {
 private:
-	SDL_Rect rect = { 0, 0, 50, 50 };
+	SDL_Rect rect = { 0, 0, 151, 143 };
 	ManagerTemplate<Asteroid> poolAst; //cambiar GO x gameObject
 	vector <Asteroid*> asteroides;
 	void initAsteroides();

@@ -13,7 +13,9 @@ public:
 
 	}
 	~ManagerTemplate(){
-	
+		for (T* it : list) {
+			delete it;
+		}
 	}
 
 	int size() { return list.size(); };

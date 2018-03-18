@@ -19,7 +19,7 @@ void GameMsgRenderer::render(GameObject* o, Uint32 time) {
 	// press any key message when game is not running
 	if (!gm->isRunning()) {
 		Texture* hitanykey = game_->getResources()->getTextTexture(
-				Resources::PresAnyKey);
+				Resources::PressEnter);
 		hitanykey->render(game_->getRenderer(),
 				game_->getWindowWidth() / 2 - hitanykey->getWidth() / 2,
 				game_->getWindowHeight() - hitanykey->getHeight() - 50);

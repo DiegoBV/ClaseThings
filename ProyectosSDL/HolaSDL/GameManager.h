@@ -4,7 +4,10 @@
 #include "Container.h"
 #include "Observable.h"
 #include "GameCtrlInputComponent.h"
+#include "GameMsgRenderer.h"
 #include "BadgeTimer.h"
+#include "ScoreRenderer.h"
+#include "LiveRenderer.h"
 
 /*
  *
@@ -21,17 +24,17 @@ public:
 	int getScore() const { return score; };
 	void setBadge(bool b) { Badge = b; };
 	virtual void receive(Message* msg);
-	virtual void handleInput(Uint32 time, const SDL_Event& event);
+	//virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void update(Uint32 time);
 
 private:
 	int lives, score;
 	bool Badge;
 	int numAstRound = 0;
-	//ScoreRenderer scoreRenderer_;
-	//LiveRenderer livesRenderer_;
+	ScoreRenderer scoreRenderer_;
+	LiveRenderer livesRenderer_;
 	GameCtrlInputComponent gameCtrl_;
-	//GameMsgRenderer gameMsg_;
+	GameMsgRenderer gameMsg_;
 	BadgeTimer badgeTimer_;
 	bool running_;
 	bool gameOver_;

@@ -9,10 +9,18 @@ AsteroidsManager::AsteroidsManager()
 
 AsteroidsManager::~AsteroidsManager()
 {
+	if (astroidImage_ != nullptr)
+		delete astroidImage_;
+	if (circularPhysics_ != nullptr)
+		delete circularPhysics_;
+	if (basicMotionPhysics_ != nullptr)
+		delete basicMotionPhysics_;
+	if (rotationPhysics_ != nullptr)
+		delete rotationPhysics_;
 }
 
 AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
-	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Star), rect); 
+	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Astroid), rect); 
 	 circularPhysics_ = new CircularMotionPhysics();
 	 basicMotionPhysics_ = new BasicMotionPhysics();
 	 rotationPhysics_ = new RotationPhysics();  
@@ -33,8 +41,8 @@ void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos)
 	newAst->addPhysicsComponent(rotationPhysics_);
 	newAst->addRenderComponent(astroidImage_);
 	newAst->setActive(true);
-	newAst->setHeight(50);
-	newAst->setWidth(50);
+	newAst->setHeight(30);
+	newAst->setWidth(30);
 	newAst->setVelocity(vel);
 	int n = rand() % 2; if (n == 0) { n = -1; }
 	newAst->setDirection(Vector2D(n , 0));
@@ -70,12 +78,12 @@ void AsteroidsManager::updatePool() {
 			newVel.rotate(i * 30);
 			newObject.second->setCont(cont - 1);
 			if (!newObject.first) { //se ha creado uno nuevo
-				setAsteroid(newObject.second, newVel, posInicial + Vector2D(rand() % 20, rand() % 20));
+				setAsteroid(newObject.second, newVel, posInicial);
 				asteroides[0]->setActive(true);
 			}
 			else { //si no se ha creado uno nuevo, simplemente se setean sus parámetros
 				newObject.second->setActive(true);
-				newObject.second->setPosition(posInicial + Vector2D(rand() % 20, rand() % 20));
+				newObject.second->setPosition(posInicial);
 				newObject.second->setVelocity(newVel);
 			}
 			numAst++;

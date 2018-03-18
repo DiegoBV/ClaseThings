@@ -28,7 +28,8 @@ public:
 		Star,
 		Astroid,
 		ExplosionImage,
-		Badges
+		Badges,
+		Vida
 	};
 
 	// Text Messages - each is loaded as an instance of a texture
