@@ -72,7 +72,6 @@ class MainWindow : public BaseWindow<MainWindow>
 	void    OnTime();
 	enum EditionMode { SelectMode, DrawMode, DragMode, NormalMode };
 	ID2D1HwndRenderTarget *pRenderTarget;
-	bool stop = false;
 	D2D1_POINT_2F ptMouse;
 	MouseTrackEvents mouseTrack;
 	double IDT_TIMER;
@@ -132,7 +131,7 @@ void MainWindow::OnResize()
 	if (Escena.pRenderTarget != NULL)
 	{
 		GetClientRect(m_hwnd, &AreaCliente);
-			Escena.CalculateLayout(AreaCliente);
+		Escena.CalculateLayout(AreaCliente);
 		InvalidateRect(m_hwnd, NULL, FALSE);
 	}
 }
@@ -173,10 +172,12 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		{
 			return -1; // Fail CreateWindowEx.
 		}
+		Timer = SetTimer(m_hwnd, 0, 1000, (TIMERPROC)NULL);
 		DPIScale::Initialize(Escena.pFactory);
 		return 0;
 	case WM_DESTROY:
 		Escena.DiscardGraphicsResources();
+		KillTimer(m_hwnd, Timer);
 		SafeRelease(&Escena.pFactory);
 		PostQuitMessage(0);
 		return 0;
@@ -184,6 +185,7 @@ LRESULT MainWindow::HandleMessage(UINT uMsg, WPARAM wParam, LPARAM lParam)
 		OnPaint();
 		return 0;
 	case WM_TIMER: // process the 1-second timer
+		OnTime();
 		PostMessage(m_hwnd, WM_PAINT, NULL, NULL);
 		return 0;
 	case WM_SIZE:
