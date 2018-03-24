@@ -9,14 +9,13 @@ AsteroidsManager::AsteroidsManager()
 
 AsteroidsManager::~AsteroidsManager()
 {
-	if (astroidImage_ != nullptr)
-		delete astroidImage_;
-	if (circularPhysics_ != nullptr)
-		delete circularPhysics_;
-	if (basicMotionPhysics_ != nullptr)
-		delete basicMotionPhysics_;
-	if (rotationPhysics_ != nullptr)
-		delete rotationPhysics_;
+	if (astroidImage_ != nullptr) { delete astroidImage_; astroidImage_ = nullptr; }
+
+	if (circularPhysics_ != nullptr) { delete circularPhysics_; circularPhysics_ = nullptr; }
+
+	if (basicMotionPhysics_ != nullptr) { delete basicMotionPhysics_; basicMotionPhysics_ = nullptr; }
+
+	if (rotationPhysics_ != nullptr) { delete rotationPhysics_; rotationPhysics_ = nullptr; }
 }
 
 AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
@@ -24,7 +23,7 @@ AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
 	 circularPhysics_ = new CircularMotionPhysics();
 	 basicMotionPhysics_ = new BasicMotionPhysics();
 	 rotationPhysics_ = new RotationPhysics();  
-	 numAst = initAsts = 3;
+	 numAst = initAsts = 1;
 	 initAsteroides();
 }
 
@@ -90,6 +89,7 @@ void AsteroidsManager::updatePool() {
 			i++;
 		}
 	}
+	if (numAst == 0) { send(&Message(NO_MORE_ATROIDS)); }
 }
 
 void AsteroidsManager::receive(Message* msg) {
@@ -106,7 +106,6 @@ void AsteroidsManager::receive(Message* msg) {
 		GameObject* aux = static_cast<BulletAstroidCollision*>(msg)->astroid_;
 		aux->setActive(false);
 		numAst--; //reduce el numero de asteroides
-		if (numAst == 0) { send(&Message(NO_MORE_ATROIDS)); }
 		updatePool();
 		break;
 	};

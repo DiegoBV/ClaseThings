@@ -2,7 +2,6 @@
 
 GameManager::GameManager(SDLGame* game) :
 		Container(game), running_(true), gameOver_(false), lives(3) {
-	badgeTimer_.start(100);
 	this->addRenderComponent(&scoreRenderer_);
 	this->addRenderComponent(&gameMsg_);
 	this->addRenderComponent(&livesRenderer_);
@@ -27,32 +26,28 @@ void GameManager::setRunning(bool running) { //esto indica ronda
 		send(&m);
 		if (gameOver_ && running){
 			gameOver_ = false;
+			score = 0; //score a 0 si pierdes
 		}
 	}
 }
-
-/*oid GameManager::handleInput(Uint32 time, const SDL_Event& event) {
-	gameCtrl_.handleInput(this, time, event);
-	Container::handleInput(time, event);
-}*/
 
 void GameManager::receive(Message* msg){
 	switch (msg->id_){
 		case ASTROID_FIGHTER_COLLISION:
 			this->lives--; //si no quedan mas vidas, acabaria el juego, si no, acaba una ronda
-			if (getLives() == 0) { gameOver_ = true;}
+			if (getLives() <= 0) { gameOver_ = true; setRunning(false); }
 			else { setRunning(false); }
 			setBadge(false);
 			numAstRound = 0;
-			//poner score a 0?
 			break;
 		case BULLET_ASTROID_COLLISION:
 			this->score++; 
-			if (numAstRound == 10) { 
+			if (numAstRound >= 10) { 
 				numAstRound = 0;
-				setBadge(true); 
+				setBadge(true);
+				badgeTimer_.start(10000);
 			}
-			else {
+			else if(!this->Badge){
 				numAstRound++;
 			}
 			break;
@@ -60,7 +55,7 @@ void GameManager::receive(Message* msg){
 			//acabar ronda, acaba juego
 			setBadge(false);
 			gameOver_ = true;
-			//ronda (?)
+			setRunning(false);
 			break;
 		case BADGE_ON:
 			badgeTimer_.start(100);
@@ -70,6 +65,12 @@ void GameManager::receive(Message* msg){
 
 void GameManager::update(Uint32 time) {
 	badgeTimer_.update(this, time);
+	if (Badge) {
+		send(&Message(BADGE_ON));
+	}
+	else {
+		send(&Message(BADGE_OFF));
+	}
 	Container::update(time);
 }
 

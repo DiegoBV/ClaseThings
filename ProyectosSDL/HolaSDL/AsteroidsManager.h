@@ -24,7 +24,7 @@ private:
 	virtual void render(Uint32 time) { for (Asteroid* it : asteroides) { it->render(time); } };
 public:
 	AsteroidsManager();
-	~AsteroidsManager();
+	virtual ~AsteroidsManager();
 	AsteroidsManager(SDLGame* game);
 	void updatePool();
 	virtual void receive(Message* msg);

@@ -14,6 +14,7 @@
  */
 class GameManager: public Container, public Observable, public Observer {
 public:
+	GameManager() {};
 	GameManager(SDLGame* game);
 	virtual ~GameManager();
 
@@ -21,11 +22,12 @@ public:
 	int getLives() const { return lives; };
 	bool isRunning() const;
 	void setRunning(bool running);
+	void setGameOver(bool gameO) { gameOver_ = gameO; };
 	int getScore() const { return score; };
 	void setBadge(bool b) { Badge = b; };
 	virtual void receive(Message* msg);
-	//virtual void handleInput(Uint32 time, const SDL_Event& event);
 	virtual void update(Uint32 time);
+	void setLives(int nLives) { this->lives = nLives; }
 
 private:
 	int lives, score;

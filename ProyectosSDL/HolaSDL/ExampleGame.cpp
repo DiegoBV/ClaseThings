@@ -12,9 +12,6 @@
 #include "AccelerationInputComponent.h"
 #include "Weapon.h"
 #include "Asteroid.h"
-#include "CollisionManager.h"
-#include "FightersManager.h"
-#include "GameManager.h"
 
 ExampleGame::ExampleGame() :
 		SDLGame("Example Game", _WINDOW_WIDTH_, _WINDOW_HEIGHT_) {
@@ -33,44 +30,18 @@ void ExampleGame::initGame() {
 	// hide cursor
 	SDL_Rect rect = { 47, 90, 207, 247 };
 	SDL_ShowCursor(0);
-	Vector2D dirPrub;
-	dirPrub.setX(0);
-	dirPrub.setY(1);
-	Vector2D velPrub;
-	velPrub.setX(-1);
-	velPrub.setY(-2);
-	
-	bullMan = new StarTrekBulletsManager(this);
 
-	rotater = new RotationComponent(5, SDLK_RIGHT, SDLK_LEFT);
-	accelerationComp = new AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
-	circular_ = new CircularMotionPhysics();
+	asterManag.registerObserver(&gameManager_);
+	colManager.registerObserver(&gameManager_);
+	gameManager_.registerObserver(&asterManag);
+	gameManager_.registerObserver(&fightersManager_);
 
-	fillrectRC_ = new FillRectRenderer();
-	transrectRC_ = new TranRectRenderer();
-	caza2_ = new ImageRenderer(getResources()->getImageTexture(Resources::Airplanes), rect);
-
-	actors_.push_back(bullMan);
-	asterManag = new AsteroidsManager(this);
-	FightersManager* fMan = new FightersManager(this, bullMan);
-	CollisionManager* man = new CollisionManager(this, bullMan, asterManag, fMan);
-	GameManager* gm = new GameManager(this);
-	asterManag->registerObserver(gm);
-	man->registerObserver(gm);
-	gm->registerObserver(asterManag);
-	gm->registerObserver(fMan);
-	actors_.push_back(fMan);
-	actors_.push_back(asterManag);
-	actors_.push_back(man);
-	actors_.push_back(gm);
+	actors_.push_back(&bullMan);
+	actors_.push_back(&fightersManager_);
+	actors_.push_back(&asterManag);
+	actors_.push_back(&colManager);
+	actors_.push_back(&gameManager_);
 }
-
-void ExampleGame::closeGame() {
-	for (GameObject* it : actors_) {
-		delete it;
-	}
-}
-
 void ExampleGame::start() {
 	exit_ = false;
 	while (!exit_) {

@@ -15,6 +15,9 @@
 #include "AsteroidsManager.h"
 #include "BulletsManager.h"
 #include "StarTrekBulletsManager.h"
+#include "FightersManager.h"
+#include "CollisionManager.h"
+#include "GameManager.h"
 
 class ExampleGame: public SDLGame {
 
@@ -25,51 +28,25 @@ public:
 	// from SDLGame
 	void start();
 	void stop();
-	void pushObject(GameObject* o) { actors_.push_back(o); };
 
 private:
-	void initGame();
-	void closeGame();
-	void handleInput(Uint32 time);
-	void update(Uint32 time);
-	void render(Uint32 time);
-
 	const static int _WINDOW_WIDTH_ = 640;
 	const static int _WINDOW_HEIGHT_ = 480;
 	bool exit_;
 	std::vector<GameObject*> actors_;
 
-	Container* leftPaddle_;
-	Container* rightPaddle_;
-	Container* ball_;
-	Fighter* caza_;
+	StarTrekBulletsManager bullMan{ this };
+	AsteroidsManager asterManag{ this };
+	FightersManager fightersManager_{ this, &bullMan };
+	CollisionManager colManager{ this, &bullMan, &asterManag, &fightersManager_ };
+	GameManager gameManager_{ this };
+	//SoundManager soundManager_;
 
-	InputComponent* keyboardIC1_;
-	InputComponent* keyboardIC2_;
-	InputComponent* mouseIC1_;
-	InputComponent* accelerationComp;
-
-	PhysicsComponent* paddlePC_;
-	PhysicsComponent* paddleAIPC_;
-	PhysicsComponent* bouncePC_;
-	CircularMotionPhysics* circular_;
-
-	RenderComponent* fillrectRC_;
-	RenderComponent* transrectRC_;
-	RenderComponent* tennisballRC_;
-
-	RenderComponent* keyIconRC_;
-	RenderComponent* mouseIconRC_;
-	RenderComponent* aiIconRC_;
-
-	RenderComponent* caza2_;
-	InputComponent* rotater;
-
-	ComponentSwitcher* cs1_;
-	ComponentSwitcher* cs2_;
-
-	AsteroidsManager* asterManag;
-	StarTrekBulletsManager* bullMan;
+	void initGame();
+	void closeGame() {};
+	void handleInput(Uint32 time);
+	void update(Uint32 time);
+	void render(Uint32 time);
 
 	bool running_;
 	int leftScore_;

@@ -4,8 +4,8 @@ FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager) : Gam
 {
 	SDL_Rect rect = { 47, 90, 207, 247 };
 	fighter_ = Fighter(game);
-	weaponComp_ = Weapon(SDLK_SPACE, 1, 5, bulletsManager);
-	weaponComp2_ = Weapon(SDLK_SPACE, 1, 15, bulletsManager);
+	weaponComp_ = Weapon(SDLK_SPACE, 1, 50, bulletsManager);
+	weaponComp2_ = Weapon(SDLK_SPACE, 1, 10, bulletsManager);
 	circularMotionComp_ = CircularMotionPhysics();
 	accelerationComp_ = AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
 	imageRenderComp_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Airplanes), rect);
@@ -40,6 +40,23 @@ void FightersManager::render(Uint32 time)
 	fighter_.render(time);
 }
 
+void FightersManager::switcherSup()
+{
+	if (!superWeapon_) {
+      	fighter_.delInputComponent(&weaponComp_);
+		fighter_.addInputComponent(&weaponComp2_);
+		superWeapon_ = true;
+	}
+}
+
+void FightersManager::switcherNor()
+{
+	if (superWeapon_) {
+		fighter_.delInputComponent(&weaponComp2_);
+		fighter_.addInputComponent(&weaponComp_);
+		superWeapon_ = false;
+	}
+}
 Fighter * FightersManager::getFighter()
 {
 	return &fighter_;
@@ -58,8 +75,10 @@ void FightersManager::receive(Message * msg)
 		fighter_.setActive(false);
 		break;
 	case BADGE_ON:
+		switcherSup();
 		break;
 	case BADGE_OFF:
+		switcherNor();
 		break;
 	}
 }

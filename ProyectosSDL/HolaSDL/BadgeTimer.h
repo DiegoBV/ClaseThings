@@ -11,7 +11,7 @@ public:
 
 private:
 	bool on_;
-	Uint32 timeOn_;
+	Uint32 timeOn_ = 0;
 	Uint32 timeInterval_;
 };
 

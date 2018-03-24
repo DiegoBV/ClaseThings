@@ -5,15 +5,6 @@ Container::Container(SDLGame* game) :
 }
 
 Container::~Container() {
-	/*for (InputComponent* ic : inputComp_) {
-		delete ic;
-	}
-	for (RenderComponent* rc : renderComp_) {
-		delete rc;
-	}
-	for (InputComponent* ic : inputComp_) {
-		delete ic;
-	}*/
 }
 
 void Container::handleInput(Uint32 time, const SDL_Event& event) {

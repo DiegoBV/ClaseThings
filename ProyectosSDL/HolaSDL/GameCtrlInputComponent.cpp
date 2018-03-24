@@ -14,10 +14,11 @@ void GameCtrlInputComponent::handleInput(GameObject* o, Uint32 time, const SDL_E
 	if (event.type == SDL_KEYDOWN) {
 		if (event.key.keysym.sym == SDLK_RETURN) {
 			if (!gm->isRunning()) {
+				if (gm->isGameOver()) {
+					gm->setLives(3);
+				}
 				gm->setRunning(true);
 				gm->send(&(Message(ROUND_START)));
-				if (gm->isGameOver()) {
-				}
 			}
 		}
 	}
