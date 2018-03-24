@@ -80,14 +80,16 @@ void Camera::scale(GLdouble s)
 void Camera::moveLR(GLdouble cs)
 {
 	eye = eye + (u * cs);
-	viewMat = lookAt(eye, eye + u, up);
+	look = look + (u*cs);
+	viewMat = lookAt(eye, look, up);
 	update();
 }
 
 void Camera::moveFB(GLdouble cs)
 {
 	eye = eye + ((-n) * cs);
-	viewMat = lookAt(eye, eye - n, up);
+	look = look + ((-n)*cs);
+	viewMat = lookAt(eye, look, up);
 	update();
 }
 

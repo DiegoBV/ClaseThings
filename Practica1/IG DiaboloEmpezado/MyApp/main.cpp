@@ -32,6 +32,7 @@ void update();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
+bool stopAnim = false;
 
 //-------------------------------------------------------------------------
 
@@ -85,9 +86,13 @@ void display()   // double buffer
 //-------------------------------------------------------------------------
 
 void update() {
-	if (last_update_tick < glutGet(GLUT_ELAPSED_TIME) + 10000) {
-		last_update_tick = glutGet(GLUT_ELAPSED_TIME) + 10000;
-		scene.update(glutGet(GLUT_ELAPSED_TIME));
+	if (!stopAnim) {
+		if (last_update_tick < glutGet(GLUT_ELAPSED_TIME) + 10000) {
+			last_update_tick = glutGet(GLUT_ELAPSED_TIME) + 10000;
+			scene.update(glutGet(GLUT_ELAPSED_TIME));
+			display();
+			camera.update();
+		}
 	}
 }
 
@@ -121,22 +126,22 @@ void key(unsigned char key, int x, int y)
 	  camera.setAZ();
 	  break;
   case 'a':
-	  camera.moveLR(-0.01);
+	  camera.moveLR(-20.0);
 	 break;
   case 'd':
-	  camera.moveLR(+0.01);
+	  camera.moveLR(20.0);
 	  break;
   case 'w':
-	  camera.moveFB(+1.0);
+	  camera.moveFB(20.0);
 	  break;
   case 's':
-	  camera.moveFB(-1.0);
+	  camera.moveFB(-20.0);
 	  break;
-
   case 'f':
-	  foto.loadColorBuffer(viewPort.getW(), viewPort.getH());
+	  stopAnim = !stopAnim;
+	  /*foto.loadColorBuffer(viewPort.getW(), viewPort.getH());
 	  foto.save("..\\Bmps\\prueba.bmp");
-	  scene.help->setText(viewPort.getW(), viewPort.getH());
+	  scene.help->setText(viewPort.getW(), viewPort.getH());*/
 	  break;
   }//switch
 
@@ -163,7 +168,7 @@ void specialKey(int key, int x, int y)
     camera.roll(-1);   // rotate -1 on the Z axis
     break;
   default:
-    need_redisplay = false;
+    need_redisplay = true;
     break;
   }//switch
 

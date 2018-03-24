@@ -151,7 +151,7 @@ void Diabolo::draw(){
 	texture.unbind();
 }
 void Diabolo::update(GLuint timeElapsed) {
-	angle = mod(angle + timeElapsed, 360.0);
+	angle = mod(angle + 0.0005*timeElapsed, 360.0);
 }
 void Diabolo::render(glm::dmat4 const& modelViewMat) {
 	setMvM(modelViewMat);
