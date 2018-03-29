@@ -27,6 +27,7 @@ std::vector<std::string> Resources::soundEffectFiles_ { "sound/wall_hit.wav",
 
 #include <iostream>
 
+
 Resources::Resources(SDLGame* game) :
 		game_(game), numOfImageTextures_(0), imageTextures_(nullptr), numOfTextTextures_(
 				0), textTextures_(nullptr), numOfFonts_(0), fonts_(nullptr), numOfMusic_(

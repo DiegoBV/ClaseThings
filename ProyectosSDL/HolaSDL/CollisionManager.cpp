@@ -16,7 +16,7 @@ void CollisionManager::update(Uint32 time) {
 			}
 		}
 		if (Collisions::collidesWithRotation(astroids[i], fighter) && astroids[i]->isActive() && fighter->isActive()) {
-			this->send(&AstroidFighterCollision(astroids[i], fighter));
+			//this->send(&AstroidFighterCollision(astroids[i], fighter));
 		}
 	}
 	//asteroidsManager_->receive(static_cast<CollisionMessage(BULLET_ASTEROID_COLISION, astroids[0], astroids[0]));

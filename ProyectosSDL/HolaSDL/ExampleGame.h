@@ -17,6 +17,7 @@
 #include "StarTrekBulletsManager.h"
 #include "FightersManager.h"
 #include "CollisionManager.h"
+#include "SoundManager.h"
 #include "GameManager.h"
 
 class ExampleGame: public SDLGame {
@@ -35,12 +36,12 @@ private:
 	bool exit_;
 	std::vector<GameObject*> actors_;
 
+	SoundManager soundManager_{ this };
 	StarTrekBulletsManager bullMan{ this };
 	AsteroidsManager asterManag{ this };
-	FightersManager fightersManager_{ this, &bullMan };
-	CollisionManager colManager{ this, &bullMan, &asterManag, &fightersManager_ };
+	FightersManager fightersManager_{ this, &bullMan, &soundManager_};
+	CollisionManager colManager{ this, &bullMan, &asterManag, &fightersManager_, &soundManager_ };
 	GameManager gameManager_{ this };
-	//SoundManager soundManager_;
 
 	void initGame();
 	void closeGame() {};

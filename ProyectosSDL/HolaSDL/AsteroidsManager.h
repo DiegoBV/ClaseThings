@@ -6,6 +6,7 @@
 class AsteroidsManager: public GameObject, public Observable, public Observer
 {
 private:
+	SDL_Rect centro;
 	SDL_Rect rect = { 0, 0, 151, 143 };
 	ManagerTemplate<Asteroid> poolAst; //cambiar GO x gameObject
 	vector <Asteroid*> asteroides;
@@ -22,6 +23,7 @@ private:
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
 	virtual void update(Uint32 time) { for (Asteroid* it : asteroides) { it->update(time); } };
 	virtual void render(Uint32 time) { for (Asteroid* it : asteroides) { it->render(time); } };
+	Vector2D generatePos();
 public:
 	AsteroidsManager();
 	virtual ~AsteroidsManager();

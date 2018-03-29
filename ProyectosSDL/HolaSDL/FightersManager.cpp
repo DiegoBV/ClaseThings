@@ -1,11 +1,11 @@
 #include "FightersManager.h"
 
-FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager) : GameObject(game)
+FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager, SoundManager* soundManager) : GameObject(game)
 {
 	SDL_Rect rect = { 47, 90, 207, 247 };
 	fighter_ = Fighter(game);
-	weaponComp_ = Weapon(SDLK_SPACE, 1, 50, bulletsManager);
-	weaponComp2_ = Weapon(SDLK_SPACE, 1, 10, bulletsManager);
+	weaponComp_ = Weapon(SDLK_SPACE, 1, 50, bulletsManager, soundManager);
+	weaponComp2_ = Weapon(SDLK_SPACE, 1, 10, bulletsManager, soundManager);
 	circularMotionComp_ = CircularMotionPhysics();
 	accelerationComp_ = AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);
 	imageRenderComp_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Airplanes), rect);
@@ -19,6 +19,7 @@ FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager) : Gam
 	fighter_.setHeight(30);
 	fighter_.setPosition(Vector2D(game->getWindowWidth()/ 2 - 6, game->getWindowHeight() / 2 - 6));
 	fighter_.setVelocity(Vector2D(-1, -2));
+	
 }
 
 FightersManager::~FightersManager()

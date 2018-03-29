@@ -8,6 +8,7 @@
 #include "ImageRenderer.h"
 #include "RotationComponent.h"
 #include "Weapon.h"
+#include "SoundManager.h"
 
 class FightersManager :
 	public GameObject, public Observer
@@ -25,7 +26,7 @@ protected:
 
 public:
 	FightersManager() {};
-	FightersManager(SDLGame* game, Observer* bulletsManager);
+	FightersManager(SDLGame* game, Observer* bulletsManager, SoundManager* soundManager);
 	virtual ~FightersManager();
 
 	virtual void handleInput(Uint32 time, const SDL_Event& event);

@@ -22,8 +22,9 @@ AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
 	 astroidImage_ = new ImageRenderer(game->getResources()->getImageTexture(Resources::Astroid), rect); 
 	 circularPhysics_ = new CircularMotionPhysics();
 	 basicMotionPhysics_ = new BasicMotionPhysics();
-	 rotationPhysics_ = new RotationPhysics();  
-	 numAst = initAsts = 1;
+	 rotationPhysics_ = new RotationPhysics();
+	 centro = { game->getWindowWidth()/2 - 200, game->getWindowHeight()/2 - 200, 400, 400 }; //centro de la pantalla
+	 numAst = initAsts = 3;
 	 initAsteroides();
 }
 
@@ -31,7 +32,7 @@ void AsteroidsManager::newAsteroid() { //crea los primeros asteroides
 	Asteroid* newAst = poolAst.addNewItem();
 	double u = (double)rand() / (RAND_MAX + 1)*(1 - 0.1) + 0.1;
 	Vector2D vel(u, u);
-	setAsteroid(newAst, vel, Vector2D(rand() % game->getWindowWidth(), rand() % game->getWindowHeight()));
+	setAsteroid(newAst, vel, Vector2D(generatePos()));
 }
 
 void AsteroidsManager::setAsteroid(Asteroid* newAst, Vector2D vel, Vector2D pos) { //Setea los parámetros de un asteroide
@@ -59,7 +60,7 @@ void AsteroidsManager::initAsteroides() {
 	else {
 		for (int i = 0; i < initAsts; i++) {
 			asteroides[i]->setActive(true);
-			asteroides[i]->setPosition(Vector2D(rand() % game->getWindowWidth(), rand() % game->getWindowHeight())); //cambiar direccion tambien y tal
+			asteroides[i]->setPosition(generatePos());
 			asteroides[i]->setCont(rand() % 3 + 2);
 		}
 	}
@@ -109,4 +110,10 @@ void AsteroidsManager::receive(Message* msg) {
 		updatePool();
 		break;
 	};
+}
+
+Vector2D AsteroidsManager::generatePos(){//genera posicion random en los bordes de la poantalla
+	SDL_Point p{ rand() % game->getWindowWidth(), rand() % game->getWindowHeight() };
+	while (SDL_PointInRect(&p, &centro)) { p.x = rand() % game->getWindowWidth(); p.y = rand() % game->getWindowHeight(); };
+	return Vector2D(p.x, p.y);
 }

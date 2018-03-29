@@ -4,6 +4,7 @@
 #include "Observable.h"
 #include "Observer.h"
 #include "Fighter.h"
+#include "SoundManager.h"
 
 class Weapon : public InputComponent, public Observable
 {
@@ -13,11 +14,14 @@ private:
 	Uint32  timeInterval;
 	Uint8 auxShots;
 	Uint32 auxTime;
+	SoundManager* soundManager_;
+
 public:
 	Weapon() {}
-	Weapon(SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o) : disparo(disparo), 
-				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0) {
+	Weapon(SDL_Keycode disparo, Uint8 shotsPerInterval, Uint32  timeInterval, Observer* o, SoundManager* soundManager) : disparo(disparo), 
+				shotsPerInterval(shotsPerInterval), timeInterval(timeInterval), auxShots(0), auxTime(0), soundManager_(soundManager) {
 		registerObserver(o);
+		registerObserver(soundManager_);
 	};
 
 	virtual ~Weapon();

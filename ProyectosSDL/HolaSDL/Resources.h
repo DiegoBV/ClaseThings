@@ -77,13 +77,15 @@ private:
 	static std::vector<std::string> musicFiles_; // initialized in .cpp
 	static std::vector<std::string> soundEffectFiles_; // initialized in .cpp
 
+	static Resources* instance_;
+	
+
 
 public:
-
 	Resources(SDLGame* game);
 	virtual ~Resources();
-
-
+	static void createInstance(SDLGame* game) { if (instance_ == nullptr) { instance_ = new Resources(game); } };
+	static Resources* instance() { return instance_; };
 	Texture* getImageTexture(ImageId i) const;
 	Texture* getTextTexture(TextId i) const;
 	Font* getFont(FontId i) const;
@@ -91,6 +93,7 @@ public:
 	SoundEffect* getSoundEffect(SoundEffectId i) const;
 
 private:
+
 	void setImageTextures(std::vector<std::string> textures);
 	void setTextTextures(std::vector<TextMsgInfo> texts);
 	void setFonts(std::vector<FontInfo> fonts);

@@ -35,6 +35,7 @@ void ExampleGame::initGame() {
 	colManager.registerObserver(&gameManager_);
 	gameManager_.registerObserver(&asterManag);
 	gameManager_.registerObserver(&fightersManager_);
+	gameManager_.registerObserver(&soundManager_);
 
 	actors_.push_back(&bullMan);
 	actors_.push_back(&fightersManager_);
@@ -44,6 +45,7 @@ void ExampleGame::initGame() {
 }
 void ExampleGame::start() {
 	exit_ = false;
+	gameManager_.send(&Message(ROUND_START));
 	while (!exit_) {
 		Uint32 startTime = SDL_GetTicks();
 		handleInput(startTime);

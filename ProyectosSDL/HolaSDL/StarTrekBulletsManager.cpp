@@ -94,7 +94,7 @@ void StarTrekBulletsManager::receive(Message* msg) {
 		roundStart();
 		break;
 	case BULLET_ASTROID_COLLISION:
-		static_cast<BulletAstroidCollision*>(msg)->bullet_->setActive(false);
+  		static_cast<BulletAstroidCollision*>(msg)->bullet_->setActive(false);
 		break;
 	case BULLET_FIGHTER_COLLISION:
 		//static_cast<FighterBulletCollisionMessage*>(msg)->o2_->setActive(false);
