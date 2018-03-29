@@ -60,9 +60,9 @@ void SDLGame::closeSDL() {
 }
 
 void SDLGame::initResources() {
-	//Resources::createInstance(this);
-	//resources_ = Resources::instance();
-	resources_ = new Resources(this);
+	Resources::createInstance(this);
+	resources_ = Resources::instance();
+	//resources_ = new Resources(this);
 }
 
 void SDLGame::closeResources() {
