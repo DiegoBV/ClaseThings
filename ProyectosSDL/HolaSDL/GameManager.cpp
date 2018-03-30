@@ -6,6 +6,8 @@ GameManager::GameManager(SDLGame* game) :
 	this->addRenderComponent(&gameMsg_);
 	this->addRenderComponent(&livesRenderer_);
 	this->addInputComponent(&gameCtrl_);
+	badgeObject_ = (game);
+	this->registerObserver(&badgeObject_);
 }
 
 GameManager::~GameManager() {
@@ -42,10 +44,10 @@ void GameManager::receive(Message* msg){
 			break;
 		case BULLET_ASTROID_COLLISION:
 			this->score++; 
-			if (numAstRound >= 10) { 
+			if (numAstRound >= 1) { 
 				numAstRound = 0;
 				setBadge(true);
-				badgeTimer_.start(10000);
+				badgeTimer_.start(10000);  
 			}
 			else if(!this->Badge){
 				numAstRound++;
@@ -61,6 +63,11 @@ void GameManager::receive(Message* msg){
 			badgeTimer_.start(100);
 			break;
 	}
+}
+
+void GameManager::render(Uint32 time){
+	badgeObject_.render(time);
+	Container::render(time);
 }
 
 void GameManager::update(Uint32 time) {

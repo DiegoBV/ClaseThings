@@ -8,6 +8,7 @@
 #include "BadgeTimer.h"
 #include "ScoreRenderer.h"
 #include "LiveRenderer.h"
+#include "BadgeObject.h"
 
 /*
  *
@@ -26,6 +27,7 @@ public:
 	int getScore() const { return score; };
 	void setBadge(bool b) { Badge = b; };
 	virtual void receive(Message* msg);
+	virtual void render(Uint32 time);
 	virtual void update(Uint32 time);
 	void setLives(int nLives) { this->lives = nLives; }
 
@@ -38,6 +40,7 @@ private:
 	GameCtrlInputComponent gameCtrl_;
 	GameMsgRenderer gameMsg_;
 	BadgeTimer badgeTimer_;
+	BadgeObject badgeObject_;
 	bool running_;
 	bool gameOver_;
 };
