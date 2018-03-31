@@ -36,6 +36,7 @@ private:
 	bool exit_;
 	std::vector<GameObject*> actors_;
 
+	Texture fondo;
 	SoundManager soundManager_{ this };
 	StarTrekBulletsManager bullMan{ this };
 	AsteroidsManager asterManag{ this };

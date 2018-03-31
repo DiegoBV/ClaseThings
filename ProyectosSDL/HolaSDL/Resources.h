@@ -30,7 +30,8 @@ public:
 		ExplosionImage,
 		Badges,
 		Vida,
-		Pistola
+		Pistola,
+		Fondo
 	};
 
 	// Text Messages - each is loaded as an instance of a texture

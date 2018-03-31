@@ -44,7 +44,7 @@ void GameManager::receive(Message* msg){
 			break;
 		case BULLET_ASTROID_COLLISION:
 			this->score++; 
-			if (numAstRound >= 1) { 
+			if (numAstRound >= 9) { 
 				numAstRound = 0;
 				setBadge(true);
 				badgeTimer_.start(10000);  

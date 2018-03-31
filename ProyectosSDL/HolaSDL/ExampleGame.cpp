@@ -84,10 +84,10 @@ void ExampleGame::update(Uint32 time) {
 void ExampleGame::render(Uint32 time) {
 	SDL_SetRenderDrawColor(getRenderer(), COLOR(0x00AAAAFF));
 	SDL_RenderClear(getRenderer());
+	this->getResources()->getImageTexture(Resources::Fondo)->render(this->getRenderer(), { 0,0,this->getWindowWidth(), this->getWindowHeight() }, nullptr);
 	for (GameObject* o : actors_) {
 		o->render(time);
 	}
-
 	SDL_RenderPresent(getRenderer());
 }
 
