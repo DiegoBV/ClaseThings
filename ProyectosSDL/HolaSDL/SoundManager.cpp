@@ -2,7 +2,7 @@
 #include "messages.h"
 #include "SDLGame.h"
 
-SoundManager::SoundManager(SDLGame* game) : game_(game) {
+SoundManager::SoundManager(SDLGame* game) : Container(game) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -11,18 +11,26 @@ SoundManager::~SoundManager() {
 	// TODO Auto-generated destructor stub
 }
 
+void SoundManager::update(Uint32 time){
+
+	while (!eventQueue.empty()) {
+		game_->getResources()->getSoundEffect(eventQueue.front().id_)->play(eventQueue.front().num_);
+		eventQueue.pop();
+	}
+}
+
 void SoundManager::receive(Message* msg) {
 	switch (static_cast<Message*>(msg)->id_) {
 	case FIGHTER_SHOOT:
-		game_->getResources()->getSoundEffect(Resources::GunShot)->play(0);
+		eventQueue.push(PlayMessage(Resources::GunShot, 0));
 		break;
 
 	case BULLET_ASTROID_COLLISION:
-		game_->getResources()->getSoundEffect(Resources::ExplosionSound)->play(0);
+		eventQueue.push(PlayMessage(Resources::ExplosionSound, 0));
 		break;
 
 	case ASTROID_FIGHTER_COLLISION:
-		game_->getResources()->getSoundEffect(Resources::ExplosionSound)->play(0);
+		eventQueue.push(PlayMessage(Resources::ExplosionSound, 0));
 		break;
 
 	case ROUND_START:

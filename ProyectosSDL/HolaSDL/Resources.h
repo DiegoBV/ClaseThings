@@ -7,6 +7,7 @@
 #include "SoundEffect.h"
 #include <vector>
 #include <tuple>
+#include "Destructor.h"
 
 class SDLGame;
 class Resources {
@@ -81,10 +82,12 @@ private:
 
 	static Resources* instance_;
 	Resources(SDLGame* game);
+
 public:
 	virtual ~Resources();
 	static void createInstance(SDLGame* game);
 	static Resources* instance();
+	//static Destructor<Resources> instanceManager_;
 	Texture* getImageTexture(ImageId i) const;
 	Texture* getTextTexture(TextId i) const;
 	Font* getFont(FontId i) const;

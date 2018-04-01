@@ -15,6 +15,7 @@ private:
 	Uint8 auxShots;
 	Uint32 auxTime;
 	SoundManager* soundManager_;
+	void updateVariables();
 
 public:
 	Weapon() {}

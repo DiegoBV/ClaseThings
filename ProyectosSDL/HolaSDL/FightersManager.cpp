@@ -4,7 +4,7 @@ FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager, Sound
 {
 	SDL_Rect rect = { 47, 90, 207, 247 };
 	fighter_ = Fighter(game);
-	weaponComp_ = Weapon(SDLK_SPACE, 1, 50, bulletsManager, soundManager);
+	weaponComp_ = Weapon(SDLK_SPACE, 1, 30, bulletsManager, soundManager);
 	weaponComp2_ = Weapon(SDLK_SPACE, 1, 10, bulletsManager, soundManager);
 	circularMotionComp_ = CircularMotionPhysics();
 	accelerationComp_ = AccelerationInputComponent(SDLK_UP, SDLK_DOWN, 0.75, 0.5, 20);

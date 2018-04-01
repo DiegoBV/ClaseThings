@@ -1,5 +1,13 @@
 #include "Weapon.h"
 
+void Weapon::updateVariables()
+{
+	if (auxTime > timeInterval) { //ha pasado un intervalo de tiempo
+		auxShots = 0;
+		auxTime = 0; //reinicio variables, devuelvo false
+	}
+}
+
 Weapon::~Weapon()
 {
 }
@@ -12,15 +20,11 @@ void Weapon::handleInput(GameObject* o, Uint32 time, const SDL_Event& event) {
 				shoot(o);
 		}
 	}
+	updateVariables();
 }
 
 bool Weapon::puedeDisparar() {
-	if (auxTime > timeInterval) { //ha pasado un inteervalo de tiempo
-		auxShots = 0;
-		auxTime = 0; //reinicio variables, devuelvo false
-		return false;
-	}
-	else if (auxShots >= shotsPerInterval) { //si el intervalo no ha pasado y se pasa de disparos, devuelve false
+	if (auxShots >= shotsPerInterval) { //si el intervalo no ha pasado y se pasa de disparos, devuelve false
 		return false;
 	}
 	else { //si no ha pasado el intervalo de tiempo y puede seguir disparando, sumo variables y devuelvo true

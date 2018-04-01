@@ -28,6 +28,7 @@ std::vector<std::string> Resources::soundEffectFiles_ { "sound/wall_hit.wav",
 #include <iostream>
 
 Resources* Resources::instance_ = nullptr;
+//Destructor<Resources> Resources::instanceManager_ = Destructor<Resources>();
 
 Resources::Resources(SDLGame* game) :
 		game_(game), numOfImageTextures_(0), imageTextures_(nullptr), numOfTextTextures_(

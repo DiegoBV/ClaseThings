@@ -1,13 +1,7 @@
 #include "ExampleGame.h"
-#include "DemoActor.h"
 #include "Collisions.h"
-#include "PaddleKeyboardComponent.h"
-#include "PaddlePhysicsComponent.h"
 #include "FillRectRenderer.h"
-#include "PaddleMouseInputComponent.h"
-#include "PaddleAIPhysics.h"
 #include "TranRectRenderer.h"
-#include "BounceOnBordersPhysics.h"
 #include "ImageRenderer.h"
 #include "AccelerationInputComponent.h"
 #include "Weapon.h"
@@ -42,6 +36,7 @@ void ExampleGame::initGame() {
 	actors_.push_back(&asterManag);
 	actors_.push_back(&colManager);
 	actors_.push_back(&gameManager_);
+	actors_.push_back(&soundManager_); //para realizar el update de la eventQueue
 }
 void ExampleGame::start() {
 	exit_ = false;
