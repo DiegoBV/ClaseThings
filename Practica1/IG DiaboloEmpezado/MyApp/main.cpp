@@ -25,6 +25,9 @@ Scene scene(&camera);
 Texture foto;
 GLuint last_update_tick;
 
+//mouse
+glm::dvec2 mCoord; 
+
 //----------- Callbacks ----------------------------------------------------
 
 void display();
@@ -32,6 +35,8 @@ void update();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
+void mouse(int button, int state, int x, int y);
+void motion(int x, int y);
 bool stopAnim = false;
 
 //-------------------------------------------------------------------------
@@ -60,6 +65,8 @@ int main(int argc, char *argv[])
   glutSpecialFunc(specialKey);
   glutDisplayFunc(display);
   glutIdleFunc(update);
+  glutMouseFunc(mouse);
+  glutMotionFunc(motion);
  
   cout << glGetString(GL_VERSION) << '\n';
   cout << glGetString(GL_VENDOR) << '\n';
@@ -127,15 +134,19 @@ void key(unsigned char key, int x, int y)
 	  break;
   case 'a':
 	  camera.moveLR(-20.0);
+	  //camera.rotatePY(1, 0);
 	 break;
   case 'd':
 	  camera.moveLR(20.0);
+	  //camera.rotatePY(-1, 0);
 	  break;
   case 'w':
 	  camera.moveFB(20.0);
+	  //camera.rotatePY(0, 1);
 	  break;
   case 's':
 	  camera.moveFB(-20.0);
+	  //camera.rotatePY(0, -1);
 	  break;
   case 'f':
 	  stopAnim = !stopAnim;
@@ -176,4 +187,15 @@ void specialKey(int key, int x, int y)
     glutPostRedisplay();
 }
 //-------------------------------------------------------------------------
+void mouse(int button, int state, int x, int y){
+	mCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
+}
 
+//-------------------------------------------------------------------------
+void motion(int x, int y){
+	glm::dvec2 mOffset = mCoord;
+	mCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
+	mOffset = (mCoord - mOffset) * 0.05; // sensitivity = 0.05
+	camera.rotatePY(mOffset.y, mOffset.x);
+	glutPostRedisplay();
+}

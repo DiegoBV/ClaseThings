@@ -127,4 +127,23 @@ void Camera::setPM()
 }
 //-------------------------------------------------------------------------
 
+void Camera::rotatePY(GLdouble incrPitch, GLdouble incrYaw){
+	pitch_ += incrPitch;
+	yaw_ += incrYaw;
+
+	if (pitch_ > 89.5) pitch_ = 89.5;
+	if (yaw_ > 89.5) yaw_ = 89.5;
+
+	glm::dvec3 front = -n;
+
+	front.x = sin(radians(yaw_)) * cos(radians(pitch_)); //actualizamos la direccion de vista
+	front.y = sin(radians(pitch_));
+	front.z = -cos(radians(yaw_)) * cos(radians(pitch_));
+	front = glm::normalize(front);
+
+	viewMat = lookAt(eye, eye + front, up);
+
+	update();
+}
+
 

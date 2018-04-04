@@ -23,7 +23,7 @@ public:
 
 protected:
   GLint x=0, y=0;
-  GLsizei w, h;  
+  GLsizei w, h;
   void set();
 };
 
@@ -59,6 +59,7 @@ public:
   void moveLR(GLdouble cs);
   void moveFB(GLdouble cs);
   void moveUD(GLdouble cs);
+  void rotatePY(GLdouble incrPitch, GLdouble incrYaw);
   void update();
  
 protected:
@@ -76,6 +77,7 @@ protected:
   GLdouble farVal = 10000;
   GLdouble factScale = 1;
   glm::dmat4 projMat;
+  GLdouble pitch_, yaw_;
 
 
   Viewport* vp;
