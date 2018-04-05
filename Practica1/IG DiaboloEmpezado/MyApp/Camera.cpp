@@ -96,7 +96,8 @@ void Camera::moveFB(GLdouble cs)
 void Camera::moveUD(GLdouble cs)
 {
 	eye = eye + (v * cs);
-	viewMat = lookAt(eye, eye + v, up);
+	look = look + (v*cs);
+	viewMat = lookAt(eye, look, up);
 	update();
 }
 

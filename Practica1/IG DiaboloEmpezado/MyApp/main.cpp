@@ -133,20 +133,22 @@ void key(unsigned char key, int x, int y)
 	  camera.setAZ();
 	  break;
   case 'a':
-	  camera.moveLR(-20.0);
-	  //camera.rotatePY(1, 0);
+	  camera.moveLR(-20.0); //izquierda
 	 break;
   case 'd':
-	  camera.moveLR(20.0);
-	  //camera.rotatePY(-1, 0);
+	  camera.moveLR(20.0); //derecha
 	  break;
   case 'w':
-	  camera.moveFB(20.0);
-	  //camera.rotatePY(0, 1);
+	  camera.moveUD(20.0); //arriba
 	  break;
   case 's':
-	  camera.moveFB(-20.0);
-	  //camera.rotatePY(0, -1);
+	  camera.moveUD(-20.0); //abajo
+	  break;
+  case 'z':
+	  camera.moveFB(20.0); //delante
+	  break;
+  case 'x':
+	  camera.moveFB(-20.0); //detrás
 	  break;
   case 'f':
 	  stopAnim = !stopAnim;
