@@ -1,0 +1,19 @@
+﻿Build started 05/04/2018 16:56:40.
+     1>Project "C:\hlocal\RumbleController\RumbleController_2010.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /IDXUT\Core /IDXUT\Optional /ZI /nologo /W4 /WX- /Od /Oi /Oy- /D WIN32 /D _DEBUG /D DEBUG /D PROFILE /D _WINDOWS /D D3DXFX_LARGEADDRESS_HANDLE /D _UNICODE /D UNICODE /Gm- /EHsc /RTC1 /MDd /GS /arch:SSE2 /fp:fast /Zc:wchar_t /Zc:forScope /openmp- /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt  RumbleController.cpp
+         RumbleController.cpp
+     1>c:\hlocal\rumblecontroller\rumblecontroller.cpp(141): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
+     1>c:\hlocal\rumblecontroller\rumblecontroller.cpp(142): warning C4244: '=' : conversion from 'float' to 'LONG', possible loss of data
+     1>c:\hlocal\rumblecontroller\rumblecontroller.cpp(124): warning C4101: 'rc' : unreferenced local variable
+     1>c:\hlocal\rumblecontroller\rumblecontroller.cpp(265): warning C4101: 'hCurs2' : unreferenced local variable
+     1>c:\hlocal\rumblecontroller\rumblecontroller.cpp(265): warning C4101: 'hCurs1' : unreferenced local variable
+       Link:
+         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\RumbleController\Debug\RumbleController.exe" /INCREMENTAL /NOLOGO xinput.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:C:\software\programacion\MSVStudio2013\VC\Include\Manifest\dpiaware.manifest /DEBUG /PDB:"C:\hlocal\RumbleController\Debug\RumbleController.pdb" /SUBSYSTEM:WINDOWS /LARGEADDRESSAWARE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\RumbleController\Debug\RumbleController.lib" /MACHINE:X86 /SAFESEH  Debug\RumbleController.res
+         Debug\RumbleController.obj
+         RumbleController_2010.vcxproj -> C:\hlocal\RumbleController\Debug\RumbleController.exe
+     1>Done Building Project "C:\hlocal\RumbleController\RumbleController_2010.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.02
