@@ -20,6 +20,7 @@
 LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam );
 HRESULT UpdateControllerState();
 void RenderFrame();
+void XBOXToMouse(int i);
 
 
 //-----------------------------------------------------------------------------
@@ -118,42 +119,6 @@ HRESULT UpdateControllerState()
     return S_OK;
 }
 
-
-void xboxToMouse(){
-	POINT pt;                  // cursor location  
-	RECT rc;                   // client area coordinates 
-
-	GetCursorPos(&pt);
-
-	// Convert screen coordinates to client coordinates. 
-
-	ScreenToClient(g_hWnd, &pt);
-
-
-	for (DWORD i = 0; i < MAX_CONTROLLERS; i++)
-	{
-		if (g_Controllers[i].dwResult == ERROR_SUCCESS)
-		{
-			//10*(float)gcontrollers[i]
-			GetCursorPos(&pt);
-			if ((g_Controllers[i].state.Gamepad.sThumbLX != 0) | (g_Controllers[i].state.Gamepad.sThumbLY != 0)){
-
-				pt.x = 10 * (float)g_Controllers[i].state.Gamepad.sThumbLX / (float)MAXINT32;
-				pt.y = 10 * (float)g_Controllers[i].state.Gamepad.sThumbLY / (float)MAXINT32;
-
-				SetCursorPos(pt.x, pt.y);
-			}
-		}
-	}
-
-
-	ClientToScreen(g_hWnd, &pt);
-
-
-
-}
-
-
 //-----------------------------------------------------------------------------
 void RenderFrame()
 {
@@ -164,8 +129,10 @@ void RenderFrame()
 	
     for( DWORD i = 0; i < MAX_CONTROLLERS; i++ )
     {
+		XBOXToMouse(i);
         if( g_Controllers[i].dwResult == ERROR_SUCCESS )
         {
+			
 			if (g_bDeadZoneOn)
 			{
 				// Zero value if thumbsticks are within the dead zone 
@@ -249,7 +216,6 @@ void RenderFrame()
         // Repaint the window if needed 
         InvalidateRect( g_hWnd, NULL, TRUE );
         UpdateWindow( g_hWnd );
-		xboxToMouse();
     }
     // This sample doesn't use Direct3D.  Instead, it just yields CPU time to other 
     // apps but this is not typically done when rendering
@@ -398,6 +364,18 @@ LRESULT WINAPI MsgProc( HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam )
     }
 
     return DefWindowProc( hWnd, msg, wParam, lParam );
+}
+
+void XBOXToMouse(int i) {
+	POINT pt; // cursor location
+	RECT rc; // client area coordinates
+	GetCursorPos(&pt);
+	if ((g_Controllers[i].state.Gamepad.sThumbLX > INPUT_DEADZONE || g_Controllers[i].state.Gamepad.sThumbLX < -INPUT_DEADZONE)
+		| (g_Controllers[i].state.Gamepad.sThumbLY > INPUT_DEADZONE || g_Controllers[i].state.Gamepad.sThumbLY < -INPUT_DEADZONE)) {
+		pt.x += 10 * (float)g_Controllers[i].state.Gamepad.sThumbLX / (float)MAXINT16;
+		pt.y -= 10 * (float)g_Controllers[i].state.Gamepad.sThumbLY / (float)MAXINT16;
+		SetCursorPos(pt.x, pt.y);
+	}
 }
 
 
