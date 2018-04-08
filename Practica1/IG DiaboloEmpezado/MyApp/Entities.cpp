@@ -326,3 +326,72 @@ void RectangleTextPhoto::render(glm::dmat4 const& modelViewMat) {
 	draw();
 }
 
+//---------------------------------------------------------------------------------------
+
+GlassPot::GlassPot(GLdouble l, GLdouble x, GLdouble y, GLubyte alpha) : Entity(), l(l), x(x), y(y) {
+	mesh = Mesh::generateContCubo(l);
+	texture.load("..\\Bmps\\window.bmp", alpha);
+
+	GLdouble aux = sqrt(2 * (l * l));
+
+	grass = new Grass(aux, l, 1, 1, alpha + 20);
+}
+
+void GlassPot::draw() {
+	texture.bind();
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glLineWidth(3);
+	mesh->draw();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glLineWidth(1);
+	glDisable(GL_BLEND);
+	texture.unbind();
+}
+void GlassPot::render(glm::dmat4 const& modelViewMat) {
+	grass->render(modelViewMat);
+	setMvM(modelViewMat);
+	dmat4 axMat = modelViewMat * modelMat;
+	axMat = translate(axMat, glm::dvec3(x, 0.0, 0.0));
+	glLoadMatrixd(value_ptr(axMat));
+	draw();
+}
+
+//--------------------------------------------------------------------
+
+Grass::Grass(GLdouble w, GLuint h, GLuint x, GLuint y, GLubyte alpha) {
+	mesh = Mesh::generateRectangleText(w, h, x, y);
+	texture.load("..\\Bmps\\grass.bmp", alpha);
+}
+
+void Grass::draw(){
+	texture.bind();
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+	glEnable(GL_BLEND);
+	glLineWidth(3);
+	mesh->draw();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+	glLineWidth(1);
+	glDisable(GL_BLEND);
+	texture.unbind();
+}
+
+void Grass::render(glm::dmat4 const& modelViewMat){
+	setMvM(modelViewMat);
+	dmat4 auxMat = modelViewMat * modelMat;
+
+	auxMat = translate(auxMat, glm::dvec3(500.0, 0.0, 0.0));
+
+	auxMat = rotate(auxMat, radians(-45.0), glm::dvec3(0.0, 1.0, 0.0));
+	glLoadMatrixd(value_ptr(auxMat));
+
+	draw();
+
+	auxMat = rotate(auxMat, radians(-90.0), glm::dvec3(0.0, 1.0, 0.0));
+	glLoadMatrixd(value_ptr(auxMat));
+
+	draw();
+}
+
+//--------------------------------------------------------------------
+

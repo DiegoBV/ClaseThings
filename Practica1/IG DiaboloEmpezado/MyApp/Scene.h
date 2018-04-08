@@ -22,6 +22,7 @@ public:
 	  
 protected:
 	Diabolo* aux;
+	GlassPot* pot;
 	GLdouble angle;
 	  Camera* camera;
 	  std::vector<Entity*> objetos;

@@ -1,3 +1,34 @@
-﻿  LINK : C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.exe not found or not built by the last incremental link; performing full link
-  MyApp.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.exe
-  MyApp.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.pdb (Full PDB)
+﻿Build started 08/04/2018 12:13:26.
+     1>Project "D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\MyApp\MyApp.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D _MBCS /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Entities.cpp main.cpp Mesh.cpp Pixmap32RGBA.cpp Scene.cpp Camera.cpp Texture.cpp
+         Texture.cpp
+         Camera.cpp
+         Scene.cpp
+         Pixmap32RGBA.cpp
+         Mesh.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\mesh.cpp(186): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\mesh.cpp(230): warning C4018: '<' : signed/unsigned mismatch
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\mesh.cpp(246): warning C4018: '<' : signed/unsigned mismatch
+         main.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\main.cpp(97): warning C4018: '<' : signed/unsigned mismatch
+         Entities.cpp
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\entities.cpp(142): warning C4244: 'argument' : conversion from 'GLdouble' to 'GLuint', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\entities.cpp(222): warning C4244: 'argument' : conversion from 'GLdouble' to 'GLuint', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\entities.cpp(230): warning C4244: 'argument' : conversion from 'GLdouble' to 'GLuint', possible loss of data
+     1>d:\cosasimportabiles\cosas git\clasethings\practica1\ig diaboloempezado\myapp\entities.cpp(337): warning C4244: 'argument' : conversion from 'GLdouble' to 'GLuint', possible loss of data
+         Generating Code...
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.exe" /INCREMENTAL /NOLOGO freeglut.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.lib" /MACHINE:X86 Debug\Entities.obj
+         Debug\main.obj
+         Debug\Mesh.obj
+         Debug\Pixmap32RGBA.obj
+         Debug\Scene.obj
+         Debug\Camera.obj
+         Debug\Texture.obj
+         MyApp.vcxproj -> D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\bin\MyAppDebug.exe
+     1>Done Building Project "D:\CosasImportabiles\Cosas git\ClaseThings\Practica1\IG DiaboloEmpezado\MyApp\MyApp.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:07.04

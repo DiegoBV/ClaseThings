@@ -172,5 +172,34 @@ public:
 	virtual void update(GLuint timeElapsed) { setText(width, height); };
 };
 
+class Grass : public Entity
+{
+private:
+	int numGrass;
+
+public:
+	Grass(GLdouble w, GLuint h, GLuint x, GLuint y, GLubyte alpha);
+	~Grass() { }
+	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
+
+};
+
+class GlassPot : public Entity
+{
+private:
+	GLdouble l;
+	GLdouble x;
+	GLdouble y;
+	Grass* grass;
+public:
+	GlassPot(GLdouble l, GLdouble x, GLdouble y, GLubyte alpha);
+	~GlassPot() { };
+	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
+};
+
+
+
 #endif //_H_Entities_H_
 
