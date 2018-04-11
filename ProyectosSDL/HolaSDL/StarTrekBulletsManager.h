@@ -22,7 +22,7 @@ protected:
 
 public:
 	virtual void shoot(Vector2D p, Vector2D v);
-	void multiShoot(Vector2D p, Vector2D v, Vector2D d);
+	void multiShoot(Vector2D p, Vector2D v, Vector2D d, GameObject* aux);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};

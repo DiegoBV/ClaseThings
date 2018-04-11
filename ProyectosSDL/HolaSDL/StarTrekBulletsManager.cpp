@@ -2,10 +2,6 @@
 #include "BasicMotionPhysics.h"
 #include "ExampleGame.h"
 
-
-
-
-
 StarTrekBulletsManager::StarTrekBulletsManager()
 {
 }
@@ -32,22 +28,34 @@ void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el esta
 	}
 }
 
-void StarTrekBulletsManager::multiShoot(Vector2D p, Vector2D v, Vector2D d) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
+void StarTrekBulletsManager::multiShoot(Vector2D p, Vector2D v, Vector2D d, GameObject* aux) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
 	for (int i = 0; i < 6; i++) {   
-		int num = -(int)cos((0 + (60 * (i)))*M_PI/180);
-		int num2 = (int)sin(((0 + (60 * (i)))*M_PI / 180));
-		int vx = (v.getX() + num);
-		int vy = (v.getY() + num2);
-		//double pit = sqrt(pow(num, 2) + pow(num2, 2));
+		float cosen = (float)cos(((360/6 * (i)))*M_PI/180);
+		float sen = (float)sin((((360/6 * (i)))*M_PI / 180));
+
+		int x = aux->getPosition().getX() + aux->getWidth() / 2;
+		int y = aux->getPosition().getY() + aux->getHeight() / 2;
+		p.setX(x);
+		p.setY(y);
+
+		int vx = (p.getX()* cosen - p.getY()*sen);
+		int vy = (p.getX() * sen + p.getY() * cosen);
+
+		Vector2D dirAct = aux->getDirection();
+		dirAct.setX(-dirAct.getX());
+
+		Vector2D vel(vx, vy);
+		vel.normalize();
+
 		pair<bool, Bullets*> check = bullets_.getObjectPool();
 
 		if (check.first) { //Si hay alguna inactiva, la activa
 			check.second->setActive(true);
 			check.second->setPosition(p);
-			check.second->setVelocity(Vector2D(vx, vy));
+			check.second->setVelocity(vel);
 		}
 		else { //Si no, crea una nueva
-			newShoot(check.second,Vector2D(vx, vy), p);
+			newShoot(check.second,vel, p);
 		}
 	}
 }
@@ -124,10 +132,10 @@ void StarTrekBulletsManager::receive(Message* msg) {
 	{	FighterIsShooting* aux = static_cast<FighterIsShooting*>(msg);
 		if (aux != nullptr) {
 			if (multiSHoot) {
-				multiShoot(aux->bulletPosition_, aux->bulletVelocity_, aux->fighter_->getDirection());
+				multiShoot(aux->fighter_->getPosition(), aux->fighter_->getVelocity(), aux->fighter_->getDirection(), aux->fighter_);
 			}
 			else {
-				multiShoot(aux->bulletPosition_, aux->bulletVelocity_, aux->fighter_->getDirection());
+				shoot(aux->bulletPosition_ , aux->bulletVelocity_);
 			}
 		}
 		  break;
