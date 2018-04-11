@@ -14,12 +14,15 @@ protected:
 	FillRectRenderer* fillRect;
 	BasicMotionPhysics* motion;
 	Vector2D basic = { 0.0, 0.0 }; //Esto es solo para pruebas, no worries
+	bool supahBullets = false;
+	bool multiSHoot = false;
 
 	virtual void receive(Message* msg);
 	
 
 public:
 	virtual void shoot(Vector2D p, Vector2D v);
+	void multiShoot(Vector2D p, Vector2D v, Vector2D d);
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};

@@ -63,3 +63,13 @@ void Container::delRenderComponent(RenderComponent* rc) {
 	if (position != renderComp_.end())
 		renderComp_.erase(position);
 }
+
+bool Container::getInputComponent(InputComponent * ic)
+{
+	std::vector<InputComponent*>::iterator position = std::find(
+		inputComp_.begin(), inputComp_.end(), ic);
+	if (position != inputComp_.end())
+		return (*position) == ic;
+	else
+		return false;
+}

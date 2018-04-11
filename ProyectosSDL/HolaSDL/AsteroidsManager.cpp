@@ -24,7 +24,7 @@ AsteroidsManager::AsteroidsManager(SDLGame* game) : game(game) {
 	 basicMotionPhysics_ = new BasicMotionPhysics();
 	 rotationPhysics_ = new RotationPhysics();
 	 centro = { game->getWindowWidth()/2 - 200, game->getWindowHeight()/2 - 200, 400, 400 }; //centro de la pantalla
-	 numAst = initAsts = 3;
+	 numAst = initAsts = numAstIniciales;
 	 initAsteroides();
 }
 
@@ -101,7 +101,8 @@ void AsteroidsManager::receive(Message* msg) {
 		}
 		initAsteroides();
 		break;
-	case ROUND_OVER: //(?)
+	case ROUND_OVER:
+   		numAst = numAstIniciales;
 		break;
 	case BULLET_ASTROID_COLLISION:
 		GameObject* aux = static_cast<BulletAstroidCollision*>(msg)->astroid_;

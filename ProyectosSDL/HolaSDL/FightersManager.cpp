@@ -19,7 +19,7 @@ FightersManager::FightersManager(SDLGame * game, Observer* bulletsManager, Sound
 	fighter_.setHeight(30);
 	fighter_.setPosition(Vector2D(game->getWindowWidth()/ 2 - 6, game->getWindowHeight() / 2 - 6));
 	fighter_.setVelocity(Vector2D(-1, -2));
-	
+	registerObserver(bulletsManager);
 }
 
 FightersManager::~FightersManager()
@@ -44,8 +44,22 @@ void FightersManager::render(Uint32 time)
 void FightersManager::switcherSup()
 {
 	if (!superWeapon_) {
-      	fighter_.delInputComponent(&weaponComp_);
-		fighter_.addInputComponent(&weaponComp2_);
+		switch (weapon_) {
+		case Badge:
+			fighter_.delInputComponent(&weaponComp_);
+			fighter_.addInputComponent(&weaponComp2_);
+			weapon_ = SupahBullets;
+			break;
+		case SupahBullets:
+			send(&Message(SUPAH_ON));
+			weapon_ = MultahBullets;
+			break;
+		case MultahBullets:
+			send(&Message(MULTI_ON));
+			weapon_ = Badge;
+			break;
+		}
+
 		superWeapon_ = true;
 	}
 }
@@ -53,8 +67,18 @@ void FightersManager::switcherSup()
 void FightersManager::switcherNor()
 {
 	if (superWeapon_) {
-		fighter_.delInputComponent(&weaponComp2_);
-		fighter_.addInputComponent(&weaponComp_);
+		if (weapon_ != SupahBullets) {
+			send(&Message(SUPAH_OFF));
+		}
+
+		if (weapon_ != MultahBullets) {
+			send(&Message(MULTI_OFF)); 
+		}
+
+		if (fighter_.getInputComponent(&weaponComp2_)) {
+			fighter_.delInputComponent(&weaponComp2_);
+			fighter_.addInputComponent(&weaponComp_);
+		}
 		superWeapon_ = false;
 	}
 }
@@ -74,6 +98,7 @@ void FightersManager::receive(Message * msg)
 		break;
 	case ROUND_OVER:
 		fighter_.setActive(false);
+		weapon_ = Badge;
 		break;
 	case BADGE_ON:
 		switcherSup();

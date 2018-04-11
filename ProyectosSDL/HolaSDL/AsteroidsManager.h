@@ -24,6 +24,7 @@ private:
 	virtual void update(Uint32 time) { for (Asteroid* it : asteroides) { it->update(time); } };
 	virtual void render(Uint32 time) { for (Asteroid* it : asteroides) { it->render(time); } };
 	Vector2D generatePos();
+	int numAstIniciales = 20;
 public:
 	AsteroidsManager();
 	virtual ~AsteroidsManager();

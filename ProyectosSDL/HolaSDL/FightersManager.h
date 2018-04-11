@@ -11,7 +11,7 @@
 #include "SoundManager.h"
 
 class FightersManager :
-	public GameObject, public Observer
+	public GameObject, public Observer, public Observable
 {
 protected:
 
@@ -23,7 +23,10 @@ protected:
 	Weapon weaponComp_;  //Esta es el arma normal del fighter
 	Weapon weaponComp2_; //Arma secundaria
 	bool superWeapon_ = false;
-
+	enum weaponType {
+		Badge, SupahBullets, MultahBullets
+	};
+	weaponType weapon_ = Badge;
 public:
 	FightersManager() {};
 	FightersManager(SDLGame* game, Observer* bulletsManager, SoundManager* soundManager);

@@ -32,6 +32,26 @@ void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el esta
 	}
 }
 
+void StarTrekBulletsManager::multiShoot(Vector2D p, Vector2D v, Vector2D d) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
+	for (int i = 0; i < 6; i++) {   
+		int num = -(int)cos((0 + (60 * (i)))*M_PI/180);
+		int num2 = (int)sin(((0 + (60 * (i)))*M_PI / 180));
+		int vx = (v.getX() + num);
+		int vy = (v.getY() + num2);
+		//double pit = sqrt(pow(num, 2) + pow(num2, 2));
+		pair<bool, Bullets*> check = bullets_.getObjectPool();
+
+		if (check.first) { //Si hay alguna inactiva, la activa
+			check.second->setActive(true);
+			check.second->setPosition(p);
+			check.second->setVelocity(Vector2D(vx, vy));
+		}
+		else { //Si no, crea una nueva
+			newShoot(check.second,Vector2D(vx, vy), p);
+		}
+	}
+}
+
 void StarTrekBulletsManager::update(Uint32 time) { //Esto sólo actualiza el estado de las balas
 	for (int i = 0; i < bullets_.size(); i++) {
 		bullets_.getItem(i)->update(time);
@@ -94,16 +114,43 @@ void StarTrekBulletsManager::receive(Message* msg) {
 		roundStart();
 		break;
 	case BULLET_ASTROID_COLLISION:
-  		static_cast<BulletAstroidCollision*>(msg)->bullet_->setActive(false);
+		if (!supahBullets)
+  			static_cast<BulletAstroidCollision*>(msg)->bullet_->setActive(false);
 		break;
 	case BULLET_FIGHTER_COLLISION:
 		//static_cast<FighterBulletCollisionMessage*>(msg)->o2_->setActive(false);
 		break;
 	case FIGHTER_SHOOT:
-		FighterIsShooting* aux = static_cast<FighterIsShooting*>(msg);
+	{	FighterIsShooting* aux = static_cast<FighterIsShooting*>(msg);
 		if (aux != nullptr) {
-			shoot(aux->bulletPosition_, aux->bulletVelocity_);
+			if (multiSHoot) {
+				multiShoot(aux->bulletPosition_, aux->bulletVelocity_, aux->fighter_->getDirection());
+			}
+			else {
+				multiShoot(aux->bulletPosition_, aux->bulletVelocity_, aux->fighter_->getDirection());
+			}
 		}
+		  break;
+	}
+	case SUPAH_ON:
+	{
+		supahBullets = true;
 		break;
+	}
+	case SUPAH_OFF:
+	{
+		supahBullets = false;
+		break;
+	}
+	case MULTI_ON:
+	{
+		multiSHoot = true;
+		break;
+	}
+	case MULTI_OFF:
+	{
+		multiSHoot = false;
+		break;
+	}
 	}
 }

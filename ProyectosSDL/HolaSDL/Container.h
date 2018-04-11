@@ -28,6 +28,7 @@ public:
 	virtual void delInputComponent(InputComponent* ic);
 	virtual void delPhysicsComponent(PhysicsComponent* pc);
 	virtual void delRenderComponent(RenderComponent* rc);
+	virtual bool getInputComponent(InputComponent* ic);
 	void setGame(SDLGame* newGame) { game_ = newGame; }
 
 private:
