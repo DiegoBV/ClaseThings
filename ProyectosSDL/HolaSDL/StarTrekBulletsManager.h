@@ -4,6 +4,7 @@
 #include "Fighter.h"
 #include "FillRectRenderer.h"
 #include "BasicMotionPhysics.h"
+#include <functional>
 
 class StarTrekBulletsManager : public BulletsManager, public GameObject
 {
@@ -14,15 +15,15 @@ protected:
 	FillRectRenderer* fillRect;
 	BasicMotionPhysics* motion;
 	Vector2D basic = { 0.0, 0.0 }; //Esto es solo para pruebas, no worries
+	GameObject* objetoQueDispara = nullptr;
+	Vector2D pos;
+	Vector2D vel;
 	bool supahBullets = false;
-	bool multiSHoot = false;
-
 	virtual void receive(Message* msg);
-	
-
+	function<void()> disparo;
 public:
-	virtual void shoot(Vector2D p, Vector2D v);
-	void multiShoot(Vector2D p, Vector2D v, Vector2D d, GameObject* aux);
+	void shoot();
+	void multiShoot();
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void handleInput(Uint32 time, const SDL_Event& event) {};
@@ -39,6 +40,7 @@ public:
 			Bullets* b = bullets_.addNewItem();
 			newShoot(b, Vector2D(0.0, 0.0), Vector2D(0.0, 0.0));
 		}
+		disparo = [this]() mutable {shoot(); }; //disparo basico
 	}
 	virtual ~StarTrekBulletsManager();
 	virtual vector<Bullets*>& getBullets() { return bullets; }

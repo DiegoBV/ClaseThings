@@ -15,33 +15,34 @@ StarTrekBulletsManager::~StarTrekBulletsManager()
 		delete motion;
 }
 
-void StarTrekBulletsManager::shoot(Vector2D p, Vector2D v) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
+void StarTrekBulletsManager::shoot() { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
 	pair<bool, Bullets*> check = bullets_.getObjectPool();
 
 	if (check.first) { //Si hay alguna inactiva, la activa
 		check.second->setActive(true);
-		check.second->setPosition(p);
-		check.second->setVelocity(v /*+ Vector2D(5.0, 5.0)*/);
+		check.second->setPosition(pos);
+		check.second->setVelocity(vel);
 	}
 	else { //Si no, crea una nueva
-		newShoot(check.second, v, p);
+		newShoot(check.second, vel, pos);
 	}
 }
 
-void StarTrekBulletsManager::multiShoot(Vector2D p, Vector2D v, Vector2D d, GameObject* aux) { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
+void StarTrekBulletsManager::multiShoot() { //Comprueba el estado actual de las balas (Hay alguna inactiva?)
 	for (int i = 0; i < 6; i++) {   
 		float cosen = (float)cos(((360/6 * (i)))*M_PI/180);
 		float sen = (float)sin((((360/6 * (i)))*M_PI / 180));
-
-		int x = aux->getPosition().getX() + aux->getWidth() / 2;
-		int y = aux->getPosition().getY() + aux->getHeight() / 2;
+		
+		Vector2D p;
+		int x = objetoQueDispara->getPosition().getX() + objetoQueDispara->getWidth() / 2;
+		int y = objetoQueDispara->getPosition().getY() + objetoQueDispara->getHeight() / 2;
 		p.setX(x);
 		p.setY(y);
 
 		int vx = (p.getX()* cosen - p.getY()*sen);
 		int vy = (p.getX() * sen + p.getY() * cosen);
 
-		Vector2D dirAct = aux->getDirection();
+		Vector2D dirAct = objetoQueDispara->getDirection();
 		dirAct.setX(-dirAct.getX());
 
 		Vector2D vel(vx, vy);
@@ -130,13 +131,11 @@ void StarTrekBulletsManager::receive(Message* msg) {
 		break;
 	case FIGHTER_SHOOT:
 	{	FighterIsShooting* aux = static_cast<FighterIsShooting*>(msg);
-		if (aux != nullptr) {
-			if (multiSHoot) {
-				multiShoot(aux->fighter_->getPosition(), aux->fighter_->getVelocity(), aux->fighter_->getDirection(), aux->fighter_);
-			}
-			else {
-				shoot(aux->bulletPosition_ , aux->bulletVelocity_);
-			}
+		if (aux != nullptr && aux->fighter_ != nullptr) {
+			objetoQueDispara = aux->fighter_;
+			pos = aux->bulletPosition_;
+			vel = aux->bulletVelocity_;
+			disparo();
 		}
 		  break;
 	}
@@ -152,12 +151,12 @@ void StarTrekBulletsManager::receive(Message* msg) {
 	}
 	case MULTI_ON:
 	{
-		multiSHoot = true;
+		disparo = [this]() mutable {multiShoot(); }; //cambiamos la funcion de disparo
 		break;
 	}
 	case MULTI_OFF:
 	{
-		multiSHoot = false;
+		disparo = [this]() mutable {shoot(); }; //la devolvemos a su valor original. En caso de agregar más funciones, seria cuestion de ir agregando mensajes e ir cambiando la funcion
 		break;
 	}
 	}
