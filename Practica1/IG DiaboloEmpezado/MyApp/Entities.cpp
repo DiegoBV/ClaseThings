@@ -334,7 +334,7 @@ GlassPot::GlassPot(GLdouble l, GLdouble x, GLdouble y, GLubyte alpha) : Entity()
 
 	GLdouble aux = sqrt(2 * (l * l));
 
-	grass = new Grass(aux, l, 1, 1, alpha + 20);
+	grass = new Grass(aux, l, 1, 1, 0);
 }
 
 void GlassPot::draw() {
@@ -342,7 +342,9 @@ void GlassPot::draw() {
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glLineWidth(3);
+	glDepthMask(GL_FALSE);
 	mesh->draw();
+	glDepthMask(GL_TRUE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glLineWidth(1);
 	glDisable(GL_BLEND);
@@ -361,7 +363,7 @@ void GlassPot::render(glm::dmat4 const& modelViewMat) {
 
 Grass::Grass(GLdouble w, GLuint h, GLuint x, GLuint y, GLubyte alpha) {
 	mesh = Mesh::generateRectangleText(w, h, x, y);
-	texture.load("..\\Bmps\\grass.bmp", alpha);
+	texture.load("..\\Bmps\\grass.bmp", ivec3(0.0, 0.0, 0.0), alpha);
 }
 
 void Grass::draw(){
@@ -369,7 +371,9 @@ void Grass::draw(){
 	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 	glEnable(GL_BLEND);
 	glLineWidth(3);
+	glDepthMask(GL_FALSE);
 	mesh->draw();
+	glDepthMask(GL_TRUE);
 	glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 	glLineWidth(1);
 	glDisable(GL_BLEND);

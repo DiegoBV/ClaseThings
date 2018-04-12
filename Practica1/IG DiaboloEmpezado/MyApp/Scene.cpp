@@ -39,6 +39,7 @@ void Scene::init()
   objetos.push_back(new SueloText(2400, 2250, 20, 20));
   pot = new GlassPot(150, 500, 50.0, 80);
   objetos.push_back(pot);
+  
 
 }
 //-------------------------------------------------------------------------
