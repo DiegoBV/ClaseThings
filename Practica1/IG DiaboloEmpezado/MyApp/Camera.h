@@ -61,6 +61,7 @@ public:
   void moveUD(GLdouble cs);
   void rotatePY(GLdouble incrPitch, GLdouble incrYaw);
   void update();
+  void changeView();
  
 protected:
   glm::dvec3 eye = { 0.0, 0.0, 500.0 };
@@ -78,6 +79,7 @@ protected:
   GLdouble factScale = 1;
   glm::dmat4 projMat;
   GLdouble pitch_, yaw_;
+  bool ortho_ = false;
 
 
   Viewport* vp;

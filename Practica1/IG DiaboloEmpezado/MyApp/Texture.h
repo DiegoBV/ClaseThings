@@ -1,5 +1,7 @@
 #pragma once
 #include "Pixmap32RGBA.h"
+#include <GL/freeglut.h>
+#include <glm.hpp>
 
 class Texture
 {
@@ -14,6 +16,7 @@ public:
 	~Texture();
 
 	bool load(const std::string &BMP_Name, GLubyte alpha = 255);
+	bool load(const std::string & BMP_Name, glm::ivec3 color, GLubyte alpha);
 
 	void bind();
 

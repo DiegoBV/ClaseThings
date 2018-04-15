@@ -106,6 +106,17 @@ void Camera::update() {
 	u = normalize(cross(up, n));
 	v = cross(n, u);
 }
+void Camera::changeView()
+{
+	if (ortho_) {
+		ortho_ = false;
+		setPM();
+	}
+	else {
+		ortho_ = true;
+		setPM();
+	}
+}
 //-------------------------------------------------------------------------
 
 void Camera::setSize(GLdouble aw, GLdouble ah) 
@@ -121,10 +132,20 @@ void Camera::setSize(GLdouble aw, GLdouble ah)
 
 void Camera::setPM() 
 {
-  projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
-  glMatrixMode(GL_PROJECTION);
-  glLoadMatrixd(value_ptr(projMat));
-  glMatrixMode(GL_MODELVIEW);
+  if (ortho_) {
+	  glMatrixMode(GL_PROJECTION);
+	  projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, 2 * yTop, farVal);
+
+	  glLoadMatrixd(value_ptr(projMat));
+	  glMatrixMode(GL_MODELVIEW);
+  }
+  else {
+	  glMatrixMode(GL_PROJECTION);
+	  projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+
+	  glLoadMatrixd(value_ptr(projMat));
+	  glMatrixMode(GL_MODELVIEW);
+  }
 }
 //-------------------------------------------------------------------------
 
@@ -141,8 +162,9 @@ void Camera::rotatePY(GLdouble incrPitch, GLdouble incrYaw){
 	front.y = sin(radians(pitch_));
 	front.z = -cos(radians(yaw_)) * cos(radians(pitch_));
 	front = glm::normalize(front);
-
-	viewMat = lookAt(eye, eye + front, up);
+	look = eye + front;
+	viewMat = lookAt(eye, look, up);
+	n = -front;
 
 	update();
 }

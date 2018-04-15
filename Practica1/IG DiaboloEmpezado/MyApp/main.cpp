@@ -156,6 +156,9 @@ void key(unsigned char key, int x, int y)
 	  foto.save("..\\Bmps\\prueba.bmp");
 	  scene.help->setText(viewPort.getW(), viewPort.getH());*/
 	  break;
+  case 'p':
+	  camera.changeView();
+	  break;
   }//switch
 
   if (need_redisplay)
