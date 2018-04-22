@@ -1,0 +1,40 @@
+﻿  AsteroidsManager.cpp
+c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\managertemplate.h(39): warning C4018: '<': no coinciden signed/unsigned
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\managertemplate.h(35): note: durante la compilación de la función miembro de plantilla clase de 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)'
+          with
+          [
+              T=Asteroid
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\asteroidsmanager.cpp(70): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)' que se está compilando
+          with
+          [
+              T=Asteroid
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\asteroidsmanager.h(11): note: vea la referencia a la creación de instancias de plantilla clase de 'ManagerTemplate<Asteroid>' que se está compilando
+  BadgeObject.cpp
+  BadgeTimer.cpp
+  BulletsManager.cpp
+  ExampleGame.cpp
+  GameCtrlInputComponent.cpp
+  GameManager.cpp
+  GameMsgRenderer.cpp
+  LiveRenderer.cpp
+c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\liverenderer.cpp(20): warning C4018: '<': no coinciden signed/unsigned
+  ScoreRenderer.cpp
+  StarTrekBulletsManager.cpp
+c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\startrekbulletsmanager.cpp(43): warning C4018: '<': no coinciden signed/unsigned
+c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\managertemplate.h(39): warning C4018: '<': no coinciden signed/unsigned
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\managertemplate.h(35): note: durante la compilación de la función miembro de plantilla clase de 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)'
+          with
+          [
+              T=Bullets
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\startrekbulletsmanager.cpp(20): note: vea la referencia a la creación de instancias de plantilla de función 'std::pair<bool,T *> ManagerTemplate<T>::getObjectPool(void)' que se está compilando
+          with
+          [
+              T=Bullets
+          ]
+  c:\users\usuario\desktop\2ºvideojuegos\asteroids\holasdl\startrekbulletsmanager.h(12): note: vea la referencia a la creación de instancias de plantilla clase de 'ManagerTemplate<Bullets>' que se está compilando
+  main.cpp
+  Generando código...
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\Asteroids\bin\HolaSDLDebug.exe
