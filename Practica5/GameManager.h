@@ -43,7 +43,7 @@ private:
 	BadgeObject badgeObject_;
 	bool running_;
 	bool gameOver_;
-
+	int numAst4Badge = 9;
 	
 };
 

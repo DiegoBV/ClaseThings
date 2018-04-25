@@ -42,7 +42,7 @@ void FightersManager::render(Uint32 time)
 	fighter_.render(time);
 }
 
-void FightersManager::switcherSup()
+void FightersManager::switcherSup() //para añadir nuevos badges---> añades un tipo al enum. Añades en el switch el componente o lo que tenga que hacer
 {
 	if (!superWeapon_) {
 		switch (weapon_) {
@@ -66,21 +66,17 @@ void FightersManager::switcherSup()
 	}
 }
 
-void FightersManager::switcherNor()
+void FightersManager::switcherNor() //elimina todos los componentes que no sean el normal
 {
 	if (superWeapon_) {
 		if (weapon_ != SupahBullets) {
 			send(&Message(SUPAH_OFF));
 		}
-
-		if (weapon_ != MultahBullets) {	
-			send(&Message(MULTI_OFF)); 
-		}
-
+		
 		fighter_.delInputComponent(&weaponComp2_);
 		this->fighter_.delInputComponent(&multiWeapon_); //borra los otros componentes
 
-		if(!fighter_.getInputComponent(&weaponComp_)) //si no tiene el normal, lo borra
+		if(!fighter_.getInputComponent(&weaponComp_)) //si no tiene el normal, lo añade
 			fighter_.addInputComponent(&weaponComp_);
 
 		superWeapon_ = false;
