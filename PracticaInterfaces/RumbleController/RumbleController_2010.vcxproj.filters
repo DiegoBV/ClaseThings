@@ -15,19 +15,16 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="BaseHID.cpp" />
-    <ClCompile Include="HIDXbox.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="BaseHID.h" />
-    <ClInclude Include="HIDXbox.h" />
-    <ClInclude Include="RumbleController.cpp" />
-  </ItemGroup>
-  <ItemGroup>
     <CLInclude Include="resource.h">
       <Filter>Resource Files</Filter>
     </CLInclude>
+    <ClInclude Include="App.h" />
+    <ClInclude Include="BaseHID.h" />
+    <ClInclude Include="HIDXbox.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="BaseHID.cpp" />
+    <ClCompile Include="HIDXbox.cpp" />
+    <ClCompile Include="RumbleController.cpp" />
   </ItemGroup>
 </Project>

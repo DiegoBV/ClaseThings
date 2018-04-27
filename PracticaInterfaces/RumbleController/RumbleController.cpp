@@ -1,4 +1,5 @@
 #include "HIDXbox.h"
+#include <algorithm>
 
 #define T 10 //ms para actualizar
 #define TARGET_XBOX360
@@ -11,6 +12,7 @@ HIDWii Control(T);
 #endif
 
 HWND hWnd, hWndAnt;
+void GeneraEfectos(HIDXBox* Control);
 
 VOID CALLBACK TimerCallback() {
 	Control.Actualiza();
@@ -21,15 +23,15 @@ void GeneraEfectos(HIDXBox* Control) {
 	POINT pt, pt0;
 
 	GetCursorPos(&pt);
-	if ((abs(Control->gLJX > 0.05) | (abs(Control->gLJY > 0.05)))) {
-		pt.x += 20 * Control->gLJX;
-		pt.y -= 20 * Control->gLJY;
+	if ((fabs(Control->gLJX()) > 0.05) | (fabs(Control->gLJY()) > 0.05)) {
+		pt.x += 20 * Control->gLJX();
+		pt.y -= 20 * Control->gLJY();
 		SetCursorPos(pt.x, pt.y);
 	}
 
-	if ((abs(Control->gRJX > 0.05) | (abs(Control->gRJY > 0.05)))) {
-		pt.x += 20 * Control->gRJX;
-		pt.y -= 20 * Control->gRJY;
+	if ((fabs(Control->gRJX()) > 0.05) | (fabs(Control->gRJY()) > 0.05)) {
+		pt.x += 20 * Control->gRJX();
+		pt.y -= 20 * Control->gRJY();
 		SetCursorPos(pt.x, pt.y);
 	}
 #if 0
