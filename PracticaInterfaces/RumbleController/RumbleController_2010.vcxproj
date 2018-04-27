@@ -378,16 +378,14 @@
   <ItemGroup>
     <ClCompile Include="BaseHID.cpp" />
     <ClCompile Include="HIDXbox.cpp" />
-    <ClCompile Include="RumbleController.cpp" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="App.h" />
+    <ClInclude Include="RumbleController.cpp" />
     <ClInclude Include="BaseHID.h" />
     <ClInclude Include="HIDXbox.h" />
     <CLInclude Include="resource.h" />
-    <ResourceCompile Include="RumbleController.rc" />
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
