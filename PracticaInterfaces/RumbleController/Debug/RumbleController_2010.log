@@ -1,1 +1,25 @@
-﻿
+﻿  HIDXbox.cpp
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\basehid.h(42): warning C4100: 'bit': parámetro formal sin referencia
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\basehid.h(63): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(32): warning C4244: '-=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(33): warning C4244: '+=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(36): warning C4244: '-=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(37): warning C4244: '+=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(40): warning C4244: '-=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(41): warning C4244: '+=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(44): warning C4244: '-=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\hidxbox.cpp(45): warning C4244: '+=': conversión de 'float' a 'SHORT'; posible pérdida de datos
+  RumbleController.cpp
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\basehid.h(42): warning C4100: 'bit': parámetro formal sin referencia
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\basehid.h(63): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(22): warning C4459: la declaración de 'Control' oculta la declaración global
+  c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(7): note: vea la declaración de 'Control'
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(27): warning C4244: '+=': conversión de 'float' a 'LONG'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(28): warning C4244: '-=': conversión de 'float' a 'LONG'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(33): warning C4244: '+=': conversión de 'float' a 'LONG'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(34): warning C4244: '-=': conversión de 'float' a 'LONG'; posible pérdida de datos
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(23): warning C4101: 'pt0': variable local sin referencia
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(147): warning C4100: 'nCmdShow': parámetro formal sin referencia
+c:\users\mrcorner\desktop\moargit\clasethings\practicainterfaces\rumblecontroller\rumblecontroller.cpp(147): warning C4100: 'hInstance': parámetro formal sin referencia
+  Generando código...
+  RumbleController_2010.vcxproj -> C:\Users\MrCorner\Desktop\MoarGit\ClaseThings\PracticaInterfaces\RumbleController\Debug\RumbleController.exe

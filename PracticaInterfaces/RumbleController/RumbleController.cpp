@@ -29,14 +29,12 @@ void GeneraEfectos(HIDXBox* Control) {
 		SetCursorPos(pt.x, pt.y);
 	}
 
-	if ((fabs(Control->gRJX()) > 0.05) | (fabs(Control->gRJY()) > 0.05)) {
-		pt.x += 20 * Control->gRJX();
-		pt.y -= 20 * Control->gRJY();
+	if ((fabs(Control->gRJXf()) > 0.05) | (fabs(Control->gRJYf()) > 0.05)) {
+		pt.x += 20 * Control->gRJXf();
+		pt.y -= 20 * Control->gRJYf();
 		SetCursorPos(pt.x, pt.y);
 	}
-#if 0
 
-#endif
 	if (Control->BD(XINPUT_GAMEPAD_LEFT_SHOULDER)) {
 		mouse_event(MOUSEEVENTF_LEFTDOWN, pt.x, pt.y, 0, NULL);
 	}
@@ -145,6 +143,7 @@ void GeneraEfectos(HIDXBox* Control) {
 }
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow) {
+	Control.update();
 	UINT_PTR ptimerxbox;
 	ptimerxbox = SetTimer(NULL, NULL, T, (TIMERPROC)TimerCallback);
 	MSG msg;
