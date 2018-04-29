@@ -16,8 +16,8 @@ protected:
 	short wButtons; //Botones (Utilizo Codificación Xbox360)
 	short wLastButtons; //Botones anteriores (Utilizo Codificación Xbox360)
 	float fLeftTrigger, fRightTrigger; //[0.0,1.0]
-	float fThumbLX, fThumbLY, fThumbRX, fThumbRY; //[-1.0,1.0]
-	float fThumbLXf, fThumbLYf, fThumbRXf, fThumbRYf; //[-1.0,1.0] Filtrado
+	float fThumbLX = 0, fThumbLY = 0, fThumbRX = 0, fThumbRY = 0; //[-1.0,1.0]
+	float fThumbLXf = 0, fThumbLYf = 0, fThumbRXf = 0, fThumbRYf = 0; //[-1.0,1.0] Filtrado
 	float T; //Perido de actualización
 	float a; //Cte.Tiempo Filtro
 				   //Salidas
@@ -61,6 +61,7 @@ public:
 	{
 		T = t / 1000; //Periodo de muestreo
 		a = T / (0.1 + T); //Cte. de tiempo para filtros (depende de T)
+		fThumbLX = 0;
 	};
 	BaseHID() {};
 	~BaseHID() {};
