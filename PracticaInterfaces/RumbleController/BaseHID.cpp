@@ -2,39 +2,46 @@
 
 void BaseHID::Actualiza()
 {
-	wLastButtons = wButtons; //Copia estado de botones
-	bConected = LeeMando(); //Leo Mando
-	if (bConected == true)
+	wLastButtons = wButtons;	//Store last state
+	bConected = LeeMando();	//Read new state (virtual)
+
+	if (bConected)
 	{
-		Mando2HID(); //Vuelco de Mando a HID normalizando
-					 //Actualizo Gestos de entrada genéricos (entradas)
-					 //Genero Gesto de feedback (salida)
+		Mando2HID(); //get translated state
 
-		wButtonsDown = (-wLastButtons) & (wButtons);
-		wButtonsUp = (wLastButtons) & (-wButtons);
+		//update buttons up/down
+		wButtonsDown = (~wLastButtons) & (wButtons);
+		wButtonsUp = (wLastButtons) & (~wButtons);
 
-		fThumbLXf = (1 - a) + fThumbLXf + a*fThumbLX;
-		fThumbLYf = (1 - a) + fThumbLYf + a*fThumbLY;
+		//apply inercia
+		if ((fThumbLX > 0.8) || (fThumbLX < -0.8)) velX = velX + 0.1*fThumbLX;
+		else if ((fThumbLX > 0.01) || (fThumbLX < -0.01)) velX = (velX + fThumbLX) / 2;
+		else velX = velX *(1 - 0.1);
 
-		fThumbRXf = (1 - a) + fThumbRXf + a*fThumbRX;
-		fThumbRYf = (1 - a) + fThumbRYf + a*fThumbRY;
+		if ((fThumbLY > 0.8) || (fThumbLY < -0.8)) velX = velX + 0.1*fThumbLY;
+		else if ((fThumbLY > 0.01) || (fThumbLY < -0.01)) velX = (velX + fThumbLY) / 2;
+		else velX = velX *(1 - 0.1);
 
-		if ((fThumbLX > 0) & (fThumbLY > 0)) {
-			roState = pp;
-			tRo = 1.0;
+		//adjust inercia vel
+		if (velX > 2.0) velX = 2.0;
+		else if (velX < -2.0) velX = -2.0;
+		if (velX > 2.0) velX = 2.0;
+		else if (velX < -2.0) velX = -2.0;
+
+		//update rotation states
+		if ((fThumbLX > 0) && (fThumbLY > 0)) //restart
+		{
+			roState == pp; //positive-positive
+			tRo = rotacionTime;
 		}
-
-		if (tRo > 0.0) {
+		else if (tRo > 0)
+		{
 			tRo = tRo - T;
-			if (roState == np) roState = pp;
-			if ((fThumbLX > 0) & (fThumbLY <= 0) & (roState == pp)) roState = pn;
-
-			if ((fThumbLX <= 0) & (fThumbLY < 0) & (roState == pn)) roState = nn;
-
-			if ((fThumbLX < 0) & (fThumbLY >= 0) & (roState == nn)) roState = np;
+			if ((fThumbLX > 0) && (fThumbLY <= 0) && (roState == pp)) roState = pn;
+			else if ((fThumbLX <= 0) && (fThumbLY < 0) && (roState == pn)) roState = nn;
+			else if ((fThumbLX < 0) && (fThumbLY >= 0) && (roState == nn)) roState = np;
 		}
-		else
-			tRo = pp;
+		else roState = pp;
 
 		if (tLR > 0) tLR -= T;
 		else sLR(0.0, 0.0);

@@ -30,6 +30,12 @@ protected:
 					  //EstadosRotacion Ro; //Estado del gesto de rotación
 	float tRo = 0.0; //Tiempo que queda para el gesto de rotación
 					 //Funciones virtuales que se deben reimplementar para cada mando.
+
+	float velX = 0.0;
+
+	const double rotacionTime = 100;
+
+
 	virtual bool LeeMando() = 0; //Lee estado del mando
 	virtual void EscribeMando() = 0; //Escribe Feeback en mando
 	virtual void Mando2HID() = 0; //Vuelca el estado del mando al HID
@@ -55,7 +61,7 @@ public:
 											//Gestos
 	bool BD(WORD Bit) { return (wButtonsDown & Bit); }; //Boton Down codificado en Bit
 	bool BU(WORD Bit) { return (wButtonsUp & Bit); }; //Boton Up codificado en Bit
-	bool GRLJ() { return ( roState == np); }; //Gesto de Rotación del LeftJoy
+	bool GRLJ() { if (roState == np) { roState = pp; return true; } else { return false; } }; //Gesto de Rotación del LeftJoy +  reset de la rotacion
 
 	BaseHID(float t) //Constructor que recoge el periodo de muestreo
 	{

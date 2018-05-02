@@ -16,7 +16,6 @@ void GeneraEfectos(HIDXBox* Control);
 
 VOID CALLBACK TimerCallback() {
 	Control.Actualiza();
-	float kk = Control.gLJX();
 	GeneraEfectos(&Control);
 }
 
@@ -35,9 +34,22 @@ void GeneraEfectos(HIDXBox* Control) {
 		pt.y -= 20 * Control->gRJY();
 		SetCursorPos(pt.x, pt.y);
 	}
+
 #if 0
 
 #endif
+
+	//rueda del raton
+	if (Control->gLT() > 0)
+		mouse_event(MOUSEEVENTF_WHEEL, pt.x, pt.y, -Control->gLT() * 100, NULL);
+	else
+		mouse_event(MOUSEEVENTF_WHEEL, pt.x, pt.y, 0, NULL);
+
+	if (Control->gRT() > 0)
+		mouse_event(MOUSEEVENTF_WHEEL, pt.x, pt.y, Control->gRT() * 100, NULL);
+	else
+		mouse_event(MOUSEEVENTF_WHEEL, pt.x, pt.y, 0, NULL);
+
 	if (Control->BD(XINPUT_GAMEPAD_LEFT_SHOULDER)) {
 		mouse_event(MOUSEEVENTF_LEFTDOWN, pt.x, pt.y, 0, NULL);
 	}
