@@ -153,8 +153,9 @@ void GeneraEfectos(HIDXBox* Control) {
 	if (Control->GRLJ())
 		ShowWindow(hWnd, SW_MINIMIZE);
 	if (hWnd != hWndAnt)
-		Control->sLR(0, 0); //vibracion permanente ye
+		Control->sLR(1, 0.1); //vibracion permanente ye
 
+	hWndAnt = hWnd;
 }
 
 int WINAPI wWinMain(HINSTANCE hInstance, HINSTANCE, PWSTR, int nCmdShow) {
