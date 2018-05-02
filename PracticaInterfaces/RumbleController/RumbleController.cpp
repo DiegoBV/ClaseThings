@@ -11,6 +11,8 @@ HIDPs Control(T);
 HIDWii Control(T);
 #endif
 
+const float DEADZONE = 0.05;
+const int velCursor = 20;
 HWND hWnd, hWndAnt;
 void GeneraEfectos(HIDXBox* Control);
 
@@ -23,15 +25,14 @@ void GeneraEfectos(HIDXBox* Control) {
 	POINT pt, pt0;
 
 	GetCursorPos(&pt);
-	if ((fabs(Control->gLJX()) > 0.05) | (fabs(Control->gLJY()) > 0.05)) {
-		pt.x += 20 * Control->gLJX();
-		pt.y -= 20 * Control->gLJY();
+	if ((fabs(Control->gLJX()) > DEADZONE) | (fabs(Control->gLJY()) > DEADZONE)) {
+		pt.x += velCursor * Control->gLJX();
+		pt.y -= velCursor * Control->gLJY();
 		SetCursorPos(pt.x, pt.y);
 	}
-
-	if ((fabs(Control->gRJX()) > 0.05) | (fabs(Control->gRJY()) > 0.05)) {
-		pt.x += 20 * Control->gRJX();
-		pt.y -= 20 * Control->gRJY();
+	else if ((fabs(Control->gRJX()) > DEADZONE) | (fabs(Control->gRJY()) > DEADZONE)) {
+		pt.x += velCursor * Control->gRJX();
+		pt.y -= velCursor * Control->gRJY();
 		SetCursorPos(pt.x, pt.y);
 	}
 

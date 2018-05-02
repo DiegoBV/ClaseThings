@@ -14,19 +14,19 @@ void BaseHID::Actualiza()
 		wButtonsUp = (wLastButtons) & (~wButtons);
 
 		//apply inercia
-		if ((fThumbLX > 0.8) || (fThumbLX < -0.8)) velX = velX + 0.1*fThumbLX;
-		else if ((fThumbLX > 0.01) || (fThumbLX < -0.01)) velX = (velX + fThumbLX) / 2;
+		if ((fThumbLX > controlMax) || (fThumbLX < -controlMax)) velX = velX + 0.1*fThumbLX;
+		else if ((fThumbLX > controlMin) || (fThumbLX < -controlMin)) velX = (velX + fThumbLX) / 2;
 		else velX = velX *(1 - 0.1);
 
-		if ((fThumbLY > 0.8) || (fThumbLY < -0.8)) velX = velX + 0.1*fThumbLY;
-		else if ((fThumbLY > 0.01) || (fThumbLY < -0.01)) velX = (velX + fThumbLY) / 2;
+		if ((fThumbLY > controlMax) || (fThumbLY < -controlMax)) velX = velX + 0.1*fThumbLY;
+		else if ((fThumbLY > controlMin) || (fThumbLY < -controlMin)) velX = (velX + fThumbLY) / 2;
 		else velX = velX *(1 - 0.1);
 
 		//adjust inercia vel
-		if (velX > 2.0) velX = 2.0;
-		else if (velX < -2.0) velX = -2.0;
-		if (velX > 2.0) velX = 2.0;
-		else if (velX < -2.0) velX = -2.0;
+		if (velX > controlInercia) velX = controlInercia;
+		else if (velX < -controlInercia) velX = -controlInercia;
+		if (velX > controlInercia) velX = controlInercia;
+		else if (velX < -controlInercia) velX = -controlInercia;
 
 		//update rotation states
 		if ((fThumbLX > 0) && (fThumbLY > 0)) //restart

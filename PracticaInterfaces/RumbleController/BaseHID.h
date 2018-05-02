@@ -41,6 +41,10 @@ protected:
 	virtual void Mando2HID() = 0; //Vuelca el estado del mando al HID
 	Rotation roState;
 
+	const float controlMax = 0.8;
+	const float controlMin = 0.01;
+	const float controlInercia = 2.0;
+
 
 public:
 	bool bConected; //Mando Conectado
