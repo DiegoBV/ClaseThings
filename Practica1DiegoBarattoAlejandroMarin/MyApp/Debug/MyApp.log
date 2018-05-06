@@ -1,1 +1,19 @@
-﻿
+﻿  Entities.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\entities.cpp(143): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\entities.cpp(223): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\entities.cpp(231): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\entities.cpp(338): warning C4244: 'argumento': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+  Light.cpp
+  main.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\main.cpp(97): warning C4018: '<': no coinciden signed/unsigned
+  Material.cpp
+  Mesh.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\mesh.cpp(186): warning C4018: '<': no coinciden signed/unsigned
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\mesh.cpp(230): warning C4018: '<': no coinciden signed/unsigned
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\mesh.cpp(246): warning C4018: '<': no coinciden signed/unsigned
+  Pixmap32RGBA.cpp
+  Scene.cpp
+  Camera.cpp
+  Texture.cpp
+  Generando código...
+  MyApp.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\Practica1DiegoBarattoAlejandroMarin\bin\MyAppDebug.exe

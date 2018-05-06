@@ -7,10 +7,23 @@ void Scene::init()
   glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
   glEnable(GL_DEPTH_TEST);  
   glEnable(GL_TEXTURE_2D);
+  glEnable(GL_LIGHTING);
+  glEnable(GL_NORMALIZE);
+  glEnable(GL_CULL_FACE);
   
   camera->setAZ();
   angle = 1;
-    
+  luz1 = new Light();
+
+  GLfloat dir [3] = { 2.0, 1.0, -4.0 };
+
+  luz2 = new SpotLight(dir);
+  luz1->enable();
+  glm::fvec3 vdir{ 0.0, 0.0, -1.0 };
+  luz1->setDir(vdir);
+  luz2->enable();
+ 
+ 
   // lights
   // textures  
 
@@ -27,19 +40,25 @@ void Scene::init()
   //objetos.push_back(new Triangle(400.0));
 
   //objetos.push_back(new Dragon(3000));
-  */aux = new Diabolo(30.0, 50.0, 150.0, 50.0);
+  *//*aux = new Diabolo(30.0, 50.0, 150.0, 50.0);
   objetos.push_back(aux);/*
   objetos.push_back(new Cubo(150, 150));
   objetos.push_back(new Poliespiral(glm::dvec2(0.0, 0.0), 0.0, 45, 1, 1, 50));*/
   //objetos.push_back(new RectangleText(400.0, 225, 1, 1));
   //objetos.push_back(new TriPyramidText(100, 200));
-  help = new RectangleTextPhoto(200, 100, 1, 1, camera->getVP()->getW(), camera->getVP()->getH());
+  /*help = new RectangleTextPhoto(200, 100, 1, 1, camera->getVP()->getW(), camera->getVP()->getH());
   objetos.push_back(new Cubo(150, 150));
   objetos.push_back(help);
   objetos.push_back(new SueloText(2400, 2250, 20, 20));
   pot = new GlassPot(150, 500, 50.0, 80);
-  objetos.push_back(pot);
-  
+  objetos.push_back(pot);*/
+  glm::dmat4 matrix(1.0);
+  matrix = translate(matrix, glm::dvec3(100, 0, 0));
+  objetos.push_back(new Esfera(matrix));
+  matrix = translate(matrix, glm::dvec3(-250, 0, 0));
+  objetos.push_back(new Esfera(matrix));
+  matrix = translate(matrix, glm::dvec3(50, 200, 0));
+  objetos.push_back(new Esfera(matrix));
 
 }
 //-------------------------------------------------------------------------
@@ -58,6 +77,12 @@ void Scene::render()
 {
   glMatrixMode(GL_MODELVIEW);
   int i = 0;
+	
+	luz2->setDir(camera->getLook());
+    luz2->setPos(camera->getEye());
+
+	luz1->load(camera->getViewMat());
+	luz2->load(camera->getViewMat());
 
 	for each (Entity* it in objetos)
 	{
@@ -84,6 +109,20 @@ void Scene::render()
 		}	
 		i++;
 	}
+}
+void Scene::shutSpot()
+{
+	if (luz2->isOn())
+		luz2->disable();
+	else
+		luz2->enable();
+}
+void Scene::shutLight()
+{
+	if (luz1->isOn())
+		luz1->disable();
+	else
+		luz1->enable();
 }
 //-------------------------------------------------------------------------
 

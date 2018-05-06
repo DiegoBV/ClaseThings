@@ -16,6 +16,7 @@ void Entity::render(dmat4 const& modelViewMat)
 
 void Entity::draw() 
 { 
+	mat.load();
   if (mesh != nullptr) 
     mesh -> draw(); 
 }
@@ -393,6 +394,34 @@ void Grass::render(glm::dmat4 const& modelViewMat){
 
 	auxMat = rotate(auxMat, radians(-90.0), glm::dvec3(0.0, 1.0, 0.0));
 	glLoadMatrixd(value_ptr(auxMat));
+
+	draw();
+}
+
+//--------------------------------------------------------------------
+
+//--------------------------------------------------------------------
+
+Esfera::Esfera(glm::dmat4 v)
+{
+	qObj = gluNewQuadric();
+	setModelMat(v);
+}
+
+void Esfera::draw() {
+	gluQuadricDrawStyle(qObj, GLU_FILL);
+	gluQuadricNormals(qObj, GLU_SMOOTH);
+	gluQuadricOrientation(qObj, GLU_OUTSIDE);
+	gluQuadricTexture(qObj, GL_FALSE);
+	gluSphere(qObj, 100, 40, 50);
+}
+
+void Esfera::render(glm::dmat4 const& modelViewMat) {
+	setMvM(modelViewMat);
+	/*dmat4 auxMat = modelViewMat * modelMat;
+
+	auxMat = translate(auxMat, v_);
+	glLoadMatrixd(value_ptr(auxMat));*/
 
 	draw();
 }

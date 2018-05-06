@@ -6,6 +6,7 @@
 #include <glm.hpp>
 #include "Mesh.h"
 #include "Texture.h"
+#include "Material.h"
 
 //-------------------------------------------------------------------------
 
@@ -17,11 +18,16 @@ public:
 
   virtual void render(glm::dmat4 const& modelViewMat);
   virtual void update(GLuint timeElapsed) {};
+
+  void setModelMat(glm::dmat4 const& mMat) { modelMat = mMat; }
+  void setMaterial(Material const& mt) { mat = mt; }
+  void setTexture(Texture const& tex) { texture = tex; };
   
 protected:
   Mesh* mesh = nullptr;
   Texture texture;
   Texture texture2;
+  Material mat;
   glm::dmat4 modelMat;
   virtual void draw();
   virtual void setMvM(glm::dmat4 const& modelViewMat);
@@ -195,6 +201,17 @@ private:
 public:
 	GlassPot(GLdouble l, GLdouble x, GLdouble y, GLubyte alpha);
 	~GlassPot() { };
+	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
+};
+
+class Esfera : public Entity
+{
+protected:
+	GLUquadricObj* qObj;
+public:
+	Esfera(glm::dmat4 v);
+	~Esfera() { gluDeleteQuadric(qObj); };
 	virtual void draw();
 	void render(glm::dmat4 const& modelViewMat);
 };

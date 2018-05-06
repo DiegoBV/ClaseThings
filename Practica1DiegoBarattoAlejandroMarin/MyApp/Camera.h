@@ -62,7 +62,8 @@ public:
   void rotatePY(GLdouble incrPitch, GLdouble incrYaw);
   void update();
   void changeView();
- 
+  glm::dvec3 getEye() const{ return eye; };
+  glm::dvec3 getLook() const { return -n; };
 protected:
   glm::dvec3 eye = { 0.0, 0.0, 500.0 };
   glm::dvec3 look = { 0.0, 0.0, 0.0 };

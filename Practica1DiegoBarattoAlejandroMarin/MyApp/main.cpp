@@ -159,6 +159,12 @@ void key(unsigned char key, int x, int y)
   case 'p':
 	  camera.changeView();
 	  break;
+  case 'n':
+	  scene.shutLight();
+	  break;
+  case 'b':
+	  scene.shutSpot();
+	  break;
   }//switch
 
   if (need_redisplay)
