@@ -10,6 +10,7 @@ void Scene::init()
   glEnable(GL_LIGHTING);
   glEnable(GL_NORMALIZE);
   glEnable(GL_CULL_FACE);
+
   
   camera->setAZ();
   angle = 1;
@@ -54,13 +55,13 @@ void Scene::init()
   objetos.push_back(pot);*/
 
   glm::dmat4 matrix(1.0);
-  matrix = translate(matrix, glm::dvec3(100, 0, 0));
+  matrix = translate(matrix, glm::dvec3(300, 0, 0));
   objetos.push_back(new Esfera(matrix));
-  matrix = translate(matrix, glm::dvec3(-250, 0, 0));
+  matrix = translate(matrix, glm::dvec3(-550, 0, 0));
   objetos.push_back(new Esfera(matrix));
-  matrix = translate(matrix, glm::dvec3(50, 200, 0));
+  matrix = translate(matrix, glm::dvec3(350, 200, 0));
   objetos.push_back(new Esfera(matrix));
-  matrix = translate(matrix, glm::dvec3(0, 200, 0));
+  matrix = glm::dmat4(1.0);
   objetos.push_back(new EsferaLuz(matrix));
 }
 //-------------------------------------------------------------------------

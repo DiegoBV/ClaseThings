@@ -432,13 +432,12 @@ EsferaLuz::EsferaLuz(glm::dmat4 v): Esfera(v)
 {
 	GLfloat dir[3]{v[3].x, -v[3].y, v[3].z};
 	foco = new SpotLight(dir, 75);
-	foco->setPos({ 0, 0, 0 });
+	foco->setPos({ 0, 0, 0 }); //para hacer pruebas. La esfera esta situada en el (0,0,0)
 	foco->enable();
 	mat.ambient = { 0.1, 0.1, 0.1, 1 };
 	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
 	mat.specular = { 0.5, 0.5, 0.5, 1 };
 	mat.expF = 2.0;
-	mat.face = GL_FRONT;
 	mat.color[0] = 0;
 	mat.color[1] = 0.2;
 	mat.color[2] = 0;
@@ -447,6 +446,6 @@ EsferaLuz::EsferaLuz(glm::dmat4 v): Esfera(v)
 
 void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 {
-	Esfera::render(modelViewMat);
 	foco->load(modelViewMat);
+	Esfera::render(modelViewMat);
 }
