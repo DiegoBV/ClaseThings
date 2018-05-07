@@ -34,19 +34,19 @@ protected:
 	GLfloat dir[3] = { 0.0, 0.0, 0.0 };
 
 public:
-	SpotLight(GLfloat dir[]) : Light() {
+	SpotLight() {};
+
+	SpotLight(GLfloat dir[], GLfloat angle = 45.0) : Light() {
 		this->dir[0] = dir[0];
 		this->dir[1] = dir[1];
 		this->dir[2] = dir[2];
-		glLightf(id, GL_SPOT_CUTOFF, 45.0);
-		glLightf(id, GL_SPOT_EXPONENT, 2.0);
+		glLightf(id, GL_SPOT_CUTOFF, angle);
+		glLightf(id, GL_SPOT_EXPONENT, 4);
 		glLightfv(id, GL_SPOT_DIRECTION, dir);
 	}
 
 	virtual void load(glm::dmat4 const& modelViewMat) {
 		Light::load(modelViewMat);
-
-
 	}
 };
 

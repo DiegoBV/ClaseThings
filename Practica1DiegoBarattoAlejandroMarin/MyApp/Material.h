@@ -12,6 +12,7 @@ public:
 	GLfloat expF; // exponente especular
 	GLuint face = GL_FRONT_AND_BACK; // ambos lados
 	GLuint sh = GL_SMOOTH; // smooth shading
+	GLfloat color[4] = {0,0,0,1};
 	virtual void load();
 };
 

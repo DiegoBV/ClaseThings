@@ -406,9 +406,14 @@ Esfera::Esfera(glm::dmat4 v)
 {
 	qObj = gluNewQuadric();
 	setModelMat(v);
+	mat.ambient = { 0.1, 0.1, 0.1, 1 };
+	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
+	mat.specular = { 0.5, 0.5, 0.5, 1 };
+	mat.expF = 2.0;
 }
 
 void Esfera::draw() {
+	mat.load();
 	gluQuadricDrawStyle(qObj, GLU_FILL);
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricOrientation(qObj, GLU_OUTSIDE);
@@ -418,13 +423,30 @@ void Esfera::draw() {
 
 void Esfera::render(glm::dmat4 const& modelViewMat) {
 	setMvM(modelViewMat);
-	/*dmat4 auxMat = modelViewMat * modelMat;
-
-	auxMat = translate(auxMat, v_);
-	glLoadMatrixd(value_ptr(auxMat));*/
-
 	draw();
 }
 
 //--------------------------------------------------------------------
 
+EsferaLuz::EsferaLuz(glm::dmat4 v): Esfera(v)
+{
+	GLfloat dir[3]{v[3].x, -v[3].y, v[3].z};
+	foco = new SpotLight(dir, 75);
+	foco->setPos({ 0, 0, 0 });
+	foco->enable();
+	mat.ambient = { 0.1, 0.1, 0.1, 1 };
+	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
+	mat.specular = { 0.5, 0.5, 0.5, 1 };
+	mat.expF = 2.0;
+	mat.face = GL_FRONT;
+	mat.color[0] = 0;
+	mat.color[1] = 0.2;
+	mat.color[2] = 0;
+	mat.color[3] = 1;
+}
+
+void EsferaLuz::render(glm::dmat4 const & modelViewMat)
+{
+	Esfera::render(modelViewMat);
+	foco->load(modelViewMat);
+}

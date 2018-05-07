@@ -52,6 +52,7 @@ void Scene::init()
   objetos.push_back(new SueloText(2400, 2250, 20, 20));
   pot = new GlassPot(150, 500, 50.0, 80);
   objetos.push_back(pot);*/
+
   glm::dmat4 matrix(1.0);
   matrix = translate(matrix, glm::dvec3(100, 0, 0));
   objetos.push_back(new Esfera(matrix));
@@ -59,7 +60,8 @@ void Scene::init()
   objetos.push_back(new Esfera(matrix));
   matrix = translate(matrix, glm::dvec3(50, 200, 0));
   objetos.push_back(new Esfera(matrix));
-
+  matrix = translate(matrix, glm::dvec3(0, 200, 0));
+  objetos.push_back(new EsferaLuz(matrix));
 }
 //-------------------------------------------------------------------------
 
@@ -78,11 +80,11 @@ void Scene::render()
   glMatrixMode(GL_MODELVIEW);
   int i = 0;
 	
-	luz2->setDir(camera->getLook());
-    luz2->setPos(camera->getEye());
+	  luz2->setDir(camera->getLook());
+	  luz2->setPos(camera->getEye());
+	  luz2->load(camera->getViewMat());
 
-	luz1->load(camera->getViewMat());
-	luz2->load(camera->getViewMat());
+	  luz1->load(camera->getViewMat());
 
 	for each (Entity* it in objetos)
 	{

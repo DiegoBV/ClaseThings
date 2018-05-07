@@ -7,6 +7,7 @@
 #include "Mesh.h"
 #include "Texture.h"
 #include "Material.h"
+#include "Light.h"
 
 //-------------------------------------------------------------------------
 
@@ -210,9 +211,21 @@ class Esfera : public Entity
 protected:
 	GLUquadricObj* qObj;
 public:
+	Esfera() {};
 	Esfera(glm::dmat4 v);
-	~Esfera() { gluDeleteQuadric(qObj); };
+	virtual ~Esfera() { gluDeleteQuadric(qObj); };
 	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
+};
+
+class EsferaLuz : public Esfera
+{
+protected:
+	GLUquadricObj * qObj;
+	SpotLight* foco;
+public:
+	EsferaLuz(glm::dmat4 v);
+	virtual ~EsferaLuz() { delete foco; };
 	void render(glm::dmat4 const& modelViewMat);
 };
 
