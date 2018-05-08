@@ -410,15 +410,18 @@ Esfera::Esfera(glm::dmat4 v)
 	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
 	mat.specular = { 0.5, 0.5, 0.5, 1 };
 	mat.expF = 2.0;
+	texture.load("..\\Bmps\\moon.bmp");
 }
 
 void Esfera::draw() {
+	texture.bind();
 	mat.load();
 	gluQuadricDrawStyle(qObj, GLU_FILL);
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricOrientation(qObj, GLU_OUTSIDE);
-	gluQuadricTexture(qObj, GL_FALSE);
+	gluQuadricTexture(qObj, GL_TRUE);
 	gluSphere(qObj, 100, 40, 50);
+	texture.unbind();
 }
 
 void Esfera::render(glm::dmat4 const& modelViewMat) {

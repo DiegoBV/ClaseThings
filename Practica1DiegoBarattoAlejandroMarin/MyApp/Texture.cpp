@@ -16,10 +16,11 @@ void Texture::init() {
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 }
 
-void Texture::bind() {
+void Texture::bind(GLuint mix) {
 	glBindTexture(GL_TEXTURE_2D, id);
 
 	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV, GL_REPLACE);
+
 }
 
 bool Texture::load(const std::string & BMP_Name, GLubyte alpha) {

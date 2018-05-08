@@ -18,7 +18,7 @@ public:
 	bool load(const std::string &BMP_Name, GLubyte alpha = 255);
 	bool load(const std::string & BMP_Name, glm::ivec3 color, GLubyte alpha);
 
-	void bind();
+	void bind(GLuint mix = GL_REPLACE);
 
 	void unbind() 
 	{ 
