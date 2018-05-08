@@ -402,7 +402,7 @@ void Grass::render(glm::dmat4 const& modelViewMat){
 
 //--------------------------------------------------------------------
 
-Esfera::Esfera(glm::dmat4 v)
+Esfera::Esfera(glm::dmat4 v,std::string text)
 {
 	qObj = gluNewQuadric();
 	setModelMat(v);
@@ -410,7 +410,7 @@ Esfera::Esfera(glm::dmat4 v)
 	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
 	mat.specular = { 0.5, 0.5, 0.5, 1 };
 	mat.expF = 2.0;
-	texture.load("..\\Bmps\\moon.bmp");
+	texture.load(text);
 }
 
 void Esfera::draw() {
@@ -431,7 +431,7 @@ void Esfera::render(glm::dmat4 const& modelViewMat) {
 
 //--------------------------------------------------------------------
 
-EsferaLuz::EsferaLuz(glm::dmat4 v): Esfera(v)
+EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text): Esfera(v, text)
 {
 	GLfloat dir[3]{v[3].x, -v[3].y, v[3].z};
 	foco = new SpotLight(dir, 75);

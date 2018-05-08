@@ -56,13 +56,13 @@ void Scene::init()
 
   glm::dmat4 matrix(1.0);
   matrix = translate(matrix, glm::dvec3(300, 0, 0));
-  objetos.push_back(new Esfera(matrix));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp"));
   matrix = translate(matrix, glm::dvec3(-550, 0, 0));
-  objetos.push_back(new Esfera(matrix));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\moon.bmp"));
   matrix = translate(matrix, glm::dvec3(350, 200, 0));
-  objetos.push_back(new Esfera(matrix));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\mars.bmp"));
   matrix = glm::dmat4(1.0);
-  objetos.push_back(new EsferaLuz(matrix));
+  objetos.push_back(new EsferaLuz(matrix, "..\\Bmps\\terreno.bmp"));
 }
 //-------------------------------------------------------------------------
 

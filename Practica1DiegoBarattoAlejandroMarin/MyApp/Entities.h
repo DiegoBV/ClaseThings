@@ -8,6 +8,7 @@
 #include "Texture.h"
 #include "Material.h"
 #include "Light.h"
+#include <string>
 
 //-------------------------------------------------------------------------
 
@@ -212,7 +213,7 @@ protected:
 	GLUquadricObj* qObj;
 public:
 	Esfera() {};
-	Esfera(glm::dmat4 v);
+	Esfera(glm::dmat4 v, std::string text);
 	virtual ~Esfera() { gluDeleteQuadric(qObj); };
 	virtual void draw();
 	void render(glm::dmat4 const& modelViewMat);
@@ -224,7 +225,7 @@ protected:
 	GLUquadricObj * qObj;
 	SpotLight* foco;
 public:
-	EsferaLuz(glm::dmat4 v);
+	EsferaLuz(glm::dmat4 v, std::string text);
 	virtual ~EsferaLuz() { delete foco; };
 	void render(glm::dmat4 const& modelViewMat);
 };
