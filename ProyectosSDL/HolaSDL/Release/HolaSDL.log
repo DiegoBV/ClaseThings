@@ -1,0 +1,52 @@
+﻿Build started 12/02/2018 12:12:46.
+     1>Project "C:\hlocal\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" on node 2 (Rebuild target(s)).
+     1>ClCompile:
+         C:\software\programacion\MSVStudio2013\VC\bin\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /Oy- /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Release\\" /Fd"Release\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt Ball.cpp Collisions.cpp DemoActor.cpp ExampleGame.cpp Font.cpp GameObject.cpp main.cpp Music.cpp Paddle.cpp PaddleWithAI.cpp PaddleWithAIWithTransRect.cpp PaddleWithMouse.cpp PaddleWithMouseWithTransRect.cpp PaddleWithTransRect.cpp Resources.cpp SDLGame.cpp SoundEffect.cpp Texture.cpp Vector2D.cpp
+         Ball.cpp
+         Collisions.cpp
+         DemoActor.cpp
+         ExampleGame.cpp
+         Font.cpp
+         GameObject.cpp
+         main.cpp
+         Music.cpp
+         Paddle.cpp
+         PaddleWithAI.cpp
+         PaddleWithAIWithTransRect.cpp
+         PaddleWithMouse.cpp
+         PaddleWithMouseWithTransRect.cpp
+         PaddleWithTransRect.cpp
+         Resources.cpp
+         SDLGame.cpp
+         SoundEffect.cpp
+         Texture.cpp
+         Vector2D.cpp
+       Link:
+         C:\software\programacion\MSVStudio2013\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.exe" /NOLOGO SDL2.lib SDL2main.lib SDL2_image.lib SDL2_ttf.lib SDL2_mixer.lib SDL2_net.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.lib" /MACHINE:X86 /SAFESEH Release\Ball.obj
+         Release\Collisions.obj
+         Release\DemoActor.obj
+         Release\ExampleGame.obj
+         Release\Font.obj
+         Release\GameObject.obj
+         Release\main.obj
+         Release\Music.obj
+         Release\Paddle.obj
+         Release\PaddleWithAI.obj
+         Release\PaddleWithAIWithTransRect.obj
+         Release\PaddleWithMouse.obj
+         Release\PaddleWithMouseWithTransRect.obj
+         Release\PaddleWithTransRect.obj
+         Release\Resources.obj
+         Release\SDLGame.obj
+         Release\SoundEffect.obj
+         Release\Texture.obj
+         Release\Vector2D.obj
+            Creating library C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.lib and object C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.exp
+         Generating code
+         Finished generating code
+         HolaSDL.vcxproj -> C:\hlocal\ProyectosSDL\bin\HolaSDLRelease.exe
+     1>Done Building Project "C:\hlocal\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" (Rebuild target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:06.50

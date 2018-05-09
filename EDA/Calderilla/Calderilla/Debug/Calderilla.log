@@ -1,7 +1,0 @@
-﻿  Source.cpp
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(27): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(39): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(57): warning C4018: '<': signed/unsigned mismatch
-c:\users\usuario\desktop\calderilla\calderilla\source.cpp(91): warning C4018: '<': signed/unsigned mismatch
-  Calderilla.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Calderilla.exe
-  Calderilla.vcxproj -> C:\Users\Usuario\Desktop\Calderilla\Debug\Calderilla.pdb (Partial PDB)
