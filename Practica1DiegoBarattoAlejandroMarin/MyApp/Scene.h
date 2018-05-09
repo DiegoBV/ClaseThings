@@ -23,17 +23,20 @@ public:
 	  void update(GLuint timeElapsed) { for each (Entity* it in objetos) {it->update(timeElapsed); } };
 	  void shutSpot();
 	  void shutLight();
+	  void shutSphereLight();
 	  
 protected:
 	Diabolo* aux;
 	GlassPot* pot;
 	GLdouble angle;
 	Camera* camera;
+	std::vector<Material> mats;
 	std::vector<Entity*> objetos;
 	bool change = false;
 	RectangleText* rect;
 	Light* luz1;
 	Light* luz2;
+	EsferaLuz* esf;
 };
 
 //-------------------------------------------------------------------------

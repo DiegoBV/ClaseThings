@@ -402,25 +402,21 @@ void Grass::render(glm::dmat4 const& modelViewMat){
 
 //--------------------------------------------------------------------
 
-Esfera::Esfera(glm::dmat4 v,std::string text)
+Esfera::Esfera(glm::dmat4 v,std::string text, GLdouble radio, GLdouble dV, GLdouble dH): radio_(radio), dV_(dV), dH_(dH)
 {
 	qObj = gluNewQuadric();
 	setModelMat(v);
-	mat.ambient = { 0.1, 0.1, 0.1, 1 };
-	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
-	mat.specular = { 0.5, 0.5, 0.5, 1 };
-	mat.expF = 2.0;
 	texture.load(text);
 }
 
 void Esfera::draw() {
+	Entity::draw();
 	texture.bind();
-	mat.load();
 	gluQuadricDrawStyle(qObj, GLU_FILL);
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricOrientation(qObj, GLU_OUTSIDE);
 	gluQuadricTexture(qObj, GL_TRUE);
-	gluSphere(qObj, 100, 40, 50);
+	gluSphere(qObj, radio_, dV_, dH_);
 	texture.unbind();
 }
 
@@ -431,20 +427,12 @@ void Esfera::render(glm::dmat4 const& modelViewMat) {
 
 //--------------------------------------------------------------------
 
-EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text): Esfera(v, text)
+EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH): Esfera(v, text, radio, dV, dH)
 {
-	GLfloat dir[3]{v[3].x, -v[3].y, v[3].z};
+	GLfloat dir[3]{0.0, -1.0, 0.0};
 	foco = new SpotLight(dir, 75);
-	foco->setPos({ 0, 0, 0 }); //para hacer pruebas. La esfera esta situada en el (0,0,0)
+	foco->setPos({ v[3].x, v[3].y, v[3].z }); //para hacer pruebas. La esfera esta situada en el (0,0,0)
 	foco->enable();
-	mat.ambient = { 0.1, 0.1, 0.1, 1 };
-	mat.diffuse = { 0.5, 0.5, 0.5, 1 };
-	mat.specular = { 0.5, 0.5, 0.5, 1 };
-	mat.expF = 2.0;
-	mat.color[0] = 0;
-	mat.color[1] = 0.2;
-	mat.color[2] = 0;
-	mat.color[3] = 1;
 }
 
 void EsferaLuz::render(glm::dmat4 const & modelViewMat)

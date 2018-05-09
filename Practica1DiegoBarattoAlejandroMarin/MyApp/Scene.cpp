@@ -56,13 +56,51 @@ void Scene::init()
 
   glm::dmat4 matrix(1.0);
   matrix = translate(matrix, glm::dvec3(300, 0, 0));
-  objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp"));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp", 100, 100, 100));
+  mats.push_back(Material());
+  mats.back().ambient = { 0.1, 0.1, 0.1, 1 }; //set de material
+  mats.back().diffuse = { 0.5, 0.5, 0.5, 1 };
+  mats.back().specular = { 0.5, 0.5, 0.5, 1 };
+  mats.back().expF = 2.0;
+  objetos.back()->setMaterial(mats.back());
+
   matrix = translate(matrix, glm::dvec3(-550, 0, 0));
-  objetos.push_back(new Esfera(matrix, "..\\Bmps\\moon.bmp"));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\moon.bmp", 100, 100, 100));
+  mats.push_back(Material());
+  mats.back().ambient = { 0.4, 0.3, 0.1, 1 };
+  mats.back().diffuse = { 0.5, 0.8, 0.5, 1 };
+  mats.back().specular = { 0.5, 0.8, 0.5, 1 };
+  mats.back().expF = 4.0;
+  objetos.back()->setMaterial(mats.back());
+
   matrix = translate(matrix, glm::dvec3(350, 200, 0));
-  objetos.push_back(new Esfera(matrix, "..\\Bmps\\mars.bmp"));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\mars.bmp", 100, 100, 100));
+  mats.push_back(Material());
+  mats.back().ambient = { 0.1, 0.2, 0.7, 1 };
+  mats.back().diffuse = { 0.5, 0.1, 0.5, 1 };
+  mats.back().specular = { 0.5, 0.7, 0.5, 1 };
+  mats.back().expF = 3.0;
+  objetos.back()->setMaterial(mats.back());
   matrix = glm::dmat4(1.0);
-  objetos.push_back(new EsferaLuz(matrix, "..\\Bmps\\terreno.bmp"));
+
+  esf = new EsferaLuz(matrix, "..\\Bmps\\venus.bmp", 50, 100, 100);
+  objetos.push_back(esf);
+  mats.push_back(Material());
+  mats.back().ambient = { 0.2, 0.2, 0.1, 1 };
+  mats.back().diffuse = { 0.5, 0.5, 0.5, 1 };
+  mats.back().specular = { 0.5, 0.8, 0.5, 1 };
+  mats.back().expF = 8.0;
+  objetos.back()->setMaterial(mats.back());
+
+  matrix = translate(matrix, glm::dvec3(0, -300, 0));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp", 100, 100, 100));
+  mats.push_back(Material());
+  mats.back().ambient = { 0.1, 0.1, 0.1, 1 };
+  mats.back().diffuse = { 0.5, 0.5, 0.5, 1 };
+  mats.back().specular = { 0.5, 0.5, 0.5, 1 };
+  mats.back().expF = 2.0;
+  objetos.back()->setMaterial(mats.back());
+
 }
 //-------------------------------------------------------------------------
 
@@ -126,6 +164,16 @@ void Scene::shutLight()
 		luz1->disable();
 	else
 		luz1->enable();
+}
+void Scene::shutSphereLight()
+{
+	if (esf->getFoco()->isOn()) {
+		esf->getFoco()->disable();
+	}
+	else
+	{
+		esf->getFoco()->enable();
+	}
 }
 //-------------------------------------------------------------------------
 

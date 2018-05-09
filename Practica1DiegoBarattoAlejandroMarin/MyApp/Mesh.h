@@ -33,6 +33,7 @@ protected:
    GLuint type = GL_POINTS;
    glm::dvec3* vertices = nullptr;
    glm::dvec4* colors = nullptr;
+   glm::dvec3* normals = nullptr;
    static glm::dvec2 mover(GLdouble x, GLdouble y, GLdouble angle, GLdouble lon);
    glm::dvec2* textCoords = nullptr;
 };

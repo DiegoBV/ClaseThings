@@ -211,9 +211,10 @@ class Esfera : public Entity
 {
 protected:
 	GLUquadricObj* qObj;
+	GLdouble radio_, dV_, dH_;
 public:
 	Esfera() {};
-	Esfera(glm::dmat4 v, std::string text);
+	Esfera(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH);
 	virtual ~Esfera() { gluDeleteQuadric(qObj); };
 	virtual void draw();
 	void render(glm::dmat4 const& modelViewMat);
@@ -225,9 +226,12 @@ protected:
 	GLUquadricObj * qObj;
 	SpotLight* foco;
 public:
-	EsferaLuz(glm::dmat4 v, std::string text);
+	EsferaLuz(glm::dmat4 v, std::string text,GLdouble radio, GLdouble dV, GLdouble dH);
 	virtual ~EsferaLuz() { delete foco; };
 	void render(glm::dmat4 const& modelViewMat);
+	SpotLight* getFoco() {
+		return foco;
+	}
 };
 
 

@@ -25,6 +25,11 @@ void Mesh::draw()
 		glEnableClientState(GL_TEXTURE_COORD_ARRAY); //hbilitamos coorddenadas de textura
 		glTexCoordPointer(2, GL_DOUBLE, 0, textCoords);
 	}
+
+	if (normals != nullptr) {
+		glEnableClientState(GL_NORMAL_ARRAY); glNormalPointer(GL_DOUBLE, 0, normals);
+		glDisableClientState(GL_NORMAL_ARRAY);
+	}
 	
     glDrawArrays(type, 0, numVertices);   // kind of primitives, first, count
 

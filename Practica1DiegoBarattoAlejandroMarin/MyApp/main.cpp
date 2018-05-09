@@ -165,6 +165,9 @@ void key(unsigned char key, int x, int y)
   case 'b':
 	  scene.shutSpot();
 	  break;
+  case 'm':
+	  scene.shutSphereLight();
+	  break;
   }//switch
 
   if (need_redisplay)
