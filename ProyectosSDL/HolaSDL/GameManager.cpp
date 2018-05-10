@@ -1,13 +1,18 @@
 #include "GameManager.h"
 
+
 GameManager::GameManager(SDLGame* game) :
 		Container(game), gameMsgRenderer_(), gameCtrlInputComponent_(), connectedPlayersRenderer_(), playerInfoRenderer_(), state_(
 				WAITING), players_(), numOfConnectedPlayers_(0), alivePlayers_(
 				0) {
+
+	timer_.registerObserver(this);
+
 	addRenderComponent(&gameMsgRenderer_);
 	//addRenderComponent(&connectedPlayersRenderer_);
 	addRenderComponent(&playerInfoRenderer_);
 	addInputComponent(&gameCtrlInputComponent_);
+	addPhysicsComponent(&timer_);
 }
 
 GameManager::~GameManager() {
@@ -46,6 +51,7 @@ void GameManager::receive(Message* msg) {
 		getReady();
 		break;
 	case GAME_START:
+		timer_.setOn(true);
 		startGame();
 		break;
 	case GAME_OVER:
@@ -53,6 +59,23 @@ void GameManager::receive(Message* msg) {
 		break;
 	case BULLET_FIGHTER_COLLISION:
 		killPlayer(static_cast<BulletFighterCollisionMsg*>(msg)->fighterId_);
+		break;
+	case TIME_HAS_PASSED:
+		if (getGame()->isMasterClient()) { //si es el master, anyade asteroides
+			send(&Message(ADD_ASTEROID)); 
+			cout << "sending" << endl;
+		}
+		break;
+	case ASTEROID_ADDED:
+		if (getGame()->isMasterClient()) {
+			msg->mType_ = NEW_ASTEROID_INCOMING;
+			send(msg);
+			cout << "mandando info a otros players";
+		}
+		break;
+	case NEW_ASTEROID_INCOMING:
+		msg->mType_ = ADDING_ASTEROID;
+		send(msg);
 		break;
 	}
 }

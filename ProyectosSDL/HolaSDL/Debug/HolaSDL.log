@@ -1,8 +1,1 @@
-﻿Build started 09/05/2018 16:43:25.
-     1>Project "C:\hlocal\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" on node 2 (Clean target(s)).
-     1>C:\Program Files (x86)\MSBuild\Microsoft.Cpp\v4.0\V120\Microsoft.CppClean.targets(76,5): warning : Access to the path 'c:\hlocal\proyectossdl\bin\holasdldebug.exe' is denied.
-     1>Done Building Project "C:\hlocal\ProyectosSDL\HolaSDL\HolaSDL.vcxproj" (Clean target(s)).
-
-Build succeeded.
-
-Time Elapsed 00:00:00.05
+﻿

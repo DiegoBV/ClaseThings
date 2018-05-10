@@ -5,6 +5,7 @@
 
 class ImageRenderer: public RenderComponent {
 public:
+	ImageRenderer() {};
 	ImageRenderer(Texture* texture);
 	ImageRenderer(Texture* texture, SDL_Rect clip);
 

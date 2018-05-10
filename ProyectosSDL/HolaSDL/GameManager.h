@@ -7,6 +7,7 @@
 #include "ConnectedPlayersRenderer.h"
 #include "GameStatusRenderer.h"
 #include "PlayersInfoRenderer.h"
+#include "Timer.h"
 
 /*
  *
@@ -54,6 +55,8 @@ private:
 	PlayersInfoRenderer playerInfoRenderer_;
 
 	GameState state_;
+
+	Timer timer_;
 
 	vector<PlayerInfo> players_;
 	int numOfConnectedPlayers_;

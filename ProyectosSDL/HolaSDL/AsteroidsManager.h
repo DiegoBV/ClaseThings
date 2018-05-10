@@ -23,13 +23,19 @@ public:
 	virtual void update(Uint32 time);
 	virtual void render(Uint32 time);
 	virtual void receive(Message* msg);
-	void addNewAsteroid();
+	void addNewAsteroid(bool updating);
 	pair<bool, Asteroid*> checkAsteroids();
+	Asteroid* getLastAsteroid() const { return asteroids_.back(); };
 
 private:
 
+	NewAsteroidMsg * msg;
+
 	vector<Asteroid*> asteroids_;
 
+	ImageRenderer render_;
 
+	void setRandomParam(Asteroid* ast);
+	void setParam(Vector2D pos, Vector2D vel, Vector2D dir, int width, int height, bool active, Asteroid* ast);
 };
 
