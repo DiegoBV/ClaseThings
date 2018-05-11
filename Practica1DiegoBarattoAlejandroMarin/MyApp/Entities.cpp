@@ -3,6 +3,7 @@
 #include <gtc/matrix_transform.hpp>  
 #include <gtc/type_ptr.hpp>
 
+
 using namespace glm;
 
 //-------------------------------------------------------------------------
@@ -439,4 +440,24 @@ void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 {
 	foco->load(modelViewMat);
 	Esfera::render(modelViewMat);
+}
+
+Terreno::Terreno()
+{
+	texture.load("..\\Bmps\\BarrenReds.bmp");
+	terrainMesh = terrainMesh->generateTerrain();
+	//terrainMesh = IndexMesh::generateTerrain(); //no deja?
+}
+
+void Terreno::draw()
+{
+	texture.bind();
+	terrainMesh->draw();
+	texture.unbind();
+}
+
+void Terreno::render(glm::dmat4 const & modelViewMat)
+{
+	setMvM(modelViewMat);
+	draw();
 }

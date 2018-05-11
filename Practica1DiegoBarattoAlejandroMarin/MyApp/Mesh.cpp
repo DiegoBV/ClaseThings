@@ -8,34 +8,43 @@ Mesh ::~Mesh(void)
 {
   delete[] vertices;
   delete[] colors;
+  delete[] textCoords;
+  delete[] normals;
 }
 //-------------------------------------------------------------------------
 
+void Mesh::enable() {
+	if (vertices != nullptr) {
+		glEnableClientState(GL_VERTEX_ARRAY);
+		glVertexPointer(3, GL_DOUBLE, 0, vertices);  // number of coordinates per vertex, type of each coordinate 
+		if (colors != nullptr) {
+			glEnableClientState(GL_COLOR_ARRAY);
+			glColorPointer(4, GL_DOUBLE, 0, colors);   // number of coordinates per color, type of each coordinate 
+		}
+
+		if (textCoords != nullptr) {
+			glEnableClientState(GL_TEXTURE_COORD_ARRAY); //hbilitamos coorddenadas de textura
+			glTexCoordPointer(2, GL_DOUBLE, 0, textCoords);
+		}
+
+		if (normals != nullptr) {
+			glEnableClientState(GL_NORMAL_ARRAY); glNormalPointer(GL_DOUBLE, 0, normals);
+			glDisableClientState(GL_NORMAL_ARRAY);
+		}
+	}
+}
+
+void Mesh::disable() {
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+}
+
 void Mesh::draw() 
 {
-  if (vertices != nullptr) {
-    glEnableClientState(GL_VERTEX_ARRAY);
-    glVertexPointer(3, GL_DOUBLE, 0, vertices);  // number of coordinates per vertex, type of each coordinate 
-    if (colors != nullptr) {
-      glEnableClientState(GL_COLOR_ARRAY);
-      glColorPointer(4, GL_DOUBLE, 0, colors);   // number of coordinates per color, type of each coordinate 
-    }
-
-	if (textCoords != nullptr) {
-		glEnableClientState(GL_TEXTURE_COORD_ARRAY); //hbilitamos coorddenadas de textura
-		glTexCoordPointer(2, GL_DOUBLE, 0, textCoords);
-	}
-
-	if (normals != nullptr) {
-		glEnableClientState(GL_NORMAL_ARRAY); glNormalPointer(GL_DOUBLE, 0, normals);
-		glDisableClientState(GL_NORMAL_ARRAY);
-	}
-	
+	enable();
     glDrawArrays(type, 0, numVertices);   // kind of primitives, first, count
 
-	  glDisableClientState(GL_TEXTURE_COORD_ARRAY);
-    glDisableClientState(GL_COLOR_ARRAY);
-  }
+	disable();
 }
 //-------------------------------------------------------------------------
 

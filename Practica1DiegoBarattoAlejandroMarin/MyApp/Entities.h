@@ -5,6 +5,7 @@
 #include <GL/freeglut.h>
 #include <glm.hpp>
 #include "Mesh.h"
+#include "IndexMesh.h"
 #include "Texture.h"
 #include "Material.h"
 #include "Light.h"
@@ -232,6 +233,17 @@ public:
 	SpotLight* getFoco() {
 		return foco;
 	}
+};
+
+class Terreno : public Entity
+{
+private:
+	IndexMesh * terrainMesh;
+public:
+	Terreno();
+	virtual ~Terreno() {};
+	virtual void draw();
+	void render(glm::dmat4 const& modelViewMat);
 };
 
 

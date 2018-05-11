@@ -80,6 +80,8 @@ void Scene::init()
   objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp", 100, 100, 100));
   mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
   objetos.back()->setMaterial(mats.back());
+
+  objetos.push_back(new Terreno());
 }
 //-------------------------------------------------------------------------
 
