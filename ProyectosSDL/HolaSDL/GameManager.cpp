@@ -62,20 +62,8 @@ void GameManager::receive(Message* msg) {
 		break;
 	case TIME_HAS_PASSED:
 		if (getGame()->isMasterClient()) { //si es el master, anyade asteroides
-			send(&Message(ADD_ASTEROID)); 
-			cout << "sending" << endl;
+			send(&Message(ADD_ASTEROID));
 		}
-		break;
-	case ASTEROID_ADDED:
-		if (getGame()->isMasterClient()) {
-			msg->mType_ = NEW_ASTEROID_INCOMING;
-			send(msg);
-			cout << "mandando info a otros players";
-		}
-		break;
-	case NEW_ASTEROID_INCOMING:
-		msg->mType_ = ADDING_ASTEROID;
-		send(msg);
 		break;
 	}
 }

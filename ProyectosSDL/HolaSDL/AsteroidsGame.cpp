@@ -44,18 +44,19 @@ void AsteroidsGame::initGame() {
 	 **/
 
 	gameManager_.registerObserver(&asteroidsManager_); //registramos como observer del gm el asteroidsManager
-
 	gameManager_.registerObserver(&networkMessenger_);
 	gameManager_.registerObserver(&fightersManager_);
 	gameManager_.registerObserver(&bulletsManager_);
 
-	asteroidsManager_.registerObserver(&gameManager_);
+	//asteroidsManager_.registerObserver(&gameManager_);
 
 	networkMessenger_.registerObserver(&gameManager_);
 	networkMessenger_.registerObserver(&fightersManager_);
 	networkMessenger_.registerObserver(&bulletsManager_);
+	networkMessenger_.registerObserver(&asteroidsManager_);
 
 	fightersManager_.registerObserver(&networkMessenger_);
+	asteroidsManager_.registerObserver(&networkMessenger_);
 
 	collisionManager_.registerObserver(&networkMessenger_);
 	collisionManager_.registerObserver(&fightersManager_);

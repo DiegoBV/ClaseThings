@@ -26,5 +26,4 @@ void NetworkMessenger::init(ClientConnection* conn) {
 	conn_ = conn;
 	socketSet_ = SDLNet_AllocSocketSet(1);
 	SDLNet_TCP_AddSocket(socketSet_, conn_->getSocket());
-
 }

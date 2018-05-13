@@ -5,7 +5,7 @@
 AsteroidsManager::AsteroidsManager(SDLGame* game) :
 		GameObject(game) {
 
-	render_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Astroid));
+	render_ = ImageRenderer(game->getResources()->getImageTexture(Resources::TennisBall));
 
 }
 
@@ -30,7 +30,6 @@ void AsteroidsManager::render(Uint32 time) {
 	for (Asteroid* a : asteroids_)
 		if (a->isActive()) {
 			a->render(time);
-			cout << "rendering";
 		}
 }
 
@@ -40,12 +39,17 @@ void AsteroidsManager::receive(Message* msg) {
 		// add you code
 		break;
 	case ADD_ASTEROID:
-		this->addNewAsteroid(false);
-		send(&NewAsteroidMsg(ASTEROID_ADDED, getLastAsteroid()->getPosition(), getLastAsteroid()->getVelocity(), getLastAsteroid()->getDirection(), getLastAsteroid()->getWidth(), getLastAsteroid()->getHeight(), getLastAsteroid()->isActive()));
+		if (getGame()->isMasterClient()) {
+			this->addNewAsteroid(false);
+			send(&NewAsteroidMsg(ASTEROID_ADDED, getLastAsteroid()->getPosition(), getLastAsteroid()->getVelocity(), getLastAsteroid()->getDirection(), getLastAsteroid()->getWidth(), getLastAsteroid()->getHeight(), getLastAsteroid()->isActive()));
+			cout << "mandando info a otros players";
+		}
 		break;
-	case ADDING_ASTEROID:
-		cout << "recibiendo info...";
-		this->msg = static_cast<NewAsteroidMsg*>(msg);
+	case ASTEROID_ADDED:
+		cout << "recibiendo info..."; //SE RECIBE MAL
+		NewAsteroidMsg* m = static_cast<NewAsteroidMsg*>(msg);
+		//cout << endl << m->astPosition_ << "+ " << m->astVelocity_ << "+ " << m->astDirection_ << "+ " << m->astWidth_ << "+ " << m->astHeight_ << "+ " << m->astActive_ << endl;
+		this->msg = m;
 		this->addNewAsteroid(true);
 		break;
 		//add other cases
@@ -69,9 +73,11 @@ void AsteroidsManager::addNewAsteroid(bool updating){
 
 	if (ast != nullptr){
 		if (!updating) setRandomParam(ast);  //updating es un bool que indica si es el primero en crearse o esta updateando el juego
-		else { setParam(msg->astPosition_, msg->astVelocity_, msg->astDirection_, msg->astWidth_, msg->astHeight_, msg->astActive_, ast);}
+		else { setParam(msg->astPosition_, msg->astVelocity_, msg->astDirection_, msg->astWidth_, msg->astHeight_, msg->astActive_, ast); /*cout << msg->astPosition_ << "+ " << msg->astVelocity_ << "+ " << msg->astDirection_ << "+ " << msg->astWidth_ << "+ " << msg->astHeight_ << "+ " << msg->astActive_;*/ }
 		asteroids_.push_back(ast);
 	}
+
+	cout << asteroids_.size();
 }
 
 pair<bool, Asteroid*> AsteroidsManager::checkAsteroids() {
