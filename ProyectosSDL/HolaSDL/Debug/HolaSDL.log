@@ -1,1 +1,66 @@
-﻿
+﻿  Asteroid.cpp
+  AsteroidsGame.cpp
+  AsteroidsManager.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\asteroidsmanager.cpp(44): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  BasicKBCtrlComponent.cpp
+  BasicMotionPhysics.cpp
+  Bullet.cpp
+  BulletsManager.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\bulletsmanager.cpp(74): warning C4267: 'argumento': conversión de 'size_t' a 'Uint16'; posible pérdida de datos
+  CircularMotionPhysics.cpp
+  ClientConnection.cpp
+  CollisionManager.cpp
+  Collisions.cpp
+  ConnectedPlayersRenderer.cpp
+  Container.cpp
+  DeActivateOnBorderExit.cpp
+  DemoActor.cpp
+  Fighter.cpp
+  FightersManager.cpp
+  FillRectRenderer.cpp
+  Font.cpp
+  FreeMoveInputComponent.cpp
+  Generando código...
+  Compilando...
+  GameCtrlInputComponent.cpp
+  GameManager.cpp
+  GameObject.cpp
+  GameStatusRenderer.cpp
+  GunInputComponent.cpp
+  ImageRenderer.cpp
+  InputComponent.cpp
+  main.cpp
+  Music.cpp
+  NetworkMessanger.cpp
+  NetworkMessenger.cpp
+  Observable.cpp
+  Observer.cpp
+  PhysicsComponent.cpp
+  PlayersInfoRenderer.cpp
+  RenderComponent.cpp
+  Resources.cpp
+  RotationPhysics.cpp
+  SDLGame.cpp
+  Server.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\server.cpp(82): warning C4018: '<': no coinciden signed/unsigned
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\server.cpp(98): warning C4018: '<': no coinciden signed/unsigned
+  Generando código...
+  Compilando...
+  SkeletonRenderer.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(42): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(41): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(44): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(43): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(46): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(45): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(48): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(47): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(53): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\proyectossdl\holasdl\skeletonrenderer.cpp(61): warning C4244: 'argumento': conversión de 'double' a 'int'; posible pérdida de datos
+  SoundEffect.cpp
+  Texture.cpp
+  Timer.cpp
+  Vector2D.cpp
+  Generando código...
+     Creando biblioteca C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\ProyectosSDL\bin\HolaSDLDebug.lib y objeto C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\ProyectosSDL\bin\HolaSDLDebug.exp
+  HolaSDL.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\ProyectosSDL\bin\HolaSDLDebug.exe

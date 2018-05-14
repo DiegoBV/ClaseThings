@@ -101,7 +101,7 @@ struct BulletFighterCollisionMsg: Message {
 
 struct NewAsteroidMsg : Message {
 
-	NewAsteroidMsg(MessageId mType, Vector2D astPosition, Vector2D astVelocity, Vector2D astDirection, int astWidth, int astHeight, bool astActive) : Message(mType), astPosition_(astPosition), astVelocity_(astVelocity), astDirection_(astDirection),
+	NewAsteroidMsg(MessageId mType, Vector2D astPosition, Vector2D astVelocity, Vector2D astDirection, int astWidth, int astHeight, bool astActive) : Message(mType, sizeof(NewAsteroidMsg)), astPosition_(astPosition), astVelocity_(astVelocity), astDirection_(astDirection),
 		astWidth_(astWidth), astHeight_(astHeight), astActive_(astActive) {}
 
 	Vector2D astPosition_; 
