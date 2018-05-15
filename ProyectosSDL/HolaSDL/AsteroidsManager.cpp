@@ -5,8 +5,9 @@
 AsteroidsManager::AsteroidsManager(SDLGame* game) :
 		GameObject(game) {
 
-	render_ = ImageRenderer(game->getResources()->getImageTexture(Resources::TennisBall));
+	render_ = ImageRenderer(game->getResources()->getImageTexture(Resources::Astroid));
 
+	rot_ = RotationPhysics(1);
 }
 
 AsteroidsManager::~AsteroidsManager() {
@@ -69,6 +70,8 @@ void AsteroidsManager::addNewAsteroid(bool updating){
 	else{
 		ast = new Asteroid(game_);
 		ast->addRenderComponent(&render_);
+		ast->addPhysicsComponent(&mov_);
+		ast->addPhysicsComponent(&rot_);
 	}
 
 	if (ast != nullptr){

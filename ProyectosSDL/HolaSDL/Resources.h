@@ -24,7 +24,7 @@ public:
 		AIIcon,
 		SpaceShips,
 		Airplanes,
-		Star	,
+		Star,
 		Astroid,
 		ExplosionImage,
 		Badges

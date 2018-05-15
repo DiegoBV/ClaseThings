@@ -35,6 +35,10 @@ private:
 
 	ImageRenderer render_;
 
+	CircularMotionPhysics mov_;
+
+	RotationPhysics rot_;
+
 	void setRandomParam(Asteroid* ast);
 	void setParam(Vector2D pos, Vector2D vel, Vector2D dir, int width, int height, bool active, Asteroid* ast);
 };

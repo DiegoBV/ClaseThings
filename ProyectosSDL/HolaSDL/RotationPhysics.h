@@ -7,6 +7,7 @@
  */
 class RotationPhysics: public PhysicsComponent {
 public:
+	RotationPhysics() {};
 	RotationPhysics(int angle);
 	virtual ~RotationPhysics();
 	virtual void update(GameObject* o, Uint32 time);
