@@ -59,6 +59,9 @@ void FightersManager::receive(Message* msg) {
 	case BULLET_FIGHTER_COLLISION:
 		killPlayer(static_cast<BulletFighterCollisionMsg*>(msg)->fighterId_);
 		break;
+	case FIGHTER_ASTEROID_COLLISION:
+		killPlayer(static_cast<AsteroidFighterCollision*>(msg)->fighterId_);
+		break;
 	}
 }
 

@@ -36,9 +36,29 @@ void CollisionManager::update(Uint32 time) {
 						break; // it can kill only one fighter
 					}
 				}
+
+				Uint8 i = 0;
+				for (Asteroid* a : asteroids) {
+					if (a != nullptr && a->isActive() && Collisions::collidesWithRotation(a, b)) { //FOR DE COLISIONES ENTRE ASTEROIDES Y BALAS
+						BulletAsteroidCollisionMsg m = { b->getBulletId(), b->getFighterId(), i };
+						send(&m);
+					}
+					i++;
+				}
 			}
 		}
 	}
+
+	/*for (Asteroid* a : asteroids) { //FOR DE COLISIONES ENTRE ASTEROIDES Y FIGHTERS
+		if (a->isActive()) {
+			for (Fighter* f : fighters) {
+				if (f != nullptr && f->isActive() && Collisions::collidesWithRotation(a, f)) {
+					AsteroidFighterCollision m = AsteroidFighterCollision(f->getId());
+					send(&m);
+				}
+			}
+		}
+	}*/
 }
 
 void CollisionManager::render(Uint32 time) {

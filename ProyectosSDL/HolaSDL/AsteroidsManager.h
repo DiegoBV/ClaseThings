@@ -8,6 +8,7 @@
 #include "SkeletonRenderer.h"
 #include "Observable.h"
 #include "Asteroid.h"
+#include "DeActivateOnBorderExit.h"
 
 /*
  *
@@ -35,7 +36,9 @@ private:
 
 	ImageRenderer render_;
 
-	CircularMotionPhysics mov_;
+	BasicMotionPhysics mov_;
+
+	DeActivateOnBorderExit deactiveOnExitBordersPhysics_;
 
 	RotationPhysics rot_;
 

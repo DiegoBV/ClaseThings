@@ -47,11 +47,17 @@ void AsteroidsManager::receive(Message* msg) {
 		}
 		break;
 	case ASTEROID_ADDED:
-		cout << "recibiendo info..."; //SE RECIBE MAL
+	{
+		cout << "recibiendo info...";
 		NewAsteroidMsg* m = static_cast<NewAsteroidMsg*>(msg);
-		//cout << endl << m->astPosition_ << "+ " << m->astVelocity_ << "+ " << m->astDirection_ << "+ " << m->astWidth_ << "+ " << m->astHeight_ << "+ " << m->astActive_ << endl;
 		this->msg = m;
 		this->addNewAsteroid(true);
+	}
+		break;
+	case BULLET_ASTEROID_COLLISION:
+		cout << "recibido";
+		//BulletAsteroidCollisionMsg* m = static_cast<BulletAsteroidCollisionMsg*>(msg);
+		//asteroids_[m->astPos_]->setActive(false);
 		break;
 		//add other cases
 	}
@@ -72,6 +78,7 @@ void AsteroidsManager::addNewAsteroid(bool updating){
 		ast->addRenderComponent(&render_);
 		ast->addPhysicsComponent(&mov_);
 		ast->addPhysicsComponent(&rot_);
+		ast->addPhysicsComponent(&deactiveOnExitBordersPhysics_);
 	}
 
 	if (ast != nullptr){

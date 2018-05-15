@@ -17,7 +17,9 @@ enum MessageId {
 	TIME_HAS_PASSED,
 	NEW_ASTEROID_INCOMING,
 	ASTEROID_ADDED,
-	ADDING_ASTEROID
+	ADDING_ASTEROID,
+	BULLET_ASTEROID_COLLISION,
+	FIGHTER_ASTEROID_COLLISION
 };
 
 typedef Uint16 header_t_;
@@ -97,6 +99,23 @@ struct BulletFighterCollisionMsg: Message {
 	// the following uniquely identify a bullet
 	Uint16 bulletId_;
 	Uint8 bulletOwnerId_;
+};
+
+struct BulletAsteroidCollisionMsg : Message {
+	BulletAsteroidCollisionMsg(Uint16 bulletId, Uint8 fbulletId, Uint8 astPos) :
+		Message(BULLET_ASTEROID_COLLISION, sizeof(BulletAsteroidCollisionMsg)), bulletId_(bulletId), bulletOwnerId_(fbulletId), astPos_(astPos) {
+	}
+	// the following uniquely identify a bullet
+	Uint16 bulletId_;
+	Uint8 bulletOwnerId_;
+	Uint8 astPos_;
+};
+
+struct AsteroidFighterCollision : Message {
+	AsteroidFighterCollision(Uint8 fighterId) :
+		Message(FIGHTER_ASTEROID_COLLISION, sizeof(AsteroidFighterCollision)), fighterId_(fighterId) {
+	}
+	Uint8 fighterId_;
 };
 
 struct NewAsteroidMsg : Message {
