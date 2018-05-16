@@ -24,6 +24,7 @@ public:
 
 	// for SDLNet games
 	Uint8 getClientId() const;
+	void setClientId(Uint8 nId) { this->client_id = nId; };
 	bool isMasterClient() const;
 	ClientConnection& getConnection();
 

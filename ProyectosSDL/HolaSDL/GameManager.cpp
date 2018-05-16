@@ -51,7 +51,6 @@ void GameManager::receive(Message* msg) {
 		getReady();
 		break;
 	case GAME_START:
-		timer_.setOn(true);
 		startGame();
 		break;
 	case GAME_OVER:
@@ -61,6 +60,7 @@ void GameManager::receive(Message* msg) {
 		killPlayer(static_cast<BulletFighterCollisionMsg*>(msg)->fighterId_);
 		break;
 	case TIME_HAS_PASSED:
+		cout << "timeeeeeeeee";
 		if (getGame()->isMasterClient()) { //si es el master, anyade asteroides
 			send(&Message(ADD_ASTEROID));
 		}
@@ -70,7 +70,8 @@ void GameManager::receive(Message* msg) {
 		break;
 	case DISCONNECTED:
 		state_ = WAITING;
-		players_[static_cast<PlayerDis*>(msg)->clientId_].renderInfo_ = false;
+		PlayerDis* m = static_cast<PlayerDis*>(msg);
+		players_[m->clientId_].renderInfo_ = false;
 		break;
 	}
 }
@@ -127,6 +128,7 @@ void GameManager::startGame() {
 			p.alive_ = true;
 		}
 		state_ = RUNNING;
+		timer_.setOn(true);
 	}
 }
 
