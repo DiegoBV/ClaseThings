@@ -110,11 +110,15 @@ void BulletsManager::receive(Message* msg) {
 		break;
 	}
 	case BULLET_ASTEROID_COLLISION: { //DISABLE BULLETS 
-			BulletAsteroidCollisionMsg* m =
-				static_cast<BulletAsteroidCollisionMsg*>(msg);
-			disableBullet(m->bulletId_, m->bulletOwnerId_);
-			break;
+		BulletAsteroidCollisionMsg* m =
+			static_cast<BulletAsteroidCollisionMsg*>(msg);
+		disableBullet(m->bulletId_, m->bulletOwnerId_);
+		break;
 	}
+	case DISCONNECTED:
+		disableBullets();
+		break;
+	
 	}
 }
 

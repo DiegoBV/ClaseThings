@@ -23,10 +23,12 @@ public:
 			id_ = -1;
 			connected_ = false;
 			alive_ = false;
+			renderInfo_ = true;
 		}
 		Uint8 id_;
 		bool connected_;
 		bool alive_;
+		bool renderInfo_;
 	};
 
 	GameManager(SDLGame* game);

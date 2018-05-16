@@ -65,6 +65,13 @@ void GameManager::receive(Message* msg) {
 			send(&Message(ADD_ASTEROID));
 		}
 		break;
+	case FIGHTER_ASTEROID_COLLISION:
+		killPlayer(static_cast<AsteroidFighterCollision*>(msg)->fighterId_);
+		break;
+	case DISCONNECTED:
+		state_ = WAITING;
+		players_[static_cast<PlayerDis*>(msg)->clientId_].renderInfo_ = false;
+		break;
 	}
 }
 
@@ -76,20 +83,20 @@ void GameManager::registerPlayer(Uint8 id) {
 	if (id >= players_.size()) {
 		players_.resize(id + 1);
 	}
+
 	if (!players_[id].connected_) {
 		players_[id].id_ = id;
 		players_[id].connected_ = true;
 		players_[id].alive_ = true;
 		numOfConnectedPlayers_++;
+	}
 
-		if (getGame()->isMasterClient()) {
-			if (numOfConnectedPlayers_ == NUM_OF_PLAYERS) {
-				Message msg = { GAME_IS_READY };
-				send(&msg);
-				getReady();
-			}
+	if (getGame()->isMasterClient()) {
+		if (numOfConnectedPlayers_ == NUM_OF_PLAYERS) {
+			Message msg = { GAME_IS_READY };
+			send(&msg);
+			getReady();
 		}
-
 	}
 }
 
@@ -101,6 +108,9 @@ void GameManager::sendClientInfo() {
 void GameManager::getReady() {
 	if (state_ == WAITING) {
 		state_ = READY;
+		for (PlayerInfo& p : players_) {
+			p.renderInfo_ = true;
+		}
 	}
 }
 

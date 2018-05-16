@@ -75,7 +75,6 @@ void Server::start(int port) {
 				// send the client her/his ID
 				msg_connected.clientId_ = j;
 				clients_[j]->sendMessage(&msg_connected);
-
 			}
 
 			// check activity from clients
@@ -92,6 +91,11 @@ void Server::start(int port) {
 						clients_[i]->close();
 						delete clients_[i];
 						clients_[i] = nullptr;
+						for (int j = 0; j < clients_.size(); j++) {
+							if (i != j && clients_[j] != nullptr) {
+								clients_[j]->sendMessage(&PlayerDis(i)); // normally we should check for error
+							}
+						}
 						cout << "Client " << i << " disconnected" << endl;
 					} else {
 						// if no error, forward the message to all clients

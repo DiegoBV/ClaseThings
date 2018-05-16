@@ -5,7 +5,7 @@ class Timer :
 	public PhysicsComponent, public Observable
 {
 private:
-	const Uint32 SECS = 10000;
+	const Uint32 SECS = 5000;
 	bool on_ = false;
 	Uint32 timeOn_ = 0;
 

@@ -49,7 +49,7 @@ void CollisionManager::update(Uint32 time) {
 		}
 	}
 
-	/*for (Asteroid* a : asteroids) { //FOR DE COLISIONES ENTRE ASTEROIDES Y FIGHTERS
+	for (Asteroid* a : asteroids) { //FOR DE COLISIONES ENTRE ASTEROIDES Y FIGHTERS
 		if (a->isActive()) {
 			for (Fighter* f : fighters) {
 				if (f != nullptr && f->isActive() && Collisions::collidesWithRotation(a, f)) {
@@ -58,7 +58,7 @@ void CollisionManager::update(Uint32 time) {
 				}
 			}
 		}
-	}*/
+	}
 }
 
 void CollisionManager::render(Uint32 time) {

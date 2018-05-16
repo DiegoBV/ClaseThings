@@ -18,7 +18,7 @@ void PlayersInfoRenderer::render(GameObject* o, Uint32 time) {
 
 	int y = 5;
 	for (GameManager::PlayerInfo & p : gm->getPlayereInfo()) {
-		if (p.connected_) {
+		if (p.renderInfo_) {
 			msg_.loadFromText(game_->getRenderer(), "Player "+std::to_string(p.id_)+": "+(p.alive_ ? "alive" : "dead"),
 					*(game_->getResources()->getFont(Resources::ARIAL16)), {
 							COLOR(0xffffbbff) });

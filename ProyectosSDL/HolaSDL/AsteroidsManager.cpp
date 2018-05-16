@@ -21,26 +21,34 @@ void AsteroidsManager::handleInput(Uint32 time, const SDL_Event& event) {
 }
 
 void AsteroidsManager::update(Uint32 time) {
-	for (Asteroid* a : asteroids_)
-		if (a->isActive()) {
-			a->update(time);
-		}
+	if (running) {
+		for (Asteroid* a : asteroids_)
+			if (a->isActive()) {
+				a->update(time);
+			}
+	}
 }
 
 void AsteroidsManager::render(Uint32 time) {
-	for (Asteroid* a : asteroids_)
-		if (a->isActive()) {
-			a->render(time);
-		}
+	if (running) {
+		for (Asteroid* a : asteroids_)
+			if (a->isActive()) {
+				a->render(time);
+			}
+	}
 }
 
 void AsteroidsManager::receive(Message* msg) {
 	switch (msg->mType_) {
 	case GAME_START:
-		// add you code
+		running = true;
+		break;
+	case GAME_OVER:
+		running = false;
+		disableAsteroids();
 		break;
 	case ADD_ASTEROID:
-		if (getGame()->isMasterClient()) {
+		if (getGame()->isMasterClient() && running) {
 			this->addNewAsteroid(false);
 			send(&NewAsteroidMsg(ASTEROID_ADDED, getLastAsteroid()->getPosition(), getLastAsteroid()->getVelocity(), getLastAsteroid()->getDirection(), getLastAsteroid()->getWidth(), getLastAsteroid()->getHeight(), getLastAsteroid()->isActive()));
 			cout << "mandando info a otros players";
@@ -60,6 +68,10 @@ void AsteroidsManager::receive(Message* msg) {
 		//asteroids_[m->astPos_]->setActive(false);
 		break;
 		//add other cases
+	case DISCONNECTED:
+		running = false;
+		disableAsteroids();
+		break;
 	}
 }
 
@@ -127,5 +139,11 @@ void AsteroidsManager::setParam(Vector2D pos, Vector2D vel, Vector2D dir, int wi
 	ast->setWidth(width);
 	ast->setHeight(height);
 	ast->setActive(true);
+}
+
+void AsteroidsManager::disableAsteroids() {
+	for (Asteroid* ast : asteroids_) {
+		ast->setActive(false);
+	}
 }
 

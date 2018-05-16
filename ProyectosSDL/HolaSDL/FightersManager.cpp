@@ -62,6 +62,9 @@ void FightersManager::receive(Message* msg) {
 	case FIGHTER_ASTEROID_COLLISION:
 		killPlayer(static_cast<AsteroidFighterCollision*>(msg)->fighterId_);
 		break;
+	case DISCONNECTED:
+		disableFighters();
+		break;
 	}
 }
 

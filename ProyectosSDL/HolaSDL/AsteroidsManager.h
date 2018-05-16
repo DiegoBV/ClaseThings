@@ -30,6 +30,8 @@ public:
 
 private:
 
+	bool running = false;
+
 	NewAsteroidMsg * msg;
 
 	vector<Asteroid*> asteroids_;
@@ -44,5 +46,6 @@ private:
 
 	void setRandomParam(Asteroid* ast);
 	void setParam(Vector2D pos, Vector2D vel, Vector2D dir, int width, int height, bool active, Asteroid* ast);
+	void disableAsteroids();
 };
 

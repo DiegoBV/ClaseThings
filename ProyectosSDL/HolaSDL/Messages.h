@@ -15,11 +15,11 @@ enum MessageId {
 	BULLET_FIGHTER_COLLISION,
 	ADD_ASTEROID,
 	TIME_HAS_PASSED,
-	NEW_ASTEROID_INCOMING,
 	ASTEROID_ADDED,
-	ADDING_ASTEROID,
 	BULLET_ASTEROID_COLLISION,
-	FIGHTER_ASTEROID_COLLISION
+	FIGHTER_ASTEROID_COLLISION,
+	DISCONNECTED,
+	CON
 };
 
 typedef Uint16 header_t_;
@@ -56,6 +56,20 @@ struct JoiningGameMsg: Message {
 struct PlayerInfoMsg: Message {
 	PlayerInfoMsg(Uint8 clientId) :
 			Message(PLAYER_INFO, sizeof(PlayerInfoMsg)), clientId_(clientId) {
+	}
+	Uint8 clientId_;
+};
+
+struct PlayerDis : Message{
+	PlayerDis(Uint8 clientId) :
+	Message(DISCONNECTED, sizeof(PlayerDis)), clientId_(clientId) {
+}
+Uint8 clientId_;
+};
+
+struct PlayerCon: Message {
+	PlayerCon(Uint8 clientId) :
+		Message(CON, sizeof(PlayerCon)), clientId_(clientId) {
 	}
 	Uint8 clientId_;
 };
