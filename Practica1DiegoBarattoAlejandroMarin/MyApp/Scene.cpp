@@ -82,6 +82,8 @@ void Scene::init()
   objetos.back()->setMaterial(mats.back());
 
   objetos.push_back(new Terreno());
+  mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
+  objetos.back()->setMaterial(mats.back());
 }
 //-------------------------------------------------------------------------
 

@@ -444,13 +444,13 @@ void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 
 Terreno::Terreno()
 {
-	texture.load("..\\Bmps\\BarrenReds.bmp");
+	texture.load("..\\Bmps\\earth24.bmp");
 	terrainMesh = terrainMesh->generateTerrain();
-	//terrainMesh = IndexMesh::generateTerrain(); //no deja?
 }
 
 void Terreno::draw()
 {
+	Entity::draw();
 	texture.bind();
 	terrainMesh->draw();
 	texture.unbind();

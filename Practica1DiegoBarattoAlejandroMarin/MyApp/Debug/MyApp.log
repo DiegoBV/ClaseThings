@@ -1,1 +1,9 @@
-﻿
+﻿  IndexMesh.cpp
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(53): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(55): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(57): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(60): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(62): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(64): warning C4244: '=': conversión de 'GLdouble' a 'GLuint'; posible pérdida de datos
+c:\users\usuario\desktop\2ºvideojuegos\gitcompartido\clasethings\clasethings\clasethings\practica1diegobarattoalejandromarin\myapp\indexmesh.cpp(107): warning C4018: '<': no coinciden signed/unsigned
+  MyApp.vcxproj -> C:\Users\Usuario\Desktop\2ºVideojuegos\GitCompartido\ClaseThings\ClaseThings\ClaseThings\Practica1DiegoBarattoAlejandroMarin\bin\MyAppDebug.exe
