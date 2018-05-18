@@ -34,8 +34,8 @@ IndexMesh* IndexMesh::generateGrid(GLdouble lado, GLuint numDiv) {
 	m->numVertices = numVer * numVer; // num. de vértices
 	m->vertices = new glm::dvec3[m->numVertices];
 
-	for (unsigned int i = 0; i < numVer - 1; i++) {
-		for (unsigned int j = 0; j < numVer - 1; j++) {
+	for (unsigned int i = 0; i < numVer; i++) {
+		for (unsigned int j = 0; j < numVer; j++) {
 			m->vertices[i * numVer + j] = glm::dvec3(-lado/2 + incr*j, 0, -lado/2 + incr*i); //makes sense maybe
 		}
 	}
@@ -45,8 +45,8 @@ IndexMesh* IndexMesh::generateGrid(GLdouble lado, GLuint numDiv) {
 	m->indices = new GLuint[m->numIndices];
 
 	int i = 0;
-	for (unsigned int f = 0; f < numVer - 1; f++) {
-		for (unsigned int c = 0; c < numVer - 1; c++) {
+	for (unsigned int f = 0; f < numDiv; f++) {
+		for (unsigned int c = 0; c < numDiv; c++) {
 			GLdouble iv = f*numVer + c;
 			//----Triangulo 1 -----
 			//i = 0
@@ -71,7 +71,7 @@ IndexMesh* IndexMesh::generateGrid(GLdouble lado, GLuint numDiv) {
 IndexMesh* IndexMesh::generateTerrain() {
 	std::ifstream file("..\\Bmps\\terrain.raw", std::ios::binary); // open
 	if (!file.is_open()) return nullptr; // "terrain.raw": 257*257 unsigned chars
-	GLuint nDiv = 256; // nVer=257.
+	GLdouble nDiv = 256; // nVer=257.
 	GLdouble lado = nDiv * 8; // para incr=8
 	GLuint numVer = nDiv + 1; // num. de vértices por filas y por columnas
 
@@ -86,11 +86,11 @@ IndexMesh* IndexMesh::generateTerrain() {
 	}
 
 	// generar coordenadas de textura -> recorrido de vértices
-	GLdouble incr = 1 / nDiv; // incremento para la coordenada x, y la z (textura)
+	GLdouble incr = (1.0 / nDiv); // incremento para la coordenada x, y la z (textura)
 
 	m->textCoords = new glm::dvec2[m->numVertices];
-	for (unsigned int f = 0; f < numVer - 1; f++) {
-		for (unsigned int c = 0; c < numVer - 1; c++) {
+	for (unsigned int f = 0; f < numVer; f++) {
+		for (unsigned int c = 0; c < numVer; c++) {
 			m->textCoords[f * numVer + c] = glm::dvec2(0 + incr*c, 1 - incr*f);
 		}
 	}

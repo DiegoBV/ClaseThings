@@ -24,7 +24,7 @@ public:
 	void disable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) { glDisable(id); on = false; } };
 	void enable() { if (id < GL_LIGHT0 + GL_MAX_LIGHTS) { glEnable(id); on = true; } };
 	void setPos(glm::fvec3 pos) { posDir = glm::fvec4(pos, 1.0); };
-	void setDir(glm::fvec3 dir) { posDir = glm::fvec4(-dir, 0.0); };
+	void setDir(glm::fvec3 dir) { posDir = glm::fvec4(dir, 0.0); };
 	void setAmb(glm::fvec4 amb) {};
 	bool isOn() const { return on; };
 };
@@ -36,7 +36,7 @@ protected:
 public:
 	SpotLight() {};
 
-	SpotLight(GLfloat dir[], GLfloat angle = 45.0) : Light() {
+	SpotLight(GLfloat dir[], GLfloat angle = 15.0) : Light() {
 		this->dir[0] = dir[0];
 		this->dir[1] = dir[1];
 		this->dir[2] = dir[2];

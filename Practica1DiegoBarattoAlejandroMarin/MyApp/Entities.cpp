@@ -412,7 +412,7 @@ Esfera::Esfera(glm::dmat4 v,std::string text, GLdouble radio, GLdouble dV, GLdou
 
 void Esfera::draw() {
 	Entity::draw();
-	texture.bind();
+	texture.bind(GL_MODULATE);
 	gluQuadricDrawStyle(qObj, GLU_FILL);
 	gluQuadricNormals(qObj, GLU_SMOOTH);
 	gluQuadricOrientation(qObj, GLU_OUTSIDE);
@@ -444,7 +444,7 @@ void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 
 Terreno::Terreno()
 {
-	texture.load("..\\Bmps\\earth24.bmp");
+	texture.load("..\\Bmps\\BarrenReds.bmp");
 	terrainMesh = terrainMesh->generateTerrain();
 }
 
@@ -459,5 +459,8 @@ void Terreno::draw()
 void Terreno::render(glm::dmat4 const & modelViewMat)
 {
 	setMvM(modelViewMat);
+	dmat4 axMat = modelViewMat * modelMat;
+	axMat = translate(axMat, glm::dvec3(0.0, -400.0, 0.0));
+	glLoadMatrixd(value_ptr(axMat));
 	draw();
 }

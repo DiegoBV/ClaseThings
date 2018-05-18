@@ -11,18 +11,18 @@ void Scene::init()
   glEnable(GL_NORMALIZE);
   glEnable(GL_CULL_FACE);
 
-  
-  camera->setAZ();
   angle = 1;
+  camera->setAZ();
+  
   luz1 = new Light();
-
-  GLfloat dir [3] = { 2.0, 1.0, -4.0 };
-
-  luz2 = new SpotLight(dir);
-  luz1->enable();
-  glm::fvec3 vdir{ 0.0, 0.0, -1.0 };
+  glm::fvec3 vdir{ 0.0, 0.0, 1.0 };
   luz1->setDir(vdir);
+  luz1->enable();
+
+  GLfloat dir[3] = { 0.0, 0.0, -1.0 };
+  luz2 = new SpotLight(dir);
   luz2->enable();
+
  
  
   // lights
@@ -76,10 +76,10 @@ void Scene::init()
   mats.push_back(Material({ 0.2, 0.2, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.8, 0.5, 1 }, 8.0));
   objetos.back()->setMaterial(mats.back());
 
-  matrix = translate(matrix, glm::dvec3(0, -300, 0));
+  /*matrix = translate(matrix, glm::dvec3(0, -300, 0));
   objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp", 100, 100, 100));
   mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
-  objetos.back()->setMaterial(mats.back());
+  objetos.back()->setMaterial(mats.back());*/
 
   objetos.push_back(new Terreno());
   mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
@@ -102,7 +102,7 @@ void Scene::render()
   glMatrixMode(GL_MODELVIEW);
   int i = 0;
 	
-	  luz2->setDir(camera->getLook());
+	  //luz2->setDir(camera->getLook());
 	  luz2->setPos(camera->getEye());
 	  luz2->load(camera->getViewMat());
 

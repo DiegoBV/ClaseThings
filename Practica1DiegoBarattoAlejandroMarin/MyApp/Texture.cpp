@@ -19,7 +19,7 @@ void Texture::init() {
 void Texture::bind(GLuint mix) {
 	glBindTexture(GL_TEXTURE_2D, id);
 
-	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV, GL_REPLACE);
+	glTexEnvi(GL_TEXTURE_ENV, GL_TEXTURE_ENV, mix);
 
 }
 

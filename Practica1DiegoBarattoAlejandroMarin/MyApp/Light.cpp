@@ -3,6 +3,7 @@
 GLuint Light::cont = 0;
 
 void Light::load(glm::dmat4 const& modelViewMat) {
+
 	glMatrixMode(GL_MODELVIEW);
 	glLoadMatrixd(value_ptr(modelViewMat));
 	glLightfv(id, GL_POSITION, value_ptr(posDir));
