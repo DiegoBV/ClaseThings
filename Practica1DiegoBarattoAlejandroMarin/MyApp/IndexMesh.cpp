@@ -103,21 +103,17 @@ IndexMesh* IndexMesh::generateTerrain() {
 		m->normals[i] = glm::dvec3(0, 0, 0); //reset a 0
 	}
 
-	int ind = 0;
-	for (int i = 0; i < m->numVertices; i++) {
+	for (int i = 0; i < m->numVertices; i+=3) {
 		
-		int a = m->indices[ind++];
-		int b = m->indices[ind++];
-		int c = m->indices[ind++];
+		glm::dvec3 a = m->vertices[m->indices[i]];
+		glm::dvec3 b = m->vertices[m->indices[i + 1]];
+		glm::dvec3 c = m->vertices[m->indices[i + 2]]; //obtener los vectores del triangulo
 
-		glm::dvec3 vAux1 = {m->vertices[c] - m->vertices[b]};
-		glm::dvec3 vAux2 = {m->vertices[a] - m->vertices[b]}; //obtener los vectores del triangulo
+		glm::dvec3 n = normalize(cross((b - a), (c - a)));
 
-		glm::dvec3 n = cross(vAux1, vAux2);
-
-		m->normals[a] += n; //sumamos n a los normales de cada vertice
-		m->normals[b] += n;
-		m->normals[c] += n;
+		m->normals[m->indices[i]] += n; //sumamos n a los normales de cada vertice
+		m->normals[m->indices[i + 1]] += n;
+		m->normals[m->indices[i + 2]] += n;
 	}
 
 	for (unsigned int i = 0; i < m->numVertices; i++) {

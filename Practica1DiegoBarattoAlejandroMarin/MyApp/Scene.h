@@ -35,7 +35,7 @@ protected:
 	bool change = false;
 	RectangleText* rect;
 	Light* luz1;
-	Light* luz2;
+	SpotLight* luz2;
 	EsferaLuz* esf;
 };
 

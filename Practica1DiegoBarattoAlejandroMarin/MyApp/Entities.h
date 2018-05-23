@@ -226,6 +226,13 @@ class EsferaLuz : public Esfera
 protected:
 	GLUquadricObj * qObj;
 	SpotLight* foco;
+	Esfera* esf1;
+	Esfera* esf2;
+	int i = 0;
+	const GLdouble Cx = 512;
+	const GLdouble Cy;
+	const GLdouble Cz = -Cx;
+	GLdouble angle = 0;
 public:
 	EsferaLuz(glm::dmat4 v, std::string text,GLdouble radio, GLdouble dV, GLdouble dH);
 	virtual ~EsferaLuz() { delete foco; };

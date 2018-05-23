@@ -82,7 +82,7 @@ void Scene::init()
   objetos.back()->setMaterial(mats.back());*/
 
   objetos.push_back(new Terreno());
-  mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
+  mats.push_back(Material({ 1.0, 1.0, 1.0, 1.0 }, {1.0, 1.0 , 1.0, 1.0 }, { 0.0, 0.0, 0.0, 0.0 }, 0.0));
   objetos.back()->setMaterial(mats.back());
 }
 //-------------------------------------------------------------------------
@@ -102,8 +102,8 @@ void Scene::render()
   glMatrixMode(GL_MODELVIEW);
   int i = 0;
 	
-	  //luz2->setDir(camera->getLook());
 	  luz2->setPos(camera->getEye());
+	  luz2->setDirect(camera->getLook());
 	  luz2->load(camera->getViewMat());
 
 	  luz1->load(camera->getViewMat());

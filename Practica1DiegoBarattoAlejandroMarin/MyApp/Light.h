@@ -42,11 +42,18 @@ public:
 		this->dir[2] = dir[2];
 		glLightf(id, GL_SPOT_CUTOFF, angle);
 		glLightf(id, GL_SPOT_EXPONENT, 4);
-		glLightfv(id, GL_SPOT_DIRECTION, dir);
 	}
 
 	virtual void load(glm::dmat4 const& modelViewMat) {
 		Light::load(modelViewMat);
+		
+		glLightfv(id, GL_SPOT_DIRECTION, dir);
+	}
+
+	void setDirect(glm::dvec3 dir) {
+		this->dir[0] = dir[0];
+		this->dir[1] = dir[1];
+		this->dir[2] = dir[2];
 	}
 };
 

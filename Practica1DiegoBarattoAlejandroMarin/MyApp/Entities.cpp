@@ -428,18 +428,42 @@ void Esfera::render(glm::dmat4 const& modelViewMat) {
 
 //--------------------------------------------------------------------
 
-EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH): Esfera(v, text, radio, dV, dH)
+EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH): Esfera(v, text, radio, dV, dH), Cy(radio*2)
 {
+	glm::dmat4 aux = v;
 	GLfloat dir[3]{0.0, -1.0, 0.0};
 	foco = new SpotLight(dir, 75);
 	foco->setPos({ v[3].x, v[3].y, v[3].z }); //para hacer pruebas. La esfera esta situada en el (0,0,0)
 	foco->enable();
+
+	aux = translate(aux, glm::dvec3(-radio - radio/2, 0, 0)); //creo esfera 1
+	esf1 = new Esfera(aux, text, radio / 2, dV, dH);
+
+	aux = v;
+	aux = translate(aux, glm::dvec3(radio + radio/2, 0, 0)); //creo esfera 2
+	esf2 = new Esfera(aux, text, radio / 2, dV, dH);
+
+	//FALTA PONERLE MATERIALES A LAS PEQUEÑAS
 }
 
 void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 {
-	foco->load(modelViewMat);
-	Esfera::render(modelViewMat);
+
+	dmat4 auxMat = modelViewMat * modelMat;
+	//aplicar cosas...
+	auxMat = translate(auxMat, glm::dvec3(Cx * cos(radians(angle)), Cy * sin(radians(angle)) * sin(radians(angle)), Cz * sin(radians(angle)) * cos(radians(angle))));
+	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 1.0, 0.0));
+	glLoadMatrixd(value_ptr(auxMat));
+
+	foco->load(auxMat);
+
+	draw();
+
+	esf1->render(auxMat);
+
+	esf2->render(auxMat);
+
+	angle++;
 }
 
 Terreno::Terreno()
@@ -450,8 +474,8 @@ Terreno::Terreno()
 
 void Terreno::draw()
 {
-	Entity::draw();
 	texture.bind();
+	mat.load();
 	terrainMesh->draw();
 	texture.unbind();
 }
