@@ -14,14 +14,16 @@ void Scene::init()
   angle = 1;
   camera->setAZ();
   
-  luz1 = new Light();
+  directionalLight = new Light();
   glm::fvec3 vdir{ 0.0, 0.0, 1.0 };
-  luz1->setDir(vdir);
-  luz1->enable();
+  directionalLight->setDir(vdir);
+  directionalLight->enable();
 
   GLfloat dir[3] = { 0.0, 0.0, -1.0 };
-  luz2 = new SpotLight(dir);
-  luz2->enable();
+  spotLight = new SpotLight(dir);
+  spotLight->setExponente(1);
+  spotLight->setAngle(20);
+  spotLight->enable();
 
  
  
@@ -61,7 +63,7 @@ void Scene::init()
   objetos.back()->setMaterial(mats.back());
 
   matrix = translate(matrix, glm::dvec3(-550, 0, 0));
-  objetos.push_back(new Esfera(matrix, "..\\Bmps\\moon.bmp", 100, 100, 100));
+  objetos.push_back(new Esfera(matrix, "..\\Bmps\\venus.bmp", 100, 100, 100));
   mats.push_back(Material({ 0.4, 0.3, 0.1, 1 }, { 0.5, 0.8, 0.5, 1 }, { 0.5, 0.8, 0.5, 1 }, 4.0));
   objetos.back()->setMaterial(mats.back());
 
@@ -71,15 +73,10 @@ void Scene::init()
   objetos.back()->setMaterial(mats.back());
   matrix = glm::dmat4(1.0);
 
-  esf = new EsferaLuz(matrix, "..\\Bmps\\venus.bmp", 50, 100, 100);
+  esf = new EsferaLuz(matrix, "..\\Bmps\\moon.bmp", 50, 100, 100, "..\\Bmps\\earth24.bmp");
   objetos.push_back(esf);
   mats.push_back(Material({ 0.2, 0.2, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.8, 0.5, 1 }, 8.0));
   objetos.back()->setMaterial(mats.back());
-
-  /*matrix = translate(matrix, glm::dvec3(0, -300, 0));
-  objetos.push_back(new Esfera(matrix, "..\\Bmps\\sun.bmp", 100, 100, 100));
-  mats.push_back(Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0));
-  objetos.back()->setMaterial(mats.back());*/
 
   objetos.push_back(new Terreno());
   mats.push_back(Material({ 1.0, 1.0, 1.0, 1.0 }, {1.0, 1.0 , 1.0, 1.0 }, { 0.0, 0.0, 0.0, 0.0 }, 0.0));
@@ -102,11 +99,11 @@ void Scene::render()
   glMatrixMode(GL_MODELVIEW);
   int i = 0;
 	
-	  luz2->setPos(camera->getEye());
-	  luz2->setDirect(camera->getLook());
-	  luz2->load(camera->getViewMat());
+       spotLight->setPos(camera->getEye());
+       spotLight->setDirect(camera->getLook());
+       spotLight->load(camera->getViewMat());
 
-	  luz1->load(camera->getViewMat());
+	  directionalLight->load(camera->getViewMat());
 
 	for each (Entity* it in objetos)
 	{
@@ -136,17 +133,17 @@ void Scene::render()
 }
 void Scene::shutSpot()
 {
-	if (luz2->isOn())
-		luz2->disable();
+	if (spotLight->isOn())
+		spotLight->disable();
 	else
-		luz2->enable();
+		spotLight->enable();
 }
 void Scene::shutLight()
 {
-	if (luz1->isOn())
-		luz1->disable();
+	if (directionalLight->isOn())
+		directionalLight->disable();
 	else
-		luz1->enable();
+		directionalLight->enable();
 }
 void Scene::shutSphereLight()
 {

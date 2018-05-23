@@ -428,20 +428,25 @@ void Esfera::render(glm::dmat4 const& modelViewMat) {
 
 //--------------------------------------------------------------------
 
-EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH): Esfera(v, text, radio, dV, dH), Cy(radio*2)
+EsferaLuz::EsferaLuz(glm::dmat4 v, std::string text, GLdouble radio, GLdouble dV, GLdouble dH, std::string textPeques): Esfera(v, text, radio, dV, dH), Cy(radio*2)
 {
 	glm::dmat4 aux = v;
 	GLfloat dir[3]{0.0, -1.0, 0.0};
-	foco = new SpotLight(dir, 75);
+	foco = new SpotLight(dir, 15);
 	foco->setPos({ v[3].x, v[3].y, v[3].z }); //para hacer pruebas. La esfera esta situada en el (0,0,0)
+	foco->setExponente(1);
 	foco->enable();
 
 	aux = translate(aux, glm::dvec3(-radio - radio/2, 0, 0)); //creo esfera 1
-	esf1 = new Esfera(aux, text, radio / 2, dV, dH);
+	m1 = Material({ 0.4, 0.3, 0.1, 1 }, { 0.5, 0.8, 0.5, 1 }, { 0.5, 0.8, 0.5, 1 }, 4.0);
+	esf1 = new Esfera(aux, textPeques, radio / 2, dV, dH);
+	esf1->setMaterial(m1);
 
 	aux = v;
 	aux = translate(aux, glm::dvec3(radio + radio/2, 0, 0)); //creo esfera 2
-	esf2 = new Esfera(aux, text, radio / 2, dV, dH);
+	m2 = Material({ 0.1, 0.1, 0.1, 1 }, { 0.5, 0.5, 0.5, 1 }, { 0.5, 0.5, 0.5, 1 }, 2.0);
+	esf2 = new Esfera(aux, textPeques, radio / 2, dV, dH);
+	esf2->setMaterial(m2);
 
 	//FALTA PONERLE MATERIALES A LAS PEQUEÑAS
 }
@@ -454,7 +459,6 @@ void EsferaLuz::render(glm::dmat4 const & modelViewMat)
 	auxMat = translate(auxMat, glm::dvec3(Cx * cos(radians(angle)), Cy * sin(radians(angle)) * sin(radians(angle)), Cz * sin(radians(angle)) * cos(radians(angle))));
 	auxMat = rotate(auxMat, radians(angle), glm::dvec3(0.0, 1.0, 0.0));
 	glLoadMatrixd(value_ptr(auxMat));
-
 	foco->load(auxMat);
 
 	draw();

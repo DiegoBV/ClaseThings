@@ -233,9 +233,11 @@ protected:
 	const GLdouble Cy;
 	const GLdouble Cz = -Cx;
 	GLdouble angle = 0;
+	Material m1;
+	Material m2;
 public:
-	EsferaLuz(glm::dmat4 v, std::string text,GLdouble radio, GLdouble dV, GLdouble dH);
-	virtual ~EsferaLuz() { delete foco; };
+	EsferaLuz(glm::dmat4 v, std::string text,GLdouble radio, GLdouble dV, GLdouble dH, std::string textPeques);
+	virtual ~EsferaLuz() { delete foco; delete esf1; delete esf2; };
 	void render(glm::dmat4 const& modelViewMat);
 	SpotLight* getFoco() {
 		return foco;

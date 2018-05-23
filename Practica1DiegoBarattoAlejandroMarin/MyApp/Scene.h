@@ -34,8 +34,8 @@ protected:
 	std::vector<Entity*> objetos;
 	bool change = false;
 	RectangleText* rect;
-	Light* luz1;
-	SpotLight* luz2;
+	Light* directionalLight;
+	SpotLight* spotLight;
 	EsferaLuz* esf;
 };
 
