@@ -1,0 +1,4 @@
+﻿  Source.cpp
+c:\users\usuario\desktop\quita_calderilla\project1\source.cpp(12): warning C4018: '<': no coinciden signed/unsigned
+c:\users\usuario\desktop\quita_calderilla\project1\source.cpp(46): warning C4018: '<': no coinciden signed/unsigned
+  Project1.vcxproj -> C:\Users\Usuario\Desktop\Quita_Calderilla\Debug\Project1.exe
